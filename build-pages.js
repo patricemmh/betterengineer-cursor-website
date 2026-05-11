@@ -8,6 +8,14 @@ var styleDir = path.join(root, 'styles');
 
 var cloudflareMode = process.argv.indexOf('--cloudflare') !== -1;
 
+var baseFromArgv = null;
+for (var ai = 0; ai < process.argv.length; ai++) {
+  var argvItem = process.argv[ai];
+  if (argvItem.indexOf('--base=') === 0) {
+    baseFromArgv = argvItem.slice('--base='.length);
+  }
+}
+
 function normalizeBasePath(input) {
   var value = (input || '/').trim();
   if (!value) value = '/';
@@ -26,7 +34,9 @@ function trimOutputRoot(dir) {
 /* Default `/` matches custom-domain GitHub Pages (see README / CNAME) and local `npm start`. */
 /* `--cloudflare` defaults to SITE_BASE=/betterengineer and OUTPUT_ROOT=betterengineer for Pages subpath deploys. */
 var siteBase = normalizeBasePath(
-  process.env.SITE_BASE || (cloudflareMode ? '/betterengineer' : '/'),
+  baseFromArgv ||
+  process.env.SITE_BASE ||
+  (cloudflareMode ? '/betterengineer' : '/'),
 );
 var outputRoot = trimOutputRoot(process.env.OUTPUT_ROOT || (cloudflareMode ? 'betterengineer' : ''));
 

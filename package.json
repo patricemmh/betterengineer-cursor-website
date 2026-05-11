@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "build": "node build-pages.js",
+    "build:github-io": "node build-pages.js --base=/betterengineer-cursor-website",
     "build:cf": "node build-pages.js --cloudflare",
     "deploy:cf": "npx --yes wrangler pages deploy betterengineer",
     "start": "npx --yes serve . -l 5173"
