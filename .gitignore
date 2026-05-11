@@ -1,0 +1,6 @@
+.DS_Store
+Thumbs.db
+.cursor/
+
+# Cloudflare / subpath build output (`npm run build:cf`)
+betterengineer/
