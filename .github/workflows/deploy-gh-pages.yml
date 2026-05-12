@@ -1,4 +1,5 @@
-# Publishes a subpath-aware build to branch `gh-pages` (project site: /<repo>/).
+# Publishes to branch `gh-pages` for Custom Domain lp.betterengineer.com with path prefix /betterengineer-cursor-website/.
+# See GITHUB_PAGES_LP_HOSTING.md for DNS (Route 53) and repo settings.
 name: Deploy GitHub Pages
 
 on:
@@ -19,10 +20,12 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Build static site (GitHub.io subpath)
+      - name: Build static site (custom domain path /betterengineer-cursor-website/)
         env:
-          OUTPUT_ROOT: dist
-        run: node build-pages.js --base=/${{ github.event.repository.name }}
+          OUTPUT_ROOT: dist/betterengineer-cursor-website
+          PAGES_PUBLISH_ROOT: dist
+          GITHUB_PAGES_CNAME: lp.betterengineer.com
+        run: node build-pages.js --base=/betterengineer-cursor-website
 
       - name: Push to gh-pages
         uses: peaceiris/actions-gh-pages@v4

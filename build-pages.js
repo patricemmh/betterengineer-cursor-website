@@ -39,6 +39,9 @@ var siteBase = normalizeBasePath(
   (cloudflareMode ? '/betterengineer' : '/'),
 );
 var outputRoot = trimOutputRoot(process.env.OUTPUT_ROOT || (cloudflareMode ? 'betterengineer' : ''));
+/* Parent folder written by CI: CNAME, .nojekyll, optional root index redirect (see GITHUB_PAGES_LP_HOSTING.md). */
+var pagesPublishRoot = trimOutputRoot(process.env.PAGES_PUBLISH_ROOT || '');
+var githubPagesCname = (process.env.GITHUB_PAGES_CNAME || '').trim();
 
 function withBase(urlPath) {
   if (!urlPath || urlPath.charAt(0) !== '/') return urlPath;
@@ -389,7 +392,9 @@ writeFileSafe('react.html', reactHtml);
 writeFileSafe('react-fintech.html', reactFintechHtml);
 writeFileSafe(path.join('services', 'ai-systems-readiness-for-manufacturing', 'index.html'), aiManufacturingHtml);
 writeFileSafe('ai-systems-readiness-for-manufacturing.html', aiManufacturingHtml);
-writeFileSafe('.nojekyll', '');
+if (!pagesPublishRoot) {
+  writeFileSafe('.nojekyll', '');
+}
 
 if (outputRoot) {
   copyIntoOutput('icons');
@@ -398,8 +403,44 @@ if (outputRoot) {
   copyFileIntoOutput('react-page.js');
 }
 
+if (pagesPublishRoot) {
+  var prAbs = path.join(root, pagesPublishRoot);
+  fs.mkdirSync(prAbs, { recursive: true });
+  fs.writeFileSync(path.join(prAbs, '.nojekyll'), '', 'utf8');
+  if (githubPagesCname) {
+    fs.writeFileSync(path.join(prAbs, 'CNAME'), githubPagesCname + '\n', 'utf8');
+  }
+  if (outputRoot) {
+    var siteAbs = path.join(root, outputRoot);
+    var relSite = path.relative(prAbs, siteAbs).replace(/\\/g, '/');
+    if (relSite && !relSite.startsWith('..')) {
+      var redirectHtml =
+        '<!DOCTYPE html>\n' +
+        '<html lang="en">\n' +
+        '<head>\n' +
+        '  <meta charset="utf-8">\n' +
+        '  <meta http-equiv="refresh" content="0;url=' +
+        relSite +
+        '/">\n' +
+        '  <title>Redirecting</title>\n' +
+        '  <link rel="canonical" href="/' +
+        relSite +
+        '/">\n' +
+        '</head>\n' +
+        '<body>\n' +
+        '  <p><a href="' +
+        relSite +
+        '/">Continue to BetterEngineer landing pages</a></p>\n' +
+        '</body>\n' +
+        '</html>\n';
+      fs.writeFileSync(path.join(prAbs, 'index.html'), redirectHtml, 'utf8');
+    }
+  }
+}
+
 console.log(
   'Wrote static build; base path:',
   siteBase,
   outputRoot ? '(output: ./' + outputRoot + '/)' : '(output: repo root)',
+  pagesPublishRoot ? '; publish root: ./' + pagesPublishRoot + '/' : '',
 );
