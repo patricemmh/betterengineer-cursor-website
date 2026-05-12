@@ -4,7 +4,11 @@ This repo is **static HTML + embedded CSS + vanilla JS**. It is suitable for Git
 
 `https://lp.betterengineer.com/aimanufacturing/`
 
-`https://lp.betterengineer.com/aimanufacturing` (no trailing slash) is also served by GitHub Pages in most cases; prefer the trailing slash in links.
+`https://lp.betterengineer.com/aimanufacturing` (GitHub usually redirects to the URL below)
+
+`https://lp.betterengineer.com/aimanufacturing/` (use this in marketing links)
+
+**Case sensitivity:** GitHub Pages treats **`/aimanufacturing/`** and **`/AIManufacturing/`** as different paths. Only **`aimanufacturing`** (all lowercase) holds the real site. The build also publishes tiny redirect pages for **`/AIManufacturing/`** and **`/Aimanufacturing/`** so common typos still reach the LP.
 
 The deep path still exists for parity with the main site:
 

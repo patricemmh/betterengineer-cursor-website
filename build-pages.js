@@ -434,6 +434,36 @@ if (pagesPublishRoot) {
         '</body>\n' +
         '</html>\n';
       fs.writeFileSync(path.join(prAbs, 'index.html'), redirectHtml, 'utf8');
+
+      /* GitHub Pages paths are case-sensitive; common capitalization typos 404 otherwise. */
+      var lpRoot = (process.env.LP_ROOT_PAGE || '').trim();
+      if (lpRoot === 'manufacturing') {
+        var aliasTarget = '/' + relSite + '/';
+        var aliasHtml =
+          '<!DOCTYPE html>\n' +
+          '<html lang="en">\n' +
+          '<head>\n' +
+          '  <meta charset="utf-8">\n' +
+          '  <meta http-equiv="refresh" content="0;url=' +
+          aliasTarget +
+          '">\n' +
+          '  <title>Redirecting</title>\n' +
+          '  <link rel="canonical" href="' +
+          aliasTarget +
+          '">\n' +
+          '</head>\n' +
+          '<body>\n' +
+          '  <p><a href="' +
+          aliasTarget +
+          '">Continue</a></p>\n' +
+          '</body>\n' +
+          '</html>\n';
+        ['AIManufacturing', 'Aimanufacturing'].forEach(function (aliasSeg) {
+          var aliasDir = path.join(prAbs, aliasSeg);
+          fs.mkdirSync(aliasDir, { recursive: true });
+          fs.writeFileSync(path.join(aliasDir, 'index.html'), aliasHtml, 'utf8');
+        });
+      }
     }
   }
 }
