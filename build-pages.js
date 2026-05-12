@@ -438,6 +438,21 @@ if (pagesPublishRoot) {
   }
 }
 
+var lpRootPage = (process.env.LP_ROOT_PAGE || '').trim();
+if (lpRootPage === 'manufacturing' && outputRoot) {
+  var mfgIdx = path.join(
+    root,
+    outputRoot,
+    'services',
+    'ai-systems-readiness-for-manufacturing',
+    'index.html',
+  );
+  var outIdx = path.join(root, outputRoot, 'index.html');
+  if (fs.existsSync(mfgIdx)) {
+    fs.copyFileSync(mfgIdx, outIdx);
+  }
+}
+
 console.log(
   'Wrote static build; base path:',
   siteBase,

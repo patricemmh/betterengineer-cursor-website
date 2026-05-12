@@ -1,4 +1,4 @@
-# Publishes to branch `gh-pages` for Custom Domain lp.betterengineer.com with path prefix /betterengineer-cursor-website/.
+# Publishes to branch `gh-pages` for Custom Domain lp.betterengineer.com at /aimanufacturing/
 # See GITHUB_PAGES_LP_HOSTING.md for DNS (Route 53) and repo settings.
 name: Deploy GitHub Pages
 
@@ -20,12 +20,13 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Build static site (custom domain path /betterengineer-cursor-website/)
+      - name: Build static site (path /aimanufacturing/, manufacturing as index)
         env:
-          OUTPUT_ROOT: dist/betterengineer-cursor-website
+          OUTPUT_ROOT: dist/aimanufacturing
           PAGES_PUBLISH_ROOT: dist
           GITHUB_PAGES_CNAME: lp.betterengineer.com
-        run: node build-pages.js --base=/betterengineer-cursor-website
+          LP_ROOT_PAGE: manufacturing
+        run: node build-pages.js --base=/aimanufacturing
 
       - name: Push to gh-pages
         uses: peaceiris/actions-gh-pages@v4
