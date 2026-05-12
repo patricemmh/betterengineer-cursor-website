@@ -33,7 +33,7 @@ Deploy from the **`main` branch root**. This repo writes:
 
 It also writes:
 
-- `CNAME` with `lp.betterengineer.com`
+- `CNAME` with `discover.betterengineer.com` (written by CI to `gh-pages`; see `GITHUB_PAGES_DISCOVER_HOSTING.md`)
 - `.nojekyll`
 
 Use root-relative assets (`/icons/...`, `/images/...`) so nested routes work on GitHub Pages.

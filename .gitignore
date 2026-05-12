@@ -5,5 +5,5 @@ Thumbs.db
 # Cloudflare / subpath build output (`npm run build:cf`)
 betterengineer/
 
-# Local GitHub Pages bundle (see GITHUB_PAGES_LP_HOSTING.md)
+# Local GitHub Pages bundle (see GITHUB_PAGES_DISCOVER_HOSTING.md)
 dist/

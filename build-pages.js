@@ -39,7 +39,7 @@ var siteBase = normalizeBasePath(
   (cloudflareMode ? '/betterengineer' : '/'),
 );
 var outputRoot = trimOutputRoot(process.env.OUTPUT_ROOT || (cloudflareMode ? 'betterengineer' : ''));
-/* Parent folder written by CI: CNAME, .nojekyll, optional root index redirect (see GITHUB_PAGES_LP_HOSTING.md). */
+/* Parent folder written by CI: CNAME, .nojekyll, optional root index redirect (see GITHUB_PAGES_DISCOVER_HOSTING.md). */
 var pagesPublishRoot = trimOutputRoot(process.env.PAGES_PUBLISH_ROOT || '');
 var githubPagesCname = (process.env.GITHUB_PAGES_CNAME || '').trim();
 
