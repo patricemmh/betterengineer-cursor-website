@@ -12,7 +12,9 @@ The **React staffing** URL is a marketing page (`react.html`); it is still stati
 - Source-of-truth brief: `COPY_BRIEF.md`
 - Repeatable copy process: `COPY_WORKFLOW.md`
 
-## Editing workflow
+## Analytics (GTM / GA4)
+
+**Google Tag Manager** (`GTM-WT77L8JF`) is installed globally via `build-pages.js`. **GA4** is not in the code; add a GA4 Configuration tag in GTM and publish. Step-by-step: [ANALYTICS_GTM_NEXT_STEPS.md](ANALYTICS_GTM_NEXT_STEPS.md).
 
 - **Source CSS**: `styles/brand.css`, `styles/react-landing.css`
 - **Page fragments**: `main-home.html`, `main-react.html`, `footer-full.html`
