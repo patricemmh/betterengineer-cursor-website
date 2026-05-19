@@ -14,7 +14,7 @@ The **React staffing** URL is a marketing page (`react.html`); it is still stati
 
 ## Analytics (GTM / GA4)
 
-**Google Tag Manager** (`GTM-WT77L8JF`) is installed globally via `build-pages.js`. **GA4** is not in the code; add a GA4 Configuration tag in GTM and publish. Step-by-step: [ANALYTICS_GTM_NEXT_STEPS.md](ANALYTICS_GTM_NEXT_STEPS.md).
+**Google Tag Manager** container **`GTM-WT77L8JF`** is installed globally in **`build-pages.js`** (`shell()`): head script + noscript after `<body>`. **GA4 is not inlined**; Measurement goes through whatever Ryan publishes in that container (**GA4**, cross-domain **`discover.betterengineer.com`** on the stream, etc.). Reference: **[ANALYTICS_GTM_NEXT_STEPS.md](ANALYTICS_GTM_NEXT_STEPS.md)**.
 
 - **Source CSS**: `styles/brand.css`, `styles/react-landing.css`
 - **Page fragments**: `main-home.html`, `main-react.html`, `footer-full.html`

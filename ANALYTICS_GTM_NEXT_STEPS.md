@@ -1,49 +1,37 @@
-# Next steps: Google Tag Manager and GA4
+# Google Tag Manager & GA4 (landing pages repo)
 
-The site already loads **Google Tag Manager** container **`GTM-WT77L8JF`** on every generated page (see `build-pages.js`, function `shell`). Nothing else is required in this repo for basic pageview tracking.
+## What is implemented in code (already done)
 
-Everything below happens in **Google Tag Manager** and **Google Analytics**. This file is a checklist your team can follow.
+Ryan confirmed the approach: **one GTM container**, **GA4 only through GTM** (nothing hardcoded).
 
-## 1. Create or open GA4
+| Item | Detail |
+|------|--------|
+| **Container** | `GTM-WT77L8JF` |
+| **Where** | `build-pages.js`, function **`shell()`**: official GTM script in `<head>`, noscript iframe immediately after `<body>`. Every generated HTML page inherits this. |
+| **GA4 in HTML** | **Not added.** No `G-…`/`gtag` snippet in site code (by design). |
+| **HubSpot** | Existing HubSpot loaders in **`shell()`** stay separate from GTM or GA4. |
 
-1. Go to [Google Analytics](https://analytics.google.com/) (admin access on your Google account).
-2. Create a **GA4 property** for BetterEngineer (or open the one you already use).
-3. Under **Admin → Data streams**, add a **Web** stream for **`discover.betterengineer.com`** (or your real hostname).
-4. Copy the **Measurement ID** (format **`G-XXXXXXXX`**).
+**Cross-domain:** Ryan added **`discover.betterengineer.com`** to the **existing GA4 web data stream** for cross-domain measurement. Domain autodetection in GTM/containers stays on their side. No extra GA4 installs are required on the static LP repo.
 
-## 2. Connect GA4 inside GTM
+Changing the container ID later: edit both places **`GTM-WT77L8JF`** appears in **`build-pages.js`** (head snippet + noscript iframe), run **`npm run build`**.
 
-1. Open [Google Tag Manager](https://tagmanager.google.com/) and select container **`GTM-WT77L8JF`**.
-2. **Tags → New** → choose **Google Analytics: GA4 Configuration** (or the current GA4 tag type Google shows).
-3. Paste your **Measurement ID** (`G-...`).
-4. **Triggering**: choose **All Pages** (or a trigger group you prefer for first launch).
-5. **Save** the tag.
+---
 
-## 3. Test before publishing
+## What Ryan / GTM owner does (not in GitHub)
 
-1. Click **Preview** in GTM. Enter your live URL (for example `https://discover.betterengineer.com/aimanufacturing/`).
-2. Confirm the **GA4** tag **fires** on page load in the Tag Assistant debug panel.
-3. In GA4, open **Reports → Realtime** and confirm you see yourself (and the correct stream).
+1. **Publish** any pending GTM workspace changes so **`discover.betterengineer.com`** picks up GA4 Configuration (and Ads links if configured there).
+2. **Preview:** Tag Assistant → open `https://discover.betterengineer.com/aimanufacturing/` (and other LP URLs).
+3. **Validate** GA4 hits (Realtime, correct hostname / stream as they set cross-domain).
 
-## 4. Publish the container
+---
 
-1. In GTM, **Submit** the workspace and **Publish** (add a version name such as “GA4 config live”).
+## Later (still only in GTM unless you decide otherwise)
 
-Until you publish, production visitors only get what was in the **last published** version (often no GA4 yet).
+- Custom events (`dataLayer.push` from `react-page.js` / `home.js`) only if you want events the HTML cannot infer; coordinate with whoever owns tags.
+- Add Google Ads conversions, Meta pixels, LinkedIn Insight, consent mode **in GTM** when ready; avoid hardcoding in this repo.
 
-## 5. Later (optional, still in GTM)
+---
 
-- **Events**: form submits, CTA clicks, file downloads: add triggers and GA4 event tags in GTM (no change to this repo unless you need `dataLayer.push` from custom JS).
-- **Google Ads / Meta / LinkedIn**: add tags only in GTM when ready; do not hardcode those scripts in the site.
-- **Consent / privacy**: if you need a CMP or consent mode, plan that in GTM or with legal; this repo does not add it by default.
+## What agents cannot do from this repo
 
-## 6. HubSpot
-
-**HubSpot** tracking on these pages is separate (existing script in `shell`). It does not replace GA4. Keep both if you use HubSpot for forms and CRM.
-
-## What we cannot do from this repository
-
-- Log in to your Google accounts or create tags for you.
-- Publish your GTM container or verify GA4 property settings remotely.
-
-If you change the GTM container ID, edit **`GTM-WT77L8JF`** in **`build-pages.js`** (head script and noscript iframe), then run **`npm run build`**.
+- Log in to Tag Manager / Analytics / Ads or publish containers for you.

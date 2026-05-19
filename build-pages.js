@@ -301,6 +301,14 @@ function shell(title, description, css, header, main, scriptName, extraHead) {
     description.replace(/"/g, '&quot;') +
     '">\n' +
     extraHead +
+    '  <!-- Google Tag Manager -->\n' +
+    '  <!-- Replace GTM-WT77L8JF in this script and in the noscript iframe right after <body> in shell() if the container changes. -->\n' +
+    '  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({\'gtm.start\':\n' +
+    '  new Date().getTime(),event:\'gtm.js\'});var f=d.getElementsByTagName(s)[0],\n' +
+    '  j=d.createElement(s),dl=l!=\'dataLayer\'?\'&l=\'+l:\'\';j.async=true;j.src=\n' +
+    '  \'https://www.googletagmanager.com/gtm.js?id=\'+i+dl;f.parentNode.insertBefore(j,f);\n' +
+    '  })(window,document,\'script\',\'dataLayer\',\'GTM-WT77L8JF\');</script>\n' +
+    '  <!-- End Google Tag Manager -->\n' +
     '  <link rel="icon" href="./icons/favicon.png" type="image/png">\n' +
     '  <link rel="preconnect" href="https://fonts.googleapis.com">\n' +
     '  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n' +
@@ -312,6 +320,10 @@ function shell(title, description, css, header, main, scriptName, extraHead) {
     '\n  </style>\n' +
     '</head>\n' +
     '<body>\n' +
+    '  <!-- Google Tag Manager (noscript) -->\n' +
+    '  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WT77L8JF"\n' +
+    '  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>\n' +
+    '  <!-- End Google Tag Manager (noscript) -->\n' +
     '  <a class="skip-link" href="#main">Skip to content</a>\n' +
     '\n' +
     header +
