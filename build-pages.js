@@ -171,131 +171,83 @@ var hireAiReadyMain = normalizeHtmlPaths(fs.readFileSync(hireAiReadyMainPath, 'u
 var mainHome = normalizeHtmlPaths(readFileSafe('main-home.html').trim());
 var footer = normalizeHtmlPaths(readFileSafe('footer-full.html').trim());
 
-var headerHome =
+/* Primary header: structure, labels, and URLs match www.betterengineer.com (HubSpot header module, 2025). */
+var headerPrimaryChrome =
   '  <header class="site-header" id="header">\n' +
   '    <div class="header-inner">\n' +
-  '      <a class="logo-link" href="./" aria-label="BetterEngineer home">\n' +
-  '        <img src="./icons/betterengineer-logo.svg" width="183" height="33" alt="BetterEngineer">\n' +
+  '      <a class="logo-link" href="https://www.betterengineer.com/" aria-label="BetterEngineer home">\n' +
+  '        <img src="./icons/betterengineer-logo.svg" alt="BetterEngineer" width="183" height="33">\n' +
   '      </a>\n' +
   '      <nav class="site-nav" aria-label="Primary">\n' +
-  '        <ul class="nav-desktop">\n' +
-  '          <li>\n' +
-  '            <a href="https://www.betterengineer.com/staff-augmentation">Services <span aria-hidden="true">▾</span></a>\n' +
-  '            <ul class="dropdown">\n' +
+  '        <ul class="nav-desktop" role="list">\n' +
+  '          <li class="has-children">\n' +
+  '            <a href="https://www.betterengineer.com/staff-augmentation">Services <span class="nav-chevron" aria-hidden="true"></span></a>\n' +
+  '            <ul class="dropdown" role="list">\n' +
   '              <li><a href="https://www.betterengineer.com/staff-augmentation">Staff Augmentation</a></li>\n' +
   '              <li><a href="https://www.betterengineer.com/ai-readiness">AI Readiness</a></li>\n' +
-  '              <li><a href="./ai-systems-readiness-for-manufacturing.html">AI Systems for Manufacturing</a></li>\n' +
+  '              <li><a href="https://www.betterengineer.com/hiring-dashboard">Platform</a></li>\n' +
   '            </ul>\n' +
   '          </li>\n' +
-  '          <li><a href="./react.html">React</a></li>\n' +
-  '          <li><a href="https://www.betterengineer.com/hiring-dashboard">Platform</a></li>\n' +
-  '          <li>\n' +
-  '            <a href="https://www.betterengineer.com/about">About <span aria-hidden="true">▾</span></a>\n' +
-  '            <ul class="dropdown">\n' +
+  '          <li><a href="https://discover.betterengineer.com/ai-fluent-engineers/">AI Fluency</a></li>\n' +
+  '          <li class="has-children">\n' +
+  '            <a href="https://www.betterengineer.com/about">About <span class="nav-chevron" aria-hidden="true"></span></a>\n' +
+  '            <ul class="dropdown" role="list">\n' +
   '              <li><a href="https://www.betterengineer.com/about">Who We Are</a></li>\n' +
   '              <li><a href="https://www.betterengineer.com/latamengineer">Why Nearshore</a></li>\n' +
   '            </ul>\n' +
   '          </li>\n' +
-  '          <li>\n' +
-  '            <a href="https://blog.betterengineer.com/resource-center">Resources <span aria-hidden="true">▾</span></a>\n' +
-  '            <ul class="dropdown">\n' +
+  '          <li class="has-children">\n' +
+  '            <a href="https://blog.betterengineer.com/resource-center">Resources <span class="nav-chevron" aria-hidden="true"></span></a>\n' +
+  '            <ul class="dropdown" role="list">\n' +
   '              <li><a href="https://blog.betterengineer.com/resource-center">Blog</a></li>\n' +
   '              <li><a href="https://www.betterengineer.com/faqs-nearshore-software-engineers-staff-augmentation-ai-talent">FAQs</a></li>\n' +
   '              <li><a href="https://www.betterengineer.com/podcast">Podcast</a></li>\n' +
   '            </ul>\n' +
   '          </li>\n' +
+  '          <li><a href="https://www.betterengineer.com/join">Join Us</a></li>\n' +
+  '          <li><a class="nav-pill-hire" href="https://www.betterengineer.com/multi-step-contact-form">Hire Engineers</a></li>\n' +
+  '          <li><a href="https://app.betterengineer.com/sign-in?redirect_url=https%3A%2F%2Fapp.betterengineer.com%2F">Login</a></li>\n' +
   '        </ul>\n' +
   '      </nav>\n' +
-  '      <div class="nav-cta">\n' +
-  '        <a class="btn-nav btn-nav--ghost" href="https://www.betterengineer.com/join">Join Us</a>\n' +
-  '        <a class="btn-nav btn-nav--solid" href="https://www.betterengineer.com/multi-step-contact-form">Hire Engineers</a>\n' +
-  '        <a class="btn-nav btn-nav--ghost" href="https://app.betterengineer.com/sign-in?redirect_url=https%3A%2F%2Fapp.betterengineer.com%2F">Login</a>\n' +
-  '      </div>\n' +
   '      <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="mobile-menu" id="nav-toggle" aria-label="Open menu">\n' +
-  '        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1c1c1c" stroke-width="2" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>\n' +
+  '        <img src="./icons/hamburger-white.svg" alt="" width="30" height="30">\n' +
   '      </button>\n' +
   '    </div>\n' +
-  '    <div class="nav-mobile" id="mobile-menu">\n' +
-  '      <a href="./" class="is-active" aria-current="page">Home</a>\n' +
-  '      <a href="./react.html">React</a>\n' +
-  '      <a href="https://www.betterengineer.com/staff-augmentation">Staff Augmentation</a>\n' +
-  '      <a href="https://www.betterengineer.com/ai-readiness">AI Readiness</a>\n' +
-  '      <a href="./ai-systems-readiness-for-manufacturing.html">AI Systems for Manufacturing</a>\n' +
-  '      <a href="https://www.betterengineer.com/hiring-dashboard">Platform</a>\n' +
-  '      <a href="https://www.betterengineer.com/about">Who We Are</a>\n' +
-  '      <a href="https://www.betterengineer.com/latamengineer">Why Nearshore</a>\n' +
-  '      <a href="https://www.betterengineer.com/multi-step-contact-form">Hire Engineers</a>\n' +
-  '    </div>\n' +
-  '  </header>\n';
-
-var headerReact =
-  '  <header class="site-header" id="header">\n' +
-  '    <div class="header-inner">\n' +
-  '      <a class="logo-link" href="./" aria-label="BetterEngineer home">\n' +
-  '        <img src="./icons/betterengineer-logo.svg" width="183" height="33" alt="BetterEngineer">\n' +
-  '      </a>\n' +
-  '      <nav class="site-nav" aria-label="Primary">\n' +
-  '        <ul class="nav-desktop">\n' +
-  '          <li>\n' +
-  '            <a href="https://www.betterengineer.com/staff-augmentation">Services <span aria-hidden="true">▾</span></a>\n' +
-  '            <ul class="dropdown">\n' +
-  '              <li><a href="https://www.betterengineer.com/staff-augmentation">Staff Augmentation</a></li>\n' +
-  '              <li><a href="https://www.betterengineer.com/ai-readiness">AI Readiness</a></li>\n' +
-  '              <li><a href="./ai-systems-readiness-for-manufacturing.html">AI Systems for Manufacturing</a></li>\n' +
-  '            </ul>\n' +
-  '          </li>\n' +
-  '          <li><a href="./react.html" class="is-active" aria-current="page">React</a></li>\n' +
+  '    <ul class="nav-mobile" id="mobile-menu" role="list">\n' +
+  '      <li class="has-children">\n' +
+  '        <a href="https://www.betterengineer.com/staff-augmentation">Services</a>\n' +
+  '        <ul class="mobile-submenu" role="list">\n' +
+  '          <li><a href="https://www.betterengineer.com/staff-augmentation">Staff Augmentation</a></li>\n' +
+  '          <li><a href="https://www.betterengineer.com/ai-readiness">AI Readiness</a></li>\n' +
   '          <li><a href="https://www.betterengineer.com/hiring-dashboard">Platform</a></li>\n' +
-  '          <li>\n' +
-  '            <a href="https://www.betterengineer.com/about">About <span aria-hidden="true">▾</span></a>\n' +
-  '            <ul class="dropdown">\n' +
-  '              <li><a href="https://www.betterengineer.com/about">Who We Are</a></li>\n' +
-  '              <li><a href="https://www.betterengineer.com/latamengineer">Why Nearshore</a></li>\n' +
-  '            </ul>\n' +
-  '          </li>\n' +
-  '          <li>\n' +
-  '            <a href="https://blog.betterengineer.com/resource-center">Resources <span aria-hidden="true">▾</span></a>\n' +
-  '            <ul class="dropdown">\n' +
-  '              <li><a href="https://blog.betterengineer.com/resource-center">Blog</a></li>\n' +
-  '              <li><a href="https://www.betterengineer.com/faqs-nearshore-software-engineers-staff-augmentation-ai-talent">FAQs</a></li>\n' +
-  '              <li><a href="https://www.betterengineer.com/podcast">Podcast</a></li>\n' +
-  '            </ul>\n' +
-  '          </li>\n' +
   '        </ul>\n' +
-  '      </nav>\n' +
-  '      <div class="nav-cta">\n' +
-  '        <a class="btn-nav btn-nav--ghost" href="https://www.betterengineer.com/join">Join Us</a>\n' +
-  '        <a class="btn-nav btn-nav--solid" href="https://www.betterengineer.com/multi-step-contact-form">Hire Engineers</a>\n' +
-  '        <a class="btn-nav btn-nav--ghost" href="https://app.betterengineer.com/sign-in?redirect_url=https%3A%2F%2Fapp.betterengineer.com%2F">Login</a>\n' +
-  '      </div>\n' +
-  '      <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="mobile-menu" id="nav-toggle" aria-label="Open menu">\n' +
-  '        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1c1c1c" stroke-width="2" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>\n' +
-  '      </button>\n' +
-  '    </div>\n' +
-  '    <div class="nav-mobile" id="mobile-menu">\n' +
-  '      <a href="./">Home</a>\n' +
-  '      <a href="./react.html" class="is-active">React</a>\n' +
-  '      <a href="https://www.betterengineer.com/staff-augmentation">Staff Augmentation</a>\n' +
-  '      <a href="https://www.betterengineer.com/ai-readiness">AI Readiness</a>\n' +
-  '      <a href="./ai-systems-readiness-for-manufacturing.html">AI Systems for Manufacturing</a>\n' +
-  '      <a href="https://www.betterengineer.com/hiring-dashboard">Platform</a>\n' +
-  '      <a href="https://www.betterengineer.com/about">Who We Are</a>\n' +
-  '      <a href="https://www.betterengineer.com/latamengineer">Why Nearshore</a>\n' +
-  '      <a href="https://www.betterengineer.com/multi-step-contact-form">Hire Engineers</a>\n' +
-  '    </div>\n' +
+  '      </li>\n' +
+  '      <li><a href="https://discover.betterengineer.com/ai-fluent-engineers/">AI Fluency</a></li>\n' +
+  '      <li class="has-children">\n' +
+  '        <a href="https://www.betterengineer.com/about">About</a>\n' +
+  '        <ul class="mobile-submenu" role="list">\n' +
+  '          <li><a href="https://www.betterengineer.com/about">Who We Are</a></li>\n' +
+  '          <li><a href="https://www.betterengineer.com/latamengineer">Why Nearshore</a></li>\n' +
+  '        </ul>\n' +
+  '      </li>\n' +
+  '      <li class="has-children">\n' +
+  '        <a href="https://blog.betterengineer.com/resource-center">Resources</a>\n' +
+  '        <ul class="mobile-submenu" role="list">\n' +
+  '          <li><a href="https://blog.betterengineer.com/resource-center">Blog</a></li>\n' +
+  '          <li><a href="https://www.betterengineer.com/faqs-nearshore-software-engineers-staff-augmentation-ai-talent">FAQs</a></li>\n' +
+  '          <li><a href="https://www.betterengineer.com/podcast">Podcast</a></li>\n' +
+  '        </ul>\n' +
+  '      </li>\n' +
+  '      <li><a href="https://www.betterengineer.com/join">Join Us</a></li>\n' +
+  '      <li><a class="nav-mobile-hire" href="https://www.betterengineer.com/multi-step-contact-form">Hire Engineers</a></li>\n' +
+  '      <li><a href="https://app.betterengineer.com/sign-in?redirect_url=https%3A%2F%2Fapp.betterengineer.com%2F">Login</a></li>\n' +
+  '    </ul>\n' +
   '  </header>\n';
 
-var headerAiManufacturing =
-  '  <header class="site-header site-header--minimal" id="header">\n' +
-  '    <div class="header-inner">\n' +
-  '      <a class="logo-link" href="./" aria-label="BetterEngineer home">\n' +
-  '        <img src="./icons/betterengineer-logo.svg" width="183" height="33" alt="BetterEngineer">\n' +
-  '      </a>\n' +
-  '      <div class="nav-cta">\n' +
-  '        <a class="btn-nav btn-nav--solid" href="https://www.betterengineer.com/multi-step-contact-form">Hire Engineers</a>\n' +
-  '      </div>\n' +
-  '    </div>\n' +
-  '  </header>\n';
+var headerHome = headerPrimaryChrome;
+var headerReact = headerPrimaryChrome;
+var headerHireAiReady = headerPrimaryChrome;
+var headerAiManufacturing = headerPrimaryChrome;
 
 function shell(title, description, css, header, main, scriptName, extraHead) {
   if (!extraHead) extraHead = '';
@@ -428,7 +380,7 @@ var hireAiReadyHtml = shell(
   'Hire AI-Ready Engineers | BetterEngineer, AI Development Team from LATAM',
   hireAiReadyDescription,
   reactCss,
-  headerAiManufacturing,
+  headerHireAiReady,
   hireAiReadyMain,
   'react-page.js',
   hireAiReadyExtraHead,

@@ -22,7 +22,7 @@
   if (toggle && mobile) {
     toggle.addEventListener('click', function () {
       var open = mobile.classList.toggle('is-open');
-      toggle.setAttribute('aria-expanded', open);
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
     });
   }
 
@@ -300,6 +300,7 @@
 
     form.addEventListener('submit', function (event) {
       event.preventDefault();
+      form.classList.remove('intake-form--success');
       setStatus(status, '', '');
 
       var formData = new FormData(form);
@@ -385,6 +386,7 @@
         .then(function () {
           form.reset();
           requiredFields.forEach(function (field) { setFieldError(field, false); });
+          form.classList.add('intake-form--success');
           setStatus(status, 'Thanks. Your request was sent. A staffing specialist will contact you shortly.', 'success');
           trackVirtualView('react_form_submit_success');
         })

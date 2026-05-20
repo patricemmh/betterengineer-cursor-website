@@ -40,7 +40,7 @@ The React landing uses an **additional purple** for a scoped hero CTA (`.btn.rea
 
 ## Layout
 
-- **Header**: Sticky `site-header` with glassy backdrop; `header-inner` centers content at **max-width 1200px** with horizontal padding. Desktop nav uses dropdown flyouts; mobile uses `#mobile-menu` toggled via `#nav-toggle`.
+- **Header**: Sticky `site-header`; `header-inner` matches the main site chrome at **max-width 1128px** (per live HubSpot header module). Desktop breakpoint for the full nav is **946px**. Primary labels and URLs mirror [betterengineer.com](https://www.betterengineer.com/) (Services, AI Fluency, About, Resources, Join Us, Hire Engineers, Login).
 - **Main content**: Section patterns use `.wrap` (and page-specific blocks) with consistent horizontal padding; `#main` uses `overflow-x: clip` on shipped pages to avoid horizontal scroll from full-bleed elements.
 - **Footer**: Shared markup in `footer-full.html`, inlined into every generated page.
 
