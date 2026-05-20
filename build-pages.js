@@ -59,6 +59,10 @@ function normalizeHtmlPaths(html) {
       /href=["']\/ai-systems-readiness-for-manufacturing\.html["']/g,
       'href="/services/ai-systems-readiness-for-manufacturing/"',
     )
+    .replace(
+      /href=["']\/hire-ai-ready-engineers\.html["']/g,
+      'href="/services/hire-ai-ready-engineers/"',
+    )
     .replace(/href=["']\/index\.html["']/g, 'href="/"')
     .replace(/href=["']\/["']/g, 'href="/"');
 }
@@ -156,6 +160,13 @@ if (!fs.existsSync(aiManufacturingMainPath)) {
   process.exit(1);
 }
 var aiManufacturingMain = normalizeHtmlPaths(fs.readFileSync(aiManufacturingMainPath, 'utf8').trim());
+
+var hireAiReadyMainPath = path.join(root, 'main-hire-ai-ready-engineers.html');
+if (!fs.existsSync(hireAiReadyMainPath)) {
+  console.error('Missing main-hire-ai-ready-engineers.html (AI-ready engineers landing <main> fragment).');
+  process.exit(1);
+}
+var hireAiReadyMain = normalizeHtmlPaths(fs.readFileSync(hireAiReadyMainPath, 'utf8').trim());
 
 var mainHome = normalizeHtmlPaths(readFileSafe('main-home.html').trim());
 var footer = normalizeHtmlPaths(readFileSafe('footer-full.html').trim());
@@ -393,6 +404,36 @@ var aiManufacturingHtml = shell(
   aiManufacturingExtraHead,
 );
 
+var hireAiReadyDescription =
+  'Hire AI-ready engineers, machine learning engineers, and AI app developers from Latin America. Senior, pre-vetted, and assessed for genuine AI fluency before you meet them.';
+
+function hireAiReadyCanonicalHref() {
+  if (siteBase === '/ai-fluent-engineers' && githubPagesCname) {
+    return 'https://' + githubPagesCname + '/ai-fluent-engineers/';
+  }
+  return 'https://www.betterengineer.com/services/hire-ai-ready-engineers/';
+}
+
+var hireAiReadyExtraHead =
+  '  <link rel="canonical" href="' +
+  hireAiReadyCanonicalHref() +
+  '">\n' +
+  '  <meta property="og:title" content="Hire AI-Ready Engineers | BetterEngineer">\n' +
+  '  <meta property="og:description" content="' +
+  hireAiReadyDescription.replace(/"/g, '&quot;') +
+  '">\n' +
+  '  <meta property="og:type" content="website">\n';
+
+var hireAiReadyHtml = shell(
+  'Hire AI-Ready Engineers | BetterEngineer, AI Development Team from LATAM',
+  hireAiReadyDescription,
+  reactCss,
+  headerAiManufacturing,
+  hireAiReadyMain,
+  'react-page.js',
+  hireAiReadyExtraHead,
+);
+
 if (outputRoot) {
   fs.rmSync(path.join(root, outputRoot), { recursive: true, force: true });
 }
@@ -404,6 +445,8 @@ writeFileSafe('react.html', reactHtml);
 writeFileSafe('react-fintech.html', reactFintechHtml);
 writeFileSafe(path.join('services', 'ai-systems-readiness-for-manufacturing', 'index.html'), aiManufacturingHtml);
 writeFileSafe('ai-systems-readiness-for-manufacturing.html', aiManufacturingHtml);
+writeFileSafe(path.join('services', 'hire-ai-ready-engineers', 'index.html'), hireAiReadyHtml);
+writeFileSafe('hire-ai-ready-engineers.html', hireAiReadyHtml);
 if (!pagesPublishRoot) {
   writeFileSafe('.nojekyll', '');
 }
@@ -492,6 +535,13 @@ if (lpRootPage === 'manufacturing' && outputRoot) {
   var outIdx = path.join(root, outputRoot, 'index.html');
   if (fs.existsSync(mfgIdx)) {
     fs.copyFileSync(mfgIdx, outIdx);
+  }
+}
+if (lpRootPage === 'hire-ai-ready' && outputRoot) {
+  var hireIdx = path.join(root, outputRoot, 'services', 'hire-ai-ready-engineers', 'index.html');
+  var hireOutIdx = path.join(root, outputRoot, 'index.html');
+  if (fs.existsSync(hireIdx)) {
+    fs.copyFileSync(hireIdx, hireOutIdx);
   }
 }
 

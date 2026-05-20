@@ -557,24 +557,25 @@
     .skill-card h3 { font-size: 1.05rem; margin: 0 0 0.5rem; font-weight: 700; }
     .skill-card p { margin: 0; font-size: 0.9rem; color: var(--color-muted); line-height: 1.5; }
 
-    /* LATAM / timezone — tight vertical padding (replaces default .section padding on this block) */
+    /* LATAM / timezone — height is driven by the LEFT column padding (--latam-pad-y); right map fills 100% of row height. */
     #latam.section {
       background: #f0f0f8;
-      padding: 1.5rem 0;
-    }
-    @media (max-width: 768px) {
-      #latam.section {
-        padding: 1.25rem 0;
-      }
+      padding: 0;
     }
     .latam {
+      --latam-pad-y: clamp(2rem, 4vw, 3.5rem); /* <- single knob controlling LATAM block height */
       display: grid;
       grid-template-columns: minmax(0, 1fr) minmax(0, 1.12fr);
       gap: clamp(2rem, 5vw, 4rem);
-      align-items: center;
+      align-items: stretch;
     }
     @media (max-width: 900px) {
-      .latam { grid-template-columns: 1fr; gap: 2.5rem; }
+      .latam { grid-template-columns: 1fr; gap: 0; }
+    }
+    .latam > .reveal:first-child {
+      padding-top: var(--latam-pad-y);
+      padding-bottom: var(--latam-pad-y);
+      align-self: center;
     }
     .latam-title {
       font-size: clamp(1.85rem, 3.6vw, 2.65rem);
@@ -612,57 +613,155 @@
       font-weight: 700;
       padding: 1rem 1.75rem;
     }
-    /* Map: real <img> so full artwork stays visible (no cover crop). Scales to column width. */
+    /* Map column: stretches to row height, image fills 100% of that height. */
     .latam-map {
-      border-radius: 12px;
+      position: relative;
+      align-self: stretch;
+      min-height: 0;
       overflow: hidden;
       line-height: 0;
     }
     .latam-map img {
       display: block;
       width: 100%;
-      height: auto;
+      height: 100%;
       max-width: 100%;
+      object-fit: cover;
+      object-position: right center;
+    }
+    @media (max-width: 900px) {
+      .latam-map {
+        align-self: auto;
+        overflow: visible;
+        margin-bottom: var(--latam-pad-y, 1.5rem);
+      }
+      .latam-map img {
+        height: auto;
+        max-height: min(260px, 56vw);
+        object-fit: contain;
+        object-position: center;
+      }
     }
 
     /* Carousel */
-    .carousel-wrap { max-width: 900px; margin: 0 auto; }
-    .carousel-intro { text-align: center; margin-bottom: 2rem; }
+    .carousel-wrap { max-width: 1040px; margin: 0 auto; }
+    .carousel-intro { text-align: center; margin-bottom: 2.5rem; }
     .carousel-shell {
-      position: relative; display: flex; align-items: center; gap: 0.5rem;
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: clamp(0.75rem, 2vw, 1.5rem);
     }
-    .carousel-slides { flex: 1; overflow: hidden; border-radius: var(--radius-lg); }
+    .carousel-slides {
+      flex: 1;
+      min-width: 0;
+      overflow: hidden;
+      border-radius: var(--radius-lg);
+    }
     .slide {
-      display: none; animation: fadeIn 0.5s var(--ease);
-      background: #fff; border: 1px solid var(--color-border); border-radius: var(--radius-lg);
-      overflow: hidden; box-shadow: var(--shadow-soft);
+      display: none;
+      animation: fadeIn 0.5s var(--ease);
+      background: #fff;
+      border: 1px solid #e5e7ef;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: 0 1px 2px rgba(28, 28, 28, 0.04), 0 8px 28px rgba(28, 28, 28, 0.06);
     }
     .slide.is-active { display: block; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
-    .slide-grid { display: grid; grid-template-columns: 200px 1fr; }
-    @media (max-width: 640px) { .slide-grid { grid-template-columns: 1fr; } }
-    .slide-photo img { width: 100%; height: 100%; object-fit: cover; min-height: 220px; }
-    .slide-copy { padding: 1.75rem; }
-    .quote { font-size: 1.05rem; line-height: 1.55; margin: 0 0 1.25rem; font-style: italic; color: #333; }
-    .slide-footer { display: flex; justify-content: space-between; align-items: flex-end; gap: 1rem; flex-wrap: wrap; }
-    .slide-name { font-weight: 700; }
-    .slide-role { font-size: 0.9rem; color: var(--color-muted); }
-    .slide-logo img { max-height: 36px; width: auto; opacity: 0.9; }
-    .carousel-btn {
-      flex-shrink: 0; width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--color-border);
-      background: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center;
-      transition: background 0.2s, border-color 0.2s, transform 0.15s;
+    .slide-grid {
+      display: grid;
+      grid-template-columns: minmax(260px, 320px) minmax(0, 1fr);
+      align-items: stretch;
+      min-height: 320px;
     }
-    .carousel-btn:hover { background: var(--color-surface-2); border-color: var(--color-primary); transform: scale(1.05); }
+    @media (max-width: 640px) {
+      .slide-grid { grid-template-columns: 1fr; min-height: 0; }
+    }
+    .slide-photo {
+      position: relative;
+      align-self: stretch;
+      min-height: 0;
+      line-height: 0;
+      background: #1a1a1a;
+    }
+    .slide-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+    @media (max-width: 640px) {
+      .slide-photo img { max-height: min(280px, 60vw); }
+    }
+    .slide-copy {
+      display: flex;
+      flex-direction: column;
+      padding: clamp(1.75rem, 3vw, 2.5rem);
+    }
+    .quote {
+      font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+      line-height: 1.55;
+      margin: 0;
+      font-style: normal;
+      font-weight: 500;
+      color: #1a1a1a;
+      letter-spacing: -0.005em;
+    }
+    .slide-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: auto;
+      padding-top: 2rem;
+    }
+    .slide-name { font-weight: 700; color: #1a1a1a; }
+    .slide-role { font-size: 0.9rem; color: var(--color-muted); margin-top: 0.15rem; }
+    .slide-logo img { max-height: 32px; width: auto; opacity: 0.85; }
+    .carousel-btn {
+      flex-shrink: 0;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 1.5px solid #d6d8e0;
+      background: transparent;
+      color: #5c5c66;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.15s;
+    }
+    .carousel-btn:hover {
+      background: #fff;
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+      transform: scale(1.05);
+    }
     .carousel-btn:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
-    .carousel-dots { display: flex; justify-content: center; gap: 0.5rem; margin-top: 1.25rem; }
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
     .carousel-dots button {
-      width: 8px; height: 8px; border-radius: 50%; border: none; background: #ccc; cursor: pointer; padding: 0;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      border: none;
+      background: #d6d8e0;
+      cursor: pointer;
+      padding: 0;
       transition: background 0.2s, transform 0.2s;
     }
-    .carousel-dots button.is-active { background: var(--color-primary); transform: scale(1.25); }
+    .carousel-dots button.is-active { background: var(--color-primary); transform: scale(1.2); }
 
-    /* CTA band — solid blue + official team PNG (soft edges are in the asset; no CSS clip-path) */
+    /* CTA band — solid blue + official team PNG (wavy edges are in the asset) */
+    /* Height is driven by the LEFT column padding (--cta-pad-y); right image fills 100% of that height. */
     .cta-band {
       background: var(--color-primary);
       color: #fff;
@@ -671,30 +770,32 @@
       overflow: hidden;
     }
     .cta-split {
+      --cta-pad-y: clamp(2rem, 4vw, 3.5rem); /* <- single knob controlling banner height */
       position: relative;
       z-index: 1;
       display: grid;
-      grid-template-columns: minmax(0, 1fr) 50vw;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 46vw);
       gap: 0;
       align-items: stretch;
       width: 100%;
-      min-height: min(520px, 70vh);
+      min-height: 0;
       margin: 0;
-      padding: clamp(2.5rem, 6vw, 4rem) 0;
+      padding: 0;
       padding-left: max(1.25rem, calc((100vw - 1200px) / 2 + 1.25rem));
       box-sizing: border-box;
     }
     @media (max-width: 900px) {
       .cta-split {
         grid-template-columns: 1fr;
-        min-height: 0;
-        padding: 2.75rem 1.25rem 3rem;
+        padding: 0 1.25rem;
       }
     }
     .cta-split__text {
       display: flex;
       align-items: center;
-      padding-right: clamp(1.25rem, 4vw, 2.75rem);
+      padding-top: var(--cta-pad-y);
+      padding-bottom: var(--cta-pad-y);
+      padding-right: clamp(1rem, 3vw, 2rem);
       min-width: 0;
     }
     .cta-split__text-inner {
@@ -709,41 +810,50 @@
     .cta-split__photo {
       position: relative;
       display: flex;
-      align-items: center;
+      align-items: stretch;
       justify-content: flex-end;
-      min-height: min(520px, 70vh);
+      min-height: 0;
+      align-self: stretch;
+      overflow: hidden;
     }
     @media (max-width: 900px) {
       .cta-split__photo {
-        min-height: 0;
         order: -1;
-        margin: 0 0 1.5rem;
+        margin: 0 0 1.25rem;
         width: 100%;
         justify-content: center;
+        align-self: auto;
+        overflow: visible;
       }
     }
     .cta-split__photo picture {
       display: block;
       width: 100%;
       max-width: 100%;
+      height: 100%;
+      min-height: 0;
       line-height: 0;
     }
     .cta-split__photo img {
       display: block;
       width: 100%;
-      height: auto;
       max-width: 100%;
-      object-fit: contain;
+      height: 100%;
+      object-fit: cover;
       object-position: right center;
     }
     @media (max-width: 900px) {
       .cta-split__photo img {
+        height: auto;
+        max-height: min(240px, 52vw);
+        width: 100%;
+        object-fit: cover;
         object-position: center;
       }
     }
     .cta-band .h2 { color: #fff; }
     .cta-band .h2 strong { font-weight: 700; }
-    .cta-band .lead { color: rgba(255, 255, 255, 0.94); margin-bottom: 1.5rem; }
+    .cta-band .lead { color: rgba(255, 255, 255, 0.94); margin-bottom: 1.25rem; }
     .cta-band .btn-row { margin-top: 0.25rem; }
     .cta-band .btn--primary {
       background: #fff;
@@ -1172,7 +1282,7 @@
       <div class="wrap carousel-wrap">
         <div class="carousel-intro reveal">
           <h2 class="h2">Real results. Real <span class="accent">people.</span></h2>
-          <p class="lead" style="margin:0;max-width:32rem">Check out what our clients are saying about their hiring experience.</p>
+          <p class="lead" style="margin:0 auto;max-width:32rem">Check out what our clients are saying about their hiring experience.</p>
         </div>
         <div class="carousel-shell reveal">
           <button type="button" class="carousel-btn" aria-label="Previous testimonial">
