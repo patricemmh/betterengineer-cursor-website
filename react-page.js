@@ -285,6 +285,10 @@
     var requiredFields = Array.prototype.slice.call(form.querySelectorAll('[required]'));
     var formStartedTracked = false;
     var firstInputAt = 0;
+    /* Validation timing: stay quiet until first submit attempt, then validate live as the user fixes
+       each field. Mirrors the "submit-then-correct" pattern from GOV.UK / Adam Silver and the NN/g
+       guidance against premature inline validation. */
+    var submitAttempted = false;
     /* Anti-bot tier 1: honeypot, time trap, message hygiene, stricter email, disposable-domain block. */
     var MIN_FILL_MS = 3000;
     var MIN_MESSAGE_LEN = 20;
@@ -307,15 +311,18 @@
     });
     requiredFields.forEach(function (field) {
       field.addEventListener('input', function () {
-        setFieldError(field, !field.value.trim());
+        if (!submitAttempted) return;
+        if (field.value.trim()) setFieldError(field, false);
       });
       field.addEventListener('blur', function () {
+        if (!submitAttempted) return;
         setFieldError(field, !field.value.trim());
       });
     });
 
     form.addEventListener('submit', function (event) {
       event.preventDefault();
+      submitAttempted = true;
       form.classList.remove('intake-form--success');
       setStatus(status, '', '');
 
