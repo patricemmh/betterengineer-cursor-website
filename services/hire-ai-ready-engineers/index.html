@@ -2535,11 +2535,6 @@
   color: var(--lavender-2);
 }
 
-.air-lead--light {
-  color: rgba(255, 255, 255, 0.78);
-}
-
-/* Fluency level cards */
 .air-fluency-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -2655,102 +2650,6 @@
   box-shadow: 0 16px 44px rgba(8, 9, 22, 0.45);
 }
 
-/* Vetting (dark section) */
-.air-vetting {
-  background: #0c0e1f;
-  color: #fff;
-  position: relative;
-  overflow: hidden;
-}
-
-.air-vetting::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 60% 50% at 80% 0%, rgba(132, 137, 227, 0.18) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 40% at 10% 100%, rgba(168, 159, 216, 0.12) 0%, transparent 65%);
-  pointer-events: none;
-}
-
-.air-vetting > .wrap {
-  position: relative;
-  z-index: 1;
-}
-
-.air-vetting-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.1rem;
-}
-
-@media (max-width: 1100px) {
-  .air-vetting-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 560px) {
-  .air-vetting-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-.air-vetting-card {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: var(--radius-md);
-  padding: 1.6rem 1.45rem;
-  transition: background 0.2s, border-color 0.2s, transform 0.25s var(--ease);
-  position: relative;
-}
-
-.air-vetting-card:hover {
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(168, 159, 216, 0.35);
-  transform: translateY(-3px);
-}
-
-.air-vetting-card__tag {
-  display: inline-block;
-  font-size: 0.6875rem;
-  font-weight: 700;
-  letter-spacing: 0.11em;
-  text-transform: uppercase;
-  color: #fff;
-  background: var(--color-primary);
-  border-radius: 4px;
-  padding: 0.3rem 0.6rem;
-  margin-bottom: 0.65rem;
-}
-
-.air-vetting-card__num {
-  position: absolute;
-  top: 1.2rem;
-  right: 1.4rem;
-  font-size: 3rem;
-  font-weight: 700;
-  color: rgba(255, 255, 255, 0.04);
-  letter-spacing: -0.02em;
-  line-height: 1;
-}
-
-.air-vetting-card h3 {
-  font-size: 1.05rem;
-  margin: 0 0 0.55rem;
-  font-weight: 700;
-  color: #fff;
-  letter-spacing: -0.01em;
-}
-
-.air-vetting-card p {
-  margin: 0;
-  font-size: 0.9rem;
-  line-height: 1.55;
-  color: rgba(255, 255, 255, 0.7);
-}
-
-/* Comparison table */
 .air-compare-head {
   display: grid;
   grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
@@ -2920,20 +2819,44 @@
   }
 }
 
-/* Skills cluster */
+/* Roles / stack coverage (hire LP) */
+.air-roles-title .air-roles-title-accent {
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.air-roles-title .air-roles-title-accent em {
+  font-style: italic;
+  font-weight: 700;
+  color: inherit;
+}
+
+.air-page #roles.section-tint .air-skill-group {
+  background: #f6f7fb;
+}
+
+.air-page #roles.section-tint .air-skill-tags span {
+  background: #fff;
+}
+
+.air-roles-lead {
+  margin-top: 0.85rem;
+}
+
+/* Skills cluster: 6 cards at 3 x 2 on desktop */
 .air-skills-cluster {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1.25rem;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 900px) {
   .air-skills-cluster {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 560px) {
   .air-skills-cluster {
     grid-template-columns: 1fr;
   }
@@ -2977,13 +2900,34 @@
   line-height: 1.2;
 }
 
-/* Tighter gap between "What we place" and "Who we serve" */
+/* Tighter gap between stack coverage and Who we serve */
 .air-page #roles.section-tint {
   padding-bottom: clamp(2.25rem, 4vw, 3.25rem);
 }
 
 .air-page #serve.section {
   padding-top: clamp(2.25rem, 4vw, 3.25rem);
+}
+
+.air-serve-title .air-serve-title-accent {
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.air-serve-title .air-serve-title-accent em {
+  font-style: italic;
+  font-weight: 700;
+  color: inherit;
+}
+
+.air-serve-lead {
+  margin-top: 0.85rem;
+}
+
+@media (max-width: 640px) {
+  .air-serve-title-break {
+    display: none;
+  }
 }
 
 /* Who we serve */
@@ -3017,15 +2961,16 @@
 }
 
 .air-serve-card__icon {
-  width: 44px;
-  height: 44px;
-  border-radius: var(--radius-sm);
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
   background: var(--color-surface-2);
-  border: 1px solid var(--color-border);
+  border: 1px solid rgba(84, 91, 179, 0.18);
   color: var(--color-primary);
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
 .air-serve-card h3 {
@@ -3426,7 +3371,7 @@
         <div class="reveal">
           <p class="eyebrow air-hero-kicker">AI-ready engineers · Staff augmentation · LATAM talent</p>
           <h1 class="h1" id="air-hero-title">Your next AI development team doesn't just use AI. <span class="light">They think with it.</span></h1>
-          <p class="lead">We help U.S. tech companies hire AI engineers, machine learning engineers, and AI app developers from Latin America. Every engineer is vetted for genuine AI fluency, not just tool familiarity.</p>
+          <p class="lead">We help U.S. tech companies hire AI engineers, machine learning engineers, and AI app developers from Latin America, vetted for genuine AI fluency.</p>
           <div class="trust-pills" aria-label="Outcomes">
             <span class="trust-pill">72-hour candidate intro</span>
             <span class="trust-pill">Senior engineers only</span>
@@ -3555,42 +3500,6 @@
       </div>
     </section>
 
-    <section class="section air-vetting" id="vetting" aria-labelledby="vetting-heading">
-      <div class="wrap">
-        <div class="reveal air-section-head">
-          <p class="eyebrow air-eyebrow--light">Our vetting process</p>
-          <h2 class="h2 air-h2--light" id="vetting-heading">How we know an engineer is truly AI-ready, <span class="accent">before you take the call.</span></h2>
-          <p class="lead air-lead--light" style="margin-bottom:0">Any offshore AI developer can claim fluency. We verify it through a four-part assessment that goes well beyond the resume.</p>
-        </div>
-        <div class="air-vetting-grid">
-          <article class="air-vetting-card reveal">
-            <span class="air-vetting-card__tag">Behavioral</span>
-            <span class="air-vetting-card__num">01</span>
-            <h3>Real-world AI workflow review</h3>
-            <p>We walk through how each engineer actually uses AI tools in their daily work, not hypotheticals. We look for iteration habits, output evaluation, and the judgment to know when not to trust the model.</p>
-          </article>
-          <article class="air-vetting-card reveal">
-            <span class="air-vetting-card__tag">Technical</span>
-            <span class="air-vetting-card__num">02</span>
-            <h3>AI-integrated coding challenge</h3>
-            <p>Candidates solve real engineering problems using AI tools as part of the exercise. We assess how they prompt, refine, validate, and integrate AI outputs, from prototype all the way to production-quality code.</p>
-          </article>
-          <article class="air-vetting-card reveal">
-            <span class="air-vetting-card__tag">Evaluative</span>
-            <span class="air-vetting-card__num">03</span>
-            <h3>Critical evaluation under complexity</h3>
-            <p>We introduce high-stakes, ambiguous scenarios to see whether candidates identify missing context, question AI reasoning, and flag risks. These are the hallmarks of a genuinely AI-fluent engineer and they are rare.</p>
-          </article>
-          <article class="air-vetting-card reveal">
-            <span class="air-vetting-card__tag">Cultural</span>
-            <span class="air-vetting-card__num">04</span>
-            <h3>Startup-readiness and business alignment</h3>
-            <p>AI fluency without business judgment is incomplete. We verify that engineers think like product owners. They raise tradeoffs early, suggest smarter paths, and align work with real business outcomes.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
     <section class="section" id="compare" aria-labelledby="compare-heading">
       <div class="wrap">
         <div class="air-compare-head reveal">
@@ -3665,9 +3574,8 @@
     <section class="section section-tint" id="roles" aria-labelledby="roles-heading">
       <div class="wrap">
         <div class="reveal air-section-head">
-          <p class="eyebrow">What we place</p>
-          <h2 class="h2" id="roles-heading">From ML engineers to AI app developers, <span class="accent">we cover the full AI engineering stack.</span></h2>
-          <p class="lead" style="margin-bottom:0">Whether you are building internal AI tooling, shipping AI-powered products to market, or scaling an existing engineering org, we find engineers who fit both the role and the mission.</p>
+          <h2 class="h2 air-roles-title" id="roles-heading">AI specialists and <span class="air-roles-title-accent"><em>AI-fluent</em> engineers</span> across every stack</h2>
+          <p class="lead air-roles-lead" style="margin-bottom:0">We place dedicated AI and ML engineers, and just as importantly, software engineers across all disciplines who are genuinely fluent in AI tools and know how to use them to build better, faster. Whatever your stack, we find engineers who fit both the role and the mission.</p>
         </div>
         <div class="air-skills-cluster">
           <div class="air-skill-group reveal">
@@ -3681,43 +3589,83 @@
               <span>MLOps</span>
               <span>NLP Engineers</span>
               <span>Prompt Engineers</span>
+              <span>Computer Vision</span>
             </div>
           </div>
           <div class="air-skill-group reveal">
-            <h3>Full-Stack &amp; Backend</h3>
+            <h3>Full-Stack &amp; Frontend</h3>
             <div class="air-skill-tags">
-              <span>Python</span>
-              <span>Node.js</span>
               <span>React</span>
+              <span>Next.js</span>
+              <span>Vue.js</span>
               <span>TypeScript</span>
-              <span>Go</span>
-              <span>AWS / GCP / Azure</span>
-              <span>API Development</span>
+              <span>Node.js</span>
+              <span>Python</span>
+              <span>Ruby on Rails</span>
               <span>GraphQL</span>
+              <span>REST APIs</span>
             </div>
           </div>
           <div class="air-skill-group reveal">
-            <h3>Data &amp; Infrastructure</h3>
+            <h3>Backend &amp; Systems</h3>
+            <div class="air-skill-tags">
+              <span>Go</span>
+              <span>Java</span>
+              <span>Kotlin</span>
+              <span>.NET / C#</span>
+              <span>Rust</span>
+              <span>Microservices</span>
+              <span>API Architecture</span>
+              <span>Serverless</span>
+            </div>
+          </div>
+          <div class="air-skill-group reveal">
+            <h3>Data &amp; Analytics</h3>
             <div class="air-skill-tags">
               <span>Data Engineers</span>
+              <span>Data Scientists</span>
               <span>Vector Databases</span>
-              <span>Data Science</span>
-              <span>DevOps / Platform</span>
-              <span>Kubernetes</span>
               <span>Data Pipelines</span>
+              <span>SQL / NoSQL</span>
+              <span>Spark</span>
+              <span>dbt</span>
+              <span>BI &amp; Analytics</span>
+            </div>
+          </div>
+          <div class="air-skill-group reveal">
+            <h3>Cloud &amp; Infrastructure</h3>
+            <div class="air-skill-tags">
+              <span>AWS</span>
+              <span>GCP</span>
+              <span>Azure</span>
+              <span>DevOps</span>
+              <span>Kubernetes</span>
+              <span>Terraform</span>
+              <span>CI/CD</span>
               <span>AI Infrastructure</span>
+              <span>Platform Engineering</span>
+            </div>
+          </div>
+          <div class="air-skill-group reveal">
+            <h3>Mobile</h3>
+            <div class="air-skill-tags">
+              <span>iOS / Swift</span>
+              <span>Android / Kotlin</span>
+              <span>React Native</span>
+              <span>Flutter</span>
+              <span>Mobile AI Integration</span>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section" id="serve" aria-labelledby="serve-heading">
+    <section class="section section-tint" id="serve" aria-labelledby="serve-heading">
       <div class="wrap">
         <div class="reveal air-section-head">
           <p class="eyebrow">Who we serve</p>
-          <h2 class="h2" id="serve-heading">Built for companies where AI software development <span class="accent">lives or dies by the team.</span></h2>
-          <p class="lead" style="margin-bottom:0">We work with three types of organizations. Each has distinct needs. They share one thing: they cannot afford to get the hire wrong.</p>
+          <h2 class="h2 air-serve-title" id="serve-heading">Any company ready to <span class="air-serve-title-accent">build and <br class="air-serve-title-break" aria-hidden="true"><em>grow with AI</em></span></h2>
+          <p class="lead air-serve-lead" style="margin-bottom:0">We work with organizations of all kinds, from early-stage startups to established enterprises, that are serious about adopting AI and need engineers who can make it real.</p>
         </div>
         <div class="air-serve-grid">
           <article class="air-serve-card reveal">
@@ -3729,8 +3677,8 @@
                 <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path>
               </svg>
             </div>
-            <h3>Startups &amp; scale-ups</h3>
-            <p>Early-stage and high-growth companies that need to hire AI developers fast. People who think like co-founders and ship like senior engineers. Every single hire matters when you are five to fifty people.</p>
+            <h3>Startups &amp; Scale-Ups</h3>
+            <p>Early-stage and high-growth companies that need to hire AI-fluent engineers fast, people who think like co-founders and ship like senior engineers. Every hire matters when you&#39;re five to fifty people.</p>
             <ul class="air-bullets">
               <li>AI-integrated engineers who hit the ground running</li>
               <li>Founder-level mission alignment</li>
@@ -3740,33 +3688,40 @@
           <article class="air-serve-card reveal">
             <div class="air-serve-card__icon" aria-hidden="true">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="6" width="18" height="14" rx="2"></rect>
-                <path d="M16 6V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"></path>
-                <path d="M8 12h.01"></path><path d="M12 12h.01"></path><path d="M16 12h.01"></path>
-                <path d="M8 16h.01"></path><path d="M12 16h.01"></path><path d="M16 16h.01"></path>
+                <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
+                <path d="M9 22v-4h6v4"></path>
+                <path d="M8 6h.01"></path>
+                <path d="M16 6h.01"></path>
+                <path d="M12 6h.01"></path>
+                <path d="M12 10h.01"></path>
+                <path d="M12 14h.01"></path>
+                <path d="M16 10h.01"></path>
+                <path d="M16 14h.01"></path>
+                <path d="M8 10h.01"></path>
+                <path d="M8 14h.01"></path>
               </svg>
             </div>
-            <h3>Established tech companies</h3>
-            <p>Scaling organizations looking to build offshore AI developer capacity without the operational complexity. Compliance, onboarding, and retention are handled so your internal teams stay focused.</p>
+            <h3>Established Companies Going AI-First</h3>
+            <p>Businesses across industries, retail, finance, healthcare, logistics, e-commerce, that are integrating AI into their products and operations and need engineers who can lead that transition, not just follow it.</p>
             <ul class="air-bullets">
-              <li>Pre-vetted, compliant LATAM AI engineers</li>
-              <li>Low attrition, no surprises</li>
-              <li>Clean integration with existing teams</li>
+              <li>Engineers fluent in AI tools across any stack</li>
+              <li>Seamless integration with existing teams</li>
+              <li>Low attrition, predictable costs, no surprises</li>
             </ul>
           </article>
           <article class="air-serve-card reveal">
             <div class="air-serve-card__icon" aria-hidden="true">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="12" cy="12" r="3"></circle>
-                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09a1.65 1.65 0 0 0-1.08-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 5 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
               </svg>
             </div>
-            <h3>Software agencies &amp; dev shops</h3>
-            <p>Agencies that need to staff client-facing AI software development work with engineers who represent their standards and stick around long enough to build real client trust.</p>
+            <h3>Agencies &amp; Digital Product Companies</h3>
+            <p>Dev shops, consultancies, and digital agencies that need to deliver AI-capable engineering work for clients, with engineers who are professional, reliable, and represent their standards on every project.</p>
             <ul class="air-bullets">
               <li>Client-ready, professional communicators</li>
               <li>Fast ramp-up on new project contexts</li>
-              <li>Engineers with real agency environment experience</li>
+              <li>Engineers with real multi-client experience</li>
             </ul>
           </article>
         </div>
@@ -3792,7 +3747,7 @@
             </div>
             <div>
               <h3>Full time-zone overlap</h3>
-              <p>Real-time collaboration with your team. No async-only constraints, no missed standups, no 6 a.m. calls.</p>
+              <p>Our engineers work your hours. Fully aligned with U.S. time zones for seamless day-to-day collaboration.</p>
             </div>
           </article>
           <article class="air-feature">
@@ -3814,7 +3769,7 @@
             </div>
             <div>
               <h3>Senior-only talent pool</h3>
-              <p>No juniors, no fluff. Battle-tested engineers who have thrived in demanding, high-growth environments.</p>
+              <p>We don't hire juniors. Every candidate in our network brings depth, ownership, and a track record of thriving in demanding, high-growth environments.</p>
             </div>
           </article>
           <article class="air-feature">

@@ -2535,11 +2535,6 @@
   color: var(--lavender-2);
 }
 
-.air-lead--light {
-  color: rgba(255, 255, 255, 0.78);
-}
-
-/* Fluency level cards */
 .air-fluency-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -2655,102 +2650,6 @@
   box-shadow: 0 16px 44px rgba(8, 9, 22, 0.45);
 }
 
-/* Vetting (dark section) */
-.air-vetting {
-  background: #0c0e1f;
-  color: #fff;
-  position: relative;
-  overflow: hidden;
-}
-
-.air-vetting::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 60% 50% at 80% 0%, rgba(132, 137, 227, 0.18) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 40% at 10% 100%, rgba(168, 159, 216, 0.12) 0%, transparent 65%);
-  pointer-events: none;
-}
-
-.air-vetting > .wrap {
-  position: relative;
-  z-index: 1;
-}
-
-.air-vetting-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.1rem;
-}
-
-@media (max-width: 1100px) {
-  .air-vetting-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 560px) {
-  .air-vetting-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-.air-vetting-card {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: var(--radius-md);
-  padding: 1.6rem 1.45rem;
-  transition: background 0.2s, border-color 0.2s, transform 0.25s var(--ease);
-  position: relative;
-}
-
-.air-vetting-card:hover {
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(168, 159, 216, 0.35);
-  transform: translateY(-3px);
-}
-
-.air-vetting-card__tag {
-  display: inline-block;
-  font-size: 0.6875rem;
-  font-weight: 700;
-  letter-spacing: 0.11em;
-  text-transform: uppercase;
-  color: #fff;
-  background: var(--color-primary);
-  border-radius: 4px;
-  padding: 0.3rem 0.6rem;
-  margin-bottom: 0.65rem;
-}
-
-.air-vetting-card__num {
-  position: absolute;
-  top: 1.2rem;
-  right: 1.4rem;
-  font-size: 3rem;
-  font-weight: 700;
-  color: rgba(255, 255, 255, 0.04);
-  letter-spacing: -0.02em;
-  line-height: 1;
-}
-
-.air-vetting-card h3 {
-  font-size: 1.05rem;
-  margin: 0 0 0.55rem;
-  font-weight: 700;
-  color: #fff;
-  letter-spacing: -0.01em;
-}
-
-.air-vetting-card p {
-  margin: 0;
-  font-size: 0.9rem;
-  line-height: 1.55;
-  color: rgba(255, 255, 255, 0.7);
-}
-
-/* Comparison table */
 .air-compare-head {
   display: grid;
   grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
@@ -2920,20 +2819,44 @@
   }
 }
 
-/* Skills cluster */
+/* Roles / stack coverage (hire LP) */
+.air-roles-title .air-roles-title-accent {
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.air-roles-title .air-roles-title-accent em {
+  font-style: italic;
+  font-weight: 700;
+  color: inherit;
+}
+
+.air-page #roles.section-tint .air-skill-group {
+  background: #f6f7fb;
+}
+
+.air-page #roles.section-tint .air-skill-tags span {
+  background: #fff;
+}
+
+.air-roles-lead {
+  margin-top: 0.85rem;
+}
+
+/* Skills cluster: 6 cards at 3 x 2 on desktop */
 .air-skills-cluster {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1.25rem;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 900px) {
   .air-skills-cluster {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 560px) {
   .air-skills-cluster {
     grid-template-columns: 1fr;
   }
@@ -2977,13 +2900,34 @@
   line-height: 1.2;
 }
 
-/* Tighter gap between "What we place" and "Who we serve" */
+/* Tighter gap between stack coverage and Who we serve */
 .air-page #roles.section-tint {
   padding-bottom: clamp(2.25rem, 4vw, 3.25rem);
 }
 
 .air-page #serve.section {
   padding-top: clamp(2.25rem, 4vw, 3.25rem);
+}
+
+.air-serve-title .air-serve-title-accent {
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.air-serve-title .air-serve-title-accent em {
+  font-style: italic;
+  font-weight: 700;
+  color: inherit;
+}
+
+.air-serve-lead {
+  margin-top: 0.85rem;
+}
+
+@media (max-width: 640px) {
+  .air-serve-title-break {
+    display: none;
+  }
 }
 
 /* Who we serve */
@@ -3017,15 +2961,16 @@
 }
 
 .air-serve-card__icon {
-  width: 44px;
-  height: 44px;
-  border-radius: var(--radius-sm);
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
   background: var(--color-surface-2);
-  border: 1px solid var(--color-border);
+  border: 1px solid rgba(84, 91, 179, 0.18);
   color: var(--color-primary);
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
 .air-serve-card h3 {
