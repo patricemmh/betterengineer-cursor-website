@@ -2660,14 +2660,14 @@
   }
 }
 
-.air-compare-head p {
+.air-compare-head p:not(.eyebrow) {
   margin: 0 0 0.85rem;
   font-size: 1rem;
   color: var(--color-muted);
   line-height: 1.6;
 }
 
-.air-compare-head p:last-child {
+.air-compare-head p:last-child:not(.eyebrow) {
   margin-bottom: 0;
 }
 
@@ -2818,13 +2818,7 @@
 /* Roles / stack coverage (hire LP) */
 .air-roles-title .air-roles-title-accent {
   color: var(--color-primary);
-  font-weight: 700;
-}
-
-.air-roles-title .air-roles-title-accent em {
-  font-style: italic;
-  font-weight: 700;
-  color: inherit;
+  font-weight: inherit;
 }
 
 .air-page #roles.section-tint .air-skill-group {
@@ -2896,24 +2890,21 @@
   line-height: 1.2;
 }
 
-/* Tighter gap between stack coverage and Who we serve */
+/* Stack coverage (#roles): comfortable vertical padding */
 .air-page #roles.section-tint {
-  padding-bottom: clamp(2.25rem, 4vw, 3.25rem);
+  padding-top: clamp(4.25rem, 8vw, 6rem);
+  padding-bottom: clamp(4.25rem, 8vw, 6.25rem);
 }
 
+/* Who we serve: comfortable vertical rhythm */
 .air-page #serve.section {
-  padding-top: clamp(2.25rem, 4vw, 3.25rem);
+  padding-top: clamp(4.25rem, 8vw, 6rem);
+  padding-bottom: clamp(4.25rem, 8vw, 6.25rem);
 }
 
 .air-serve-title .air-serve-title-accent {
   color: var(--color-primary);
-  font-weight: 700;
-}
-
-.air-serve-title .air-serve-title-accent em {
-  font-style: italic;
-  font-weight: 700;
-  color: inherit;
+  font-weight: inherit;
 }
 
 .air-serve-lead {
