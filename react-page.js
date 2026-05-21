@@ -284,7 +284,23 @@
 
     var requiredFields = Array.prototype.slice.call(form.querySelectorAll('[required]'));
     var formStartedTracked = false;
+    var firstInputAt = 0;
+    /* Anti-bot tier 1: honeypot, time trap, message hygiene, stricter email, disposable-domain block. */
+    var MIN_FILL_MS = 3000;
+    var MIN_MESSAGE_LEN = 20;
+    var EMAIL_RE = /^[A-Z0-9._%+\-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+    var MESSAGE_URL_RE = /(?:https?:\/\/|\bwww\.[a-z]|\bt\.me\/|\bbit\.ly\/|\btinyurl\.|\bgoo\.gl\/|\bdiscord\.gg\/)/i;
+    var DISPOSABLE_DOMAINS = [
+      'mailinator.com','mailinator.net','10minutemail.com','10minutemail.net',
+      'guerrillamail.com','guerrillamail.net','sharklasers.com',
+      'tempmail.com','temp-mail.org','tempr.email','dropmail.me',
+      'yopmail.com','throwawaymail.com','maildrop.cc','getairmail.com',
+      'spamgourmet.com','dispostable.com','fakeinbox.com','mailnesia.com',
+      'mintemail.com','trbvm.com','mohmal.com','getnada.com',
+      'tempinbox.com','emailondeck.com','mvrht.net'
+    ];
     form.addEventListener('input', function () {
+      if (!firstInputAt) firstInputAt = Date.now();
       if (formStartedTracked) return;
       formStartedTracked = true;
       trackVirtualView('react_form_started');
@@ -327,11 +343,43 @@
         return;
       }
 
+      /* Honeypot + time trap: silently fake success so bots do not retry or detect rejection. */
+      var honeypot = (formData.get('company_website') || '').toString().trim();
+      var elapsedSinceFirstInput = firstInputAt ? Date.now() - firstInputAt : 0;
+      if (honeypot || !firstInputAt || elapsedSinceFirstInput < MIN_FILL_MS) {
+        form.reset();
+        requiredFields.forEach(function (field) { setFieldError(field, false); });
+        form.classList.add('intake-form--success');
+        setStatus(status, 'Thanks. Your request was sent. A staffing specialist will contact you shortly.', 'success');
+        return;
+      }
+
       var emailField = form.querySelector('[name="email"]');
-      var looksLikeEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email);
+      var looksLikeEmail = EMAIL_RE.test(values.email);
       if (!looksLikeEmail) {
         setFieldError(emailField, true);
         setStatus(status, 'Please enter a valid work email address.', 'error');
+        return;
+      }
+
+      var atIdx = values.email.lastIndexOf('@');
+      var emailDomain = atIdx >= 0 ? values.email.slice(atIdx + 1).toLowerCase() : '';
+      if (DISPOSABLE_DOMAINS.indexOf(emailDomain) !== -1) {
+        setFieldError(emailField, true);
+        setStatus(status, 'Please use your work email so we can verify your team.', 'error');
+        return;
+      }
+
+      var messageField = form.querySelector('[name="message"]');
+      if (values.message.length < MIN_MESSAGE_LEN) {
+        setFieldError(messageField, true);
+        setStatus(status, 'Please add a few more details about what you are building so we can route your request.', 'error');
+        return;
+      }
+
+      if (MESSAGE_URL_RE.test(values.message)) {
+        setFieldError(messageField, true);
+        setStatus(status, 'Please describe your project without links. We will follow up by email if we need any.', 'error');
         return;
       }
 
