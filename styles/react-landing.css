@@ -268,12 +268,13 @@
 }
 
 .turnstile-widget-wrap.is-active {
-  display: flex;
-  justify-content: center;
+  display: block;
+  width: 100%;
   margin: 0.75rem 0 0.35rem;
 }
 
 .turnstile-widget-wrap iframe {
+  width: 100% !important;
   max-width: 100%;
 }
 

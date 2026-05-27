@@ -394,7 +394,7 @@
         turnstileWidgetId = window.turnstile.render(holder, {
           sitekey: TURNSTILE_SITEKEY,
           theme: 'light',
-          size: 'normal',
+          size: 'flexible',
           appearance: 'interaction-only',
           callback: function (token) {
             turnstileTokenCache = token;
