@@ -347,8 +347,8 @@
     var turnstileWaiter = null;
     var turnstileTokenCache = '';
     var turnstileReadyWaiters = [];
-    var TURNSTILE_READY_TIMEOUT_MS = 20000;
-    var TURNSTILE_TOKEN_TIMEOUT_MS = 22000;
+    var TURNSTILE_READY_TIMEOUT_MS = 30000;
+    var TURNSTILE_TOKEN_TIMEOUT_MS = 90000;
 
     function resolveTurnstileReady() {
       if (turnstileWidgetId === null) return;
@@ -508,7 +508,7 @@
             if (settled) return;
             settled = true;
             turnstileWaiter = null;
-            reject(new Error('Security check timed out. Complete the check above the button, then try again.'));
+            reject(new Error('Security check timed out. Complete the verification step above the button, then submit again.'));
           }, TURNSTILE_TOKEN_TIMEOUT_MS);
 
           function settle(ok, val) {
@@ -542,6 +542,38 @@
       loadTurnstileScript();
     }
 
+    function ensureSubmitErrorEl() {
+      var el = form.querySelector('.form-submit-error');
+      if (el) return el;
+      el = document.createElement('p');
+      el.className = 'form-submit-error';
+      el.setAttribute('role', 'alert');
+      el.setAttribute('aria-live', 'polite');
+      var btn = form.querySelector('button[type="submit"]');
+      if (btn && btn.parentNode) {
+        btn.parentNode.insertBefore(el, btn);
+      } else {
+        form.appendChild(el);
+      }
+      return el;
+    }
+
+    function setSubmitError(message) {
+      var el = ensureSubmitErrorEl();
+      if (message) {
+        el.textContent = message;
+        el.classList.add('is-visible');
+      } else {
+        el.textContent = '';
+        el.classList.remove('is-visible');
+      }
+    }
+
+    function applySubmitError(message) {
+      setSubmitError(message || 'We could not submit right now. Please try again in a moment.');
+      trackVirtualView('react_form_submit_error');
+    }
+
     form.addEventListener('input', function () {
       if (!firstInputAt) firstInputAt = Date.now();
       if (formStartedTracked) return;
@@ -565,6 +597,7 @@
       submitAttempted = true;
       form.classList.remove('intake-form--success');
       setStatus(status, '', '');
+      setSubmitError('');
 
       var formData = new FormData(form);
       var values = {
@@ -664,14 +697,10 @@
       function applySuccess() {
         form.reset();
         requiredFields.forEach(function (field) { setFieldError(field, false); });
+        setSubmitError('');
         form.classList.add('intake-form--success');
         setStatus(status, 'Thanks. Your request was sent. A staffing specialist will contact you shortly.', 'success');
         trackVirtualView('react_form_submit_success');
-      }
-
-      function applyError(message) {
-        setStatus(status, message || 'We could not submit right now. Please try again in a moment.', 'error');
-        trackVirtualView('react_form_submit_error');
       }
 
       function clearLoading() {
@@ -713,10 +742,10 @@
           })
           .then(function (data) {
             if (data && data.ok) { applySuccess(); return; }
-            applyError(data && data.error);
+            applySubmitError(data && data.error);
           })
           .catch(function (err) {
-            applyError(err && err.message);
+            applySubmitError(err && err.message);
           })
           .finally(clearLoading);
         return;
@@ -745,7 +774,7 @@
         })
         .catch(function (err) {
           var hubspotMessage = err && err.data ? getHubSpotErrorMessage(err.data) : '';
-          applyError(hubspotMessage);
+          applySubmitError(hubspotMessage);
         })
         .finally(clearLoading);
     });
