@@ -364,6 +364,12 @@
       else w.reject(val);
     }
 
+    function setTurnstileHolderVisible(show) {
+      var holder = form.querySelector('#turnstile-widget');
+      if (!holder) return;
+      holder.classList.toggle('is-active', !!show);
+    }
+
     function ensureTurnstileHolder() {
       var holder = form.querySelector('#turnstile-widget');
       if (holder) return holder;
@@ -383,24 +389,26 @@
       if (!window.turnstile || turnstileWidgetId !== null) return;
       var holder = ensureTurnstileHolder();
       try {
-        /* Managed widget (Cloudflare dashboard): render visibly and let the
-           challenge run on page load. The `onload` query param on api.js
-           already guarantees the API is ready, so we do not call
-           turnstile.ready() here (which is incompatible with defer). */
+        /* Managed widget: interaction-only hides the checkbox for most visitors;
+           we reveal the holder only when submit still needs a token. */
         turnstileWidgetId = window.turnstile.render(holder, {
           sitekey: TURNSTILE_SITEKEY,
           theme: 'light',
-          size: 'flexible',
+          size: 'compact',
+          appearance: 'interaction-only',
           callback: function (token) {
             turnstileTokenCache = token;
+            setTurnstileHolderVisible(false);
             notifyTurnstileWaiter(true, token);
           },
           'error-callback': function () {
             turnstileTokenCache = '';
+            setTurnstileHolderVisible(true);
             notifyTurnstileWaiter(false, new Error('Verification could not load. Please reload the page and try again.'));
           },
           'expired-callback': function () {
             turnstileTokenCache = '';
+            setTurnstileHolderVisible(true);
             notifyTurnstileWaiter(false, new Error('Verification expired. Please submit again.'));
           },
         });
@@ -519,6 +527,7 @@
             },
           };
 
+          setTurnstileHolderVisible(true);
           try {
             window.turnstile.reset(turnstileWidgetId);
           } catch (e) {
