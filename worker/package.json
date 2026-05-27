@@ -1,0 +1,17 @@
+{
+  "name": "intake-proxy",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Cloudflare Worker that fronts HubSpot Forms submissions with Turnstile verification and Tier 1 anti-spam checks for the BetterEngineer intake form.",
+  "main": "intake-proxy.js",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "tail": "wrangler tail",
+    "secret:turnstile": "wrangler secret put TURNSTILE_SECRET"
+  },
+  "devDependencies": {
+    "wrangler": "^3.78.0"
+  }
+}

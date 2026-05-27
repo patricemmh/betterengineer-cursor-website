@@ -1,0 +1,13 @@
+name = "intake-proxy"
+main = "intake-proxy.js"
+compatibility_date = "2025-01-01"
+
+# Secrets are NOT defined here. Set them with:
+#   npx wrangler secret put TURNSTILE_SECRET
+#
+# Routing: by default this Worker is reachable at
+#   https://intake-proxy.<your-cloudflare-subdomain>.workers.dev
+# If you want a custom domain, add a [route] or [[routes]] block, e.g.
+#   routes = [
+#     { pattern = "intake.betterengineer.com/*", custom_domain = true }
+#   ]

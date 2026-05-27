@@ -303,6 +303,93 @@
       'mintemail.com','trbvm.com','mohmal.com','getnada.com',
       'tempinbox.com','emailondeck.com','mvrht.net'
     ];
+
+    /* === Cloudflare Turnstile + Worker proxy (Tier 2) ===
+       Set both values below to activate. The form falls back to the existing
+       direct-to-HubSpot path while the placeholders are still in place, so
+       this code is safe to ship before Cloudflare setup is done.
+       See worker/README.md for full deploy steps. */
+    var TURNSTILE_SITEKEY = '0x4AAAAAADXUtFccGnkJSbpe';
+    var WORKER_URL = 'https://intake-proxy.patricemmh.workers.dev';
+    var USE_WORKER =
+      TURNSTILE_SITEKEY !== 'PASTE_TURNSTILE_SITE_KEY_HERE' &&
+      WORKER_URL !== 'PASTE_WORKER_URL_HERE' &&
+      TURNSTILE_SITEKEY.length > 0 &&
+      WORKER_URL.length > 0;
+
+    var turnstileWidgetId = null;
+    var turnstileWaiter = null;
+
+    function ensureTurnstileHolder() {
+      var holder = form.querySelector('#turnstile-widget');
+      if (holder) return holder;
+      holder = document.createElement('div');
+      holder.id = 'turnstile-widget';
+      holder.style.cssText = 'position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;pointer-events:none';
+      form.appendChild(holder);
+      return holder;
+    }
+
+    function renderTurnstileWidget() {
+      if (!window.turnstile || turnstileWidgetId !== null) return;
+      var holder = ensureTurnstileHolder();
+      try {
+        turnstileWidgetId = window.turnstile.render(holder, {
+          sitekey: TURNSTILE_SITEKEY,
+          size: 'invisible',
+          callback: function (token) {
+            if (turnstileWaiter) {
+              var w = turnstileWaiter;
+              turnstileWaiter = null;
+              w.resolve(token);
+            }
+          },
+          'error-callback': function () {
+            if (turnstileWaiter) {
+              var w = turnstileWaiter;
+              turnstileWaiter = null;
+              w.reject(new Error('Verification could not load. Please reload the page and try again.'));
+            }
+          },
+        });
+      } catch (e) {
+        turnstileWidgetId = null;
+      }
+    }
+
+    function loadTurnstileScript() {
+      if (!USE_WORKER) return;
+      if (window.turnstile) { renderTurnstileWidget(); return; }
+      if (document.getElementById('turnstile-api-script')) return;
+      window.onloadTurnstileCallback = renderTurnstileWidget;
+      var s = document.createElement('script');
+      s.id = 'turnstile-api-script';
+      s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstileCallback';
+      s.async = true;
+      s.defer = true;
+      document.head.appendChild(s);
+    }
+
+    function getTurnstileToken() {
+      return new Promise(function (resolve, reject) {
+        if (!USE_WORKER) { resolve(''); return; }
+        if (!window.turnstile || turnstileWidgetId === null) {
+          reject(new Error('Verification not ready. Please wait a moment and try again.'));
+          return;
+        }
+        turnstileWaiter = { resolve: resolve, reject: reject };
+        try {
+          window.turnstile.reset(turnstileWidgetId);
+          window.turnstile.execute(turnstileWidgetId);
+        } catch (e) {
+          turnstileWaiter = null;
+          reject(e);
+        }
+      });
+    }
+
+    loadTurnstileScript();
+
     form.addEventListener('input', function () {
       if (!firstInputAt) firstInputAt = Date.now();
       if (formStartedTracked) return;
@@ -420,6 +507,67 @@
       var submitButton = form.querySelector('button[type="submit"]');
       if (submitButton) submitButton.disabled = true;
 
+      function applySuccess() {
+        form.reset();
+        requiredFields.forEach(function (field) { setFieldError(field, false); });
+        form.classList.add('intake-form--success');
+        setStatus(status, 'Thanks. Your request was sent. A staffing specialist will contact you shortly.', 'success');
+        trackVirtualView('react_form_submit_success');
+      }
+
+      function applyError(message) {
+        setStatus(status, message || 'We could not submit right now. Please try again in a moment.', 'error');
+        trackVirtualView('react_form_submit_error');
+      }
+
+      function clearLoading() {
+        form.classList.remove('is-submitting');
+        form.removeAttribute('aria-busy');
+        if (submitButton) submitButton.disabled = false;
+      }
+
+      if (USE_WORKER) {
+        /* Route the submission through the Cloudflare Worker with a Turnstile token.
+           Worker verifies the token, re-runs the Tier 1 checks server-side, then
+           forwards to HubSpot. See worker/intake-proxy.js. */
+        getTurnstileToken()
+          .then(function (token) {
+            var workerPayload = {
+              firstname: values.firstname,
+              lastname: values.lastname,
+              email: values.email,
+              message: values.message,
+              utm_campaign: values.utm_campaign,
+              utm_content: values.utm_content,
+              utm_medium: values.utm_medium,
+              utm_source: values.utm_source,
+              turnstileToken: token,
+              pageUri: window.location.href,
+              pageName: document.title,
+              hutk: getCookie('hubspotutk'),
+              company_website: honeypot,
+            };
+            return fetch(WORKER_URL, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(workerPayload),
+            }).then(function (res) {
+              return res
+                .json()
+                .catch(function () { return { ok: false, error: 'Unexpected server response.' }; });
+            });
+          })
+          .then(function (data) {
+            if (data && data.ok) { applySuccess(); return; }
+            applyError(data && data.error);
+          })
+          .catch(function (err) {
+            applyError(err && err.message);
+          })
+          .then(clearLoading, clearLoading);
+        return;
+      }
+
       fetch(hsSubmitEndpoint, {
         method: 'POST',
         headers: {
@@ -439,26 +587,13 @@
             });
         })
         .then(function () {
-          form.reset();
-          requiredFields.forEach(function (field) { setFieldError(field, false); });
-          form.classList.add('intake-form--success');
-          setStatus(status, 'Thanks. Your request was sent. A staffing specialist will contact you shortly.', 'success');
-          trackVirtualView('react_form_submit_success');
+          applySuccess();
         })
         .catch(function (err) {
-          var genericMessage = 'We could not submit right now. Please try again in a moment.';
           var hubspotMessage = err && err.data ? getHubSpotErrorMessage(err.data) : '';
-          if (hubspotMessage) {
-            genericMessage = hubspotMessage;
-          }
-          setStatus(status, genericMessage, 'error');
-          trackVirtualView('react_form_submit_error');
+          applyError(hubspotMessage);
         })
-        .finally(function () {
-          form.classList.remove('is-submitting');
-          form.removeAttribute('aria-busy');
-          if (submitButton) submitButton.disabled = false;
-        });
+        .finally(clearLoading);
     });
   }
 
