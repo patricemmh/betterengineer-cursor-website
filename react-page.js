@@ -319,6 +319,9 @@
 
     var turnstileWidgetId = null;
     var turnstileWaiter = null;
+    /* Invisible + execute() must use appearance "execute" so the widget runs when
+       execute() is called; without it, callbacks may never fire and submit hangs. */
+    var TURNSTILE_TOKEN_TIMEOUT_MS = 22000;
 
     function ensureTurnstileHolder() {
       var holder = form.querySelector('#turnstile-widget');
@@ -337,6 +340,7 @@
         turnstileWidgetId = window.turnstile.render(holder, {
           sitekey: TURNSTILE_SITEKEY,
           size: 'invisible',
+          appearance: 'execute',
           callback: function (token) {
             if (turnstileWaiter) {
               var w = turnstileWaiter;
@@ -349,6 +353,13 @@
               var w = turnstileWaiter;
               turnstileWaiter = null;
               w.reject(new Error('Verification could not load. Please reload the page and try again.'));
+            }
+          },
+          'expired-callback': function () {
+            if (turnstileWaiter) {
+              var w = turnstileWaiter;
+              turnstileWaiter = null;
+              w.reject(new Error('Verification expired. Please submit again.'));
             }
           },
         });
@@ -377,13 +388,34 @@
           reject(new Error('Verification not ready. Please wait a moment and try again.'));
           return;
         }
-        turnstileWaiter = { resolve: resolve, reject: reject };
+        var settled = false;
+        var timer = setTimeout(function () {
+          if (settled) return;
+          settled = true;
+          turnstileWaiter = null;
+          reject(new Error('Security check timed out. Please try again or refresh the page.'));
+        }, TURNSTILE_TOKEN_TIMEOUT_MS);
+
+        function settle(ok, val) {
+          if (settled) return;
+          settled = true;
+          clearTimeout(timer);
+          turnstileWaiter = null;
+          if (ok) resolve(val);
+          else reject(val);
+        }
+
+        turnstileWaiter = {
+          resolve: function (token) { settle(true, token); },
+          reject: function (err) {
+            settle(false, err || new Error('Verification failed. Please try again.'));
+          },
+        };
         try {
           window.turnstile.reset(turnstileWidgetId);
           window.turnstile.execute(turnstileWidgetId);
         } catch (e) {
-          turnstileWaiter = null;
-          reject(e);
+          settle(false, e);
         }
       });
     }
@@ -564,7 +596,7 @@
           .catch(function (err) {
             applyError(err && err.message);
           })
-          .then(clearLoading, clearLoading);
+          .finally(clearLoading);
         return;
       }
 
