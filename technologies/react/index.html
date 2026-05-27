@@ -1429,8 +1429,13 @@
 }
 
 .turnstile-widget-wrap.is-active {
-  display: block;
+  display: flex;
+  justify-content: center;
   margin: 0.75rem 0 0.35rem;
+}
+
+.turnstile-widget-wrap iframe {
+  max-width: 100%;
 }
 
 .form-field__error {
