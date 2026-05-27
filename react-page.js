@@ -320,7 +320,15 @@
     var turnstileWidgetId = null;
     var turnstileWaiter = null;
     var turnstileTokenCache = '';
+    var turnstileReadyWaiters = [];
+    var TURNSTILE_READY_TIMEOUT_MS = 20000;
     var TURNSTILE_TOKEN_TIMEOUT_MS = 22000;
+
+    function resolveTurnstileReady() {
+      if (turnstileWidgetId === null) return;
+      turnstileReadyWaiters.forEach(function (fn) { fn(); });
+      turnstileReadyWaiters = [];
+    }
 
     function notifyTurnstileWaiter(ok, val) {
       if (!turnstileWaiter) return;
@@ -371,6 +379,7 @@
               notifyTurnstileWaiter(false, new Error('Verification expired. Please submit again.'));
             },
           });
+          resolveTurnstileReady();
         } catch (e) {
           turnstileWidgetId = null;
         }
@@ -379,27 +388,36 @@
 
     function loadTurnstileScript() {
       if (!USE_WORKER) return;
-      if (window.turnstile) { renderTurnstileWidget(); return; }
-      if (document.getElementById('turnstile-api-script')) return;
+      ensureTurnstileHolder();
+      if (window.turnstile) {
+        renderTurnstileWidget();
+        return;
+      }
+      var existing = document.getElementById('turnstile-api-script');
+      if (existing) return;
       window.onloadTurnstileCallback = renderTurnstileWidget;
       var s = document.createElement('script');
       s.id = 'turnstile-api-script';
       s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onloadTurnstileCallback';
       s.defer = true;
+      s.onerror = function () {
+        turnstileReadyWaiters.forEach(function (fn) {
+          fn(new Error('Verification script blocked. Disable ad blockers and refresh.'));
+        });
+        turnstileReadyWaiters = [];
+      };
       document.head.appendChild(s);
     }
 
-    function getTurnstileToken() {
+    function waitForTurnstileWidget() {
       return new Promise(function (resolve, reject) {
-        if (!USE_WORKER) { resolve(''); return; }
-        if (!window.turnstile || turnstileWidgetId === null) {
-          reject(new Error('Verification not ready. Please wait a moment and try again.'));
+        if (!USE_WORKER) {
+          resolve();
           return;
         }
-
-        var existing = turnstileTokenCache || window.turnstile.getResponse(turnstileWidgetId);
-        if (existing) {
-          resolve(existing);
+        loadTurnstileScript();
+        if (window.turnstile && turnstileWidgetId !== null) {
+          resolve();
           return;
         }
 
@@ -407,35 +425,89 @@
         var timer = setTimeout(function () {
           if (settled) return;
           settled = true;
-          turnstileWaiter = null;
-          reject(new Error('Security check timed out. Complete the check above the button, then try again.'));
-        }, TURNSTILE_TOKEN_TIMEOUT_MS);
+          turnstileReadyWaiters = [];
+          reject(new Error('Verification could not load. Check your connection and refresh the page.'));
+        }, TURNSTILE_READY_TIMEOUT_MS);
 
-        function settle(ok, val) {
+        function finish(err) {
           if (settled) return;
-          settled = true;
-          clearTimeout(timer);
-          turnstileWaiter = null;
-          if (ok) resolve(val);
-          else reject(val);
+          if (err) {
+            settled = true;
+            clearTimeout(timer);
+            reject(err);
+            return;
+          }
+          if (turnstileWidgetId !== null) {
+            settled = true;
+            clearTimeout(timer);
+            resolve();
+          }
         }
 
-        turnstileWaiter = {
-          resolve: function (token) { settle(true, token); },
-          reject: function (err) {
-            settle(false, err || new Error('Verification failed. Please try again.'));
-          },
-        };
+        turnstileReadyWaiters.push(finish);
 
-        try {
-          window.turnstile.reset(turnstileWidgetId);
-        } catch (e) {
-          settle(false, e);
-        }
+        var poll = setInterval(function () {
+          if (settled) {
+            clearInterval(poll);
+            return;
+          }
+          if (window.turnstile) renderTurnstileWidget();
+          finish();
+        }, 150);
       });
     }
 
-    loadTurnstileScript();
+    function getTurnstileToken() {
+      return waitForTurnstileWidget().then(function () {
+        return new Promise(function (resolve, reject) {
+          if (!USE_WORKER) {
+            resolve('');
+            return;
+          }
+
+          var existing = turnstileTokenCache || window.turnstile.getResponse(turnstileWidgetId);
+          if (existing) {
+            resolve(existing);
+            return;
+          }
+
+          var settled = false;
+          var timer = setTimeout(function () {
+            if (settled) return;
+            settled = true;
+            turnstileWaiter = null;
+            reject(new Error('Security check timed out. Complete the check above the button, then try again.'));
+          }, TURNSTILE_TOKEN_TIMEOUT_MS);
+
+          function settle(ok, val) {
+            if (settled) return;
+            settled = true;
+            clearTimeout(timer);
+            turnstileWaiter = null;
+            if (ok) resolve(val);
+            else reject(val);
+          }
+
+          turnstileWaiter = {
+            resolve: function (token) { settle(true, token); },
+            reject: function (err) {
+              settle(false, err || new Error('Verification failed. Please try again.'));
+            },
+          };
+
+          try {
+            window.turnstile.reset(turnstileWidgetId);
+          } catch (e) {
+            settle(false, e);
+          }
+        });
+      });
+    }
+
+    if (USE_WORKER) {
+      ensureTurnstileHolder();
+      loadTurnstileScript();
+    }
 
     form.addEventListener('input', function () {
       if (!firstInputAt) firstInputAt = Date.now();
