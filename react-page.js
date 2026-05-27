@@ -239,9 +239,35 @@
     });
   }
 
-  function setFieldError(field, isInvalid) {
+  function getFieldErrorEl(field) {
+    if (!field) return null;
+    var wrap = field.closest('.form-field');
+    if (!wrap) return null;
+    var el = wrap.querySelector('.form-field__error');
+    if (el) return el;
+    el = document.createElement('p');
+    el.className = 'form-field__error';
+    el.setAttribute('role', 'alert');
+    el.setAttribute('aria-live', 'polite');
+    el.id = (field.id || field.name || 'field') + '-error';
+    wrap.appendChild(el);
+    return el;
+  }
+
+  function setFieldError(field, isInvalid, message) {
     if (!field) return;
     field.setAttribute('aria-invalid', isInvalid ? 'true' : 'false');
+    var el = getFieldErrorEl(field);
+    if (!el) return;
+    if (isInvalid && message) {
+      el.textContent = message;
+      el.classList.add('is-visible');
+      field.setAttribute('aria-describedby', el.id);
+    } else {
+      el.textContent = '';
+      el.classList.remove('is-visible');
+      field.removeAttribute('aria-describedby');
+    }
   }
 
   function setStatus(el, message, kind) {
@@ -355,35 +381,33 @@
 
     function renderTurnstileWidget() {
       if (!window.turnstile || turnstileWidgetId !== null) return;
-      window.turnstile.ready(function () {
-        if (turnstileWidgetId !== null) return;
-        var holder = ensureTurnstileHolder();
-        try {
-          /* Managed widget (Cloudflare dashboard): render visibly and let the
-             challenge run on page load. Invisible + execute() does not match
-             our Managed sitekey and often never returns a token. */
-          turnstileWidgetId = window.turnstile.render(holder, {
-            sitekey: TURNSTILE_SITEKEY,
-            theme: 'light',
-            size: 'flexible',
-            callback: function (token) {
-              turnstileTokenCache = token;
-              notifyTurnstileWaiter(true, token);
-            },
-            'error-callback': function () {
-              turnstileTokenCache = '';
-              notifyTurnstileWaiter(false, new Error('Verification could not load. Please reload the page and try again.'));
-            },
-            'expired-callback': function () {
-              turnstileTokenCache = '';
-              notifyTurnstileWaiter(false, new Error('Verification expired. Please submit again.'));
-            },
-          });
-          resolveTurnstileReady();
-        } catch (e) {
-          turnstileWidgetId = null;
-        }
-      });
+      var holder = ensureTurnstileHolder();
+      try {
+        /* Managed widget (Cloudflare dashboard): render visibly and let the
+           challenge run on page load. The `onload` query param on api.js
+           already guarantees the API is ready, so we do not call
+           turnstile.ready() here (which is incompatible with defer). */
+        turnstileWidgetId = window.turnstile.render(holder, {
+          sitekey: TURNSTILE_SITEKEY,
+          theme: 'light',
+          size: 'flexible',
+          callback: function (token) {
+            turnstileTokenCache = token;
+            notifyTurnstileWaiter(true, token);
+          },
+          'error-callback': function () {
+            turnstileTokenCache = '';
+            notifyTurnstileWaiter(false, new Error('Verification could not load. Please reload the page and try again.'));
+          },
+          'expired-callback': function () {
+            turnstileTokenCache = '';
+            notifyTurnstileWaiter(false, new Error('Verification expired. Please submit again.'));
+          },
+        });
+        resolveTurnstileReady();
+      } catch (e) {
+        turnstileWidgetId = null;
+      }
     }
 
     function loadTurnstileScript() {
@@ -522,7 +546,8 @@
       });
       field.addEventListener('blur', function () {
         if (!submitAttempted) return;
-        setFieldError(field, !field.value.trim());
+        var empty = !field.value.trim();
+        setFieldError(field, empty, empty ? 'This field is required.' : '');
       });
     });
 
@@ -548,11 +573,12 @@
       requiredFields.forEach(function (field) {
         var val = (values[field.name] || '').trim();
         var invalid = !val;
-        setFieldError(field, invalid);
+        setFieldError(field, invalid, invalid ? 'This field is required.' : '');
         if (invalid) hasError = true;
       });
       if (hasError) {
-        setStatus(status, 'Please complete all required fields before submitting.', 'error');
+        var firstInvalid = form.querySelector('[aria-invalid="true"]');
+        if (firstInvalid && typeof firstInvalid.focus === 'function') firstInvalid.focus();
         return;
       }
 
@@ -570,29 +596,29 @@
       var emailField = form.querySelector('[name="email"]');
       var looksLikeEmail = EMAIL_RE.test(values.email);
       if (!looksLikeEmail) {
-        setFieldError(emailField, true);
-        setStatus(status, 'Please enter a valid work email address.', 'error');
+        setFieldError(emailField, true, 'Please enter a valid work email address.');
+        if (emailField && typeof emailField.focus === 'function') emailField.focus();
         return;
       }
 
       var atIdx = values.email.lastIndexOf('@');
       var emailDomain = atIdx >= 0 ? values.email.slice(atIdx + 1).toLowerCase() : '';
       if (DISPOSABLE_DOMAINS.indexOf(emailDomain) !== -1) {
-        setFieldError(emailField, true);
-        setStatus(status, 'Please use your work email so we can verify your team.', 'error');
+        setFieldError(emailField, true, 'Please use your work email so we can verify your team.');
+        if (emailField && typeof emailField.focus === 'function') emailField.focus();
         return;
       }
 
       var messageField = form.querySelector('[name="message"]');
       if (values.message.length < MIN_MESSAGE_LEN) {
-        setFieldError(messageField, true);
-        setStatus(status, 'Please add a few more details about what you are building so we can route your request.', 'error');
+        setFieldError(messageField, true, 'Please add a few more details about what you are building so we can route your request.');
+        if (messageField && typeof messageField.focus === 'function') messageField.focus();
         return;
       }
 
       if (MESSAGE_URL_RE.test(values.message)) {
-        setFieldError(messageField, true);
-        setStatus(status, 'Please describe your project without links. We will follow up by email if we need any.', 'error');
+        setFieldError(messageField, true, 'Please describe your project without links. We will follow up by email if we need any.');
+        if (messageField && typeof messageField.focus === 'function') messageField.focus();
         return;
       }
 
