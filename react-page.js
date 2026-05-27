@@ -319,53 +319,62 @@
 
     var turnstileWidgetId = null;
     var turnstileWaiter = null;
-    /* Invisible + execute() must use appearance "execute" so the widget runs when
-       execute() is called; without it, callbacks may never fire and submit hangs. */
+    var turnstileTokenCache = '';
     var TURNSTILE_TOKEN_TIMEOUT_MS = 22000;
+
+    function notifyTurnstileWaiter(ok, val) {
+      if (!turnstileWaiter) return;
+      var w = turnstileWaiter;
+      turnstileWaiter = null;
+      if (ok) w.resolve(val);
+      else w.reject(val);
+    }
 
     function ensureTurnstileHolder() {
       var holder = form.querySelector('#turnstile-widget');
       if (holder) return holder;
       holder = document.createElement('div');
       holder.id = 'turnstile-widget';
-      holder.style.cssText = 'position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;pointer-events:none';
-      form.appendChild(holder);
+      holder.className = 'turnstile-widget-wrap';
+      var submitButton = form.querySelector('button[type="submit"]');
+      if (submitButton && submitButton.parentNode) {
+        submitButton.parentNode.insertBefore(holder, submitButton);
+      } else {
+        form.appendChild(holder);
+      }
       return holder;
     }
 
     function renderTurnstileWidget() {
       if (!window.turnstile || turnstileWidgetId !== null) return;
-      var holder = ensureTurnstileHolder();
-      try {
-        turnstileWidgetId = window.turnstile.render(holder, {
-          sitekey: TURNSTILE_SITEKEY,
-          size: 'invisible',
-          appearance: 'execute',
-          callback: function (token) {
-            if (turnstileWaiter) {
-              var w = turnstileWaiter;
-              turnstileWaiter = null;
-              w.resolve(token);
-            }
-          },
-          'error-callback': function () {
-            if (turnstileWaiter) {
-              var w = turnstileWaiter;
-              turnstileWaiter = null;
-              w.reject(new Error('Verification could not load. Please reload the page and try again.'));
-            }
-          },
-          'expired-callback': function () {
-            if (turnstileWaiter) {
-              var w = turnstileWaiter;
-              turnstileWaiter = null;
-              w.reject(new Error('Verification expired. Please submit again.'));
-            }
-          },
-        });
-      } catch (e) {
-        turnstileWidgetId = null;
-      }
+      window.turnstile.ready(function () {
+        if (turnstileWidgetId !== null) return;
+        var holder = ensureTurnstileHolder();
+        try {
+          /* Managed widget (Cloudflare dashboard): render visibly and let the
+             challenge run on page load. Invisible + execute() does not match
+             our Managed sitekey and often never returns a token. */
+          turnstileWidgetId = window.turnstile.render(holder, {
+            sitekey: TURNSTILE_SITEKEY,
+            theme: 'light',
+            size: 'flexible',
+            callback: function (token) {
+              turnstileTokenCache = token;
+              notifyTurnstileWaiter(true, token);
+            },
+            'error-callback': function () {
+              turnstileTokenCache = '';
+              notifyTurnstileWaiter(false, new Error('Verification could not load. Please reload the page and try again.'));
+            },
+            'expired-callback': function () {
+              turnstileTokenCache = '';
+              notifyTurnstileWaiter(false, new Error('Verification expired. Please submit again.'));
+            },
+          });
+        } catch (e) {
+          turnstileWidgetId = null;
+        }
+      });
     }
 
     function loadTurnstileScript() {
@@ -375,8 +384,7 @@
       window.onloadTurnstileCallback = renderTurnstileWidget;
       var s = document.createElement('script');
       s.id = 'turnstile-api-script';
-      s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstileCallback';
-      s.async = true;
+      s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onloadTurnstileCallback';
       s.defer = true;
       document.head.appendChild(s);
     }
@@ -388,12 +396,19 @@
           reject(new Error('Verification not ready. Please wait a moment and try again.'));
           return;
         }
+
+        var existing = turnstileTokenCache || window.turnstile.getResponse(turnstileWidgetId);
+        if (existing) {
+          resolve(existing);
+          return;
+        }
+
         var settled = false;
         var timer = setTimeout(function () {
           if (settled) return;
           settled = true;
           turnstileWaiter = null;
-          reject(new Error('Security check timed out. Please try again or refresh the page.'));
+          reject(new Error('Security check timed out. Complete the check above the button, then try again.'));
         }, TURNSTILE_TOKEN_TIMEOUT_MS);
 
         function settle(ok, val) {
@@ -411,9 +426,9 @@
             settle(false, err || new Error('Verification failed. Please try again.'));
           },
         };
+
         try {
           window.turnstile.reset(turnstileWidgetId);
-          window.turnstile.execute(turnstileWidgetId);
         } catch (e) {
           settle(false, e);
         }
