@@ -7,3 +7,25 @@ betterengineer/
 
 # Local GitHub Pages bundle (see GITHUB_PAGES_DISCOVER_HOSTING.md)
 dist/
+astro-demo/
+tmp-pdf-ai/
+tmp_ai_ready_pdf.txt
+
+# Dev/build utility scripts (not part of site output)
+apply-seo-fixes.js
+verify-fixes.js
+remove-breadcrumbs.js
+add-roles-grid.js
+swap-featured.js
+build-tech-grids.js
+verify-grids.js
+add-other-roles-fe.js
+check-other-roles.js
+extract-section.js
+fix-perf-mobile.js
+verify-perf.js
+inspect-fe.js
+audit-pages.js
+peek.js
+inspect-pages.js
+static-server.js
