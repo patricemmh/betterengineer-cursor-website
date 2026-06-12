@@ -65,6 +65,50 @@ if (fs.existsSync(hireLanding)) {
   fs.copyFileSync(hireLanding, hireIndex);
 }
 
+// ── Roles bundle ─────────────────────────────────────────────────────────────
+// Copy roles pages and every asset they reference into dist so that
+// discover.betterengineer.com/roles/ resolves correctly.
+
+function copyDir(src, dest) {
+  fs.mkdirSync(dest, { recursive: true });
+  fs.readdirSync(src).forEach(function (entry) {
+    var s = path.join(src, entry);
+    var d = path.join(dest, entry);
+    if (fs.statSync(s).isDirectory()) {
+      copyDir(s, d);
+    } else {
+      fs.copyFileSync(s, d);
+    }
+  });
+}
+
+// roles/ HTML pages
+copyDir(path.join(root, 'roles'), path.join(distRoot, 'roles'));
+
+// Stylesheets
+['brand.css', 'react-landing.css', 'role-detail.css', 'roles.css'].forEach(function (f) {
+  fs.mkdirSync(path.join(distRoot, 'styles'), { recursive: true });
+  fs.copyFileSync(path.join(root, 'styles', f), path.join(distRoot, 'styles', f));
+});
+
+// Icons
+['betterengineer-logo.svg', 'hamburger-white.svg', 'favicon.png'].forEach(function (f) {
+  var src = path.join(root, 'icons', f);
+  if (fs.existsSync(src)) {
+    fs.mkdirSync(path.join(distRoot, 'icons'), { recursive: true });
+    fs.copyFileSync(src, path.join(distRoot, 'icons', f));
+  }
+});
+
+// images/roles/
+copyDir(path.join(root, 'images', 'roles'), path.join(distRoot, 'images', 'roles'));
+
+// Shared JS
+if (fs.existsSync(path.join(root, 'air-page.js'))) {
+  fs.copyFileSync(path.join(root, 'air-page.js'), path.join(distRoot, 'air-page.js'));
+}
+
 console.log('Discover bundle ready in ./dist/');
 console.log('  https://discover.betterengineer.com/aimanufacturing/');
 console.log('  https://discover.betterengineer.com/ai-fluent-engineers/');
+console.log('  https://discover.betterengineer.com/roles/');
