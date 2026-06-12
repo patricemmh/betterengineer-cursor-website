@@ -1,6 +1,9 @@
 .DS_Store
 Thumbs.db
-.cursor/
+# Ignore Cursor IDE settings (personal), but track project-level skills
+.cursor/*
+!.cursor/skills
+!.cursor/skills/**
 
 # Cloudflare / subpath build output (`npm run build:cf`)
 betterengineer/
