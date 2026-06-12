@@ -103,7 +103,31 @@ node .cursor/skills/create-role-page/scripts/add-role-to-grids.js \
 
 This appends the new card to every `roles/*/index.html` that already has `id="other-roles"`.
 
-### Step 5 — Verify
+### Step 5 — Add Google Tag Manager tracking
+
+The template contains a placeholder comment that must be replaced with the live GTM snippets.
+
+**In `<head>`, replace:**
+```html
+<!-- Google Tag Manager would go here (GTM-WT77L8JF), same as your current setup -->
+```
+**With:**
+```html
+<!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-WT77L8JF');</script><!-- End Google Tag Manager -->
+```
+
+**After `<body>`, add the noscript fallback** (immediately before `<a class="skip-link"`):
+```html
+<!-- Google Tag Manager (noscript) --><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WT77L8JF" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><!-- End Google Tag Manager (noscript) -->
+```
+
+To apply both at once across any number of pages, run:
+```bash
+node inject-gtm.js
+```
+(The script auto-detects the placeholder and inserts both snippets correctly.)
+
+### Step 6 — Verify
 
 ```bash
 node verify-grids.js
@@ -112,7 +136,7 @@ node verify-perf.js
 
 Check: `css: true`, `grid: true`, `imgGone: true` for all pages including the new one.
 
-### Step 6 — Commit and deploy
+### Step 7 — Commit and deploy
 
 ```bash
 git add roles/{slug}/ roles/index.html
@@ -132,6 +156,8 @@ GitHub Actions deploys automatically. The full pipeline (build → gh-pages → 
 - [ ] FAQ JSON-LD matches the visible FAQ questions
 - [ ] Tech icon grid CSS added to `<head>`
 - [ ] Static image `technologies-stack.png` replaced with icon grid `div`
+- [ ] GTM head snippet present (search for `gtm.start` — must not be a comment)
+- [ ] GTM noscript iframe present after `<body>` (search for `ns.html?id=GTM`)
 - [ ] No em dashes anywhere in copy
 - [ ] All internal role links in `#other-roles` grid include the new role
 - [ ] `roles/index.html` updated with new card
