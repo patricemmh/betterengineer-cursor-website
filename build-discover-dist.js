@@ -108,7 +108,12 @@ if (fs.existsSync(path.join(root, 'air-page.js'))) {
   fs.copyFileSync(path.join(root, 'air-page.js'), path.join(distRoot, 'air-page.js'));
 }
 
+// ── Technologies bundle ───────────────────────────────────────────────────────
+// Copy technology pages so discover.betterengineer.com/technologies/ resolves.
+copyDir(path.join(root, 'technologies'), path.join(distRoot, 'technologies'));
+
 console.log('Discover bundle ready in ./dist/');
 console.log('  https://discover.betterengineer.com/aimanufacturing/');
 console.log('  https://discover.betterengineer.com/ai-fluent-engineers/');
 console.log('  https://discover.betterengineer.com/roles/');
+console.log('  https://discover.betterengineer.com/technologies/');
