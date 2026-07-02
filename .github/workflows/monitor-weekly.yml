@@ -1,0 +1,24 @@
+# Weekly synthetic checks against the live discover site and intake worker.
+name: Weekly live monitor
+
+on:
+  schedule:
+  # Mondays at 15:00 UTC
+    - cron: '0 15 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Run live site monitor
+        run: node tools/monitor-live.js

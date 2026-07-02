@@ -158,6 +158,13 @@ function checkSitemap() {
   }
 }
 
+function checkLegacyContactCta(filePath, html) {
+  if (shouldSkipOptionalChecks(filePath, html)) return;
+  if (/betterengineer\.com\/contact/.test(html)) {
+    fail(filePath, 'legacy /contact CTA (use /multi-step-contact-form)');
+  }
+}
+
 function checkRobots() {
   const robotsPath = path.join(distRoot, 'robots.txt');
   if (!fs.existsSync(robotsPath)) {
@@ -182,6 +189,7 @@ htmlFiles.forEach(function (filePath) {
   checkUrlCorruption(filePath, html);
   checkGtm(filePath, html);
   checkJsonLd(filePath, html);
+  checkLegacyContactCta(filePath, html);
   if (rel(filePath).startsWith('dist/roles/') || rel(filePath).startsWith('dist/technologies/')) {
     if (!shouldSkipOptionalChecks(filePath, html)) {
       checkCanonical(filePath, html);

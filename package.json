@@ -9,6 +9,7 @@
     "dev": "node static-server.js",
     "start": "node static-server.js",
     "verify": "node tools/verify-site.js",
-    "verify:dist": "node tools/verify-dist.js"
+    "verify:dist": "node tools/verify-dist.js",
+    "monitor:live": "node tools/monitor-live.js"
   }
 }
