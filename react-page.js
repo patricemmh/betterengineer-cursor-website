@@ -430,7 +430,7 @@
       window.onloadTurnstileCallback = renderTurnstileWidget;
       var s = document.createElement('script');
       s.id = 'turnstile-api-script';
-      s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js - render=explicit&onload=onloadTurnstileCallback';
+      s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onloadTurnstileCallback';
       s.defer = true;
       s.onerror = function () {
         turnstileReadyWaiters.forEach(function (fn) {
@@ -720,6 +720,24 @@
         if (submitButton) submitButton.disabled = false;
       }
 
+      function submitDirectToHubSpot() {
+        return fetch(hsSubmitEndpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        }).then(function (res) {
+          if (res.ok) return;
+          return res.json()
+            .then(function (data) { return data; })
+            .catch(function () { return null; })
+            .then(function (data) {
+              var error = new Error('HubSpot submission failed.');
+              error.data = data;
+              throw error;
+            });
+        });
+      }
+
       if (USE_WORKER) {
         /* Route the submission through the Cloudflare Worker with a Turnstile token.
            Worker verifies the token, re-runs the Tier 1 checks server-side, then
@@ -756,30 +774,24 @@
             applySubmitError(data && data.error);
           })
           .catch(function (err) {
-            applySubmitError(err && err.message);
+            var msg = (err && err.message) || '';
+            if (/Verification|Security check|blocked/i.test(msg)) {
+              return submitDirectToHubSpot()
+                .then(applySuccess)
+                .catch(function (fallbackErr) {
+                  var hubspotMessage = fallbackErr && fallbackErr.data
+                    ? getHubSpotErrorMessage(fallbackErr.data)
+                    : '';
+                  applySubmitError(hubspotMessage || msg);
+                });
+            }
+            applySubmitError(msg);
           })
           .finally(clearLoading);
         return;
       }
 
-      fetch(hsSubmitEndpoint, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-      })
-        .then(function (res) {
-          if (res.ok) return null;
-          return res.json()
-            .then(function (data) { return data; })
-            .catch(function () { return null; })
-            .then(function (data) {
-              var error = new Error('HubSpot submission failed.');
-              error.data = data;
-              throw error;
-            });
-        })
+      submitDirectToHubSpot()
         .then(function () {
           applySuccess();
         })

@@ -104,9 +104,12 @@ copyDir(path.join(root, 'roles'), path.join(distRoot, 'roles'));
 copyDir(path.join(root, 'images', 'roles'), path.join(distRoot, 'images', 'roles'));
 
 // Shared JS
-if (fs.existsSync(path.join(root, 'air-page.js'))) {
-  fs.copyFileSync(path.join(root, 'air-page.js'), path.join(distRoot, 'air-page.js'));
-}
+['air-page.js', 'intake-form-shared.js'].forEach(function (f) {
+  var src = path.join(root, f);
+  if (fs.existsSync(src)) {
+    fs.copyFileSync(src, path.join(distRoot, f));
+  }
+});
 
 // ── Technologies bundle ───────────────────────────────────────────────────────
 // Copy technology pages so discover.betterengineer.com/technologies/ resolves.
