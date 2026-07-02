@@ -1471,17 +1471,18 @@
   position: absolute;
   inset: 0;
   border-radius: 12px;
-  padding: 1.25rem;
-  align-items: center;
-  justify-content: center;
+  padding: 2rem 1.5rem;
   text-align: center;
-  font-size: 1.05rem;
-  line-height: 1.45;
-  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.6;
+  font-weight: 500;
   background: #fff;
   z-index: 10;
   pointer-events: none;
   box-sizing: border-box;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .react-intake-form.intake-form--success .form-grid,
@@ -1492,9 +1493,21 @@
 
 .form-status.is-success {
   display: flex;
-  color: #027a48;
-  background: #ecfdf3;
-  border: 1px solid #abefc6;
+  color: #3d4293;
+  background: #f0f1fa;
+  border: 1px solid #b8bae8;
+  pointer-events: auto;
+}
+
+.form-status.is-success a {
+  color: #3d4293;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.form-status.is-success a:hover {
+  color: #545bb3;
 }
 
 .form-status.is-error {
@@ -1502,6 +1515,7 @@
   color: #b42318;
   background: #fef2f2;
   border: 1px solid #fecdca;
+  pointer-events: auto;
 }
 
 @media (max-width: 720px) {
@@ -2434,11 +2448,12 @@
 
 .air-page .hero .h1 {
   color: var(--color-text);
+  font-weight: 400;
 }
 
 .air-page .hero .h1 .light {
   color: var(--color-primary);
-  font-weight: 300;
+  font-weight: 700;
 }
 
 .air-page .hero .lead {
@@ -3871,6 +3886,7 @@
       <span><a href="https://www.betterengineer.com/resource-center/wpautoterms/privacy-policy">Privacy Policy</a> · <a href="https://www.betterengineer.com/terms-of-service">Terms of Service</a></span>
     </div>
   </footer>
+  <script src="/intake-form-shared.js" defer></script>
   <script src="/react-page.js" defer></script>
 </body>
 </html>

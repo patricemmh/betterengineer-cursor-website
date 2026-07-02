@@ -295,6 +295,7 @@ function shell(title, description, css, header, main, scriptName, extraHead) {
     '\n' +
     footer +
     '\n' +
+    '  <script src="./intake-form-shared.js" defer></script>\n' +
     '  <script src="./' +
     scriptName +
     '" defer></script>\n' +
@@ -391,8 +392,6 @@ if (outputRoot) {
 }
 
 writeFileSafe('index.html', indexHtml);
-writeFileSafe(path.join('technologies', 'react', 'index.html'), reactHtml);
-writeFileSafe(path.join('technologies', 'react-fintech', 'index.html'), reactFintechHtml);
 writeFileSafe('react.html', reactHtml);
 writeFileSafe('react-fintech.html', reactFintechHtml);
 writeFileSafe(path.join('services', 'ai-systems-readiness-for-manufacturing', 'index.html'), aiManufacturingHtml);
@@ -407,6 +406,7 @@ if (outputRoot) {
   copyIntoOutput('icons');
   copyIntoOutput('images');
   copyFileIntoOutput('home.js');
+  copyFileIntoOutput('intake-form-shared.js');
   copyFileIntoOutput('react-page.js');
 }
 
