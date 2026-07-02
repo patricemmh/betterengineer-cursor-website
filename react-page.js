@@ -577,9 +577,11 @@
     function setSuccessMessage(el) {
       if (!el) return;
       el.innerHTML =
-        'Thanks - we got your request. We will be in touch within 24 hours. ' +
-        'Or <a href="https://calendly.com/tim-salsamobi/30min" target="_blank" ' +
-        'rel="noopener noreferrer">book a call with Tim directly</a>.';
+        '<span style="display:block;font-size:1.35rem;font-weight:700;margin-bottom:0.75rem">Thanks</span>' +
+        '<span style="display:block;margin-bottom:0.75rem">We got your request. We will be in touch within 24 hours.</span>' +
+        '<span style="display:block;margin-bottom:0.75rem">Or</span>' +
+        '<a href="https://calendly.com/tim-salsamobi/30min" target="_blank" ' +
+        'rel="noopener noreferrer">Book a call with Tim directly</a>';
       el.classList.remove('is-error');
       el.classList.add('is-success');
     }
