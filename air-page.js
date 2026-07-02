@@ -289,9 +289,15 @@
     function showRoleSuccess() {
       if (!roleStatus) return;
       roleStatus.innerHTML =
-        '<span style="display:block;font-size:1.35rem;font-weight:700;margin-bottom:0.75rem">Thanks</span>' +
-        '<span style="display:block;margin-bottom:0.75rem">We got your request. We will be in touch within 24 hours.</span>' +
-        '<span style="display:block;margin-bottom:0.75rem">Or</span>' +
+        '<span style="display:block;margin-bottom:0.75rem">' +
+          '<svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' +
+            '<circle cx="18" cy="18" r="16" stroke="#545bb3" stroke-width="2"/>' +
+            '<path d="M10 18l6 6 10-10" stroke="#545bb3" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+          '</svg>' +
+        '</span>' +
+        '<span style="display:block;font-size:1.25rem;font-weight:700;margin-bottom:0.75rem">Request Received</span>' +
+        '<span style="display:block;margin-bottom:0.75rem">We got your request.<br>We will be in touch within 24 hours.</span>' +
+        '<span style="display:block;margin-bottom:0.75rem;opacity:0.6;font-size:0.9rem">&#8212; Or &#8212;</span>' +
         '<a href="https://calendly.com/tim-salsamobi/30min" target="_blank" ' +
         'rel="noopener noreferrer">Book a call with Tim directly</a>';
       roleStatus.classList.remove('is-error');
