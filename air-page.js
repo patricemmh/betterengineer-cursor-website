@@ -291,8 +291,7 @@
       roleStatus.innerHTML =
         'Thanks - we got your request. We will be in touch within 24 hours. ' +
         'Or <a href="https://calendly.com/tim-salsamobi/30min" target="_blank" ' +
-        'rel="noopener noreferrer" style="color:inherit;text-decoration:underline">' +
-        'book a call with Tim directly</a>.';
+        'rel="noopener noreferrer">book a call with Tim directly</a>.';
       roleStatus.classList.remove('is-error');
       roleStatus.classList.add('is-success');
     }
