@@ -296,7 +296,7 @@
           '</svg>' +
         '</span>' +
         '<span style="display:block;font-size:1.25rem;font-weight:700;margin-bottom:0.75rem">Request Received</span>' +
-        '<span style="display:block;margin-bottom:0.75rem">We got your request.<br>We will be in touch within 24 hours.</span>' +
+        '<span style="display:block;margin-bottom:0.75rem">We will be in touch within 24 hours.</span>' +
         '<span style="display:block;margin-bottom:0.75rem;opacity:0.6;font-size:0.9rem">&#8212; Or &#8212;</span>' +
         '<a href="https://calendly.com/tim-salsamobi/30min" target="_blank" ' +
         'rel="noopener noreferrer">Book a call with Tim directly</a>';
