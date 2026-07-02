@@ -86,7 +86,7 @@ function copyDir(src, dest) {
 copyDir(path.join(root, 'roles'), path.join(distRoot, 'roles'));
 
 // Stylesheets
-['brand.css', 'react-landing.css', 'role-detail.css', 'roles.css'].forEach(function (f) {
+['brand.css', 'landing-page.css', 'role-detail.css', 'roles.css'].forEach(function (f) {
   fs.mkdirSync(path.join(distRoot, 'styles'), { recursive: true });
   fs.copyFileSync(path.join(root, 'styles', f), path.join(distRoot, 'styles', f));
 });

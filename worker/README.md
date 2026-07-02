@@ -54,11 +54,11 @@ Deployed intake-proxy triggers
   https://intake-proxy.<your-cloudflare-subdomain>.workers.dev
 ```
 
-Copy that URL. You will paste it into `react-page.js` in step 3.
+Copy that URL. You will paste it into `landing-page.js` in step 3.
 
 ### 3. Wire the browser form to the Worker
 
-Open `react-page.js` at the repo root and find this block near the top of
+Open `landing-page.js` at the repo root and find this block near the top of
 `wireReactIntakeForm()`:
 
 ```js
@@ -104,7 +104,7 @@ For local testing without setting the secret in Cloudflare, create
 TURNSTILE_SECRET=your_turnstile_secret_here
 ```
 
-Then point `WORKER_URL` in `react-page.js` at `http://localhost:8787` while
+Then point `WORKER_URL` in `landing-page.js` at `http://localhost:8787` while
 testing locally.
 
 ---
@@ -123,5 +123,5 @@ The TOML stub is at the bottom of `wrangler.toml`.
 
 ## Removing the proxy
 
-Delete the two filled-in values in `react-page.js`, leaving the placeholders,
+Delete the two filled-in values in `landing-page.js`, leaving the placeholders,
 and the form falls back to the original direct-to-HubSpot submission path.

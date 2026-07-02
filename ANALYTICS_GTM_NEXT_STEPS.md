@@ -27,7 +27,7 @@ Changing the container ID later: edit both places **`GTM-WT77L8JF`** appears in 
 
 ## Later (still only in GTM unless you decide otherwise)
 
-- Custom events (`dataLayer.push` from `react-page.js` / `home.js`) only if you want events the HTML cannot infer; coordinate with whoever owns tags.
+- Custom events (`dataLayer.push` from `landing-page.js` / `home.js`) only if you want events the HTML cannot infer; coordinate with whoever owns tags.
 - Add Google Ads conversions, Meta pixels, LinkedIn Insight, consent mode **in GTM** when ready; avoid hardcoding in this repo.
 
 ---

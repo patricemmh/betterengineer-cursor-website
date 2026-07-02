@@ -6,7 +6,7 @@ This document describes the **visual language, structure, and content workflow**
 
 - **Clarity first**: marketing copy and CTAs should read easily; navigation mirrors the main BetterEngineer site.
 - **Fast static delivery**: pages ship as single HTML documents with **inlined CSS** (produced by `build-pages.js`) so first paint does not wait on extra stylesheets.
-- **Consistent brand**: shared tokens and components in `styles/brand.css`; the React staffing page adds scoped rules in `styles/react-landing.css`.
+- **Consistent brand**: shared tokens and components in `styles/brand.css`; the React staffing page adds scoped rules in `styles/landing-page.css`.
 
 ## Typography
 
@@ -36,7 +36,7 @@ The React landing uses an **additional purple** for a scoped hero CTA (`.btn.rea
 - **Radii**: `--radius-sm` (4px), `--radius-md` (12px), `--radius-lg` (16px); pills use `border-radius: 999px` where noted.
 - **Shadows**: `--shadow-soft` for cards/dropdowns; `--shadow-hover` for lift on interactive panels.
 - **Easing**: `--ease`: `cubic-bezier(0.4, 0, 0.2, 1)` for short transitions.
-- **Reduced motion**: scripts respect `prefers-reduced-motion` where animations are used (see `home.js` / `react-page.js`).
+- **Reduced motion**: scripts respect `prefers-reduced-motion` where animations are used (see `home.js` / `landing-page.js`).
 
 ## Layout
 
@@ -51,9 +51,9 @@ Conventions are intentionally **BEM-like** with utility-style modifiers:
 - **Primary actions**: `.btn`, `.btn--primary`, modifiers such as `.btn--lg`
 - **Header CTAs**: `.btn-nav`, `.btn-nav--ghost`, `.btn-nav--solid`
 - **Navigation**: `.site-nav`, `.nav-desktop`, `.nav-mobile`, `.dropdown`
-- **React page**: `.react-hero-badge`, `.hubspot-form-card`, `.react-intake-form`, etc. in `styles/react-landing.css`
+- **React page**: `.react-hero-badge`, `.hubspot-form-card`, `.react-intake-form`, etc. in `styles/landing-page.css`
 
-Prefer **reusing** these classes before inventing new ones; extend in the appropriate stylesheet (`brand.css` vs `react-landing.css`).
+Prefer **reusing** these classes before inventing new ones; extend in the appropriate stylesheet (`brand.css` vs `landing-page.css`).
 
 ## Pages
 
@@ -61,7 +61,7 @@ Prefer **reusing** these classes before inventing new ones; extend in the approp
 | Shipped URL (GitHub Pages) | Source body fragment | CSS bundle                                    | Script          |
 | -------------------------- | -------------------- | --------------------------------------------- | --------------- |
 | `/` (`index.html`)         | `main-home.html`     | `brand.css` + small `#main` safe-area snippet | `home.js`       |
-| `/technologies/react/`     | `main-react.html`    | `brand.css` + `react-landing.css`             | `react-page.js` |
+| `/technologies/react/`     | `main-react.html`    | `brand.css` + `landing-page.css`             | `landing-page.js` |
 
 
 Headers are **assembled in `build-pages.js`** (not separate files) so home vs React can mark the active nav item and `aria-current="page"` correctly.
@@ -79,7 +79,7 @@ Headers are **assembled in `build-pages.js`** (not separate files) so home vs Re
 ## How to change the design safely
 
 1. Edit `**styles/brand.css`** for site-wide tokens and shared components.
-2. Edit `**styles/react-landing.css**` only for React-page-specific layout or overrides.
+2. Edit `**styles/landing-page.css**` only for React-page-specific layout or overrides.
 3. Edit `**main-*.html**` and `**footer-full.html**` for structure and copy.
 4. If navigation or global chrome changes, update the header strings in `**build-pages.js**`, then run `**node build-pages.js**` (or `npm run build`).
 

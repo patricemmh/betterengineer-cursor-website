@@ -91,18 +91,18 @@ function fixUrls(css) {
 
 function readStyles() {
   var brandPath = path.join(styleDir, 'brand.css');
-  var reactPath = path.join(styleDir, 'react-landing.css');
+  var landingCssPath = path.join(styleDir, 'landing-page.css');
   if (!fs.existsSync(brandPath)) {
     console.error('Missing brand.css at', brandPath);
     process.exit(1);
   }
-  if (!fs.existsSync(reactPath)) {
-    console.error('Missing react-landing.css at', reactPath);
+  if (!fs.existsSync(landingCssPath)) {
+    console.error('Missing landing-page.css at', landingCssPath);
     process.exit(1);
   }
   return {
     brand: applyBaseToCss(fixUrls(fs.readFileSync(brandPath, 'utf8'))),
-    reactExtra: applyBaseToCss(fixUrls(fs.readFileSync(reactPath, 'utf8'))),
+    landingExtra: applyBaseToCss(fixUrls(fs.readFileSync(landingCssPath, 'utf8'))),
   };
 }
 
@@ -317,24 +317,24 @@ var indexHtml = shell(
   'home.js',
 );
 
-var reactCss = styles.brand + '\n\n' + styles.reactExtra;
+var landingCss = styles.brand + '\n\n' + styles.landingExtra;
 
 var reactHtml = shell(
   'React Engineers | BetterEngineer',
   'Hire senior React developers in your time zone. Staff augmentation, UI modernization, and shipping support from BetterEngineer.',
-  reactCss,
+  landingCss,
   headerReact,
   reactMain,
-  'react-page.js',
+  'landing-page.js',
 );
 
 var reactFintechHtml = shell(
   'Fintech React Engineers | BetterEngineer',
   'Hire senior React engineers for fintech teams. Build onboarding, payment, and risk workflows with timezone-aligned staff augmentation support.',
-  reactCss,
+  landingCss,
   headerReact,
   reactFintechMain,
-  'react-page.js',
+  'landing-page.js',
 );
 
 var aiManufacturingDescription =
@@ -350,10 +350,10 @@ var aiManufacturingExtraHead =
 var aiManufacturingHtml = shell(
   'AI Systems Readiness for Manufacturing Companies | BetterEngineer',
   aiManufacturingDescription,
-  reactCss,
+  landingCss,
   headerAiManufacturing,
   aiManufacturingMain,
-  'react-page.js',
+  'landing-page.js',
   aiManufacturingExtraHead,
 );
 
@@ -380,10 +380,10 @@ var hireAiReadyExtraHead =
 var hireAiReadyHtml = shell(
   'Hire AI-Ready Engineers | BetterEngineer, AI Development Team from LATAM',
   hireAiReadyDescription,
-  reactCss,
+  landingCss,
   headerHireAiReady,
   hireAiReadyMain,
-  'react-page.js',
+  'landing-page.js',
   hireAiReadyExtraHead,
 );
 
@@ -407,7 +407,7 @@ if (outputRoot) {
   copyIntoOutput('images');
   copyFileIntoOutput('home.js');
   copyFileIntoOutput('intake-form-shared.js');
-  copyFileIntoOutput('react-page.js');
+  copyFileIntoOutput('landing-page.js');
 }
 
 if (pagesPublishRoot) {

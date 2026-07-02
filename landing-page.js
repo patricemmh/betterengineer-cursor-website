@@ -293,6 +293,7 @@
   function wireReactIntakeForm() {
     var form = document.getElementById('react-intake-form');
     if (!form || form.dataset.intakeWired === 'true') return;
+    form.dataset.intakeWired = 'true';
     var status = document.getElementById('react-intake-status');
     var utmKeys = ['utm_campaign', 'utm_content', 'utm_medium', 'utm_source'];
     var params = new URLSearchParams(window.location.search || '');
@@ -315,8 +316,7 @@
        each field. Mirrors the "submit-then-correct" pattern from GOV.UK / Adam Silver and the NN/g
        guidance against premature inline validation. */
     var submitAttempted = false;
-    /* Anti-bot tier 1: honeypot, time trap, message hygiene, stricter email, disposable-domain block. */
-    var MIN_FILL_MS = 3000;
+    /* Anti-bot tier 1: honeypot, message hygiene, stricter email, disposable-domain block. */
     var MIN_MESSAGE_LEN = 20;
     var EMAIL_RE = /^[A-Z0-9._%+\-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
     var MESSAGE_URL_RE = /(?:https?:\/\/|\bwww\.[a-z]|\bt\.me\/|\bbit\.ly\/|\btinyurl\.|\bgoo\.gl\/|\bdiscord\.gg\/)/i;
@@ -635,15 +635,18 @@
         return;
       }
 
-      /* Honeypot + time trap: silently fake success so bots do not retry or detect rejection. */
+      /* Honeypot only: silently fake success so bots do not retry or detect rejection. */
       var honeypot = (formData.get('company_website') || '').toString().trim();
-      var elapsedSinceFirstInput = firstInputAt ? Date.now() - firstInputAt : 0;
-      if (honeypot || !firstInputAt || elapsedSinceFirstInput < MIN_FILL_MS) {
+      if (honeypot) {
         form.reset();
         requiredFields.forEach(function (field) { setFieldError(field, false); });
         form.classList.add('intake-form--success');
         setSuccessMessage(status);
         return;
+      }
+
+      if (!firstInputAt) {
+        firstInputAt = Date.now();
       }
 
       var emailField = form.querySelector('[name="email"]');

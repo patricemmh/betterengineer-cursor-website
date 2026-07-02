@@ -10,10 +10,10 @@ There is no Astro, React app, Vite, TypeScript, or SPA framework for the pages i
 - `main-*.html`: editable page content fragments used by `build-pages.js`.
 - `footer-full.html`: shared footer fragment.
 - `styles/brand.css`: shared design tokens, layout, header, footer, and base components.
-- `styles/react-landing.css`: shared landing-page and service-page components.
+- `styles/landing-page.css`: shared landing-page and service-page components.
 - `styles/roles.css`: role index and simple role detail styles.
 - `styles/role-detail.css`: front-end engineer role page styles.
-- `home.js`, `react-page.js`, `air-page.js`: vanilla JavaScript behavior.
+- `home.js`, `landing-page.js`, `air-page.js`: vanilla JavaScript behavior.
 - `icons/` and `images/`: static assets.
 - `roles/`, `services/`, `technologies/`: nested static routes.
 - `worker/`: optional Cloudflare Worker for the intake proxy.
