@@ -574,6 +574,17 @@
       trackVirtualView('react_form_submit_error');
     }
 
+    function setSuccessMessage(el) {
+      if (!el) return;
+      el.innerHTML =
+        'Thanks - we got your request. We will be in touch within 24 hours. ' +
+        'Or <a href="https://calendly.com/tim-salsamobi/30min" target="_blank" ' +
+        'rel="noopener noreferrer" style="color:inherit;text-decoration:underline">' +
+        'book a call with Tim directly</a>.';
+      el.classList.remove('is-error');
+      el.classList.add('is-success');
+    }
+
     form.addEventListener('input', function () {
       if (!firstInputAt) firstInputAt = Date.now();
       if (formStartedTracked) return;
@@ -631,7 +642,7 @@
         form.reset();
         requiredFields.forEach(function (field) { setFieldError(field, false); });
         form.classList.add('intake-form--success');
-        setStatus(status, 'Thanks. Your request was sent. A staffing specialist will contact you shortly.', 'success');
+        setSuccessMessage(status);
         return;
       }
 
@@ -699,7 +710,7 @@
         requiredFields.forEach(function (field) { setFieldError(field, false); });
         setSubmitError('');
         form.classList.add('intake-form--success');
-        setStatus(status, 'Thanks. Your request was sent. A staffing specialist will contact you shortly.', 'success');
+        setSuccessMessage(status);
         trackVirtualView('react_form_submit_success');
       }
 
