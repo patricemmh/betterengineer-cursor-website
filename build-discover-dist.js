@@ -115,6 +115,63 @@ copyDir(path.join(root, 'images', 'roles'), path.join(distRoot, 'images', 'roles
 // Copy technology pages so discover.betterengineer.com/technologies/ resolves.
 copyDir(path.join(root, 'technologies'), path.join(distRoot, 'technologies'));
 
+// ── Sitemap + robots.txt ─────────────────────────────────────────────────────
+var SITE_ORIGIN = 'https://discover.betterengineer.com';
+var SITEMAP_SKIP = new Set(['roles-template', 'tech-template']);
+
+function collectIndexPaths(baseDir, urlPrefix, out) {
+  if (!fs.existsSync(baseDir)) return;
+  fs.readdirSync(baseDir).forEach(function (entry) {
+    var entryPath = path.join(baseDir, entry);
+    if (!fs.statSync(entryPath).isDirectory()) return;
+    if (SITEMAP_SKIP.has(entry)) return;
+    var indexPath = path.join(entryPath, 'index.html');
+    if (fs.existsSync(indexPath)) {
+      out.push(SITE_ORIGIN + urlPrefix + entry + '/');
+    }
+  });
+}
+
+function writeDiscoverSeoFiles() {
+  var urls = [
+    SITE_ORIGIN + '/ai-fluent-engineers/',
+    SITE_ORIGIN + '/aimanufacturing/',
+    SITE_ORIGIN + '/roles/',
+  ];
+  collectIndexPaths(path.join(distRoot, 'roles'), '/roles/', urls);
+  collectIndexPaths(path.join(distRoot, 'technologies'), '/technologies/', urls);
+
+  var lastmod = new Date().toISOString().slice(0, 10);
+  var sitemap =
+    '<?xml version="1.0" encoding="UTF-8"?>\n' +
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
+    urls
+      .sort()
+      .map(function (loc) {
+        return (
+          '  <url>\n' +
+          '    <loc>' +
+          loc +
+          '</loc>\n' +
+          '    <lastmod>' +
+          lastmod +
+          '</lastmod>\n' +
+          '  </url>'
+        );
+      })
+      .join('\n') +
+    '\n</urlset>\n';
+
+  fs.writeFileSync(path.join(distRoot, 'sitemap.xml'), sitemap, 'utf8');
+  fs.writeFileSync(
+    path.join(distRoot, 'robots.txt'),
+    'User-agent: *\nAllow: /\n\nSitemap: ' + SITE_ORIGIN + '/sitemap.xml\n',
+    'utf8',
+  );
+}
+
+writeDiscoverSeoFiles();
+
 console.log('Discover bundle ready in ./dist/');
 console.log('  https://discover.betterengineer.com/aimanufacturing/');
 console.log('  https://discover.betterengineer.com/ai-fluent-engineers/');
