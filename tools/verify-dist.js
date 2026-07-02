@@ -49,17 +49,37 @@ function checkUrlCorruption(filePath, html) {
   });
 }
 
-function shouldSkipOptionalChecks(filePath) {
+const CANONICAL_TOP_LEVEL = {
+  'ai-fluent-engineers': 'ai-fluent-engineers',
+  aimanufacturing: 'aimanufacturing',
+};
+
+function isCaseAliasRedirect(filePath) {
+  const r = rel(filePath);
+  const m = r.match(/^dist\/([^/]+)\/index\.html$/);
+  if (!m) return false;
+  const seg = m[1];
+  const lower = seg.toLowerCase();
+  return CANONICAL_TOP_LEVEL[lower] && seg !== CANONICAL_TOP_LEVEL[lower];
+}
+
+function isMetaRefreshStub(html) {
+  return /<meta\s+http-equiv=["']refresh["']/i.test(html) && html.length < 1200;
+}
+
+function shouldSkipOptionalChecks(filePath, html) {
   const r = rel(filePath);
   return (
     r === 'dist/index.html' ||
     r.includes('/roles-template/') ||
-    r.includes('/tech-template/')
+    r.includes('/tech-template/') ||
+    isCaseAliasRedirect(filePath) ||
+    isMetaRefreshStub(html)
   );
 }
 
 function checkGtm(filePath, html) {
-  if (shouldSkipOptionalChecks(filePath)) return;
+  if (shouldSkipOptionalChecks(filePath, html)) return;
   if (!html.includes(GTM_ID)) {
     fail(filePath, 'missing GTM container id ' + GTM_ID);
   }
@@ -163,7 +183,7 @@ htmlFiles.forEach(function (filePath) {
   checkGtm(filePath, html);
   checkJsonLd(filePath, html);
   if (rel(filePath).startsWith('dist/roles/') || rel(filePath).startsWith('dist/technologies/')) {
-    if (!shouldSkipOptionalChecks(filePath)) {
+    if (!shouldSkipOptionalChecks(filePath, html)) {
       checkCanonical(filePath, html);
     }
   }
