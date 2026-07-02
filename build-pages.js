@@ -206,7 +206,7 @@ var headerPrimaryChrome =
   '          </li>\n' +
   '          <li><a href="https://www.betterengineer.com/join">Join Us</a></li>\n' +
   '          <li><a class="nav-pill-hire" href="https://www.betterengineer.com/multi-step-contact-form">Hire Engineers</a></li>\n' +
-  '          <li><a href="https://app.betterengineer.com/sign-in - redirect_url=https%3A%2F%2Fapp.betterengineer.com%2F">Login</a></li>\n' +
+  '          <li><a href="https://app.betterengineer.com/sign-in?redirect_url=https%3A%2F%2Fapp.betterengineer.com%2F">Login</a></li>\n' +
   '        </ul>\n' +
   '      </nav>\n' +
   '      <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="mobile-menu" id="nav-toggle" aria-label="Open menu">\n' +
@@ -240,7 +240,7 @@ var headerPrimaryChrome =
   '      </li>\n' +
   '      <li><a href="https://www.betterengineer.com/join">Join Us</a></li>\n' +
   '      <li><a class="nav-mobile-hire" href="https://www.betterengineer.com/multi-step-contact-form">Hire Engineers</a></li>\n' +
-  '      <li><a href="https://app.betterengineer.com/sign-in - redirect_url=https%3A%2F%2Fapp.betterengineer.com%2F">Login</a></li>\n' +
+  '      <li><a href="https://app.betterengineer.com/sign-in?redirect_url=https%3A%2F%2Fapp.betterengineer.com%2F">Login</a></li>\n' +
   '    </ul>\n' +
   '  </header>\n';
 
