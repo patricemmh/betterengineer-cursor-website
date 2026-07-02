@@ -1,78 +1,69 @@
-# BetterEngineer — static site
+# BetterEngineer Static Site
 
-**Design tokens, layout patterns, and UI conventions** are documented in [DESIGN.md](DESIGN.md).
+This repository is plain static web work: HTML, CSS, and vanilla JavaScript.
 
-This repository is **plain static assets**: HTML with **embedded CSS**, **vanilla JavaScript** (`home.js`, `react-page.js`), and local `icons/` / `images/`. There is **no** React app, Vite, TypeScript, or SPA bundler for these pages.
+There is no Astro, React app, Vite, TypeScript, or SPA framework for the pages in this repo.
 
-The **React staffing** URL is a marketing page (`react.html`); it is still static HTML/JS. It loads **HubSpot’s** embed script only for the intake form.
+## Where Things Live
 
-## Copy system
+- `index.html`, `react.html`, `react-fintech.html`, `hire-ai-ready-engineers.html`, `ai-systems-readiness-for-manufacturing.html`: generated static root pages.
+- `main-*.html`: editable page content fragments used by `build-pages.js`.
+- `footer-full.html`: shared footer fragment.
+- `styles/brand.css`: shared design tokens, layout, header, footer, and base components.
+- `styles/react-landing.css`: shared landing-page and service-page components.
+- `styles/roles.css`: role index and simple role detail styles.
+- `styles/role-detail.css`: front-end engineer role page styles.
+- `home.js`, `react-page.js`, `air-page.js`: vanilla JavaScript behavior.
+- `icons/` and `images/`: static assets.
+- `roles/`, `services/`, `technologies/`: nested static routes.
+- `worker/`: optional Cloudflare Worker for the intake proxy.
 
-- Copy guardrails: `.cursor/rules/copy-voice-guardrails.mdc`
-- Source-of-truth brief: `COPY_BRIEF.md`
-- Repeatable copy process: `COPY_WORKFLOW.md`
+For visual design, CSS structure, and component naming, see `DESIGN.md`.
+For copy voice and positioning, see `COPY_BRIEF.md` and `COPY_WORKFLOW.md`.
 
-## Analytics (GTM / GA4)
+## Local Preview
 
-**Google Tag Manager** container **`GTM-WT77L8JF`** is installed globally in **`build-pages.js`** (`shell()`): head script + noscript after `<body>`. **GA4 is not inlined**; Measurement goes through whatever Ryan publishes in that container (**GA4**, cross-domain **`discover.betterengineer.com`** on the stream, etc.). Reference: **[ANALYTICS_GTM_NEXT_STEPS.md](ANALYTICS_GTM_NEXT_STEPS.md)**.
-
-- **Source CSS**: `styles/brand.css`, `styles/react-landing.css`
-- **Page fragments**: `main-home.html`, `main-react.html`, `footer-full.html`
-- Regenerate root HTML with embedded styles:
-
-  ```bash
-  npm run build
-  ```
-
-  or `node build-pages.js`
-
-## GitHub Pages
-
-Deploy from the **`main` branch root**. This repo writes:
-
-- `index.html` -> `/`
-- `technologies/react/index.html` -> `/technologies/react`
-
-It also writes:
-
-- `CNAME` with `discover.betterengineer.com` (written by CI to `gh-pages`; see `GITHUB_PAGES_DISCOVER_HOSTING.md`)
-- `.nojekyll`
-
-Use root-relative assets (`/icons/...`, `/images/...`) so nested routes work on GitHub Pages.
-
-## Cloudflare Pages (subpath `/betterengineer/`)
-
-When this site should live at **`https://<your-domain>/betterengineer/`** (alongside other routes), build a self-contained output folder and deploy that folder however you attach it to Cloudflare (direct upload, CI, or Wrangler).
-
-1. **Build** (sets `SITE_BASE=/betterengineer`, writes `./betterengineer/` with HTML + copied `icons/`, `images/`, `home.js`, `react-page.js`):
-
-   ```bash
-   npm run build:cf
-   ```
-
-2. **Deploy** (Wrangler CLI; prompts login if needed):
-
-   ```bash
-   npm run deploy:cf
-   ```
-
-   Or in **Cloudflare Dashboard**: create or open your Pages project, set **Build command** to `npm run build:cf` and **Build output directory** to `betterengineer`, connect the repo, and deploy.
-
-**If your Pages project serves the contents of `betterengineer/` at the site root** (for example `https://project.pages.dev/` with no `/betterengineer` prefix), build with root assets instead:
-
-```bash
-# PowerShell
-$env:SITE_BASE="/"; $env:OUTPUT_ROOT="betterengineer"; node build-pages.js
-```
-
-Then upload or point the project at `betterengineer/` the same way as above.
-
-## Local preview
-
-Any static file server from this folder works, for example:
+Start a static server from the repo root:
 
 ```bash
 npm start
 ```
 
-Then open [http://localhost:5173/](http://localhost:5173/) (or use `npx serve .` and the port it prints).
+Then open:
+
+```text
+http://localhost:4323/
+```
+
+Nested static routes work directly, for example:
+
+```text
+http://localhost:4323/roles/front-end-engineers/
+```
+
+## Build
+
+Regenerate the root static pages from fragments and source CSS:
+
+```bash
+npm run build
+```
+
+Cloudflare subpath build:
+
+```bash
+npm run build:cf
+```
+
+Cloudflare deploy:
+
+```bash
+npm run deploy:cf
+```
+
+## Rules
+
+- Keep pages static: HTML, CSS, and vanilla JavaScript only.
+- Do not add Astro, React app setup, Vite, TypeScript page builds, or SPA tooling.
+- Use root-relative asset paths such as `/icons/...` and `/images/...` so nested routes work.
+- Website copy must not use the em dash character.

@@ -206,7 +206,7 @@ var headerPrimaryChrome =
   '          </li>\n' +
   '          <li><a href="https://www.betterengineer.com/join">Join Us</a></li>\n' +
   '          <li><a class="nav-pill-hire" href="https://www.betterengineer.com/multi-step-contact-form">Hire Engineers</a></li>\n' +
-  '          <li><a href="https://app.betterengineer.com/sign-in?redirect_url=https%3A%2F%2Fapp.betterengineer.com%2F">Login</a></li>\n' +
+  '          <li><a href="https://app.betterengineer.com/sign-in - redirect_url=https%3A%2F%2Fapp.betterengineer.com%2F">Login</a></li>\n' +
   '        </ul>\n' +
   '      </nav>\n' +
   '      <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="mobile-menu" id="nav-toggle" aria-label="Open menu">\n' +
@@ -240,7 +240,7 @@ var headerPrimaryChrome =
   '      </li>\n' +
   '      <li><a href="https://www.betterengineer.com/join">Join Us</a></li>\n' +
   '      <li><a class="nav-mobile-hire" href="https://www.betterengineer.com/multi-step-contact-form">Hire Engineers</a></li>\n' +
-  '      <li><a href="https://app.betterengineer.com/sign-in?redirect_url=https%3A%2F%2Fapp.betterengineer.com%2F">Login</a></li>\n' +
+  '      <li><a href="https://app.betterengineer.com/sign-in - redirect_url=https%3A%2F%2Fapp.betterengineer.com%2F">Login</a></li>\n' +
   '    </ul>\n' +
   '  </header>\n';
 
@@ -269,7 +269,7 @@ function shell(title, description, css, header, main, scriptName, extraHead) {
     '  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({\'gtm.start\':\n' +
     '  new Date().getTime(),event:\'gtm.js\'});var f=d.getElementsByTagName(s)[0],\n' +
     '  j=d.createElement(s),dl=l!=\'dataLayer\'?\'&l=\'+l:\'\';j.async=true;j.src=\n' +
-    '  \'https://www.googletagmanager.com/gtm.js?id=\'+i+dl;f.parentNode.insertBefore(j,f);\n' +
+    '  \'https://www.googletagmanager.com/gtm.js - id=\'+i+dl;f.parentNode.insertBefore(j,f);\n' +
     '  })(window,document,\'script\',\'dataLayer\',\'GTM-WT77L8JF\');</script>\n' +
     '  <!-- End Google Tag Manager -->\n' +
     '  <link rel="icon" href="./icons/favicon.png" type="image/png">\n' +
@@ -284,7 +284,7 @@ function shell(title, description, css, header, main, scriptName, extraHead) {
     '</head>\n' +
     '<body>\n' +
     '  <!-- Google Tag Manager (noscript) -->\n' +
-    '  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WT77L8JF"\n' +
+    '  <noscript><iframe src="https://www.googletagmanager.com/ns.html - id=GTM-WT77L8JF"\n' +
     '  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>\n' +
     '  <!-- End Google Tag Manager (noscript) -->\n' +
     '  <a class="skip-link" href="#main">Skip to content</a>\n' +

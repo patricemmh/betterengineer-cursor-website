@@ -170,4 +170,110 @@
     tocLinks[0].classList.add('is-active');
     tocLinks[0].setAttribute('aria-current', 'true');
   }
+
+  // ── Guide section accordion (mobile only) ───────────────────────────
+  if (tocSections.length) {
+    var accMq = window.matchMedia('(max-width: 900px)');
+
+    function openGuideSection(section) {
+      var prose = section.querySelector('.air-role-prose');
+      section.classList.add('is-open');
+      if (!prose) return;
+      prose.hidden = false;
+      if (reduceMotion) { prose.style.height = ''; return; }
+      prose.style.height = '0px';
+      requestAnimationFrame(function () {
+        prose.style.height = prose.scrollHeight + 'px';
+      });
+    }
+
+    function closeGuideSection(section) {
+      var prose = section.querySelector('.air-role-prose');
+      section.classList.remove('is-open');
+      if (!prose) return;
+      if (reduceMotion) { prose.hidden = true; prose.style.height = ''; return; }
+      prose.style.height = prose.scrollHeight + 'px';
+      requestAnimationFrame(function () {
+        prose.style.height = '0px';
+      });
+    }
+
+    tocSections.forEach(function (section) {
+      var h3 = section.querySelector('h3');
+      var prose = section.querySelector('.air-role-prose');
+      if (!h3 || !prose) return;
+
+      h3.setAttribute('tabindex', '0');
+      h3.setAttribute('role', 'button');
+
+      h3.addEventListener('click', function () {
+        if (!accMq.matches) return;
+        if (section.classList.contains('is-open')) {
+          closeGuideSection(section);
+        } else {
+          tocSections.forEach(function (other) {
+            if (other !== section && other.classList.contains('is-open')) {
+              closeGuideSection(other);
+            }
+          });
+          openGuideSection(section);
+        }
+      });
+
+      h3.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          h3.click();
+        }
+      });
+
+      // Mirror FAQ transitionend exactly
+      prose.addEventListener('transitionend', function (e) {
+        if (e.propertyName !== 'height') return;
+        if (section.classList.contains('is-open')) {
+          // Keep explicit height so CSS height:0 cannot re-collapse it
+          prose.style.height = prose.scrollHeight + 'px';
+        } else {
+          prose.hidden = true;
+          prose.style.height = '';
+        }
+      });
+    });
+
+    function syncAccordion() {
+      if (accMq.matches) {
+        tocSections.forEach(function (section, i) {
+          var prose = section.querySelector('.air-role-prose');
+          if (!prose) return;
+          if (i === 0) {
+            section.classList.add('is-open');
+            prose.hidden = false;
+            // Measure and set without triggering a transition on page load
+            prose.style.transition = 'none';
+            prose.style.height = prose.scrollHeight + 'px';
+            requestAnimationFrame(function () { prose.style.transition = ''; });
+          } else {
+            section.classList.remove('is-open');
+            prose.hidden = true;
+            prose.style.height = '';
+          }
+        });
+      } else {
+        // Desktop: restore all panels, no animation
+        tocSections.forEach(function (section) {
+          var prose = section.querySelector('.air-role-prose');
+          section.classList.remove('is-open');
+          if (prose) {
+            prose.hidden = false;
+            prose.style.transition = 'none';
+            prose.style.height = '';
+            requestAnimationFrame(function () { prose.style.transition = ''; });
+          }
+        });
+      }
+    }
+
+    syncAccordion();
+    accMq.addEventListener('change', syncAccordion);
+  }
 })();

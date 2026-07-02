@@ -500,7 +500,7 @@
       transform: none;
     }
 
-    /* Partners — static row (no marquee), aligned with betterengineer.com sizing */
+    /* Partners - static row (no marquee), aligned with betterengineer.com sizing */
     .partners {
       background: var(--color-surface);
       border-top: 1px solid var(--color-border);
@@ -595,7 +595,7 @@
       padding: 2rem; box-shadow: var(--shadow-soft);
     }
 
-    /* Stats — bento grid (matches betterengineer.com: 4+8 row, 4+4+4 row) */
+    /* Stats - bento grid (matches betterengineer.com: 4+8 row, 4+4+4 row) */
     .stats-section { background: linear-gradient(180deg, #fff 0%, #fafafe 100%); }
     .stats-title {
       font-size: clamp(1.75rem, 3vw, 2.25rem);
@@ -705,7 +705,7 @@
     .skill-card h3 { font-size: 1.05rem; margin: 0 0 0.5rem; font-weight: 700; }
     .skill-card p { margin: 0; font-size: 0.9rem; color: var(--color-muted); line-height: 1.5; }
 
-    /* LATAM / timezone — height is driven by the LEFT column padding (--latam-pad-y); right map fills 100% of row height. */
+    /* LATAM / timezone - height is driven by the LEFT column padding (--latam-pad-y); right map fills 100% of row height. */
     #latam.section {
       background: #f0f0f8;
       padding: 0;
@@ -908,7 +908,7 @@
     }
     .carousel-dots button.is-active { background: var(--color-primary); transform: scale(1.2); }
 
-    /* CTA band — solid blue + official team PNG (wavy edges are in the asset) */
+    /* CTA band - solid blue + official team PNG (wavy edges are in the asset) */
     /* Height is driven by the LEFT column padding (--cta-pad-y); right image fills 100% of that height. */
     .cta-band {
       background: var(--color-primary);

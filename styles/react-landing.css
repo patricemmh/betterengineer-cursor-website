@@ -1,4 +1,4 @@
-/* React landing page — extends brand.css */
+/* React landing page - extends brand.css */
 
 .nav-desktop a.is-active {
   color: var(--color-primary);
@@ -28,7 +28,7 @@
   opacity: 0.9;
 }
 
-/* Hero card CTA — distinct purple (scoped so global primary stays on-brand elsewhere) */
+/* Hero card CTA - distinct purple (scoped so global primary stays on-brand elsewhere) */
 .btn.react-hero-card-cta.btn--primary {
   background: #6b46c1;
   border-color: #6b46c1;
@@ -788,7 +788,7 @@
   color: #fff;
 }
 
-/* ——— Responsive: tablet & mobile (React + shared #main) ——— */
+/* Responsive: tablet & mobile (React + shared #main) */
 
 #main {
   overflow-x: clip;
@@ -1272,11 +1272,12 @@
 
 .air-page .hero .h1 {
   color: var(--color-text);
+  font-weight: 400;
 }
 
 .air-page .hero .h1 .light {
   color: var(--color-primary);
-  font-weight: 300;
+  font-weight: 700;
 }
 
 .air-page .hero .lead {

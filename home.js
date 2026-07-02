@@ -54,7 +54,7 @@
   function trackVirtualView(eventName) {
     var q = getHsqQueue();
     var basePath = window.location.pathname || '/';
-    q.push(['setPath', basePath + '?hs_evt=' + sanitizeEventName(eventName)]);
+    q.push(['setPath', basePath + ' - hs_evt=' + sanitizeEventName(eventName)]);
     q.push(['trackPageView']);
     q.push(['setPath', window.location.pathname + window.location.search]);
   }

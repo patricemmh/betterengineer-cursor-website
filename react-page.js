@@ -68,7 +68,7 @@
       });
 
       item.classList.toggle('is-open', !open);
-      btn.setAttribute('aria-expanded', open ? 'false' : 'true');
+        btn.setAttribute('aria-expanded', open ? 'false' : 'true');
       if (panel) panel.hidden = open;
     });
 
@@ -223,7 +223,7 @@
   function trackVirtualView(eventName) {
     var q = getHsqQueue();
     var basePath = window.location.pathname || '/';
-    q.push(['setPath', basePath + '?hs_evt=' + sanitizeEventName(eventName)]);
+    q.push(['setPath', basePath + ' - hs_evt=' + sanitizeEventName(eventName)]);
     q.push(['trackPageView']);
     q.push(['setPath', window.location.pathname + window.location.search]);
   }
@@ -430,7 +430,7 @@
       window.onloadTurnstileCallback = renderTurnstileWidget;
       var s = document.createElement('script');
       s.id = 'turnstile-api-script';
-      s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onloadTurnstileCallback';
+      s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js - render=explicit&onload=onloadTurnstileCallback';
       s.defer = true;
       s.onerror = function () {
         turnstileReadyWaiters.forEach(function (fn) {
