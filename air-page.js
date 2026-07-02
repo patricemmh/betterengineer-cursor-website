@@ -276,4 +276,128 @@
     syncAccordion();
     accMq.addEventListener('change', syncAccordion);
   }
+
+  // ── Hero intake form (role pages) ────────────────────────────────────────
+  var roleForm = document.getElementById('react-intake-form');
+  if (roleForm) {
+    var roleStatus = document.getElementById('react-intake-status');
+    var HS_PORTAL = '8679235';
+    var HS_FORM   = '4431ddc0-7bea-46ba-939c-98c422756479';
+    var hsUrl     = 'https://api.hsforms.com/submissions/v3/integration/submit/' +
+                    HS_PORTAL + '/' + HS_FORM;
+
+    function showRoleSuccess() {
+      if (!roleStatus) return;
+      roleStatus.innerHTML =
+        'Thanks - we got your request. We will be in touch within 24 hours. ' +
+        'Or <a href="https://calendly.com/tim-salsamobi/30min" target="_blank" ' +
+        'rel="noopener noreferrer" style="color:inherit;text-decoration:underline">' +
+        'book a call with Tim directly</a>.';
+      roleStatus.classList.remove('is-error');
+      roleStatus.classList.add('is-success');
+    }
+
+    function setRoleFieldError(field, invalid) {
+      if (!field) return;
+      field.setAttribute('aria-invalid', invalid ? 'true' : 'false');
+      var wrap = field.closest('.form-field');
+      if (!wrap) return;
+      var err = wrap.querySelector('.form-field__error');
+      if (!err) {
+        err = document.createElement('p');
+        err.className = 'form-field__error';
+        err.setAttribute('role', 'alert');
+        wrap.appendChild(err);
+      }
+      err.textContent = invalid ? 'This field is required.' : '';
+      err.style.display = invalid ? '' : 'none';
+    }
+
+    roleForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      var fd       = new FormData(roleForm);
+      var first    = (fd.get('firstname') || '').trim();
+      var last     = (fd.get('lastname')  || '').trim();
+      var email    = (fd.get('email')     || '').trim();
+      var message  = (fd.get('message')   || '').trim();
+      var honeypot = (fd.get('company_website') || '').trim();
+
+      var emailRe  = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+      // Validate required fields
+      var valid = true;
+      [['firstname', first], ['lastname', last], ['email', email], ['message', message]]
+        .forEach(function (pair) {
+          var field = roleForm.querySelector('[name="' + pair[0] + '"]');
+          if (!pair[1]) { setRoleFieldError(field, true); valid = false; }
+          else setRoleFieldError(field, false);
+        });
+
+      if (!valid) {
+        var firstBad = roleForm.querySelector('[aria-invalid="true"]');
+        if (firstBad) firstBad.focus();
+        return;
+      }
+
+      if (!emailRe.test(email)) {
+        setRoleFieldError(roleForm.querySelector('[name="email"]'), true);
+        return;
+      }
+
+      // Honeypot: fake success silently
+      if (honeypot) {
+        roleForm.reset();
+        roleForm.classList.add('intake-form--success');
+        showRoleSuccess();
+        return;
+      }
+
+      var submitBtn = roleForm.querySelector('button[type="submit"]');
+      if (submitBtn) submitBtn.disabled = true;
+      roleForm.classList.add('is-submitting');
+
+      var fields = [
+        { name: 'firstname', value: first   },
+        { name: 'lastname',  value: last    },
+        { name: 'email',     value: email   },
+        { name: 'message',   value: message },
+      ];
+      ['utm_campaign', 'utm_content', 'utm_medium', 'utm_source'].forEach(function (k) {
+        var v = (fd.get(k) || '').trim();
+        if (v) fields.push({ name: k, value: v });
+      });
+
+      fetch(hsUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          fields:  fields,
+          context: { pageUri: window.location.href, pageName: document.title },
+        }),
+      })
+        .then(function (r) {
+          if (r.ok) {
+            roleForm.reset();
+            roleForm.classList.add('intake-form--success');
+            showRoleSuccess();
+          } else {
+            if (roleStatus) {
+              roleStatus.textContent = 'Something went wrong. Please try again.';
+              roleStatus.classList.add('is-error');
+            }
+          }
+        })
+        .catch(function () {
+          if (roleStatus) {
+            roleStatus.textContent = 'Could not send your request. Please try again.';
+            roleStatus.classList.add('is-error');
+          }
+        })
+        .finally(function () {
+          roleForm.classList.remove('is-submitting');
+          if (submitBtn) submitBtn.disabled = false;
+        });
+    });
+  }
 })();
