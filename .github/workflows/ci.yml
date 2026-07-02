@@ -1,18 +1,18 @@
-# Publishes to branch `gh-pages` for Custom Domain discover.betterengineer.com
-# Paths: /aimanufacturing/ and /ai-fluent-engineers/
-# See GITHUB_PAGES_DISCOVER_HOSTING.md for DNS (Route 53) and repo settings.
-name: Deploy GitHub Pages
+# Build, verify, and deploy discover.betterengineer.com on push to main.
+# PRs run verify only. See GITHUB_PAGES_DISCOVER_HOSTING.md for DNS settings.
+name: CI
 
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
 
 permissions:
-  contents: write
-  pages: write
+  contents: read
 
 jobs:
-  deploy:
+  verify:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -21,7 +21,24 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Build discover bundle (/aimanufacturing/ + /ai-fluent-engineers/)
+      - name: Build and verify site
+        run: npm run verify
+
+  deploy:
+    needs: verify
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Build discover bundle
         run: node build-discover-dist.js
 
       - name: Push to gh-pages
@@ -31,7 +48,6 @@ jobs:
           publish_dir: ./dist
           force_orphan: true
 
-      # Ensures the live site republishes from gh-pages (avoids stale main-branch artifact after source changes).
       - name: Trigger GitHub Pages rebuild
         env:
           GH_TOKEN: ${{ github.token }}

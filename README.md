@@ -21,6 +21,16 @@ There is no Astro, React app, Vite, TypeScript, or SPA framework for the pages i
 For visual design, CSS structure, and component naming, see `DESIGN.md`.
 For copy voice and positioning, see `COPY_BRIEF.md` and `COPY_WORKFLOW.md`.
 
+## Build and verify
+
+```bash
+npm run build
+node build-discover-dist.js
+npm run verify
+```
+
+`npm run verify` rebuilds the discover bundle and runs SEO, form, and dist regression checks. CI runs the same command on every push and pull request to `main`; deploy to GitHub Pages only runs after verify passes on `main`.
+
 ## Local Preview
 
 Start a static server from the repo root:

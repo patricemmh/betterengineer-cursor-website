@@ -7,6 +7,8 @@
     "build:cf": "node build-pages.js --cloudflare",
     "deploy:cf": "npx --yes wrangler pages deploy betterengineer",
     "dev": "node static-server.js",
-    "start": "node static-server.js"
+    "start": "node static-server.js",
+    "verify": "node tools/verify-site.js",
+    "verify:dist": "node tools/verify-dist.js"
   }
 }
