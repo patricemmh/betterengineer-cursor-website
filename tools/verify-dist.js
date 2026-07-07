@@ -135,6 +135,18 @@ function collectInternalLinks(html) {
   return links;
 }
 
+function collectInternalImageSrc(html) {
+  const srcs = new Set();
+  const re = /src="(\/[^"]*)"/g;
+  let m;
+  while ((m = re.exec(html)) !== null) {
+    var src = m[1];
+    if (src.startsWith('//')) continue;
+    srcs.add(src);
+  }
+  return srcs;
+}
+
 function checkSitemap() {
   const sitemapPath = path.join(distRoot, 'sitemap.xml');
   if (!fs.existsSync(sitemapPath)) {
@@ -211,6 +223,21 @@ htmlFiles.forEach(function (filePath) {
   });
 });
 
+const checkedImages = new Set();
+htmlFiles.forEach(function (filePath) {
+  const html = fs.readFileSync(filePath, 'utf8');
+  collectInternalImageSrc(html).forEach(function (src) {
+    if (!src.startsWith('/images/engineers/')) return;
+    const key = src;
+    if (checkedImages.has(key)) return;
+    checkedImages.add(key);
+    const target = resolveDistAsset(src);
+    if (!fs.existsSync(target)) {
+      errors.push(rel(filePath) + ': broken image src ' + src + ' (' + rel(target) + ' missing)');
+    }
+  });
+});
+
 checkSitemap();
 checkRobots();
 
@@ -227,5 +254,7 @@ console.log(
   htmlFiles.length,
   'HTML files,',
   checkedLinks.size,
-  'internal links, sitemap + robots OK',
+  'internal links,',
+  checkedImages.size,
+  'image assets, sitemap + robots OK',
 );

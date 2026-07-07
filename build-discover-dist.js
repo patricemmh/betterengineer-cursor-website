@@ -100,8 +100,10 @@ copyDir(path.join(root, 'roles'), path.join(distRoot, 'roles'));
   }
 });
 
-// images/roles/
+// images/roles/, images/engineers/, and images/ai-tools/
 copyDir(path.join(root, 'images', 'roles'), path.join(distRoot, 'images', 'roles'));
+copyDir(path.join(root, 'images', 'engineers'), path.join(distRoot, 'images', 'engineers'));
+copyDir(path.join(root, 'images', 'ai-tools'), path.join(distRoot, 'images', 'ai-tools'));
 
 // Shared JS
 ['air-page.js', 'intake-form-shared.js'].forEach(function (f) {
