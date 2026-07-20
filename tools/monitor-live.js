@@ -241,14 +241,6 @@ async function main() {
     ],
   });
 
-  await checkPageContent(SITE + '/technologies/react-fintech/', {
-    label: 'react-fintech',
-    patterns: [
-      { name: 'GTM container', must: new RegExp(GTM_ID) },
-      { name: 'corrupted GTM loader', mustNot: /gtm\.js - id=/ },
-    ],
-  });
-
   await checkWorker();
 
   console.log('\n' + passes.length + ' passed, ' + failures.length + ' failed');

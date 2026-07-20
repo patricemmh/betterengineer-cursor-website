@@ -6,7 +6,7 @@ There is no Astro, React app, Vite, TypeScript, or SPA framework for the pages i
 
 ## Where Things Live
 
-- `index.html`, `react.html`, `react-fintech.html`, `hire-ai-ready-engineers.html`, `ai-systems-readiness-for-manufacturing.html`: generated static root pages.
+- `index.html`, `hire-ai-ready-engineers.html`, `ai-systems-readiness-for-manufacturing.html`: generated static root pages.
 - `main-*.html`: editable page content fragments used by `build-pages.js`.
 - `footer-full.html`: shared footer fragment.
 - `styles/brand.css`: shared design tokens, layout, header, footer, and base components.

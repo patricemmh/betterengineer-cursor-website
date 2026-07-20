@@ -27,12 +27,27 @@ function runBuild(basePath, outputRoot, lpRootPage, initPublishRoot) {
 }
 
 if (fs.existsSync(path.join(root, 'dist'))) {
-  fs.rmSync(path.join(root, 'dist'), {
-    recursive: true,
-    force: true,
-    maxRetries: 5,
-    retryDelay: 200,
-  });
+  try {
+    fs.rmSync(path.join(root, 'dist'), {
+      recursive: true,
+      force: true,
+      maxRetries: 5,
+      retryDelay: 200,
+    });
+  } catch (e) {
+    // Some sandboxed/mounted filesystems refuse to unlink existing files
+    // outright (observed on a FUSE-backed mount: unlink() fails with EPERM
+    // even with full permissions, while rename() succeeds). Fall back to
+    // renaming the stale dist/ out of the way so the build steps below
+    // start from a clean, conflict-free directory.
+    var trashDir = path.join(root, '.dist-trash-' + Date.now());
+    try {
+      fs.renameSync(path.join(root, 'dist'), trashDir);
+      console.warn('warn: could not remove dist/ (' + e.code + '); renamed stale copy to ' + path.basename(trashDir) + ' instead');
+    } catch (e2) {
+      console.warn('warn: could not remove or rename dist/ (' + e.code + ' / ' + e2.code + '); continuing with in-place rebuild');
+    }
+  }
 }
 
 runBuild('/aimanufacturing', 'dist/aimanufacturing', 'manufacturing', true);
@@ -139,6 +154,7 @@ function writeDiscoverSeoFiles() {
     SITE_ORIGIN + '/ai-fluent-engineers/',
     SITE_ORIGIN + '/aimanufacturing/',
     SITE_ORIGIN + '/roles/',
+    SITE_ORIGIN + '/technologies/',
   ];
   collectIndexPaths(path.join(distRoot, 'roles'), '/roles/', urls);
   collectIndexPaths(path.join(distRoot, 'technologies'), '/technologies/', urls);
@@ -172,7 +188,50 @@ function writeDiscoverSeoFiles() {
   );
 }
 
+
+function writeLlmsTxt() {
+  var lines = [
+    '# BetterEngineer',
+    '',
+    '> BetterEngineer connects U.S. companies with pre-vetted senior software engineers from Latin America who embed as trusted long-term collaborators.',
+    '',
+    '## Key pages',
+    '',
+    '- [AI Fluent Engineers](' + SITE_ORIGIN + '/ai-fluent-engineers/): AI-fluency program overview.',
+    '- [AI Manufacturing](' + SITE_ORIGIN + '/aimanufacturing/): AI systems readiness for manufacturing teams.',
+    '- [Roles](' + SITE_ORIGIN + '/roles/): Hire by engineering role (front-end, back-end, full-stack, mobile, DevOps, data, AI, QA, blockchain).',
+    '- [Technologies](' + SITE_ORIGIN + '/technologies/): Hire by technology and framework.'
+  ];
+
+  function collectPages(baseDir, urlPrefix, label) {
+    if (!fs.existsSync(baseDir)) return;
+    fs.readdirSync(baseDir).forEach(function (entry) {
+      var entryPath = path.join(baseDir, entry);
+      if (!fs.statSync(entryPath).isDirectory()) return;
+      if (SITEMAP_SKIP.has(entry)) return;
+      var indexPath = path.join(entryPath, 'index.html');
+      if (!fs.existsSync(indexPath)) return;
+      var html = fs.readFileSync(indexPath, 'utf8');
+      var titleMatch = html.match(/<title>([^<]*)<\/title>/);
+      var title = titleMatch ? titleMatch[1].replace(' | BetterEngineer', '') : entry;
+      lines.push('- [' + title + '](' + SITE_ORIGIN + urlPrefix + entry + '/): ' + label + '.');
+    });
+  }
+
+  lines.push('');
+  lines.push('## Roles');
+  lines.push('');
+  collectPages(path.join(distRoot, 'roles'), '/roles/', 'Hire senior nearshore engineers for this role');
+  lines.push('');
+  lines.push('## Technologies');
+  lines.push('');
+  collectPages(path.join(distRoot, 'technologies'), '/technologies/', 'Hire senior nearshore engineers for this technology');
+
+  fs.writeFileSync(path.join(distRoot, 'llms.txt'), lines.join('\n') + '\n', 'utf8');
+}
+
 writeDiscoverSeoFiles();
+writeLlmsTxt();
 
 console.log('Discover bundle ready in ./dist/');
 console.log('  https://discover.betterengineer.com/aimanufacturing/');

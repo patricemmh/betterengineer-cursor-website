@@ -277,6 +277,56 @@
     accMq.addEventListener('change', syncAccordion);
   }
 
+  // ── Tech page guide tabs (one panel at a time) ───────────────────────
+  var guideTabsRoot = document.querySelector('[data-air-guide-tabs]');
+  if (guideTabsRoot) {
+    var guideTabButtons = guideTabsRoot.querySelectorAll('[role="tab"]');
+    var guideTabPanels = guideTabsRoot.querySelectorAll('[role="tabpanel"]');
+
+    function activateGuideTab(index) {
+      guideTabButtons.forEach(function (tab, i) {
+        var selected = i === index;
+        tab.setAttribute('aria-selected', selected ? 'true' : 'false');
+        tab.classList.toggle('is-active', selected);
+        tab.tabIndex = selected ? 0 : -1;
+      });
+      guideTabPanels.forEach(function (panel, i) {
+        var active = i === index;
+        panel.classList.toggle('is-active', active);
+        panel.hidden = !active;
+      });
+    }
+
+    guideTabButtons.forEach(function (tab, index) {
+      tab.addEventListener('click', function () {
+        activateGuideTab(index);
+      });
+
+      tab.addEventListener('keydown', function (e) {
+        var next = index;
+        if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+          e.preventDefault();
+          next = (index + 1) % guideTabButtons.length;
+        } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+          e.preventDefault();
+          next = (index - 1 + guideTabButtons.length) % guideTabButtons.length;
+        } else if (e.key === 'Home') {
+          e.preventDefault();
+          next = 0;
+        } else if (e.key === 'End') {
+          e.preventDefault();
+          next = guideTabButtons.length - 1;
+        } else {
+          return;
+        }
+        activateGuideTab(next);
+        guideTabButtons[next].focus();
+      });
+    });
+
+    activateGuideTab(0);
+  }
+
   // ── Hero intake form (role + tech pages using air-page.js) ─────────────
   var roleForm = document.getElementById('react-intake-form');
   if (roleForm && window.BEIntakeForm) {
