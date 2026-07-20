@@ -1,6 +1,14 @@
 .DS_Store
 Thumbs.db
-# Ignore Cursor IDE settings (personal), but track project-level skills
+node_modules/
+
+# Local env / secrets (never commit)
+.env
+.env.*
+!.env.example
+
+# Local IDE / agent harness (not site content)
+.claude/
 .cursor/*
 !.cursor/skills
 !.cursor/skills/**
@@ -10,9 +18,22 @@ betterengineer/
 
 # Local GitHub Pages bundle (see GITHUB_PAGES_DISCOVER_HOSTING.md)
 dist/
+.dist-trash-*/
 astro-demo/
 tmp-pdf-ai/
 tmp_ai_ready_pdf.txt
+
+# Local-only planning / ops notes (keep on machine, do not publish)
+TODO.md
+REVIEW_NEEDED.md
+TECH_PAGES_PLAN.md
+TECH_PAGES_EXECUTION_PLAN.md
+TECH_PAGES_ROADMAP.md
+TECH_PAGES_SEO_AEO_REVIEW.md
+TECH_PAGES_SOURCES.md
+TECH_PAGES_BUILD_PROMPT.md
+INTERNAL_TRAFFIC_SUPPRESSION_SPEC.md
+data-keywords.csv
 
 # Dev/build utility scripts (not part of site output)
 apply-seo-fixes.js

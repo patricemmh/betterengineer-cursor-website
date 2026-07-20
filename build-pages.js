@@ -53,8 +53,6 @@ function normalizeHtmlPaths(html) {
   return html
     .replace(/(src|href)=["']\.\/([^"']*)["']/g, '$1="/$2"')
     .replace(/srcset=["']\.\/([^"']*)["']/g, 'srcset="/$1"')
-    .replace(/href=["']\/react\.html["']/g, 'href="/technologies/react/"')
-    .replace(/href=["']\/react-fintech\.html["']/g, 'href="/technologies/react-fintech/"')
     .replace(
       /href=["']\/ai-systems-readiness-for-manufacturing\.html["']/g,
       'href="/services/ai-systems-readiness-for-manufacturing/"',
@@ -139,20 +137,6 @@ function copyFileIntoOutput(file) {
 }
 
 var styles = readStyles();
-
-var reactMainPath = path.join(root, 'main-react.html');
-if (!fs.existsSync(reactMainPath)) {
-  console.error('Missing main-react.html (React landing <main> fragment).');
-  process.exit(1);
-}
-var reactMain = normalizeHtmlPaths(fs.readFileSync(reactMainPath, 'utf8').trim());
-
-var reactFintechMainPath = path.join(root, 'main-react-fintech.html');
-if (!fs.existsSync(reactFintechMainPath)) {
-  console.error('Missing main-react-fintech.html (React fintech <main> fragment).');
-  process.exit(1);
-}
-var reactFintechMain = normalizeHtmlPaths(fs.readFileSync(reactFintechMainPath, 'utf8').trim());
 
 var aiManufacturingMainPath = path.join(root, 'main-ai-systems-manufacturing.html');
 if (!fs.existsSync(aiManufacturingMainPath)) {
@@ -245,7 +229,6 @@ var headerPrimaryChrome =
   '  </header>\n';
 
 var headerHome = headerPrimaryChrome;
-var headerReact = headerPrimaryChrome;
 var headerHireAiReady = headerPrimaryChrome;
 var headerAiManufacturing = headerPrimaryChrome;
 
@@ -306,7 +289,7 @@ function shell(title, description, css, header, main, scriptName, extraHead) {
 
 var homeCss =
   styles.brand +
-  '\n\n/* Safe-area + overflow (subset of React landing #main rules) */\n#main { overflow-x: clip; }\n#main .wrap {\n  padding-left: max(1.25rem, env(safe-area-inset-left, 0px));\n  padding-right: max(1.25rem, env(safe-area-inset-right, 0px));\n}\n';
+  '\n\n/* Safe-area + overflow (subset of landing #main rules) */\n#main { overflow-x: clip; }\n#main .wrap {\n  padding-left: max(1.25rem, env(safe-area-inset-left, 0px));\n  padding-right: max(1.25rem, env(safe-area-inset-right, 0px));\n}\n';
 
 var indexHtml = shell(
   'BetterEngineer | Staff Augmentation & Engineering Talent',
@@ -318,24 +301,6 @@ var indexHtml = shell(
 );
 
 var landingCss = styles.brand + '\n\n' + styles.landingExtra;
-
-var reactHtml = shell(
-  'React Engineers | BetterEngineer',
-  'Hire senior React developers in your time zone. Staff augmentation, UI modernization, and shipping support from BetterEngineer.',
-  landingCss,
-  headerReact,
-  reactMain,
-  'landing-page.js',
-);
-
-var reactFintechHtml = shell(
-  'Fintech React Engineers | BetterEngineer',
-  'Hire senior React engineers for fintech teams. Build onboarding, payment, and risk workflows with timezone-aligned staff augmentation support.',
-  landingCss,
-  headerReact,
-  reactFintechMain,
-  'landing-page.js',
-);
 
 var aiManufacturingDescription =
   'We help manufacturing companies audit disconnected ERP, CRM, sales, and operations systems, then build practical AI workflows and integrations that reduce manual work.';
@@ -392,8 +357,6 @@ if (outputRoot) {
 }
 
 writeFileSafe('index.html', indexHtml);
-writeFileSafe('react.html', reactHtml);
-writeFileSafe('react-fintech.html', reactFintechHtml);
 writeFileSafe(path.join('services', 'ai-systems-readiness-for-manufacturing', 'index.html'), aiManufacturingHtml);
 writeFileSafe('ai-systems-readiness-for-manufacturing.html', aiManufacturingHtml);
 writeFileSafe(path.join('services', 'hire-ai-ready-engineers', 'index.html'), hireAiReadyHtml);

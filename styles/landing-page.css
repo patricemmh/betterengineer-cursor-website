@@ -637,7 +637,7 @@
 }
 
 @media (max-width: 1100px) {
-  .process-grid:not(.process-grid--five) {
+  .process-grid:not(.process-grid--five):not(.process-grid--three) {
     grid-template-columns: repeat(2, 1fr);
   }
 }

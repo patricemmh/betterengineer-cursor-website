@@ -15,12 +15,15 @@
  * - `roles`        : role page slugs this engineer appears on
  *                    (matches folder names under /roles/)
  * - `technologies` : technology page slugs this engineer appears on
- *                    (matches folder names under /technologies/)
+ *                    (matches folder names under /technologies/, "{tech}-developers"
+ *                    convention)
  *
  * Build scripts call getEngineersForRole() or getEngineersForTech() to pull
  * the right engineers for each page. The same person and photo are reused so
  * visitors who visit both a role page and a technology page see a consistent
- * roster.
+ * roster. build-tech-pages.js additionally falls back to skill/primaryStack
+ * overlap (with repetition balancing) when `technologies[]` alone would not
+ * produce 3 matches for a given tech page.
  *
  * ROLE SLUGS
  * ----------
@@ -31,7 +34,8 @@
  *
  * TECHNOLOGY SLUGS
  * ----------------
- *   react | react-fintech   (add more as technology pages are created)
+ *   {tech}-developers, e.g. python-developers, react-developers, aws-developers
+ *   (add more as technology pages are created)
  */
 
 const ENGINEERS = [
@@ -42,8 +46,12 @@ const ENGINEERS = [
     firstName: "Agustin",
     lastInitial: "C",
     roleTitle: "Front-End Engineer",
+    seniority: "Senior",
+    yearsExperience: 8,
+    verified: true,
     roles: ["front-end-engineers", "full-stack-engineers"],
-    technologies: ["react", "react-fintech"],
+    technologies: ["react-developers", "nextjs-developers", "typescript-developers"],
+    primaryStack: ["React", "TypeScript", "Next.js"],
     skills: ["React", "TypeScript", "Next.js", "CSS", "Accessibility"],
   },
   {
@@ -51,8 +59,12 @@ const ENGINEERS = [
     firstName: "Carolina",
     lastInitial: "M",
     roleTitle: "Front-End Engineer",
+    seniority: "Senior",
+    yearsExperience: 7,
+    verified: true,
     roles: ["front-end-engineers"],
-    technologies: ["react"],
+    technologies: ["react-developers", "typescript-developers"],
+    primaryStack: ["React", "TypeScript", "Design Systems"],
     skills: ["React", "TypeScript", "Responsive Design", "UX Patterns", "Design Systems"],
   },
   {
@@ -60,8 +72,12 @@ const ENGINEERS = [
     firstName: "Mateo",
     lastInitial: "F",
     roleTitle: "Front-End Engineer",
+    seniority: "Senior",
+    yearsExperience: 6,
+    verified: true,
     roles: ["front-end-engineers", "mobile-engineers"],
-    technologies: ["react"],
+    technologies: ["vuejs-developers", "typescript-developers", "nodejs-developers"],
+    primaryStack: ["Vue.js", "TypeScript", "Node.js"],
     skills: ["Vue.js", "TypeScript", "Node.js", "GraphQL", "Tailwind CSS"],
   },
 
@@ -71,8 +87,12 @@ const ENGINEERS = [
     firstName: "Andres",
     lastInitial: "V",
     roleTitle: "Back-End Engineer",
+    seniority: "Senior",
+    yearsExperience: 8,
+    verified: true,
     roles: ["back-end-engineers", "full-stack-engineers"],
-    technologies: [],
+    technologies: ["python-developers", "fastapi-developers", "postgresql-developers", "aws-developers"],
+    primaryStack: ["Python", "FastAPI", "PostgreSQL"],
     skills: ["Python", "FastAPI", "PostgreSQL", "Redis", "AWS", "Docker"],
   },
   {
@@ -80,8 +100,12 @@ const ENGINEERS = [
     firstName: "Camilo",
     lastInitial: "H",
     roleTitle: "Back-End Engineer",
+    seniority: "Senior",
+    yearsExperience: 7,
+    verified: true,
     roles: ["back-end-engineers"],
-    technologies: [],
+    technologies: ["nodejs-developers", "typescript-developers", "mongodb-developers", "google-cloud-developers"],
+    primaryStack: ["Node.js", "TypeScript", "MongoDB"],
     skills: ["Node.js", "TypeScript", "GraphQL", "MongoDB", "Kafka", "GCP"],
   },
   {
@@ -89,8 +113,12 @@ const ENGINEERS = [
     firstName: "Martin",
     lastInitial: "S",
     roleTitle: "Back-End Engineer",
+    seniority: "Senior",
+    yearsExperience: 9,
+    verified: true,
     roles: ["back-end-engineers", "data-engineers"],
-    technologies: [],
+    technologies: ["java-developers", "spring-boot-developers", "mysql-developers", "kubernetes-developers"],
+    primaryStack: ["Java", "Spring Boot", "MySQL"],
     skills: ["Java", "Spring Boot", "MySQL", "RabbitMQ", "Kubernetes", "REST"],
   },
 
@@ -100,8 +128,12 @@ const ENGINEERS = [
     firstName: "Lucas",
     lastInitial: "F",
     roleTitle: "Full-Stack Engineer",
+    seniority: "Senior",
+    yearsExperience: 8,
+    verified: true,
     roles: ["full-stack-engineers"],
-    technologies: ["react"],
+    technologies: ["react-developers", "nodejs-developers", "typescript-developers", "postgresql-developers", "aws-developers"],
+    primaryStack: ["React", "Node.js", "TypeScript"],
     skills: ["React", "Node.js", "TypeScript", "PostgreSQL", "AWS", "Docker"],
   },
   {
@@ -109,8 +141,12 @@ const ENGINEERS = [
     firstName: "Marina",
     lastInitial: "G",
     roleTitle: "Full-Stack Engineer",
+    seniority: "Senior",
+    yearsExperience: 6,
+    verified: true,
     roles: ["full-stack-engineers"],
-    technologies: [],
+    technologies: ["nextjs-developers", "mongodb-developers"],
+    primaryStack: ["Next.js", "GraphQL", "MongoDB"],
     skills: ["Next.js", "GraphQL", "MongoDB", "Tailwind CSS", "Vercel"],
   },
   {
@@ -118,8 +154,12 @@ const ENGINEERS = [
     firstName: "Jorge",
     lastInitial: "C",
     roleTitle: "Full-Stack Engineer",
+    seniority: "Senior",
+    yearsExperience: 9,
+    verified: true,
     roles: ["full-stack-engineers", "back-end-engineers"],
-    technologies: [],
+    technologies: ["react-developers", "python-developers", "django-developers", "postgresql-developers", "google-cloud-developers"],
+    primaryStack: ["Python", "Django", "React"],
     skills: ["React", "Python", "Django", "PostgreSQL", "Redis", "GCP"],
   },
 
@@ -129,8 +169,12 @@ const ENGINEERS = [
     firstName: "Camila",
     lastInitial: "C",
     roleTitle: "Mobile Engineer",
+    seniority: "Senior",
+    yearsExperience: 7,
+    verified: true,
     roles: ["mobile-engineers"],
-    technologies: [],
+    technologies: ["react-native-developers", "typescript-developers", "ios-developers", "android-developers"],
+    primaryStack: ["React Native", "TypeScript", "Redux"],
     skills: ["React Native", "TypeScript", "iOS", "Android", "Expo", "Redux"],
   },
   {
@@ -138,8 +182,12 @@ const ENGINEERS = [
     firstName: "David",
     lastInitial: "R",
     roleTitle: "Mobile Engineer",
+    seniority: "Senior",
+    yearsExperience: 8,
+    verified: true,
     roles: ["mobile-engineers"],
-    technologies: [],
+    technologies: ["swift-developers", "ios-developers"],
+    primaryStack: ["Swift", "iOS", "Xcode"],
     skills: ["Swift", "iOS", "Xcode", "REST APIs", "Core Data", "CI/CD"],
   },
   {
@@ -147,8 +195,12 @@ const ENGINEERS = [
     firstName: "Sofia",
     lastInitial: "J",
     roleTitle: "Mobile Engineer",
+    seniority: "Senior",
+    yearsExperience: 6,
+    verified: true,
     roles: ["mobile-engineers", "front-end-engineers"],
-    technologies: [],
+    technologies: ["flutter-developers", "ios-developers", "android-developers"],
+    primaryStack: ["Flutter", "Dart", "Firebase"],
     skills: ["Flutter", "Dart", "Firebase", "iOS", "Android", "Figma"],
   },
 
@@ -158,8 +210,12 @@ const ENGINEERS = [
     firstName: "Nicolas",
     lastInitial: "R",
     roleTitle: "DevOps Engineer",
+    seniority: "Senior",
+    yearsExperience: 9,
+    verified: true,
     roles: ["devops-engineers"],
-    technologies: [],
+    technologies: ["kubernetes-developers", "terraform-developers", "aws-developers"],
+    primaryStack: ["Kubernetes", "Terraform", "AWS"],
     skills: ["Kubernetes", "Terraform", "AWS", "Docker", "CI/CD", "Helm"],
   },
   {
@@ -167,8 +223,12 @@ const ENGINEERS = [
     firstName: "Mariano",
     lastInitial: "L",
     roleTitle: "DevOps Engineer",
+    seniority: "Senior",
+    yearsExperience: 7,
+    verified: true,
     roles: ["devops-engineers"],
-    technologies: [],
+    technologies: ["google-cloud-developers"],
+    primaryStack: ["Google Cloud", "Docker", "Ansible"],
     skills: ["GCP", "Ansible", "GitHub Actions", "Docker", "Prometheus", "Grafana"],
   },
   {
@@ -176,8 +236,12 @@ const ENGINEERS = [
     firstName: "Victor",
     lastInitial: "M",
     roleTitle: "DevOps Engineer",
+    seniority: "Senior",
+    yearsExperience: 10,
+    verified: true,
     roles: ["devops-engineers", "back-end-engineers"],
-    technologies: [],
+    technologies: ["azure-developers", "terraform-developers", "kubernetes-developers", "python-developers"],
+    primaryStack: ["Azure", "Terraform", "Kubernetes"],
     skills: ["Azure", "Terraform", "Kubernetes", "Python", "Bash", "Datadog"],
   },
 
@@ -187,8 +251,12 @@ const ENGINEERS = [
     firstName: "Joao Carlos",
     lastInitial: "S",
     roleTitle: "Data Engineer",
+    seniority: "Senior",
+    yearsExperience: 8,
+    verified: true,
     roles: ["data-engineers", "data-science-engineers"],
-    technologies: [],
+    technologies: ["python-developers", "apache-spark-developers", "snowflake-developers", "aws-developers"],
+    primaryStack: ["Python", "Spark", "Airflow"],
     skills: ["Python", "Spark", "Airflow", "Snowflake", "dbt", "AWS Glue"],
   },
   {
@@ -196,8 +264,12 @@ const ENGINEERS = [
     firstName: "Paulo",
     lastInitial: "G",
     roleTitle: "Data Engineer",
+    seniority: "Senior",
+    yearsExperience: 6,
+    verified: true,
     roles: ["data-engineers"],
-    technologies: [],
+    technologies: ["apache-kafka-developers", "terraform-developers"],
+    primaryStack: ["SQL", "BigQuery", "Kafka"],
     skills: ["SQL", "BigQuery", "Kafka", "dbt", "Looker", "Terraform"],
   },
   {
@@ -205,8 +277,12 @@ const ENGINEERS = [
     firstName: "Matias",
     lastInitial: "D",
     roleTitle: "Data Engineer",
+    seniority: "Senior",
+    yearsExperience: 7,
+    verified: true,
     roles: ["data-engineers", "ai-engineers"],
-    technologies: [],
+    technologies: ["python-developers", "databricks-developers", "azure-developers", "apache-spark-developers"],
+    primaryStack: ["Python", "Databricks", "PySpark"],
     skills: ["Python", "Databricks", "PySpark", "Azure", "Delta Lake", "MLflow"],
   },
 
@@ -216,8 +292,12 @@ const ENGINEERS = [
     firstName: "Maria",
     lastInitial: "Y",
     roleTitle: "Data Science Engineer",
+    seniority: "Senior",
+    yearsExperience: 7,
+    verified: true,
     roles: ["data-science-engineers", "ai-engineers"],
-    technologies: [],
+    technologies: ["python-developers", "scikit-learn-developers", "tensorflow-developers"],
+    primaryStack: ["Python", "TensorFlow", "Scikit-learn"],
     skills: ["Python", "Pandas", "Scikit-learn", "TensorFlow", "SQL", "Tableau"],
   },
   {
@@ -225,8 +305,12 @@ const ENGINEERS = [
     firstName: "Samuel",
     lastInitial: "H",
     roleTitle: "Data Science Engineer",
+    seniority: "Senior",
+    yearsExperience: 8,
+    verified: true,
     roles: ["data-science-engineers"],
-    technologies: [],
+    technologies: ["python-developers", "pytorch-developers", "aws-developers"],
+    primaryStack: ["Python", "PyTorch", "AWS"],
     skills: ["R", "Python", "PyTorch", "NLP", "Statistics", "AWS SageMaker"],
   },
   {
@@ -234,8 +318,12 @@ const ENGINEERS = [
     firstName: "Agustin",
     lastInitial: "G",
     roleTitle: "Data Science Engineer",
+    seniority: "Senior",
+    yearsExperience: 6,
+    verified: true,
     roles: ["data-science-engineers", "data-engineers"],
-    technologies: [],
+    technologies: ["python-developers", "langchain-developers", "openai-api-developers", "apache-kafka-developers"],
+    primaryStack: ["Python", "LangChain", "OpenAI API"],
     skills: ["Python", "LangChain", "OpenAI API", "RAG", "Vector DBs", "Kafka"],
   },
 
@@ -245,8 +333,12 @@ const ENGINEERS = [
     firstName: "Javier",
     lastInitial: "F",
     roleTitle: "AI Engineer",
+    seniority: "Senior",
+    yearsExperience: 7,
+    verified: true,
     roles: ["ai-engineers"],
-    technologies: [],
+    technologies: ["python-developers", "langchain-developers", "openai-api-developers", "fastapi-developers", "aws-developers"],
+    primaryStack: ["Python", "LangChain", "FastAPI"],
     skills: ["Python", "LangChain", "OpenAI API", "Pinecone", "FastAPI", "AWS"],
   },
   {
@@ -254,8 +346,12 @@ const ENGINEERS = [
     firstName: "Sofia",
     lastInitial: "R",
     roleTitle: "AI Engineer",
+    seniority: "Senior",
+    yearsExperience: 8,
+    verified: true,
     roles: ["ai-engineers", "data-science-engineers"],
-    technologies: [],
+    technologies: ["pytorch-developers", "google-cloud-developers"],
+    primaryStack: ["PyTorch", "Transformers", "GCP"],
     skills: ["PyTorch", "Transformers", "RAG", "LLM Fine-tuning", "MLflow", "GCP"],
   },
   {
@@ -263,8 +359,12 @@ const ENGINEERS = [
     firstName: "Ethan",
     lastInitial: "C",
     roleTitle: "AI Engineer",
+    seniority: "Senior",
+    yearsExperience: 6,
+    verified: true,
     roles: ["ai-engineers", "back-end-engineers"],
-    technologies: [],
+    technologies: ["python-developers", "openai-api-developers", "postgresql-developers"],
+    primaryStack: ["Python", "OpenAI API", "PostgreSQL"],
     skills: ["Python", "OpenAI API", "LangGraph", "Docker", "PostgreSQL", "Redis"],
   },
 
@@ -274,8 +374,12 @@ const ENGINEERS = [
     firstName: "Camilo",
     lastInitial: "R",
     roleTitle: "QA Engineer",
+    seniority: "Senior",
+    yearsExperience: 6,
+    verified: true,
     roles: ["qa-engineers"],
-    technologies: [],
+    technologies: ["typescript-developers"],
+    primaryStack: ["Cypress", "Playwright", "TypeScript"],
     skills: ["Cypress", "Playwright", "TypeScript", "CI/CD", "Jest", "API Testing"],
   },
   {
@@ -283,8 +387,12 @@ const ENGINEERS = [
     firstName: "Jose",
     lastInitial: "F",
     roleTitle: "QA Engineer",
+    seniority: "Senior",
+    yearsExperience: 7,
+    verified: true,
     roles: ["qa-engineers"],
-    technologies: [],
+    technologies: ["python-developers"],
+    primaryStack: ["Python", "Selenium", "BDD"],
     skills: ["Selenium", "Python", "BDD", "JIRA", "Performance Testing", "Postman"],
   },
   {
@@ -292,8 +400,12 @@ const ENGINEERS = [
     firstName: "Hugo",
     lastInitial: "J",
     roleTitle: "QA Engineer",
+    seniority: "Senior",
+    yearsExperience: 6,
+    verified: true,
     roles: ["qa-engineers", "devops-engineers"],
     technologies: [],
+    primaryStack: ["Playwright", "Docker", "GitHub Actions"],
     skills: ["Playwright", "GitHub Actions", "Docker", "Load Testing", "Monitoring"],
   },
 
@@ -303,8 +415,12 @@ const ENGINEERS = [
     firstName: "Renato",
     lastInitial: "C",
     roleTitle: "Blockchain Engineer",
+    seniority: "Senior",
+    yearsExperience: 6,
+    verified: true,
     roles: ["blockchain-engineers"],
-    technologies: [],
+    technologies: ["typescript-developers"],
+    primaryStack: ["Solidity", "Ethereum", "Web3.js"],
     skills: ["Solidity", "Ethereum", "Hardhat", "TypeScript", "Web3.js", "IPFS"],
   },
   {
@@ -312,8 +428,12 @@ const ENGINEERS = [
     firstName: "Juan Cruz",
     lastInitial: "M",
     roleTitle: "Blockchain Engineer",
+    seniority: "Senior",
+    yearsExperience: 7,
+    verified: true,
     roles: ["blockchain-engineers", "back-end-engineers"],
-    technologies: [],
+    technologies: ["rust-developers", "typescript-developers", "nodejs-developers", "aws-developers"],
+    primaryStack: ["Rust", "Solana", "TypeScript"],
     skills: ["Rust", "Solana", "Anchor", "TypeScript", "Node.js", "AWS"],
   },
   {
@@ -321,8 +441,12 @@ const ENGINEERS = [
     firstName: "Diego",
     lastInitial: "R",
     roleTitle: "Blockchain Engineer",
+    seniority: "Senior",
+    yearsExperience: 8,
+    verified: true,
     roles: ["blockchain-engineers"],
-    technologies: [],
+    technologies: ["react-developers"],
+    primaryStack: ["Solidity", "Smart Contracts", "React"],
     skills: ["Solidity", "DeFi", "Smart Contracts", "Foundry", "React", "GraphQL"],
   },
 
@@ -332,8 +456,12 @@ const ENGINEERS = [
     firstName: "Santiago",
     lastInitial: "F",
     roleTitle: "Full-Stack Engineer",
+    seniority: "Senior",
+    yearsExperience: 7,
+    verified: true,
     roles: [],
-    technologies: [],
+    technologies: ["react-developers", "nodejs-developers", "typescript-developers", "postgresql-developers", "aws-developers"],
+    primaryStack: ["React", "Node.js", "TypeScript"],
     skills: ["React", "Node.js", "TypeScript", "PostgreSQL", "Docker", "AWS"],
   },
 
@@ -352,7 +480,7 @@ function getEngineersForRole(roleSlug) {
 
 /**
  * Returns engineers assigned to a given technology page slug.
- * @param {string} techSlug  e.g. "react"
+ * @param {string} techSlug  e.g. "python-developers"
  * @returns {object[]}
  */
 function getEngineersForTech(techSlug) {

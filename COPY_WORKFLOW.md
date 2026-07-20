@@ -18,7 +18,7 @@ If a source contains direct quotes, label them as approved quotes.
 
 Provide:
 
-- Page target (`main-home.html`, `main-react.html`, or both)
+- Page target (e.g. `main-home.html`, or a specific `technologies/*` page)
 - Section target (hero, problem, process, CTA, etc.)
 - Objective (conversion, clarity, differentiation, trust)
 - Primary ICP (`startup`, `established`, or `agency`)
@@ -54,7 +54,7 @@ Edit for:
 Use this exact format when requesting copy updates:
 
 ```text
-Page: [main-home.html | main-react.html]
+Page: [main-home.html | technologies/<slug>/index.html]
 Sections: [hero, social proof, process, CTA]
 Objective: [what this copy should achieve]
 Audience: [ICP segment]

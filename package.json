@@ -5,11 +5,15 @@
     "build": "node build-pages.js",
     "build:lp-dist": "node build-lp-dist.js",
     "build:cf": "node build-pages.js --cloudflare",
+    "build:tech": "node build-tech-pages.js",
     "deploy:cf": "npx --yes wrangler pages deploy betterengineer",
     "dev": "node static-server.js",
     "start": "node static-server.js",
-    "verify": "node tools/verify-site.js",
+    "verify": "node tools/verify-site.js && node tools/verify-tech-data.js && node tools/verify-links.js --assets",
+    "verify:tech": "node tools/verify-tech-data.js",
     "verify:dist": "node tools/verify-dist.js",
+    "verify:links": "node tools/verify-links.js --assets",
+    "verify:links:external": "node tools/verify-links.js --external",
     "monitor:live": "node tools/monitor-live.js"
   }
 }

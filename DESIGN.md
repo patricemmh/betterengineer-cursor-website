@@ -61,10 +61,11 @@ Prefer **reusing** these classes before inventing new ones; extend in the approp
 | Shipped URL (GitHub Pages) | Source body fragment | CSS bundle                                    | Script          |
 | -------------------------- | -------------------- | --------------------------------------------- | --------------- |
 | `/` (`index.html`)         | `main-home.html`     | `brand.css` + small `#main` safe-area snippet | `home.js`       |
-| `/technologies/react/`     | `main-react.html`    | `brand.css` + `landing-page.css`             | `landing-page.js` |
+| `/services/hire-ai-ready-engineers/` | `main-hire-ai-ready-engineers.html` | `brand.css` + `landing-page.css` | `landing-page.js` |
+| `/services/ai-systems-readiness-for-manufacturing/` | `main-ai-systems-manufacturing.html` | `brand.css` + `landing-page.css` | `landing-page.js` |
 
 
-Headers are **assembled in `build-pages.js`** (not separate files) so home vs React can mark the active nav item and `aria-current="page"` correctly.
+Headers are **assembled in `build-pages.js`** (not separate files) so each page can mark the active nav item and `aria-current="page"` correctly.
 
 ## Assets and paths
 
@@ -79,8 +80,8 @@ Headers are **assembled in `build-pages.js`** (not separate files) so home vs Re
 ## How to change the design safely
 
 1. Edit `**styles/brand.css`** for site-wide tokens and shared components.
-2. Edit `**styles/landing-page.css**` only for React-page-specific layout or overrides.
+2. Edit `**styles/landing-page.css**` only for landing-page-specific layout or overrides.
 3. Edit `**main-*.html**` and `**footer-full.html**` for structure and copy.
 4. If navigation or global chrome changes, update the header strings in `**build-pages.js**`, then run `**node build-pages.js**` (or `npm run build`).
 
-Generated files `**index.html**`, `**react.html**`, and `**technologies/react/index.html**` are build outputs; treat the sources above as the source of truth.
+Generated files `**index.html**` and the `**technologies/*/index.html**` pages are build outputs; treat the sources above as the source of truth.
