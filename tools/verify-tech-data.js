@@ -84,6 +84,9 @@ for (const t of technologies.filter((x) => x.status === "published")) {
   check((html.match(/<h1[ >]/g) || []).length === 1, "must have exactly one H1");
   check(html.includes("gtm.start"), "GTM head snippet missing");
   check(html.includes("ns.html?id=GTM-WT77L8JF"), "GTM noscript missing");
+  check((html.match(/googletagmanager\.com\/gtm\.js/g) || []).length === 1, "GTM loader must appear exactly once");
+  check(html.includes('id="hs-script-loader"') && html.includes("js.hs-scripts.com/8679235.js"), "HubSpot tracking loader missing");
+  check((html.match(/hs-script-loader/g) || []).length === 1, "HubSpot loader must appear exactly once");
   check(html.includes('id="react-intake-form"') && html.includes('id="react-intake-status"'), "intake form not wired");
   check(html.includes('class="air-answer"'), "no direct-answer block");
   check(html.includes('class="air-glance"'), "no at-a-glance table");

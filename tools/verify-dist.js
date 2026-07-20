@@ -7,6 +7,7 @@ const root = path.join(__dirname, '..');
 const distRoot = path.join(root, 'dist');
 const DISCOVER = 'https://discover.betterengineer.com';
 const GTM_ID = 'GTM-WT77L8JF';
+const HUBSPOT_PORTAL = '8679235';
 
 const errors = [];
 const htmlFiles = [];
@@ -86,11 +87,22 @@ function checkGtm(filePath, html) {
   if (!html.includes('googletagmanager.com/gtm.js')) {
     fail(filePath, 'missing GTM loader script');
   }
+  var gtmLoaders = html.match(/googletagmanager\.com\/gtm\.js/g);
+  if (!gtmLoaders || gtmLoaders.length !== 1) {
+    fail(filePath, 'GTM loader must appear exactly once (found ' + (gtmLoaders ? gtmLoaders.length : 0) + ')');
+  }
   if (html.includes('gtm.js - id=') || html.includes('ns.html - id=')) {
     fail(filePath, 'corrupted GTM URL (space-hyphen instead of ?)');
   }
   if (!html.includes('googletagmanager.com/ns.html')) {
     fail(filePath, 'missing GTM noscript iframe');
+  }
+  if (!html.includes('js.hs-scripts.com/' + HUBSPOT_PORTAL + '.js') || !html.includes('id="hs-script-loader"')) {
+    fail(filePath, 'missing HubSpot tracking loader for portal ' + HUBSPOT_PORTAL);
+  }
+  var hsLoaders = html.match(/hs-script-loader/g);
+  if (!hsLoaders || hsLoaders.length !== 1) {
+    fail(filePath, 'HubSpot loader must appear exactly once (found ' + (hsLoaders ? hsLoaders.length : 0) + ')');
   }
 }
 
