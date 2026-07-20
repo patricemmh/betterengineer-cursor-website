@@ -170,6 +170,8 @@ var headerPrimaryChrome =
   '              <li><a href="https://www.betterengineer.com/staff-augmentation">Staff Augmentation</a></li>\n' +
   '              <li><a href="https://www.betterengineer.com/ai-readiness">AI Readiness</a></li>\n' +
   '              <li><a href="https://www.betterengineer.com/hiring-dashboard">Platform</a></li>\n' +
+  '              <li><a href="https://discover.betterengineer.com/roles/">Browse Roles</a></li>\n' +
+  '              <li><a href="https://discover.betterengineer.com/technologies/">Browse by Technology</a></li>\n' +
   '            </ul>\n' +
   '          </li>\n' +
   '          <li><a href="https://discover.betterengineer.com/ai-fluent-engineers/">AI Fluency</a></li>\n' +
@@ -204,6 +206,8 @@ var headerPrimaryChrome =
   '          <li><a href="https://www.betterengineer.com/staff-augmentation">Staff Augmentation</a></li>\n' +
   '          <li><a href="https://www.betterengineer.com/ai-readiness">AI Readiness</a></li>\n' +
   '          <li><a href="https://www.betterengineer.com/hiring-dashboard">Platform</a></li>\n' +
+  '          <li><a href="https://discover.betterengineer.com/roles/">Browse Roles</a></li>\n' +
+  '          <li><a href="https://discover.betterengineer.com/technologies/">Browse by Technology</a></li>\n' +
   '        </ul>\n' +
   '      </li>\n' +
   '      <li><a href="https://discover.betterengineer.com/ai-fluent-engineers/">AI Fluency</a></li>\n' +
