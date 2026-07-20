@@ -71,7 +71,6 @@ function isMetaRefreshStub(html) {
 function shouldSkipOptionalChecks(filePath, html) {
   const r = rel(filePath);
   return (
-    r === 'dist/index.html' ||
     r.includes('/roles-template/') ||
     r.includes('/tech-template/') ||
     isCaseAliasRedirect(filePath) ||

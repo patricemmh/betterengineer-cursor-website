@@ -1,6 +1,6 @@
 'use strict';
 
-/* Builds the discover.betterengineer.com bundle: /aimanufacturing/ + /ai-fluent-engineers/. See GITHUB_PAGES_DISCOVER_HOSTING.md. */
+/* Builds the discover.betterengineer.com bundle: home at /, plus /aimanufacturing/, /ai-fluent-engineers/, /roles/, /technologies/. See GITHUB_PAGES_DISCOVER_HOSTING.md. */
 
 var cp = require('child_process');
 var fs = require('fs');
@@ -151,6 +151,7 @@ function collectIndexPaths(baseDir, urlPrefix, out) {
 
 function writeDiscoverSeoFiles() {
   var urls = [
+    SITE_ORIGIN + '/',
     SITE_ORIGIN + '/ai-fluent-engineers/',
     SITE_ORIGIN + '/aimanufacturing/',
     SITE_ORIGIN + '/roles/',
@@ -197,6 +198,7 @@ function writeLlmsTxt() {
     '',
     '## Key pages',
     '',
+    '- [Home](' + SITE_ORIGIN + '/): BetterEngineer staff augmentation and hiring platform overview.',
     '- [AI Fluent Engineers](' + SITE_ORIGIN + '/ai-fluent-engineers/): AI-fluency program overview.',
     '- [AI Manufacturing](' + SITE_ORIGIN + '/aimanufacturing/): AI systems readiness for manufacturing teams.',
     '- [Roles](' + SITE_ORIGIN + '/roles/): Hire by engineering role (front-end, back-end, full-stack, mobile, DevOps, data, AI, QA, blockchain).',
@@ -230,10 +232,49 @@ function writeLlmsTxt() {
   fs.writeFileSync(path.join(distRoot, 'llms.txt'), lines.join('\n') + '\n', 'utf8');
 }
 
+// ── Discover root home page ───────────────────────────────────────────────────
+// manufacturing build writes a temporary dist/index.html redirect to
+// /aimanufacturing/. Replace that with the staff-augmentation home page so
+// https://discover.betterengineer.com/ is the main Discover home.
+(function publishHomeAtDiscoverRoot() {
+  var homeTmpRel = 'dist/_home_tmp';
+  var homeTmpAbs = path.join(root, homeTmpRel);
+  var env = Object.assign({}, process.env, {
+    OUTPUT_ROOT: homeTmpRel,
+    GITHUB_PAGES_CNAME: 'discover.betterengineer.com',
+  });
+  delete env.PAGES_PUBLISH_ROOT;
+  delete env.LP_ROOT_PAGE;
+  cp.execSync('node build-pages.js --base=/', {
+    cwd: root,
+    stdio: 'inherit',
+    env: env,
+  });
+  fs.copyFileSync(path.join(homeTmpAbs, 'index.html'), path.join(distRoot, 'index.html'));
+  ['home.js', 'intake-form-shared.js', 'landing-page.js'].forEach(function (f) {
+    var src = path.join(homeTmpAbs, f);
+    if (fs.existsSync(src)) {
+      fs.copyFileSync(src, path.join(distRoot, f));
+    }
+  });
+  if (fs.existsSync(path.join(homeTmpAbs, 'images'))) {
+    copyDir(path.join(homeTmpAbs, 'images'), path.join(distRoot, 'images'));
+  }
+  if (fs.existsSync(path.join(homeTmpAbs, 'icons'))) {
+    copyDir(path.join(homeTmpAbs, 'icons'), path.join(distRoot, 'icons'));
+  }
+  try {
+    fs.rmSync(homeTmpAbs, { recursive: true, force: true, maxRetries: 5, retryDelay: 200 });
+  } catch (e) {
+    console.warn('warn: could not remove ' + homeTmpRel + ' (' + e.code + ')');
+  }
+})();
+
 writeDiscoverSeoFiles();
 writeLlmsTxt();
 
 console.log('Discover bundle ready in ./dist/');
+console.log('  https://discover.betterengineer.com/');
 console.log('  https://discover.betterengineer.com/aimanufacturing/');
 console.log('  https://discover.betterengineer.com/ai-fluent-engineers/');
 console.log('  https://discover.betterengineer.com/roles/');
