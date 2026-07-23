@@ -78,6 +78,13 @@ function shouldSkipOptionalChecks(filePath, html) {
   );
 }
 
+function checkFavicon(filePath, html) {
+  if (shouldSkipOptionalChecks(filePath, html)) return;
+  if (!html.includes('rel="icon"') || !html.includes('/icons/favicon.png')) {
+    fail(filePath, 'missing favicon link (/icons/favicon.png)');
+  }
+}
+
 function checkGtm(filePath, html) {
   if (shouldSkipOptionalChecks(filePath, html)) return;
   if (!html.includes(GTM_ID)) {
@@ -210,6 +217,7 @@ walkHtml(distRoot);
 htmlFiles.forEach(function (filePath) {
   const html = fs.readFileSync(filePath, 'utf8');
   checkUrlCorruption(filePath, html);
+  checkFavicon(filePath, html);
   checkGtm(filePath, html);
   checkJsonLd(filePath, html);
   checkLegacyContactCta(filePath, html);
