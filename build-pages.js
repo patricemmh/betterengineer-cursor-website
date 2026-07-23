@@ -259,7 +259,7 @@ function shell(title, description, css, header, main, scriptName, extraHead) {
     '  \'https://www.googletagmanager.com/gtm.js?id=\'+i+dl;f.parentNode.insertBefore(j,f);\n' +
     '  })(window,document,\'script\',\'dataLayer\',\'GTM-WT77L8JF\');</script>\n' +
     '  <!-- End Google Tag Manager -->\n' +
-    '  <link rel="icon" href="./icons/favicon.png" type="image/png">\n' +
+    '  <link rel="icon" href="/icons/favicon.png" type="image/png">\n' +
     '  <link rel="preconnect" href="https://fonts.googleapis.com">\n' +
     '  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n' +
     '  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">\n' +
