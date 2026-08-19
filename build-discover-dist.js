@@ -106,14 +106,16 @@ copyDir(path.join(root, 'roles'), path.join(distRoot, 'roles'));
   fs.copyFileSync(path.join(root, 'styles', f), path.join(distRoot, 'styles', f));
 });
 
-// Icons
-['betterengineer-logo.svg', 'hamburger-white.svg', 'favicon.png'].forEach(function (f) {
-  var src = path.join(root, 'icons', f);
-  if (fs.existsSync(src)) {
+// Icons used by chrome plus tech-page ecosystem images.
+copyDir(path.join(root, 'icons'), path.join(distRoot, 'icons'));
+var faviconSrc = path.join(root, 'icons', 'favicon.png');
+if (!fs.existsSync(faviconSrc)) {
+  var altFav = path.join(root, 'favicon.png');
+  if (fs.existsSync(altFav)) {
     fs.mkdirSync(path.join(distRoot, 'icons'), { recursive: true });
-    fs.copyFileSync(src, path.join(distRoot, 'icons', f));
+    fs.copyFileSync(altFav, path.join(distRoot, 'icons', 'favicon.png'));
   }
-});
+}
 
 // images/roles/, images/engineers/, and images/ai-tools/
 copyDir(path.join(root, 'images', 'roles'), path.join(distRoot, 'images', 'roles'));

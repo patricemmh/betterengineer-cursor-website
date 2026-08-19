@@ -112,7 +112,7 @@ const ORG = {
     "https://www.instagram.com/betterengineer_/"
   ]
 };
-const OG_IMAGE = "https://www.betterengineer.com/images/roles/shared/trust-laptop.png";
+const OG_IMAGE = "https://discover.betterengineer.com/images/roles/shared/trust-laptop.png";
 
 function head(t) {
   const title = `Hire ${t.name} Developers | BetterEngineer`;
