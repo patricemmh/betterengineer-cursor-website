@@ -36,7 +36,7 @@ Open `roles/{slug}/index.html` and make every substitution below. The file is a 
 **Head / meta**
 - `<title>Role Page Template | BetterEngineer</title>` → `<title>Hire {Display Name} | BetterEngineer</title>`
 - Both `og:title` and `<title>` should match
-- `og:url` and `rel="canonical"` → `https://www.betterengineer.com/roles/{slug}/`
+- `og:url` and `rel="canonical"` → `https://discover.betterengineer.com/roles/{slug}/`
 - Meta description → unique sentence (120–155 chars), include role name + "nearshore" + "72 hours"
 
 **Hero section (`#role-hero`)**

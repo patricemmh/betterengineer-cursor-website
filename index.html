@@ -319,6 +319,9 @@
     .h2 { font-size: clamp(1.75rem, 3vw, 2.5rem); line-height: 1.2; font-weight: 600; margin: 0 0 1rem; letter-spacing: -0.02em; }
     .h2 .accent { color: var(--color-primary); font-weight: 500; }
     .lead { font-size: 1.125rem; color: var(--color-muted); max-width: 36rem; margin: 0 0 1.75rem; }
+    @media (min-width: 901px) {
+      #hero .lead { padding-right: 4.5rem; }
+    }
 
     /* Buttons */
     .btn-row { display: flex; flex-wrap: wrap; gap: 0.75rem 1rem; align-items: center; }
@@ -364,6 +367,21 @@
         padding: 1.5rem 0 1.5rem 1.75rem;
       }
     }
+    .hero-visual--image {
+      align-self: center;
+      padding: 0;
+    }
+    @media (min-width: 901px) {
+      .hero-visual--image { padding: 0; }
+    }
+    .hero-visual__img {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-width: 560px;
+      margin-left: auto;
+      margin-right: auto;
+    }
 
     /* Hero lead form */
     .hero-form {
@@ -384,6 +402,222 @@
     }
     @media (min-width: 901px) {
       .hero-form__card { margin-right: 0; margin-left: auto; }
+    }
+    .hero-form__card--split {
+      margin-left: 0;
+      margin-right: auto;
+      width: 100%;
+    }
+    .split__form { min-width: 0; }
+
+    /* Shared intake form (matches technology / role page form) */
+    .react-intake-card .hero-form__title {
+      margin: 0 0 1.6rem;
+      line-height: 1.25;
+    }
+    .react-intake-form {
+      display: grid;
+      gap: 1.15rem;
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.85rem 1rem;
+    }
+    .form-field {
+      display: grid;
+      gap: 0;
+      position: relative;
+    }
+    .form-field--full { grid-column: 1 / -1; }
+    .form-field label {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+    .form-field input,
+    .form-field textarea {
+      width: 100%;
+      border: 1px solid var(--color-border);
+      border-radius: 10px;
+      background-color: #fff;
+      background-image: none;
+      color: var(--color-text);
+      font: inherit;
+      font-size: 0.9375rem;
+      padding: 0.82rem 0.95rem 0.82rem 2.65rem;
+      transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
+      position: relative;
+      z-index: 1;
+    }
+    .form-field textarea {
+      resize: vertical;
+      min-height: 92px;
+      padding-top: 0.85rem;
+    }
+    .form-field:has(#firstname)::before,
+    .form-field:has(#email)::before {
+      content: "";
+      position: absolute;
+      left: 0.95rem;
+      top: 50%;
+      width: 18px;
+      height: 18px;
+      transform: translateY(-50%);
+      background-repeat: no-repeat;
+      background-size: contain;
+      pointer-events: none;
+      z-index: 2;
+    }
+    .form-field:has(#message)::before {
+      content: "";
+      position: absolute;
+      left: 0.95rem;
+      top: 0.85rem;
+      width: 18px;
+      height: 18px;
+      background-repeat: no-repeat;
+      background-size: contain;
+      pointer-events: none;
+      z-index: 2;
+    }
+    .form-field:has(#firstname)::before {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%239a9aaa' stroke-width='1.75' stroke-linecap='round'%3E%3Cpath d='M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2'/%3E%3Ccircle cx='12' cy='7' r='4'/%3E%3C/svg%3E");
+    }
+    .form-field:has(#email)::before {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%239a9aaa' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z'/%3E%3Cpolyline points='22,6 12,13 2,6'/%3E%3C/svg%3E");
+    }
+    .form-field:has(#message)::before {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%239a9aaa' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='2' y='7' width='20' height='14' rx='2' ry='2'/%3E%3Cpath d='M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2'/%3E%3C/svg%3E");
+    }
+    #lastname { padding-left: 0.95rem; }
+    .form-field input::placeholder,
+    .form-field textarea::placeholder { color: #9a9aaa; }
+    .form-field input:focus,
+    .form-field textarea:focus {
+      outline: 0;
+      border-color: rgba(84, 91, 179, 0.45);
+      box-shadow: 0 0 0 3px rgba(84, 91, 179, 0.12);
+    }
+    .form-field input[aria-invalid="true"],
+    .form-field textarea[aria-invalid="true"] {
+      border-color: #b42318;
+      box-shadow: 0 0 0 4px rgba(180, 35, 24, 0.12);
+    }
+    .form-field input:-webkit-autofill,
+    .form-field input:-webkit-autofill:hover,
+    .form-field input:-webkit-autofill:focus,
+    .form-field input:-webkit-autofill:active,
+    .form-field textarea:-webkit-autofill,
+    .form-field textarea:-webkit-autofill:hover,
+    .form-field textarea:-webkit-autofill:focus,
+    .form-field textarea:-webkit-autofill:active {
+      -webkit-box-shadow: 0 0 0 1000px #fff inset;
+      box-shadow: 0 0 0 1000px #fff inset;
+      -webkit-text-fill-color: var(--color-text);
+      caret-color: var(--color-text);
+      font-family: inherit;
+      font-size: 0.9375rem;
+      transition: background-color 9999s ease-in-out 0s, color 9999s ease-in-out 0s;
+    }
+    .form-privacy-note {
+      margin: 0;
+      font-size: 0.75rem;
+      color: #9a9aaa;
+      text-align: center;
+    }
+    .react-intake-submit {
+      width: 100%;
+      margin-top: 0.5rem;
+      padding: 1rem 1.25rem;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+      background: linear-gradient(180deg, #5a5fc4 0%, #4a4eb0 100%);
+      box-shadow: 0 2px 10px rgba(74, 78, 176, 0.22);
+      transition: transform 0.15s var(--ease), box-shadow 0.2s, filter 0.2s;
+    }
+    .react-intake-submit:hover {
+      filter: brightness(1.05);
+      box-shadow: 0 4px 14px rgba(74, 78, 176, 0.28);
+    }
+    .react-intake-submit:active { transform: translateY(1px); }
+    .react-intake-form.is-submitting .react-intake-submit {
+      opacity: 0.7;
+      cursor: wait;
+    }
+    .form-field__error {
+      display: block;
+      margin: 0.3rem 0 0;
+      font-size: 0.8125rem;
+      line-height: 1.35;
+      color: #b42318;
+    }
+    .form-status {
+      margin: 0;
+      display: none;
+      position: absolute;
+      inset: 0;
+      border-radius: 12px;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      font-size: 1rem;
+      line-height: 1.6;
+      font-weight: 500;
+      background: #fff;
+      z-index: 10;
+      pointer-events: none;
+      box-sizing: border-box;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .react-intake-form.intake-form--success .form-grid,
+    .react-intake-form.intake-form--success .form-privacy-note,
+    .react-intake-form.intake-form--success .react-intake-submit {
+      visibility: hidden;
+    }
+    .form-status.is-success {
+      display: flex;
+      color: #3d4293;
+      background: #f0f1fa;
+      border: 1px solid #b8bae8;
+      pointer-events: auto;
+    }
+    .form-status.is-success a {
+      color: #3d4293;
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .form-status.is-error {
+      display: flex;
+      color: #b42318;
+      background: #fef2f2;
+      border: 1px solid #fecdca;
+      pointer-events: auto;
+    }
+    .air-role-process {
+      margin: 1rem 0 0;
+      color: var(--color-muted);
+      font-size: 0.875rem;
+      letter-spacing: 0.02em;
+      text-align: center;
+      line-height: 1.45;
+    }
+    @media (max-width: 720px) {
+      .form-grid { grid-template-columns: 1fr; }
     }
     .hero-form__title {
       font-size: 1.375rem;
@@ -438,27 +672,72 @@
       color: #a0a0b0;
     }
     .hero-form__field--select {
-      position: relative;
-      padding-right: 2rem;
-    }
-    .hero-form__field--select select {
-      appearance: none;
+      gap: 0.55rem;
+      padding-top: 0.55rem;
+      padding-bottom: 0.55rem;
+      padding-right: 0.55rem;
       cursor: pointer;
-      color: var(--color-text);
     }
-    .hero-form__field--select select:invalid {
+    .hero-form__field--select:hover {
+      border-color: rgba(84, 91, 179, 0.28);
+    }
+    .hero-form__select {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      width: 100%;
+      min-height: 1.5rem;
+      margin: 0;
+      padding: 0.2rem 0;
+      border: none;
+      border-radius: 0;
+      background-color: transparent;
+      background-image: none;
+      color: var(--color-text);
+      font: inherit;
+      font-size: 0.9375rem;
+      font-weight: 500;
+      line-height: 1.4;
+      cursor: pointer;
+      outline: none;
+      color-scheme: light;
+      text-overflow: ellipsis;
+    }
+    .hero-form__select::-ms-expand { display: none; }
+    .hero-form__select:invalid {
+      color: #a0a0b0;
+      font-weight: 400;
+    }
+    .hero-form__select option {
+      color: var(--color-text);
+      font-weight: 500;
+      background: #fff;
+    }
+    .hero-form__select option[disabled] {
       color: #a0a0b0;
     }
-    .hero-form__field--select option {
-      color: var(--color-text);
-    }
     .hero-form__chevron {
-      position: absolute;
-      right: 0.85rem;
-      top: 50%;
-      transform: translateY(-50%);
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 8px;
+      background: var(--color-surface-2);
+      border: 1px solid var(--color-border);
+      color: var(--color-primary);
       pointer-events: none;
-      color: #9a9aaa;
+      transition: background 0.15s var(--ease), border-color 0.15s var(--ease), color 0.15s var(--ease);
+    }
+    .hero-form__field--select:hover .hero-form__chevron,
+    .hero-form__field--select:focus-within .hero-form__chevron {
+      background: rgba(84, 91, 179, 0.1);
+      border-color: rgba(84, 91, 179, 0.28);
+      color: var(--color-primary-dark);
+    }
+    .hero-form__chevron svg {
+      display: block;
     }
     .hero-form__submit {
       width: 100%;
@@ -598,18 +877,186 @@
       transition: transform 0.5s var(--ease);
     }
     .split__img:hover img { transform: scale(1.01); }
+    #opportunity-assessment .split__img img {
+      width: 88%;
+    }
 
     .section-tint { background: linear-gradient(180deg, rgba(238,239,250,0.45) 0%, rgba(255,255,255,0.9) 100%); }
+
+    #platform.section {
+      padding-bottom: 2.5rem;
+    }
+    #what-to-expect.section {
+      padding-bottom: 2.5rem;
+    }
+    #expert-team.section {
+      padding-top: 2.5rem;
+    }
+    #faq.section {
+      padding-bottom: 2.5rem;
+    }
+    #latest-articles.section {
+      padding-top: 2.5rem;
+    }
+    #slack.section {
+      padding-top: 2.5rem;
+    }
+    @media (max-width: 768px) {
+      #platform.section { padding-bottom: 1.75rem; }
+      #slack.section { padding-top: 1.75rem; }
+    }
+
+    /* AI Fluency feature section */
+    .fluency-section {
+      background:
+        radial-gradient(ellipse 65% 55% at 85% 15%, rgba(201, 196, 236, 0.4) 0%, transparent 55%),
+        linear-gradient(180deg, #f6f7fc 0%, #fff 100%);
+    }
+    .fluency-split {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: clamp(2.25rem, 5vw, 4.5rem);
+      align-items: center;
+    }
+    @media (max-width: 900px) {
+      .fluency-split { grid-template-columns: 1fr; gap: 2.25rem; }
+    }
+    .fluency-intro {
+      min-width: 0;
+      padding-right: clamp(1.25rem, 3vw, 2.75rem);
+    }
+    .fluency-intro .lead { margin-bottom: 1.35rem; }
+    .fluency-checks {
+      list-style: none;
+      margin: 0 0 1.75rem;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      max-width: 34rem;
+    }
+    .fluency-checks li {
+      position: relative;
+      padding-left: 1.6rem;
+      font-size: 1rem;
+      line-height: 1.45;
+      color: var(--color-text);
+      font-weight: 500;
+    }
+    .fluency-checks li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.45rem;
+      width: 0.65rem;
+      height: 0.65rem;
+      border-radius: 50%;
+      background: var(--color-primary);
+      box-shadow: 0 0 0 3px rgba(84, 91, 179, 0.16);
+    }
+    .fluency-cta {
+      gap: 0.5rem;
+    }
+    .fluency-cta svg { transition: transform 0.2s var(--ease); }
+    .fluency-cta:hover svg { transform: translateX(3px); }
+    .fluency-panel {
+      min-width: 0;
+      background: #fff;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-soft);
+      padding: 1.35rem 1.35rem 1.2rem;
+    }
+    .fluency-panel__label {
+      margin: 0 0 0.9rem;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-primary);
+    }
+    .fluency-tiers {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+    .fluency-tier {
+      padding: 0.85rem 0.95rem;
+      border-radius: 10px;
+      background: var(--color-surface);
+      border: 1px solid transparent;
+    }
+    .fluency-tier__top {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.4rem 0.65rem;
+      margin-bottom: 0.35rem;
+    }
+    .fluency-tier__name {
+      margin: 0 0 0.25rem;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: -0.015em;
+      color: var(--color-text);
+    }
+    .fluency-tier__top .fluency-tier__name { margin-bottom: 0; }
+    .fluency-tier p {
+      margin: 0;
+      font-size: 0.85rem;
+      line-height: 1.45;
+      color: var(--color-muted);
+    }
+    .fluency-tier__badge {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #c9c4ec;
+      background: rgba(201, 196, 236, 0.18);
+      border: 1px solid rgba(201, 196, 236, 0.35);
+      border-radius: 999px;
+      padding: 0.22rem 0.5rem;
+    }
+    .fluency-tier--priority {
+      background: linear-gradient(165deg, #14172e 0%, #1a1c2e 100%);
+      border-color: rgba(168, 159, 216, 0.28);
+      padding: 1.15rem 1.2rem 1.2rem;
+      margin-bottom: 0.2rem;
+      box-shadow: 0 12px 28px rgba(20, 23, 46, 0.18);
+    }
+    .fluency-tier--priority .fluency-tier__name {
+      color: #fff;
+      font-size: 1.15rem;
+    }
+    .fluency-tier--priority p {
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 0.925rem;
+      max-width: 36rem;
+    }
 
     hr.section-rule {
       border: none; border-top: 1px solid var(--color-border); margin: 0; max-width: 1200px; margin-left: auto; margin-right: auto;
     }
 
     /* AI band */
+    #ai-readiness.section {
+      padding-top: 2.5rem;
+      padding-bottom: 5rem;
+    }
+    @media (max-width: 768px) {
+      #ai-readiness.section {
+        padding-top: 1.75rem;
+        padding-bottom: 3rem;
+      }
+    }
     .ai-split {
       display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;
       align-items: center;
-      padding: 4rem 0;
+      padding: 0;
     }
     @media (max-width: 900px) { .ai-split { grid-template-columns: 1fr; } }
     .ai-split__right {
@@ -618,7 +1065,7 @@
     }
 
     /* Stats - bento grid (matches betterengineer.com: 4+8 row, 4+4+4 row) */
-    .stats-section { background: linear-gradient(180deg, #fff 0%, #fafafe 100%); }
+    .stats-section { background: linear-gradient(180deg, rgba(238,239,250,0.45) 0%, rgba(255,255,255,0.9) 100%); }
     .stats-title {
       font-size: clamp(1.75rem, 3vw, 2.25rem);
       font-weight: 700;
@@ -690,13 +1137,13 @@
       }
       .stats-bento__stat--lavender,
       .stats-bento__photo--abstract,
-      .stats-bento__photo--office,
       .stats-bento__stat--a,
       .stats-bento__stat--b {
         grid-column: 1 / -1;
         grid-row: auto;
         min-height: 200px;
       }
+      .stats-bento__photo--office { display: none; }
       .stats-bento__photo--abstract { min-height: 220px; }
     }
 
@@ -726,6 +1173,51 @@
     .skill-card img { width: 56px; height: 56px; object-fit: contain; margin-bottom: 1rem; }
     .skill-card h3 { font-size: 1.05rem; margin: 0 0 0.5rem; font-weight: 700; }
     .skill-card p { margin: 0; font-size: 0.9rem; color: var(--color-muted); line-height: 1.5; }
+
+    /* Role cards (home skills grid, matches /roles/ index) */
+    #skills .role-card {
+      display: block;
+      padding: 1.5rem;
+      color: inherit;
+      text-decoration: none;
+      background: #fff;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-soft);
+      min-height: 160px;
+      transition: box-shadow 0.15s var(--ease), transform 0.15s var(--ease), border-color 0.15s var(--ease);
+    }
+    #skills .role-card:hover {
+      box-shadow: var(--shadow-hover);
+      transform: translateY(-3px);
+      text-decoration: none;
+    }
+    #skills .role-card--featured {
+      border-color: var(--color-primary);
+      background: linear-gradient(180deg, #fff 0%, var(--color-surface) 100%);
+      box-shadow: 0 10px 28px rgba(84, 91, 179, 0.12);
+    }
+    #skills .role-card h3 {
+      margin: 0 0 0.5rem;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--color-navy);
+    }
+    #skills .role-card p {
+      margin: 0;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      color: var(--color-muted);
+    }
+    #skills .role-card__badge {
+      display: inline-block;
+      margin-top: 0.75rem;
+      color: var(--color-primary);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
 
     /* LATAM / timezone - height is driven by the LEFT column padding (--latam-pad-y); right map fills 100% of row height. */
     #latam.section {
@@ -960,6 +1452,53 @@
         padding: 0 1.25rem;
       }
     }
+    /* ai-readiness CTA: shorter banner (scoped via unique preceding section) */
+    #latest-articles + .cta-band .cta-split {
+      --cta-pad-y: clamp(1.25rem, 2.25vw, 2rem);
+    }
+    /* Compact CTA variant: ~60% of the image-driven banner height */
+    .cta-band--compact .cta-split {
+      --cta-pad-y: clamp(1rem, 1.75vw, 1.5rem);
+    }
+    @media (min-width: 901px) {
+      .cta-band--compact .cta-split {
+        grid-template-columns: minmax(0, 1fr) minmax(260px, 38vw);
+        height: 18.5rem;
+      }
+      .cta-band--compact .cta-split__photo picture,
+      .cta-band--compact .cta-split__photo img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        max-width: none;
+        max-height: none;
+        object-fit: cover;
+        object-position: right center;
+      }
+      .cta-break { display: block; }
+    }
+    /* LATAM Engineer compact CTA: 20% taller than the shared 18.5rem band,
+       with a bit more space between the heading and the button. */
+    #articles + .cta-band--compact .btn-row {
+      margin-top: 0.9rem;
+    }
+    @media (min-width: 901px) {
+      #articles + .cta-band--compact .cta-split {
+        height: 22.2rem;
+      }
+    }
+    /* Hiring dashboard compact CTA: more room above and below the copy.
+       This band has a heading, lead, and button, so it needs more height
+       than the shared 18.5rem compact size. */
+    main:has(#platform-overview) .cta-band--compact .cta-split {
+      --cta-pad-y: clamp(1.75rem, 3vw, 2.75rem);
+    }
+    @media (min-width: 901px) {
+      main:has(#platform-overview) .cta-band--compact .cta-split {
+        height: 24rem;
+      }
+    }
     .cta-split__text {
       display: flex;
       align-items: center;
@@ -1049,7 +1588,9 @@
       .footer-main { grid-template-columns: 1fr; gap: 2rem; }
     }
     .footer-brand .footer-logo { display: inline-block; margin-bottom: 0.85rem; }
-    .footer-brand .footer-logo img { display: block; }
+    /* The wordmark SVG has ~8px of empty canvas before the "b". Pull it left
+       so the glyph lines up with the tagline and the rest of the footer column. */
+    .footer-brand .footer-logo img { display: block; margin-left: -8px; }
     .footer-tagline {
       margin: 0 0 0;
       color: var(--color-text);
@@ -1159,6 +1700,194 @@
       .reveal { opacity: 1; transform: none; transition: none; }
     }
 
+    /* ======================================================================
+       FAQ accordion: CANONICAL COMPONENT
+       ----------------------------------------------------------------------
+       One implementation for the whole site. The visual treatment is the one
+       established on the technology pages (see technologies/*/index.html):
+       a full-width hairline list, no card boxes, large question type, and a
+       CSS-drawn chevron. Do not create a second FAQ style.
+
+       Markup contract (enforced by tools/verify-migrated-pages.js):
+
+         <section class="section section-tint" id="faq" aria-labelledby="faq-heading">
+           <div class="wrap">
+             <div class="reveal air-section-head" style="max-width:44rem">
+               <p class="eyebrow">SECTION LABEL FAQ</p>
+               <h2 class="h2" id="faq-heading">Heading</h2>
+             </div>
+             <div class="faq-list reveal" id="faq-list">
+               <div class="faq-item is-open">
+                 <button type="button" aria-expanded="true"><span class="faq-question">Q</span><span class="chevron" aria-hidden="true"></span></button>
+                 <div class="faq-panel"><p>A</p></div>
+               </div>
+               <div class="faq-item">
+                 <button type="button" aria-expanded="false"><span class="faq-question">Q</span><span class="chevron" aria-hidden="true"></span></button>
+                 <div class="faq-panel" hidden><p>A</p></div>
+               </div>
+             </div>
+           </div>
+         </section>
+
+       Exactly one item carries `is-open`. Every closed panel carries `hidden`.
+
+       Collapse is driven by the `hidden` attribute, so a page script that only
+       toggles `hidden` and `is-open` (landing-page.js) renders correctly. The
+       height and opacity transition is a progressive enhancement: a script that
+       also sets an inline height (page.js, air-page.js) gets the animation for
+       free because the inline value wins over `height: auto`.
+
+       Role and technology pages link styles/role-detail.css after this file and
+       it still carries a duplicate of these rules. That duplicate is scheduled
+       for removal in Roles v2 (technical-debt.md TD-15). Until then, changes
+       here must be mirrored there or the two families will drift.
+       ====================================================================== */
+
+    .faq-list {
+      display: grid;
+      gap: 0;
+      width: 100%;
+      max-width: none;
+      margin: 0;
+    }
+
+    .faq-item {
+      border: 0;
+      border-bottom: 1px solid rgba(17, 24, 39, 0.12);
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+      overflow: visible;
+      margin: 0;
+    }
+
+    .faq-item:first-child { border-top: 0; }
+
+    .faq-item button {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.25rem;
+      padding: 1.25rem 0 calc(1.25rem + 10px);
+      border: 0;
+      background: transparent;
+      color: var(--color-text);
+      font: inherit;
+      font-weight: 500;
+      line-height: 1.2;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .faq-item button:hover { background: transparent; }
+
+    .faq-item button:focus-visible {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 4px;
+      border-radius: var(--radius-sm);
+    }
+
+    .faq-question {
+      flex: 1 1 auto;
+      display: block;
+      padding-right: 0.25rem;
+      font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+      line-height: 1.2;
+    }
+
+    .faq-item button .chevron {
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.25rem;
+      height: 1.25rem;
+      transition: transform 0.2s var(--ease);
+      transform-origin: center;
+    }
+
+    .faq-item button .chevron::before {
+      content: "";
+      width: 0.62rem;
+      height: 0.62rem;
+      border-right: 2.5px solid var(--color-primary);
+      border-bottom: 2.5px solid var(--color-primary);
+      transform: rotate(45deg) translateY(-1px);
+    }
+
+    .faq-item.is-open button .chevron { transform: rotate(180deg); }
+
+    .faq-panel {
+      box-sizing: border-box;
+      height: 0;
+      opacity: 0;
+      overflow: hidden;
+      padding: 0;
+      will-change: height, opacity;
+      transition:
+        height 0.36s cubic-bezier(0.2, 0.8, 0.2, 1),
+        opacity 0.24s ease;
+    }
+
+    /* Collapse is the `hidden` attribute, so scripts that only toggle it work. */
+    .faq-panel[hidden] { display: none; }
+
+    .faq-item.is-open .faq-panel {
+      height: auto;
+      opacity: 1;
+    }
+
+    /* Rich answer content. Technology pages only ever emit a single <p>;
+       migrated pages carry lists, links, and inline emphasis, so the component
+       has to style all of it consistently. */
+    .faq-panel > :first-child { margin-top: 0; }
+    .faq-panel > :last-child { margin-bottom: 0; padding-bottom: 1.7rem; }
+
+    .faq-panel p,
+    .faq-panel li {
+      color: var(--color-muted);
+      font-size: 1.1rem;
+      line-height: 1.65;
+    }
+
+    .faq-panel p {
+      margin: 0 0 1rem;
+      padding: 0 2.5rem 0 0;
+    }
+
+    .faq-panel ul,
+    .faq-panel ol {
+      margin: 0 0 1rem;
+      padding: 0 2.5rem 0 1.25rem;
+    }
+
+    .faq-panel li { margin: 0 0 0.5rem; }
+    .faq-panel li:last-child { margin-bottom: 0; }
+
+    .faq-panel a {
+      color: var(--color-primary);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .faq-panel strong { color: var(--color-text); font-weight: 600; }
+
+    @media (max-width: 700px) {
+      .faq-item button { padding: 1rem 0 calc(1rem + 10px); }
+      .faq-question { font-size: 1rem; }
+      .faq-item button .chevron { width: 1.15rem; height: 1.15rem; }
+      .faq-panel > :last-child { padding-bottom: 1.2rem; }
+      .faq-panel p { padding-right: 0; font-size: 0.98rem; }
+      .faq-panel li { font-size: 0.98rem; }
+      .faq-panel ul,
+      .faq-panel ol { padding-right: 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .faq-panel { transition: none; }
+    }
+
 
 /* Safe-area + overflow (subset of landing #main rules) */
 #main { overflow-x: clip; }
@@ -1256,64 +1985,17 @@
       <div class="wrap hero-grid">
         <div class="reveal">
           <h1 class="h1" id="hero-title">
-            Senior engineers.<br>
-            <span class="light">Trusted partnerships.</span>
+            Better AI Native Engineers.<br>
+            <span class="light">Better Results.</span>
           </h1>
-          <p class="lead">BetterEngineer connects U.S. teams with pre-vetted senior engineers from Latin America who integrate into your day-to-day workflow. We focus on long-term fit, clear communication, and shared ownership from day one.</p>
+          <p class="lead">We build relationships with exceptional AI native software engineers throughout the Americas. Scale your team with senior engineers to fit your culture and time-zone, for better results.</p>
           <div class="btn-row">
             <a class="btn btn--primary" href="https://www.betterengineer.com/multi-step-contact-form">Find Talent</a>
             <a class="btn btn--outline" href="https://calendly.com/tim-salsamobi/30min" rel="noopener noreferrer">Book a Call</a>
           </div>
         </div>
-        <div class="hero-visual reveal">
-          <form class="hero-form" id="hero-lead-form" action="https://www.betterengineer.com/multi-step-contact-form" method="get" autocomplete="on">
-            <div class="hero-form__card">
-              <h2 class="hero-form__title">Start building your team</h2>
-              <p class="hero-form__subtitle">It only takes 30 seconds.</p>
-              <div class="hero-form__field">
-                <span class="hero-form__icon" aria-hidden="true">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                </span>
-                <input type="text" name="name" id="hero-name" placeholder="Your Name" autocomplete="name" required aria-label="Your name">
-              </div>
-              <div class="hero-form__field">
-                <span class="hero-form__icon" aria-hidden="true">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-                </span>
-                <input type="text" name="company" id="hero-company" placeholder="Your Company" autocomplete="organization" required aria-label="Your company">
-              </div>
-              <div class="hero-form__field">
-                <span class="hero-form__icon" aria-hidden="true">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                </span>
-                <input type="email" name="email" id="hero-email" placeholder="Work Email" autocomplete="email" required aria-label="Work email">
-              </div>
-              <div class="hero-form__field hero-form__field--select">
-                <span class="hero-form__icon" aria-hidden="true">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"></path></svg>
-                </span>
-                <select name="engineer_type" id="hero-engineer" required aria-label="Type of engineer needed">
-                  <option value="" disabled selected>What kind of engineer do you need?</option>
-                  <option value="full-stack">Full Stack</option>
-                  <option value="front-end">Front End</option>
-                  <option value="back-end">Back End</option>
-                  <option value="mobile">Mobile</option>
-                  <option value="data-ai">Data / AI / ML</option>
-                  <option value="devops">DevOps</option>
-                  <option value="qa">QA / Test</option>
-                  <option value="other">Other / Multiple</option>
-                </select>
-                <span class="hero-form__chevron" aria-hidden="true">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
-                </span>
-              </div>
-              <button type="submit" class="hero-form__submit">Get Matched in 72 Hours</button>
-              <p class="hero-form__trust">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-                <span>Your information is secure and protected.</span>
-              </p>
-            </div>
-          </form>
+        <div class="hero-visual hero-visual--image reveal">
+          <img class="hero-visual__img" src="/images/hero/home-ai-engineer.png" alt="Senior AI engineer profile with skills, experience, and verified expertise" width="1156" height="772" loading="eager">
         </div>
       </div>
     </section>
@@ -1348,30 +2030,73 @@
       </div>
     </section>
 
+    <section class="section fluency-section" id="ai-fluency" aria-labelledby="fluency-heading">
+      <div class="wrap fluency-split">
+        <div class="fluency-intro reveal">
+          <p class="eyebrow">AI Fluency Standard</p>
+          <h2 class="h2" id="fluency-heading">Anyone can open an AI tool. <span class="accent">Few know how to ship with it.</span></h2>
+          <p class="lead">Plenty of engineers say they use AI. We assess how they actually use it to design, build, and ship before you ever meet them.</p>
+          <ul class="fluency-checks">
+            <li>Every candidate scored on a clear fluency scale before intro</li>
+            <li>Proof of shipped AI work, not just tool familiarity</li>
+            <li>Matched to the fluency your team needs, with AI Native as the high bar</li>
+          </ul>
+          <a class="btn btn--primary fluency-cta" href="https://discover.betterengineer.com/ai-fluent-engineers/">
+            See Our AI Fluency Standard
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg>
+          </a>
+        </div>
+        <aside class="fluency-panel reveal" aria-label="AI fluency scale">
+          <p class="fluency-panel__label">How we score every candidate</p>
+          <ul class="fluency-tiers">
+            <li class="fluency-tier fluency-tier--priority">
+              <div class="fluency-tier__top">
+                <h3 class="fluency-tier__name">AI Native</h3>
+                <span class="fluency-tier__badge">Our priority</span>
+              </div>
+              <p>Designs agents and multi-step pipelines that execute complex work end to end. This is the level we aim to place for teams that want real AI delivery.</p>
+            </li>
+            <li class="fluency-tier">
+              <h3 class="fluency-tier__name">AI Integrated</h3>
+              <p>Treats AI as a thinking partner across design, build, and review. Strong judgment on when to trust or reject model output.</p>
+            </li>
+            <li class="fluency-tier">
+              <h3 class="fluency-tier__name">AI Assisted</h3>
+              <p>Uses AI for research, code generation, and debugging with clear human oversight on every important step.</p>
+            </li>
+            <li class="fluency-tier">
+              <h3 class="fluency-tier__name">AI Exploring</h3>
+              <p>Limited or inconsistent AI use. Solid engineering fundamentals, still building daily AI habits.</p>
+            </li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
     <section class="section section-tint" id="staff-augmentation">
       <div class="wrap split">
         <div class="split__img reveal">
-          <img src="/images/hero/home-ai-engineer.png" alt="Engineers collaborating with modern hiring tools" width="1156" height="772" loading="lazy">
+          <img src="/images/hero/engineers-collaborating-desk.png" alt="Two engineers collaborating at a laptop in a modern office" width="900" height="700" loading="lazy">
         </div>
         <div class="reveal">
           <p class="eyebrow">Services / Staff Augmentation</p>
           <h2 class="h2">Build <span class="accent">high-trust</span> engineering teams.</h2>
-          <p class="lead">Our staff augmentation model is built for delivery teams that need senior talent fast, without lowering the hiring bar. We match for technical depth, communication style, and long-term team fit.</p>
+          <p class="lead">Our staff augmentation model is built for delivery teams that need senior talent fast, without lowering the hiring bar. We match for technical depth, communication style, and long-term team fit, with engineers who work in your time zone.</p>
           <a class="btn btn--ghost" href="https://www.betterengineer.com/staff-augmentation">Learn More</a>
         </div>
       </div>
     </section>
 
-    <section class="section" id="slack">
-      <div class="wrap split">
+    <section class="section" id="ai-readiness">
+      <div class="wrap ai-split">
         <div class="reveal">
-          <p class="eyebrow">Slack Integration</p>
-          <img src="/icons/slack-logo.svg" alt="Slack" width="120" height="36" style="margin-bottom:1rem" loading="lazy">
-          <h2 class="h2">We work where<br>you need us.</h2>
-          <p class="lead">We offer full Slack integration. Simply Slack us about your hiring needs and we will submit fully vetted candidates within 72 hours.</p>
+          <h2 class="h2">Identify <strong>practical opportunities</strong> to apply AI in <strong>high-impact work.</strong></h2>
+          <p class="lead">Get on-demand access to AI experts who will analyze your current capabilities, identify opportunities, and create a tailored roadmap for your success.</p>
         </div>
-        <div class="split__img reveal">
-          <img src="/images/platform/slack-integration.png" alt="Slack integration with BetterEngineer" loading="lazy">
+        <div class="ai-split__right reveal">
+          <p class="eyebrow">Services / AI Readiness</p>
+          <h2 class="h2"><span class="accent">Empower</span> Your Projects with our <span class="accent">AI Readiness Assessment.</span></h2>
+          <a class="btn btn--primary" href="https://www.betterengineer.com/ai-readiness" style="margin-top:1rem">Discover Your AI Solutions</a>
         </div>
       </div>
     </section>
@@ -1395,16 +2120,16 @@
       </div>
     </section>
 
-    <section class="section" id="ai-readiness">
-      <div class="wrap ai-split">
+    <section class="section" id="slack">
+      <div class="wrap split">
         <div class="reveal">
-          <h2 class="h2">Identify <strong>practical opportunities</strong> to apply AI in <strong>high-impact work.</strong></h2>
-          <p class="lead">Get access to senior AI practitioners who assess your current stack, identify practical use cases, and map a plan your team can execute.</p>
+          <p class="eyebrow">Slack Integration</p>
+          <img src="/icons/slack-logo.svg" alt="Slack" width="120" height="36" style="margin-bottom:1rem" loading="lazy">
+          <h2 class="h2">We work where<br>you need us.</h2>
+          <p class="lead">We offer full Slack integration. Simply Slack us about your hiring needs and we will submit fully vetted candidates within 72 hours.</p>
         </div>
-        <div class="ai-split__right reveal">
-          <p class="eyebrow">Services / AI Readiness</p>
-          <h2 class="h2"><span class="accent">Empower</span> Your Projects with our <span class="accent">AI Readiness Assessment.</span></h2>
-          <a class="btn btn--primary" href="https://www.betterengineer.com/ai-readiness" style="margin-top:1rem">Discover Your AI Solutions</a>
+        <div class="split__img reveal">
+          <img src="/images/platform/slack-integration.png" alt="Slack integration with BetterEngineer" loading="lazy">
         </div>
       </div>
     </section>
@@ -1436,20 +2161,48 @@
         <div class="skills-head reveal">
           <div>
             <h2 class="h2"><span class="accent">The talent</span> you need.</h2>
-            <p class="lead">Partner with senior engineers who can contribute quickly and communicate clearly with product and engineering stakeholders. We cover the core skills needed by modern SaaS teams.</p>
+            <p class="lead">Partner with talented, ambitious engineers who will push the boundaries of your technology and drive success. We specialize in a wide range of tech skills.</p>
           </div>
           <a class="btn btn--primary" href="https://www.betterengineer.com/multi-step-contact-form">Start Hiring</a>
         </div>
         <div class="card-grid">
-          <article class="skill-card reveal"><img src="/icons/role/full-stack-icon.png" alt=""><h3>Full stack engineers</h3><p>React, TypeScript, Node, AWS and more</p></article>
-          <article class="skill-card reveal"><img src="/icons/role/front-end-engineers-icon.png" alt=""><h3>Front end engineers</h3><p>React, Angular, Vanilla, JavaScript, HTML, CSS</p></article>
-          <article class="skill-card reveal"><img src="/icons/role/back-end-engineers-icon.png" alt=""><h3>Back end engineers</h3><p>Node, Python, Java, Go, Kotlin, Rust</p></article>
-          <article class="skill-card reveal"><img src="/icons/role/data-science-icon.png" alt=""><h3>Data science engineers</h3><p>Python, Jupyter Notebooks, TensorFlow, SQL</p></article>
-          <article class="skill-card reveal"><img src="/icons/role/mobile-engineers-icon.png" alt=""><h3>Mobile engineers</h3><p>iOS, Android, Swift, Kotlin, React Native</p></article>
-          <article class="skill-card reveal"><img src="/icons/role/data-engineers-icon.png" alt=""><h3>Data engineers</h3><p>SQL, Hadoop, Spark, AWS, GCP, Python, Scala</p></article>
-          <article class="skill-card reveal"><img src="/icons/role/ai-engineers-icon.png" alt=""><h3>AI engineers</h3><p>Python, TensorFlow, Machine Learning, LLM</p></article>
-          <article class="skill-card reveal"><img src="/icons/role/dev-ops-icon.png" alt=""><h3>DevOps</h3><p>Linux, AWS, Azure, Google Cloud, Docker, Kubernetes</p></article>
-          <article class="skill-card reveal"><img src="/icons/role/qa-icon.png" alt=""><h3>QA engineers</h3><p>Selenium WebDriver, Cypress, Jenkins, GitLab CI</p></article>
+          <a class="role-card role-card--featured reveal" href="/roles/ai-engineers/">
+            <h3>AI engineers</h3>
+            <p>LLMs, RAG, vector databases, and production AI workflows beyond demo-stage prototypes.</p>
+            <span class="role-card__badge">Featured</span>
+          </a>
+          <a class="role-card reveal" href="/roles/full-stack-engineers/">
+            <h3>Full stack engineers</h3>
+            <p>Senior engineers for end-to-end product work across React, Node.js, TypeScript, APIs, and cloud deployment.</p>
+          </a>
+          <a class="role-card reveal" href="/roles/front-end-engineers/">
+            <h3>Front-end engineers</h3>
+            <p>Hire vetted senior front-end engineers for React, TypeScript, and design systems with U.S. hours overlap.</p>
+          </a>
+          <a class="role-card reveal" href="/roles/back-end-engineers/">
+            <h3>Back end engineers</h3>
+            <p>APIs, microservices, databases, and scalable cloud systems from vetted nearshore senior engineers.</p>
+          </a>
+          <a class="role-card reveal" href="/roles/mobile-engineers/">
+            <h3>Mobile engineers</h3>
+            <p>iOS, Android, React Native, and Flutter talent for apps that ship reliably through store review.</p>
+          </a>
+          <a class="role-card reveal" href="/roles/data-engineers/">
+            <h3>Data engineers</h3>
+            <p>Pipelines, warehouses, Airflow, dbt, and Spark expertise for dependable data infrastructure.</p>
+          </a>
+          <a class="role-card reveal" href="/roles/data-science-engineers/">
+            <h3>Data science engineers</h3>
+            <p>Machine learning, experimentation, and predictive analytics that connect to real product decisions.</p>
+          </a>
+          <a class="role-card reveal" href="/roles/devops-engineers/">
+            <h3>DevOps engineers</h3>
+            <p>CI/CD, Kubernetes, AWS, monitoring, and automation for safer, faster releases.</p>
+          </a>
+          <a class="role-card reveal" href="/roles/qa-engineers/">
+            <h3>QA engineers</h3>
+            <p>Manual QA, Cypress, Playwright, and API testing to raise release confidence.</p>
+          </a>
         </div>
       </div>
     </section>
@@ -1628,6 +2381,7 @@
             <li><a href="https://www.betterengineer.com/faqs-nearshore-software-engineers-staff-augmentation-ai-talent">FAQs</a></li>
             <li><a href="https://www.betterengineer.com/ebooks">Ebooks</a></li>
             <li><a href="https://www.betterengineer.com/podcast">Podcast</a></li>
+            <li><a href="https://www.betterengineer.com/technical-glossary">Technical Glossary</a></li>
           </ul>
         </div>
         <div class="footer-nav-group">

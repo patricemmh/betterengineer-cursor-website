@@ -205,6 +205,30 @@ function checkRobots() {
   if (!robots.includes('Sitemap: ' + DISCOVER + '/sitemap.xml')) {
     errors.push('dist/robots.txt: missing sitemap directive');
   }
+  if (!robots.includes('Disallow: /roles/roles-template/')) {
+    errors.push('dist/robots.txt: missing roles-template Disallow');
+  }
+  if (!robots.includes('Disallow: /technologies/tech-template/')) {
+    errors.push('dist/robots.txt: missing tech-template Disallow');
+  }
+}
+
+function checkTemplateStub(relPath, canonicalPath) {
+  const filePath = path.join(root, relPath);
+  if (!fs.existsSync(filePath)) {
+    errors.push(relPath + ': missing noindex stub');
+    return;
+  }
+  const html = fs.readFileSync(filePath, 'utf8');
+  if (!/name=["']robots["'] content=["']noindex, follow["']/i.test(html)) {
+    errors.push(relPath + ': template stub must be noindex, follow');
+  }
+  if (!html.includes('rel="canonical" href="' + DISCOVER + canonicalPath + '"')) {
+    errors.push(relPath + ': template stub canonical must point at ' + canonicalPath);
+  }
+  if (!isMetaRefreshStub(html)) {
+    errors.push(relPath + ': template stub must be a short meta-refresh page');
+  }
 }
 
 if (!fs.existsSync(distRoot)) {
@@ -259,6 +283,8 @@ htmlFiles.forEach(function (filePath) {
 
 checkSitemap();
 checkRobots();
+checkTemplateStub('dist/roles/roles-template/index.html', '/roles/');
+checkTemplateStub('dist/technologies/tech-template/index.html', '/technologies/');
 
 if (errors.length) {
   console.error('dist verification failed (' + errors.length + ' issue(s)):');

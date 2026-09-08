@@ -425,7 +425,7 @@ function hubMain() {
     const cards = items.map((t, i) => `<a class="role-card${i === 0 ? " role-card--featured" : ""}" href="/technologies/${t.slug}/"> <h3>${esc(t.name)} engineers</h3> <p>${esc(t.metaDescription)}</p>${i === 0 ? ` <span class="role-card__badge">Featured</span>` : ""} </a>`).join("");
     return `<div class="reveal air-section-head" style="margin-top:2rem"><h2 class="h2">${esc(cat)}</h2></div><div class="roles-grid">${cards}</div>`;
   }).join("");
-  return `<main id="main" class=""> <section class="hero"> <div class="container"> <p class="eyebrow">Engineering by technology</p> <h1>Hire engineers by the technology you build on</h1> <p>Match with senior nearshore engineers who already work in your stack. Senior-only talent, U.S. hours overlap, and profiles in as little as 72 hours.</p> </div> </section> <section class="section"> <div class="container"> ${sections} </div> </section> </main>`;
+  return `<main id="main" class=""> <section class="hero"> <div class="container"> <p class="eyebrow">Engineering by technology</p> <h1>Hire engineers by the technology you build on</h1> <p>Match with senior nearshore engineers who already work in your stack. Senior-only talent, U.S. hours overlap, and profiles in as little as 72 hours. You can also <a href="/roles/">browse by engineering role</a>.</p> </div> </section> <section class="section"> <div class="container"> ${sections} </div> </section> </main>`;
 }
 
 function renderHub() {

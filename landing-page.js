@@ -48,6 +48,13 @@
     });
   }
 
+  if (reduceMotion) {
+    document.querySelectorAll('#main video[autoplay]').forEach(function (video) {
+      video.removeAttribute('autoplay');
+      video.pause();
+    });
+  }
+
   /* FAQ accordion */
   var faqList = document.getElementById('faq-list');
   if (faqList) {

@@ -22,14 +22,17 @@ function checkJsonLd(filePath, html) {
   while ((m = re.exec(html)) !== null) {
     try {
       const data = JSON.parse(m[1]);
-      if (data['@type'] !== 'FAQPage' || !Array.isArray(data.mainEntity)) continue;
-      data.mainEntity.forEach(function (item, i) {
-        if (!item.name || !item.name.endsWith('?')) {
-          errors.push(filePath + ': FAQ name ' + (i + 1) + ' missing ?');
-        }
-        if (/\s-\s*$/.test(item.name)) {
-          errors.push(filePath + ': FAQ name ' + (i + 1) + ' still has trailing dash');
-        }
+      const nodes = data['@graph'] ? data['@graph'] : [data];
+      nodes.forEach(function (node) {
+        if (!node || node['@type'] !== 'FAQPage' || !Array.isArray(node.mainEntity)) return;
+        node.mainEntity.forEach(function (item, i) {
+          if (!item.name || !item.name.endsWith('?')) {
+            errors.push(filePath + ': FAQ name ' + (i + 1) + ' missing ?');
+          }
+          if (/\s-\s*$/.test(item.name)) {
+            errors.push(filePath + ': FAQ name ' + (i + 1) + ' still has trailing dash');
+          }
+        });
       });
     } catch (e) {
       errors.push(filePath + ': invalid JSON-LD');
@@ -45,6 +48,49 @@ function checkCanonical(filePath, html) {
   }
 }
 
+function isTemplate(filePath) {
+  return /roles-template|tech-template/.test(filePath.replace(/\\/g, '/'));
+}
+
+function collectTypes(html) {
+  const types = new Set();
+  const re = /<script type="application\/ld\+json">([\s\S]*?)<\/script>/g;
+  let m;
+  while ((m = re.exec(html)) !== null) {
+    try {
+      const data = JSON.parse(m[1]);
+      const nodes = data['@graph'] ? data['@graph'] : [data];
+      nodes.forEach(function (n) {
+        if (n && n['@type']) types.add(n['@type']);
+      });
+    } catch (e) {
+      errors.push('invalid JSON-LD');
+    }
+  }
+  return types;
+}
+
+function checkRequiredTypes(filePath, html) {
+  if (isTemplate(filePath)) return;
+  const rel = filePath.replace(/\\/g, '/');
+  const types = collectTypes(html);
+  function requireType(t) {
+    if (!types.has(t)) errors.push(filePath + ': missing ' + t + ' JSON-LD');
+  }
+  if (rel === 'roles/index.html' || rel === 'technologies/index.html') {
+    requireType('Organization');
+    requireType('BreadcrumbList');
+    requireType('CollectionPage');
+    return;
+  }
+  if (rel.startsWith('roles/')) {
+    requireType('Organization');
+    requireType('Service');
+    requireType('BreadcrumbList');
+    requireType('FAQPage');
+  }
+}
+
 const targets = [];
 walkHtml('roles', targets);
 walkHtml('technologies', targets);
@@ -53,6 +99,7 @@ targets.forEach(function (filePath) {
   const html = fs.readFileSync(filePath, 'utf8');
   checkCanonical(filePath, html);
   checkJsonLd(filePath, html);
+  checkRequiredTypes(filePath, html);
 });
 
 if (errors.length) {

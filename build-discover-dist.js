@@ -19,7 +19,10 @@ function runBuild(basePath, outputRoot, lpRootPage, initPublishRoot) {
   } else {
     delete env.PAGES_PUBLISH_ROOT;
   }
-  cp.execSync('node build-pages.js --base=' + basePath, {
+  /* --no-migrated keeps the Phase 1 HubSpot migration pages out of the published
+     discover bundle until www is cut over to this build. See
+     docs/site-migration/site-migration-plan.md section 4. */
+  cp.execSync('node build-pages.js --no-migrated --base=' + basePath, {
     cwd: root,
     stdio: 'inherit',
     env: env,
@@ -100,6 +103,36 @@ function copyDir(src, dest) {
 // roles/ HTML pages
 copyDir(path.join(root, 'roles'), path.join(distRoot, 'roles'));
 
+function writeNoindexStub(destDir, canonicalPath, label) {
+  var canonical = SITE_ORIGIN + canonicalPath;
+  fs.mkdirSync(destDir, { recursive: true });
+  fs.writeFileSync(
+    path.join(destDir, 'index.html'),
+    '<!DOCTYPE html>\n' +
+      '<html lang="en">\n' +
+      '<head>\n' +
+      '  <meta charset="utf-8">\n' +
+      '  <meta name="robots" content="noindex, follow">\n' +
+      '  <link rel="canonical" href="' +
+      canonical +
+      '">\n' +
+      '  <meta http-equiv="refresh" content="0;url=' +
+      canonicalPath +
+      '">\n' +
+      '  <title>Redirecting</title>\n' +
+      '</head>\n' +
+      '<body>\n' +
+      '  <p><a href="' +
+      canonicalPath +
+      '">Continue to ' +
+      label +
+      '</a></p>\n' +
+      '</body>\n' +
+      '</html>\n',
+    'utf8',
+  );
+}
+
 // Stylesheets
 ['brand.css', 'landing-page.css', 'role-detail.css', 'roles.css'].forEach(function (f) {
   fs.mkdirSync(path.join(distRoot, 'styles'), { recursive: true });
@@ -137,6 +170,11 @@ copyDir(path.join(root, 'technologies'), path.join(distRoot, 'technologies'));
 // ── Sitemap + robots.txt ─────────────────────────────────────────────────────
 var SITE_ORIGIN = 'https://discover.betterengineer.com';
 var SITEMAP_SKIP = new Set(['roles-template', 'tech-template']);
+
+/* Authoring templates must not compete with real pages. Replace the copied
+   files with noindex stubs that canonicalise to the hubs. */
+writeNoindexStub(path.join(distRoot, 'roles', 'roles-template'), '/roles/', 'roles');
+writeNoindexStub(path.join(distRoot, 'technologies', 'tech-template'), '/technologies/', 'technologies');
 
 function collectIndexPaths(baseDir, urlPrefix, out) {
   if (!fs.existsSync(baseDir)) return;
@@ -185,7 +223,9 @@ function writeDiscoverSeoFiles() {
   fs.writeFileSync(path.join(distRoot, 'sitemap.xml'), sitemap, 'utf8');
   fs.writeFileSync(
     path.join(distRoot, 'robots.txt'),
-    'User-agent: *\nAllow: /\n\nSitemap: ' + SITE_ORIGIN + '/sitemap.xml\n',
+    'User-agent: *\nAllow: /\nDisallow: /roles/roles-template/\nDisallow: /technologies/tech-template/\n\nSitemap: ' +
+      SITE_ORIGIN +
+      '/sitemap.xml\n',
     'utf8',
   );
 }

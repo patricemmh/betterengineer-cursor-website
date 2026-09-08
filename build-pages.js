@@ -1,18 +1,39 @@
 'use strict';
 
+/**
+ * Static page generator.
+ *
+ * Pages are described in data/pages.js. This file knows how to turn a page record
+ * plus a main-*.html fragment into a shipped HTML document. Adding a page does not
+ * require editing this file.
+ *
+ * Existing pages (home, the two service landing pages) must keep byte identical
+ * output. Their records carry only the head fields they already had.
+ */
+
 var fs = require('fs');
 var path = require('path');
 
 var root = __dirname;
 var styleDir = path.join(root, 'styles');
 
+var manifest = require('./data/pages.js');
+
 var cloudflareMode = process.argv.indexOf('--cloudflare') !== -1;
 
 var baseFromArgv = null;
+var onlySlugs = [];
+/* Migrated pages are built locally but must not ship in the discover bundle until
+   www is cut over. build-discover-dist.js passes --no-migrated for that reason.
+   See docs/site-migration/site-migration-plan.md section 4. */
+var skipMigrated = process.argv.indexOf('--no-migrated') !== -1;
 for (var ai = 0; ai < process.argv.length; ai++) {
   var argvItem = process.argv[ai];
   if (argvItem.indexOf('--base=') === 0) {
     baseFromArgv = argvItem.slice('--base='.length);
+  }
+  if (argvItem.indexOf('--only=') === 0) {
+    onlySlugs = argvItem.slice('--only='.length).split(',').filter(Boolean);
   }
 }
 
@@ -43,6 +64,14 @@ var outputRoot = trimOutputRoot(process.env.OUTPUT_ROOT || (cloudflareMode ? 'be
 var pagesPublishRoot = trimOutputRoot(process.env.PAGES_PUBLISH_ROOT || '');
 var githubPagesCname = (process.env.GITHUB_PAGES_CNAME || '').trim();
 
+/* Until www is cut over to this build, internal links to migrated pages stay
+   absolute so the published discover bundle does not 404. Set INTERNAL_LINKS=local
+   at cutover to rewrite them to root relative paths.
+   See docs/site-migration/seo-followups.md section 4. */
+var localInternalLinks = (process.env.INTERNAL_LINKS || '').trim() === 'local';
+
+var EMDASH = /\u2014/;
+
 function withBase(urlPath) {
   if (!urlPath || urlPath.charAt(0) !== '/') return urlPath;
   if (siteBase === '/') return urlPath;
@@ -63,6 +92,17 @@ function normalizeHtmlPaths(html) {
     )
     .replace(/href=["']\/index\.html["']/g, 'href="/"')
     .replace(/href=["']\/["']/g, 'href="/"');
+}
+
+/* Rewrite absolute www links to pages that now exist locally. Off by default. */
+function localizeInternalLinks(html) {
+  if (!localInternalLinks) return html;
+  var out = html;
+  manifest.migratedSlugs.forEach(function (slug) {
+    var re = new RegExp('href="https://www\\.betterengineer\\.com/' + slug + '/?"', 'g');
+    out = out.replace(re, 'href="/' + slug + '/"');
+  });
+  return out;
 }
 
 function applyBaseToHtml(html) {
@@ -104,6 +144,16 @@ function readStyles() {
   };
 }
 
+var blogFeedBuilder = require('./build-blog-feed.js');
+
+function injectBlogFeed(html) {
+  var cache = blogFeedBuilder.readCache();
+  var feeds = cache.feeds || {};
+  return html.replace(/<!--BLOG_FEED:([a-z]+)-->/g, function (_, key) {
+    return blogFeedBuilder.renderPostGrid(feeds[key] || []);
+  });
+}
+
 function readFileSafe(rel) {
   return fs.readFileSync(path.join(root, rel), 'utf8');
 }
@@ -136,24 +186,206 @@ function copyFileIntoOutput(file) {
   fs.copyFileSync(src, dest);
 }
 
-var styles = readStyles();
-
-var aiManufacturingMainPath = path.join(root, 'main-ai-systems-manufacturing.html');
-if (!fs.existsSync(aiManufacturingMainPath)) {
-  console.error('Missing main-ai-systems-manufacturing.html (AI manufacturing landing <main> fragment).');
-  process.exit(1);
+function attr(value) {
+  return String(value).replace(/"/g, '&quot;');
 }
-var aiManufacturingMain = normalizeHtmlPaths(fs.readFileSync(aiManufacturingMainPath, 'utf8').trim());
 
-var hireAiReadyMainPath = path.join(root, 'main-hire-ai-ready-engineers.html');
-if (!fs.existsSync(hireAiReadyMainPath)) {
-  console.error('Missing main-hire-ai-ready-engineers.html (AI-ready engineers landing <main> fragment).');
-  process.exit(1);
+/* ── JSON-LD helpers ─────────────────────────────────────────────────────────── */
+
+function ld(obj) {
+  return (
+    '  <script type="application/ld+json">' +
+    JSON.stringify(obj) +
+    '</script>\n'
+  );
 }
-var hireAiReadyMain = normalizeHtmlPaths(fs.readFileSync(hireAiReadyMainPath, 'utf8').trim());
 
-var mainHome = normalizeHtmlPaths(readFileSafe('main-home.html').trim());
-var footer = normalizeHtmlPaths(readFileSafe('footer-full.html').trim());
+function decodeEntities(text) {
+  return text
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#0?39;/g, "'")
+    .replace(/&apos;/g, "'")
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&');
+}
+
+function htmlToText(html) {
+  return decodeEntities(
+    String(html)
+      .replace(/<\s*br\s*\/?>/gi, '\n')
+      .replace(/<\/(p|li|h[1-6]|div)>/gi, '\n')
+      .replace(/<li[^>]*>/gi, '')
+      .replace(/<[^>]+>/g, ''),
+  )
+    .replace(/[ \t]+/g, ' ')
+    .replace(/\s*\n\s*/g, '\n')
+    .replace(/\n{2,}/g, '\n')
+    .trim();
+}
+
+/**
+ * Build FAQPage JSON-LD by parsing the fragment's own FAQ markup.
+ *
+ * This is deliberate. Technology pages generate both the markup and the schema
+ * from one data record, so they cannot drift. Migrated pages keep their verbatim
+ * copy in the fragment, so the schema is derived from the rendered markup instead.
+ * Either way the schema can never disagree with what a visitor reads, which is the
+ * failure already present on roles/front-end-engineers.
+ */
+function faqsFromFragment(mainHtml) {
+  var faqs = [];
+  var itemRe = /<div class="faq-item[^"]*">([\s\S]*?)<\/div>\s*<\/div>/g;
+  var m;
+  while ((m = itemRe.exec(mainHtml)) !== null) {
+    var block = m[1];
+    var qMatch = block.match(/<span class="faq-question">([\s\S]*?)<\/span>/);
+    var aMatch = block.match(/<div class="faq-panel"[^>]*>([\s\S]*)$/);
+    if (!qMatch || !aMatch) continue;
+    var q = htmlToText(qMatch[1]);
+    var a = htmlToText(aMatch[1]);
+    if (q && a) faqs.push({ q: q, a: a });
+  }
+  return faqs;
+}
+
+function schemaBlocks(page, canonicalUrl, mainHtml) {
+  var out = '';
+  var org = manifest.ORG;
+
+  out += ld(Object.assign({ '@context': 'https://schema.org' }, org));
+
+  if (page.breadcrumb && page.breadcrumb.length) {
+    out += ld({
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: page.breadcrumb.map(function (b, i) {
+        var item = { '@type': 'ListItem', position: i + 1, name: b.name };
+        if (b.url) item.item = b.url;
+        else item.item = canonicalUrl;
+        return item;
+      }),
+    });
+  }
+
+  if (page.faqSchema) {
+    var faqs = faqsFromFragment(mainHtml);
+    if (faqs.length) {
+      out += ld({
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: faqs.map(function (f) {
+          return {
+            '@type': 'Question',
+            name: f.q,
+            acceptedAnswer: { '@type': 'Answer', text: f.a },
+          };
+        }),
+      });
+    } else {
+      console.warn('warn: faqSchema is on but no .faq-item blocks were found in', page.fragment);
+    }
+  }
+
+  if (page.service) {
+    out += ld({
+      '@context': 'https://schema.org',
+      '@type': 'Service',
+      name: page.service.name,
+      serviceType: page.service.serviceType,
+      description: page.description,
+      provider: org,
+      areaServed: { '@type': 'Country', name: 'United States' },
+      url: canonicalUrl,
+    });
+  }
+
+  var webPage = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: page.title,
+    url: canonicalUrl,
+    description: page.description,
+    inLanguage: 'en-US',
+    isPartOf: { '@type': 'WebSite', name: 'BetterEngineer', url: manifest.WWW + '/' },
+    primaryImageOfPage: (page.og && page.og.image) || manifest.OG_IMAGE,
+  };
+  if (page.lastUpdated) {
+    webPage.datePublished = page.lastUpdated + '-01';
+    webPage.dateModified = page.lastUpdated + '-01';
+  }
+  out += ld(webPage);
+
+  /* Page-specific schema, built from the same data that renders the page so the
+     two cannot drift. Used by the glossary for DefinedTermSet. */
+  if (typeof page.extraSchema === 'function') {
+    var extra = page.extraSchema({ canonical: canonicalUrl, page: page }) || [];
+    extra.forEach(function (node) {
+      out += ld(node);
+    });
+  }
+
+  return out;
+}
+
+/* ── Head ────────────────────────────────────────────────────────────────────── */
+
+function buildExtraHead(page, mainHtml) {
+  var extra = '';
+  var canonicalUrl = null;
+
+  if (typeof page.canonical === 'function') {
+    canonicalUrl = page.canonical({ siteBase: siteBase, githubPagesCname: githubPagesCname });
+  } else if (page.canonical) {
+    canonicalUrl = page.canonical;
+  }
+
+  if (canonicalUrl) {
+    extra += '  <link rel="canonical" href="' + canonicalUrl + '">\n';
+  }
+
+  var robots = page.migrated && page.robots === undefined
+    ? manifest.PRE_CUTOVER_ROBOTS
+    : page.robots;
+  if (robots) {
+    extra += '  <meta name="robots" content="' + attr(robots) + '">\n';
+  }
+
+  var og = page.og || (page.migrated ? {} : null);
+  if (og) {
+    var ogTitle = og.title || page.title;
+    var ogDescription = og.description || page.description;
+    var ogType = og.type || 'website';
+    extra += '  <meta property="og:title" content="' + attr(ogTitle) + '">\n';
+    extra += '  <meta property="og:description" content="' + attr(ogDescription) + '">\n';
+    extra += '  <meta property="og:type" content="' + ogType + '">\n';
+
+    if (page.migrated) {
+      var ogImage = og.image || manifest.OG_IMAGE;
+      if (canonicalUrl) {
+        extra += '  <meta property="og:url" content="' + canonicalUrl + '">\n';
+      }
+      extra += '  <meta property="og:image" content="' + ogImage + '">\n';
+      extra += '  <meta property="og:image:width" content="720">\n';
+      extra += '  <meta property="og:image:height" content="540">\n';
+      extra += '  <meta name="twitter:card" content="summary_large_image">\n';
+      extra += '  <meta name="twitter:title" content="' + attr(ogTitle) + '">\n';
+      extra += '  <meta name="twitter:description" content="' + attr(ogDescription) + '">\n';
+      extra += '  <meta name="twitter:image" content="' + ogImage + '">\n';
+    }
+  }
+
+  if (page.migrated) {
+    extra += schemaBlocks(page, canonicalUrl, mainHtml);
+  }
+
+  return extra;
+}
+
+/* ── Chrome ──────────────────────────────────────────────────────────────────── */
+
+var footer = localizeInternalLinks(normalizeHtmlPaths(readFileSafe('footer-full.html').trim()));
 
 /* Primary header: structure, labels, and URLs match www.betterengineer.com (HubSpot header module, 2025). */
 var headerPrimaryChrome =
@@ -232,9 +464,18 @@ var headerPrimaryChrome =
   '    </ul>\n' +
   '  </header>\n';
 
-var headerHome = headerPrimaryChrome;
-var headerHireAiReady = headerPrimaryChrome;
-var headerAiManufacturing = headerPrimaryChrome;
+/* Mark the current page in the nav. Purely additive: pages with no canonical, or
+   whose canonical is not in the nav, get the header unchanged. */
+function headerFor(page) {
+  var header = localizeInternalLinks(headerPrimaryChrome);
+  var canonicalUrl = typeof page.canonical === 'function' ? null : page.canonical;
+  if (!canonicalUrl) return header;
+  var needle = 'href="' + canonicalUrl + '"';
+  if (header.indexOf(needle) === -1) return header;
+  return header.split(needle).join(needle + ' aria-current="page"');
+}
+
+/* ── Shell ───────────────────────────────────────────────────────────────────── */
 
 function shell(title, description, css, header, main, scriptName, extraHead) {
   if (!extraHead) extraHead = '';
@@ -291,80 +532,70 @@ function shell(title, description, css, header, main, scriptName, extraHead) {
   return applyBaseToHtml(normalizeHtmlPaths(html));
 }
 
+/* ── Build ───────────────────────────────────────────────────────────────────── */
+
+var styles = readStyles();
+
 var homeCss =
   styles.brand +
   '\n\n/* Safe-area + overflow (subset of landing #main rules) */\n#main { overflow-x: clip; }\n#main .wrap {\n  padding-left: max(1.25rem, env(safe-area-inset-left, 0px));\n  padding-right: max(1.25rem, env(safe-area-inset-right, 0px));\n}\n';
 
-var indexHtml = shell(
-  'BetterEngineer | Staff Augmentation & Engineering Talent',
-  'Scale your team with vetted software engineers across the Americas. Staff augmentation, Slack integration, and the BetterEngineer hiring platform.',
-  homeCss,
-  headerHome,
-  mainHome,
-  'home.js',
-);
-
 var landingCss = styles.brand + '\n\n' + styles.landingExtra;
 
-var aiManufacturingDescription =
-  'We help manufacturing companies audit disconnected ERP, CRM, sales, and operations systems, then build practical AI workflows and integrations that reduce manual work.';
-var aiManufacturingExtraHead =
-  '  <link rel="canonical" href="https://www.betterengineer.com/services/ai-systems-readiness-for-manufacturing/">\n' +
-  '  <meta property="og:title" content="AI Systems Readiness for Manufacturing Companies | BetterEngineer">\n' +
-  '  <meta property="og:description" content="' +
-  aiManufacturingDescription.replace(/"/g, '&quot;') +
-  '">\n' +
-  '  <meta property="og:type" content="website">\n';
-
-var aiManufacturingHtml = shell(
-  'AI Systems Readiness for Manufacturing Companies | BetterEngineer',
-  aiManufacturingDescription,
-  landingCss,
-  headerAiManufacturing,
-  aiManufacturingMain,
-  'landing-page.js',
-  aiManufacturingExtraHead,
-);
-
-var hireAiReadyDescription =
-  'Hire AI-ready engineers, machine learning engineers, and AI app developers from Latin America. Senior, pre-vetted, and assessed for genuine AI fluency before you meet them.';
-
-function hireAiReadyCanonicalHref() {
-  if (siteBase === '/ai-fluent-engineers' && githubPagesCname) {
-    return 'https://' + githubPagesCname + '/ai-fluent-engineers/';
-  }
-  return 'https://www.betterengineer.com/services/hire-ai-ready-engineers/';
+function cssFor(page) {
+  return page.cssBundle === 'home' ? homeCss : landingCss;
 }
-
-var hireAiReadyExtraHead =
-  '  <link rel="canonical" href="' +
-  hireAiReadyCanonicalHref() +
-  '">\n' +
-  '  <meta property="og:title" content="Hire AI-Ready Engineers | BetterEngineer">\n' +
-  '  <meta property="og:description" content="' +
-  hireAiReadyDescription.replace(/"/g, '&quot;') +
-  '">\n' +
-  '  <meta property="og:type" content="website">\n';
-
-var hireAiReadyHtml = shell(
-  'Hire AI-Ready Engineers | BetterEngineer, AI Development Team from LATAM',
-  hireAiReadyDescription,
-  landingCss,
-  headerHireAiReady,
-  hireAiReadyMain,
-  'landing-page.js',
-  hireAiReadyExtraHead,
-);
 
 if (outputRoot) {
   fs.rmSync(path.join(root, outputRoot), { recursive: true, force: true });
 }
 
-writeFileSafe('index.html', indexHtml);
-writeFileSafe(path.join('services', 'ai-systems-readiness-for-manufacturing', 'index.html'), aiManufacturingHtml);
-writeFileSafe('ai-systems-readiness-for-manufacturing.html', aiManufacturingHtml);
-writeFileSafe(path.join('services', 'hire-ai-ready-engineers', 'index.html'), hireAiReadyHtml);
-writeFileSafe('hire-ai-ready-engineers.html', hireAiReadyHtml);
+var built = [];
+var missing = [];
+var emdashPages = [];
+
+manifest.pages.forEach(function (page) {
+  if (onlySlugs.length && onlySlugs.indexOf(page.slug) === -1) return;
+  if (skipMigrated && (page.migrated || page.excludeFromDiscover)) return;
+
+  var fragmentPath = path.join(root, page.fragment);
+  if (!fs.existsSync(fragmentPath)) {
+    /* Existing pages are required. Migrated pages may not have a fragment yet,
+       which is expected while the migration is in progress. */
+    if (page.migrated) {
+      missing.push(page.slug);
+      return;
+    }
+    console.error('Missing fragment for "' + page.slug + '":', page.fragment);
+    process.exit(1);
+  }
+
+  var mainHtml = injectBlogFeed(
+    localizeInternalLinks(
+      normalizeHtmlPaths(fs.readFileSync(fragmentPath, 'utf8').trim()),
+    ),
+  );
+
+  var html = shell(
+    page.title,
+    page.description,
+    cssFor(page),
+    headerFor(page),
+    mainHtml,
+    page.script,
+    buildExtraHead(page, mainHtml),
+  );
+
+  if (EMDASH.test(html)) {
+    emdashPages.push(page.slug);
+  }
+
+  page.outputs.forEach(function (outPath) {
+    writeFileSafe(outPath, html);
+  });
+  built.push(page.slug);
+});
+
 if (!pagesPublishRoot) {
   writeFileSafe('.nojekyll', '');
 }
@@ -375,6 +606,7 @@ if (outputRoot) {
   copyFileIntoOutput('home.js');
   copyFileIntoOutput('intake-form-shared.js');
   copyFileIntoOutput('landing-page.js');
+  copyFileIntoOutput('page.js');
 }
 
 if (pagesPublishRoot) {
@@ -470,3 +702,11 @@ console.log(
   outputRoot ? '(output: ./' + outputRoot + '/)' : '(output: repo root)',
   pagesPublishRoot ? '; publish root: ./' + pagesPublishRoot + '/' : '',
 );
+console.log('  built: ' + built.join(', '));
+if (missing.length) {
+  console.log('  pending migration (no fragment yet): ' + missing.join(', '));
+}
+if (emdashPages.length) {
+  console.error('ERROR: em dash character found in: ' + emdashPages.join(', '));
+  process.exitCode = 1;
+}
