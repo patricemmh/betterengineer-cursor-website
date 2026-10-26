@@ -1,0 +1,85 @@
+# BetterEngineer
+
+> BetterEngineer connects U.S. companies with pre-vetted senior software engineers from Latin America who embed as trusted long-term collaborators.
+
+## Key pages
+
+- [Home](https://www.betterengineer.com/): BetterEngineer staff augmentation and hiring platform overview.
+- [AI Fluent Engineers](https://discover.betterengineer.com/ai-fluent-engineers/): AI-fluency program overview.
+- [AI Manufacturing](https://discover.betterengineer.com/aimanufacturing/): AI systems readiness for manufacturing teams.
+- [Roles](https://discover.betterengineer.com/roles/): Hire by engineering role (front-end, back-end, full-stack, mobile, DevOps, data, AI, QA, blockchain).
+- [Technologies](https://discover.betterengineer.com/technologies/): Hire by technology and framework.
+
+## Roles
+
+- [Hire Senior AI Engineers in Your Timezone](https://discover.betterengineer.com/roles/ai-engineers/): Hire senior nearshore engineers for this role.
+- [Hire Senior Back End Engineers in Your Timezone](https://discover.betterengineer.com/roles/back-end-engineers/): Hire senior nearshore engineers for this role.
+- [Hire Blockchain Engineers](https://discover.betterengineer.com/roles/blockchain-engineers/): Hire senior nearshore engineers for this role.
+- [Hire Senior Data Engineers in Your Timezone](https://discover.betterengineer.com/roles/data-engineers/): Hire senior nearshore engineers for this role.
+- [Hire Senior Data Science Engineers in Your Timezone](https://discover.betterengineer.com/roles/data-science-engineers/): Hire senior nearshore engineers for this role.
+- [Hire Senior DevOps Engineers in Your Timezone](https://discover.betterengineer.com/roles/devops-engineers/): Hire senior nearshore engineers for this role.
+- [Hire Senior Front-End Engineers](https://discover.betterengineer.com/roles/front-end-engineers/): Hire senior nearshore engineers for this role.
+- [Hire Senior Full Stack Engineers in Your Timezone](https://discover.betterengineer.com/roles/full-stack-engineers/): Hire senior nearshore engineers for this role.
+- [Hire Senior Mobile Engineers in Your Timezone](https://discover.betterengineer.com/roles/mobile-engineers/): Hire senior nearshore engineers for this role.
+- [Hire Senior QA Engineers in Your Timezone](https://discover.betterengineer.com/roles/qa-engineers/): Hire senior nearshore engineers for this role.
+
+## Technologies
+
+- [Hire Android Developers](https://discover.betterengineer.com/technologies/android-developers/): Hire senior nearshore engineers for this technology.
+- [Hire Angular Developers](https://discover.betterengineer.com/technologies/angular-developers/): Hire senior nearshore engineers for this technology.
+- [Hire Apache Kafka Developers](https://discover.betterengineer.com/technologies/apache-kafka-developers/): Hire senior nearshore engineers for this technology.
+- [Hire Apache Spark Developers](https://discover.betterengineer.com/technologies/apache-spark-developers/): Hire senior nearshore engineers for this technology.
+- [Hire AWS Developers](https://discover.betterengineer.com/technologies/aws-developers/): Hire senior nearshore engineers for this technology.
+- [Hire Azure Developers](https://discover.betterengineer.com/technologies/azure-developers/): Hire senior nearshore engineers for this technology.
+- [Hire C++ Developers](https://discover.betterengineer.com/technologies/cpp-developers/): Hire senior nearshore engineers for this technology.
+- [Hire C# Developers](https://discover.betterengineer.com/technologies/csharp-developers/): Hire senior nearshore engineers for this technology.
+- [Hire Databricks Developers](https://discover.betterengineer.com/technologies/databricks-developers/): Hire senior nearshore engineers for this technology.
+- [Hire Django Developers](https://discover.betterengineer.com/technologies/django-developers/): Hire senior nearshore engineers for this technology.
+- [Hire Docker Developers](https://discover.betterengineer.com/technologies/docker-developers/): Hire senior nearshore engineers for this technology.
+- [Hire .NET Developers](https://discover.betterengineer.com/technologies/dotnet-developers/): Hire senior nearshore engineers for this technology.
+- [Hire Elasticsearch Developers](https://discover.betterengineer.com/technologies/elasticsearch-developers/): Hire senior nearshore engineers for this technology.
+- [Hire Express.js Developers](https://discover.betterengineer.com/technologies/expressjs-developers/): Hire senior nearshore engineers for this technology.
+- [Hire FastAPI Developers](https://discover.betterengineer.com/technologies/fastapi-developers/): Hire senior nearshore engineers for this technology.
+- [Hire Flask Developers](https://discover.betterengineer.com/technologies/flask-developers/): Hire senior nearshore engineers for this technology.
+- [Hire Flutter Developers](https://discover.betterengineer.com/technologies/flutter-developers/): Hire senior nearshore engineers for this technology.
+- [Hire Go Developers](https://discover.betterengineer.com/technologies/golang-developers/): Hire senior nearshore engineers for this technology.
+- [Hire Google Cloud Developers](https://discover.betterengineer.com/technologies/google-cloud-developers/): Hire senior nearshore engineers for this technology.
+- [Hire GraphQL Developers](https://discover.betterengineer.com/technologies/graphql-developers/): Hire senior nearshore engineers for this technology.
+- [Hire Ionic Developers](https://discover.betterengineer.com/technologies/ionic-developers/): Hire senior nearshore engineers for this technology.
+- [Hire iOS Developers](https://discover.betterengineer.com/technologies/ios-developers/): Hire senior nearshore engineers for this technology.
+- [Hire Java Developers](https://discover.betterengineer.com/technologies/java-developers/): Hire senior nearshore engineers for this technology.
+- [Hire JavaScript Developers](https://discover.betterengineer.com/technologies/javascript-developers/): Hire senior nearshore engineers for this technology.
+- [Hire Jenkins Developers](https://discover.betterengineer.com/technologies/jenkins-developers/): Hire senior nearshore engineers for this technology.
+- [Hire Kotlin Developers](https://discover.betterengineer.com/technologies/kotlin-developers/): Hire senior nearshore engineers for this technology.
+- [Hire Kubernetes Developers](https://discover.betterengineer.com/technologies/kubernetes-developers/): Hire senior nearshore engineers for this technology.
+- [Hire LangChain Developers](https://discover.betterengineer.com/technologies/langchain-developers/): Hire senior nearshore engineers for this technology.
+- [Hire Laravel Developers](https://discover.betterengineer.com/technologies/laravel-developers/): Hire senior nearshore engineers for this technology.
+- [Hire MongoDB Developers](https://discover.betterengineer.com/technologies/mongodb-developers/): Hire senior nearshore engineers for this technology.
+- [Hire MySQL Developers](https://discover.betterengineer.com/technologies/mysql-developers/): Hire senior nearshore engineers for this technology.
+- [Hire NestJS Developers](https://discover.betterengineer.com/technologies/nestjs-developers/): Hire senior nearshore engineers for this technology.
+- [Hire Next.js Developers](https://discover.betterengineer.com/technologies/nextjs-developers/): Hire senior nearshore engineers for this technology.
+- [Hire Node.js Developers](https://discover.betterengineer.com/technologies/nodejs-developers/): Hire senior nearshore engineers for this technology.
+- [Hire Nuxt.js Developers](https://discover.betterengineer.com/technologies/nuxtjs-developers/): Hire senior nearshore engineers for this technology.
+- [Hire OpenAI API Developers](https://discover.betterengineer.com/technologies/openai-api-developers/): Hire senior nearshore engineers for this technology.
+- [Hire Oracle Database Developers](https://discover.betterengineer.com/technologies/oracle-database-developers/): Hire senior nearshore engineers for this technology.
+- [Hire PHP Developers](https://discover.betterengineer.com/technologies/php-developers/): Hire senior nearshore engineers for this technology.
+- [Hire PostgreSQL Developers](https://discover.betterengineer.com/technologies/postgresql-developers/): Hire senior nearshore engineers for this technology.
+- [Hire Python Developers](https://discover.betterengineer.com/technologies/python-developers/): Hire senior nearshore engineers for this technology.
+- [Hire PyTorch Developers](https://discover.betterengineer.com/technologies/pytorch-developers/): Hire senior nearshore engineers for this technology.
+- [Hire React Developers](https://discover.betterengineer.com/technologies/react-developers/): Hire senior nearshore engineers for this technology.
+- [Hire React Native Developers](https://discover.betterengineer.com/technologies/react-native-developers/): Hire senior nearshore engineers for this technology.
+- [Hire Redis Developers](https://discover.betterengineer.com/technologies/redis-developers/): Hire senior nearshore engineers for this technology.
+- [Hire Redux Developers](https://discover.betterengineer.com/technologies/redux-developers/): Hire senior nearshore engineers for this technology.
+- [Hire Ruby Developers](https://discover.betterengineer.com/technologies/ruby-developers/): Hire senior nearshore engineers for this technology.
+- [Hire Ruby on Rails Developers](https://discover.betterengineer.com/technologies/ruby-on-rails-developers/): Hire senior nearshore engineers for this technology.
+- [Hire Rust Developers](https://discover.betterengineer.com/technologies/rust-developers/): Hire senior nearshore engineers for this technology.
+- [Hire Scikit-learn Developers](https://discover.betterengineer.com/technologies/scikit-learn-developers/): Hire senior nearshore engineers for this technology.
+- [Hire Snowflake Developers](https://discover.betterengineer.com/technologies/snowflake-developers/): Hire senior nearshore engineers for this technology.
+- [Hire Spring Boot Developers](https://discover.betterengineer.com/technologies/spring-boot-developers/): Hire senior nearshore engineers for this technology.
+- [Hire SQL Server Developers](https://discover.betterengineer.com/technologies/sql-server-developers/): Hire senior nearshore engineers for this technology.
+- [Hire Svelte Developers](https://discover.betterengineer.com/technologies/svelte-developers/): Hire senior nearshore engineers for this technology.
+- [Hire Swift Developers](https://discover.betterengineer.com/technologies/swift-developers/): Hire senior nearshore engineers for this technology.
+- [Hire TensorFlow Developers](https://discover.betterengineer.com/technologies/tensorflow-developers/): Hire senior nearshore engineers for this technology.
+- [Hire Terraform Developers](https://discover.betterengineer.com/technologies/terraform-developers/): Hire senior nearshore engineers for this technology.
+- [Hire TypeScript Developers](https://discover.betterengineer.com/technologies/typescript-developers/): Hire senior nearshore engineers for this technology.
+- [Hire Vue.js Developers](https://discover.betterengineer.com/technologies/vuejs-developers/): Hire senior nearshore engineers for this technology.

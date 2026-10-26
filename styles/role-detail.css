@@ -1,0 +1,910 @@
+/* Role detail pages */
+
+#skills {
+  padding-top: 4.5rem;
+  padding-bottom: 3rem;
+}
+
+#use-cases {
+  padding-top: 3rem;
+}
+
+/* Related-roles section sits directly under the related-technologies
+   section on tech pages; both already carry a full .section padding,
+   so trim the top gap between them. */
+#related-roles {
+  padding-top: 2rem;
+}
+
+#tech-stack {
+  position: relative;
+}
+
+#tech-stack::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: min(74rem, calc(100% - 2rem));
+  height: 1px;
+  background: var(--color-border);
+  transform: translateX(-50%);
+}
+
+.air-role-hero-visual {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.air-role-hero-visual img {
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  border-radius: var(--radius-lg);
+  box-shadow:
+    0 4px 24px rgba(28, 28, 28, 0.08),
+    0 12px 40px rgba(84, 91, 179, 0.1);
+}
+
+.air-role-hero-card {
+  padding: 1.75rem 1.85rem;
+}
+
+.air-role-hero-card .hero-form__title {
+  font-size: 1.2rem;
+  line-height: 1.35;
+  margin: 0.35rem 0 1rem;
+}
+
+.air-role-process {
+  margin: 1rem 0 0;
+  color: var(--color-muted);
+  font-size: 0.875rem;
+  letter-spacing: 0.02em;
+  text-align: center;
+  line-height: 1.45;
+}
+
+.air-candidates-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+@media (max-width: 960px) {
+  .air-candidates-grid {
+    grid-template-columns: 1fr;
+    max-width: 22rem;
+    margin: 0 auto;
+  }
+}
+
+.air-candidate-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  padding: 1.7rem 1.7rem 1.75rem;
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  transition:
+    border-color 0.2s,
+    box-shadow 0.25s var(--ease),
+    transform 0.25s var(--ease);
+}
+
+.air-candidate-card:hover {
+  border-color: rgba(84, 91, 179, 0.32);
+  box-shadow: var(--shadow-soft);
+  transform: translateY(-3px);
+}
+
+.air-candidate-card__photo {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius-sm);
+}
+
+.air-candidate-card__role {
+  margin: 0;
+  color: var(--color-primary);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.air-candidate-card__name {
+  margin: -0.45rem 0 0;
+  color: var(--color-text);
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.15;
+}
+
+.air-candidate-card__verified {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #7f73f6;
+  font-size: 0.78rem;
+  font-weight: 500;
+  margin-top: -0.15rem;
+}
+
+.air-candidate-card__verified span:first-child {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.1rem;
+  height: 1.1rem;
+  color: var(--color-primary);
+  font-size: 0.65rem;
+  background: rgba(84, 91, 179, 0.12);
+  border-radius: 50%;
+}
+
+.air-candidate-card__label {
+  margin: 0.2rem 0 0;
+  color: var(--color-text);
+  font-size: 0.82rem;
+  font-weight: 500;
+}
+
+.air-candidate-card .air-skill-tags {
+  gap: 0.4rem;
+  margin-top: 0.2rem;
+}
+
+.air-candidate-card .air-skill-tags span {
+  padding: 0.36rem 0.58rem;
+  font-size: 0.76rem;
+}
+
+.air-candidate-card .btn {
+  justify-content: center;
+  width: 100%;
+  margin-top: auto;
+  text-align: center;
+}
+
+.process-grid--three {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+#hiring-path .btn-row {
+  margin-top: 3.25rem !important;
+}
+
+#hiring-path .btn-row .btn {
+  min-width: 220px;
+}
+
+@media (max-width: 900px) {
+  #hiring-path .process-grid.process-grid--three {
+    grid-template-columns: 1fr;
+  }
+}
+
+.process-step__icon {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 0.75rem;
+  object-fit: contain;
+}
+
+.air-toc-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 220px) minmax(0, 1fr);
+  gap: clamp(2rem, 4vw, 3.5rem);
+  align-items: start;
+}
+
+.air-toc-aside {
+  position: sticky;
+  top: calc(var(--header-h) + 1rem);
+  align-self: start;
+}
+
+@media (max-width: 900px) {
+  .air-toc-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .air-toc-aside {
+    display: none;
+  }
+}
+
+.air-toc-nav {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+@media (max-width: 900px) {
+  .air-toc-nav {
+    position: static;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+.air-toc-nav a {
+  display: block;
+  padding: 0.45rem 0 0.45rem 0.75rem;
+  color: var(--color-muted);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.4;
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+@media (max-width: 900px) {
+  .air-toc-nav a {
+    padding: 0.45rem 0.75rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+  }
+}
+
+/* ── Guide section accordion (mobile only) ──────────────────────── */
+/* Use .air-toc-layout .air-toc-section (specificity 0,2,0) so these   */
+/* rules win over the base .air-toc-section rule (0,1,0) that appears   */
+/* later in this file.                                                   */
+@media (max-width: 900px) {
+  .air-toc-layout .air-toc-section {
+    padding: 0;
+    margin: 0;
+    border-bottom: none;
+    border-top: 1px solid rgba(17, 24, 39, 0.12);
+  }
+
+  .air-toc-layout .air-toc-section:last-child {
+    border-bottom: 1px solid rgba(17, 24, 39, 0.12);
+  }
+
+  /* h3 becomes the accordion trigger */
+  .air-toc-layout .air-toc-section > h3 {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1.25rem;
+    width: 100%;
+    padding: 1.25rem 0;
+    margin: 0;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.2;
+    color: var(--color-text);
+    user-select: none;
+  }
+
+  /* Chevron */
+  .air-toc-layout .air-toc-section > h3::after {
+    content: '';
+    flex: 0 0 auto;
+    display: inline-block;
+    width: 0.62rem;
+    height: 0.62rem;
+    border-right: 2.5px solid var(--color-primary);
+    border-bottom: 2.5px solid var(--color-primary);
+    transform: rotate(45deg) translateY(-1px);
+    transition: transform 0.2s ease;
+    margin-top: 4px;
+  }
+
+  .air-toc-layout .air-toc-section.is-open > h3::after {
+    transform: rotate(225deg) translateY(2px);
+  }
+
+  /* Collapsible prose panel */
+  .air-toc-layout .air-toc-section > .air-role-prose {
+    box-sizing: border-box;
+    height: 0;
+    opacity: 0;
+    overflow: hidden;
+    will-change: height, opacity;
+    transition:
+      height 0.36s cubic-bezier(0.2, 0.8, 0.2, 1),
+      opacity 0.24s ease;
+  }
+
+  .air-toc-layout .air-toc-section.is-open > .air-role-prose {
+    opacity: 1;
+  }
+}
+
+.air-toc-nav a:hover,
+.air-toc-nav a.is-active {
+  color: var(--color-primary-dark);
+  border-left-color: var(--color-primary);
+}
+
+.air-toc-nav a[aria-current='true'] {
+  color: var(--color-primary-dark);
+  border-left-color: var(--color-primary);
+}
+
+.air-toc-section {
+  padding-bottom: 2.75rem;
+  margin-bottom: 2.75rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.air-toc-section:last-child {
+  padding-bottom: 0;
+  margin-bottom: 0;
+  border-bottom: none;
+}
+
+.air-toc-section h3 {
+  margin: 0 0 1rem;
+  color: var(--color-text);
+  font-size: clamp(1.25rem, 2.2vw, 1.5rem);
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.air-role-prose {
+  color: var(--color-muted);
+  font-size: 0.9875rem;
+  line-height: 1.65;
+}
+
+.air-role-prose p {
+  margin: 0 0 1rem;
+}
+
+.air-role-prose ul {
+  padding-left: 1.25rem;
+  margin: 0 0 1rem;
+}
+
+.air-role-prose li {
+  margin-bottom: 0.4rem;
+}
+
+.air-role-prose strong {
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.air-role-prose em {
+  font-style: italic;
+}
+
+.air-mid-cta {
+  padding: 0 0 5.5rem;
+  background: transparent;
+}
+
+.air-mid-cta__card {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1.25fr) auto;
+  align-items: center;
+  gap: 1.65rem;
+  padding: 0;
+  overflow: hidden;
+  background: var(--color-primary);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-soft);
+}
+
+.air-mid-cta__image {
+  width: 100%;
+  height: 100%;
+  min-height: 112px;
+  object-fit: cover;
+  display: block;
+}
+
+.air-mid-cta__title {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(1.2rem, 1.72vw, 1.55rem);
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+.air-mid-cta__button {
+  min-width: 200px;
+  margin-right: 2rem;
+  padding: 1.1rem 1.5rem;
+  color: var(--color-primary);
+  background: #fff;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.air-mid-cta__button:hover {
+  color: var(--color-primary-dark);
+  background: #fff;
+}
+
+@media (max-width: 860px) {
+  .air-mid-cta__card {
+    grid-template-columns: 1fr;
+    gap: 1.3rem;
+    padding-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .air-mid-cta__image {
+    max-height: 190px;
+  }
+
+  .air-mid-cta__title {
+    padding: 0 1.5rem;
+  }
+
+  .air-mid-cta__button {
+    width: calc(100% - 3rem);
+    min-width: 0;
+    margin: 0 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .air-mid-cta__title {
+    padding: 0 1rem;
+    font-size: 1.1rem;
+  }
+
+  .air-mid-cta__button {
+    width: calc(100% - 2rem);
+    margin: 0 1rem;
+    padding: 0.9rem 1.2rem;
+    font-size: 1rem;
+  }
+
+  .air-role-hero-card {
+    padding: 1.25rem 1.25rem;
+  }
+
+  #hiring-path .btn-row .btn {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+.air-use-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+@media (max-width: 640px) {
+  .air-use-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.air-trust-split {
+  align-items: start;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr);
+}
+
+@media (max-width: 900px) {
+  .air-trust-split,
+  #trust .air-trust-split {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+
+  .air-trust-split .air-trust-grid {
+    width: 100%;
+  }
+
+  #trust .air-trust-split .btn--primary {
+    display: block;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.air-trust-photo {
+  width: 100%;
+  max-width: 480px;
+  margin: 2rem 0 1.5rem;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-soft);
+}
+
+.air-trust-split .btn--primary {
+  min-width: 190px;
+  padding: 0.95rem 1.6rem;
+  font-size: 1rem;
+}
+
+.air-trust-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.45rem;
+}
+
+@media (max-width: 700px) {
+  .air-trust-grid {
+    gap: 1.15rem;
+  }
+}
+
+/* On mobile, trust photo sits below the lead — center it with extra top spacing */
+@media (max-width: 900px) {
+  .air-trust-photo {
+    display: block;
+    max-width: 100%;
+    margin: 1.5rem auto 1.5rem;
+  }
+}
+
+.air-trust-mini {
+  position: relative;
+  padding: 0 0 0 3.2rem;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  transition: opacity 0.2s var(--ease);
+}
+
+.air-trust-mini:hover {
+  opacity: 0.96;
+}
+
+.air-trust-mini h3,
+.air-trust-mini h4 {
+  position: relative;
+  margin: 0;
+  color: var(--color-text);
+  font-size: clamp(1.05rem, 1.5vw, 1.3rem);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.air-trust-mini h4::before {
+  content: '✓';
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.1rem;
+  height: 1.1rem;
+  margin-top: 0.15rem;
+  color: var(--color-primary);
+  font-size: 0.75rem;
+  font-weight: 700;
+  background: rgba(84, 91, 179, 0.12);
+  border-radius: 50%;
+}
+
+.air-trust-mini p {
+  margin: 0.45rem 0 0 1.7rem;
+  color: var(--color-muted);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.air-trust-mini h3::before,
+.air-trust-mini h4::before {
+  content: "";
+  position: absolute;
+  left: -3.2rem;
+  top: 50%;
+  width: 1.2rem;
+  height: 0.62rem;
+  margin: 0;
+  background: transparent;
+  border: 0;
+  border-left: 2.5px solid var(--color-primary);
+  border-bottom: 2.5px solid var(--color-primary);
+  border-radius: 0;
+  transform: translateY(-50%) rotate(-45deg);
+}
+
+.air-trust-mini p {
+  margin: 0.75rem 0 0;
+  color: var(--color-text);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
+.air-tech-split {
+  align-items: center;
+}
+
+.air-tech-split img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+}
+
+.air-skills-cluster--fe {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (max-width: 560px) {
+  .air-skills-cluster--fe {
+    grid-template-columns: 1fr;
+  }
+}
+
+.air-skill-group--fe p {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 0.875rem;
+  line-height: 1.55;
+}
+
+.air-skill-group--fe h3 {
+  font-size: 1.15rem;
+  margin-bottom: 0.65rem;
+}
+
+.faq-list {
+  display: grid;
+  gap: 0;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+}
+
+.faq-item {
+  border-bottom: 1px solid rgba(17, 24, 39, 0.12);
+  border-left: 0;
+  border-right: 0;
+  border-top: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  overflow: visible;
+}
+
+.faq-item:first-child {
+  border-top: 0;
+}
+
+.faq-item button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  padding: 1.25rem 0 calc(1.25rem + 10px);
+  border: 0;
+  background: transparent;
+  color: var(--color-text);
+  font: inherit;
+  font-weight: 500;
+  line-height: 1.2;
+  text-align: left;
+  cursor: pointer;
+}
+
+.faq-item button:hover {
+  background: transparent;
+}
+
+.faq-question {
+  flex: 1 1 auto;
+  display: block;
+  padding-right: 0.25rem;
+  font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+  line-height: 1.2;
+}
+
+.faq-item button .chevron {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  transition: transform 0.2s var(--ease);
+  transform-origin: center;
+}
+
+.faq-item button .chevron::before {
+  content: "";
+  width: 0.62rem;
+  height: 0.62rem;
+  border-right: 2.5px solid var(--color-primary);
+  border-bottom: 2.5px solid var(--color-primary);
+  transform: rotate(45deg) translateY(-1px);
+}
+
+.faq-item.is-open button .chevron {
+  transform: rotate(180deg);
+}
+
+.faq-item.is-open button {
+  border-bottom: 0 !important;
+  box-shadow: none !important;
+}
+
+.faq-item.is-open .faq-panel {
+  border-top: 0 !important;
+}
+
+.faq-panel {
+  box-sizing: border-box;
+  height: 0;
+  opacity: 0;
+  overflow: hidden;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  will-change: height, opacity;
+  transition:
+    height 0.36s cubic-bezier(0.2, 0.8, 0.2, 1),
+    opacity 0.24s ease;
+}
+
+.faq-item.is-open .faq-panel {
+  opacity: 1;
+}
+
+.faq-panel p {
+  margin: 0;
+  padding: 0 2.5rem 1.7rem 0;
+  color: var(--color-muted);
+  font-size: 1.1rem;
+  line-height: 1.65;
+}
+
+@media (max-width: 700px) {
+  .faq-item button {
+    padding: 1rem 0 calc(1rem + 10px);
+  }
+
+  .faq-panel {
+    padding: 0;
+  }
+
+  .faq-question {
+    font-size: 1rem;
+  }
+
+  .faq-item button .chevron {
+    width: 1.15rem;
+    height: 1.15rem;
+  }
+
+  .faq-panel p {
+    padding: 0 0 1.2rem;
+    font-size: 0.98rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq-panel {
+    transition: none;
+  }
+}
+
+/* Linked tech icons — clickable hover state */
+a.air-tech-icon--link{text-decoration:none;color:inherit;cursor:pointer;border-radius:10px;padding:6px 4px;transition:background .15s,transform .15s,box-shadow .15s}
+a.air-tech-icon--link:hover{background:rgba(79,70,229,.08);transform:translateY(-3px);box-shadow:0 4px 14px rgba(0,0,0,.1)}
+a.air-tech-icon--link:hover img{filter:drop-shadow(0 3px 8px rgba(0,0,0,.18))}
+
+/* Technology pages: mobile responsive */
+.air-tech-page .air-role-hero-card .hero-form__title {
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+}
+
+@media (max-width: 640px) {
+  .air-tech-page #tech-hero .trust-pills {
+    flex-wrap: wrap;
+    gap: 0.4rem 0.6rem;
+  }
+
+  .air-tech-page #tech-hero .trust-pill {
+    white-space: normal;
+  }
+
+  .air-tech-page .air-candidates-grid {
+    max-width: none;
+    width: 100%;
+  }
+
+  .air-tech-page .air-guide-tabs__tab {
+    flex: 1 1 100%;
+  }
+
+  .air-tech-page .air-guide-tabs__panel {
+    padding: 1.15rem 1.25rem;
+  }
+
+  .air-tech-page .roles-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .air-tech-page .faq-panel p {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+  }
+
+  .air-tech-page .air-glance {
+    font-size: 0.88rem;
+  }
+
+  .air-tech-page .air-glance th,
+  .air-tech-page .air-glance td {
+    padding: 0.55rem 0.65rem;
+  }
+
+  .air-tech-page .air-eco-icon {
+    width: 56px;
+  }
+
+  .air-tech-page .air-eco-group__icons {
+    gap: 0.7rem 0.6rem;
+  }
+}
+
+@media (max-width: 520px) {
+  .air-tech-page .air-glance tr {
+    display: block;
+    padding-bottom: 0.85rem;
+    margin-bottom: 0.85rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .air-tech-page .air-glance tr:last-child {
+    margin-bottom: 0;
+    border-bottom: 0;
+  }
+
+  .air-tech-page .air-glance th {
+    display: block;
+    width: 100%;
+    padding: 0 0 0.2rem;
+    border: 0;
+  }
+
+  .air-tech-page .air-glance td {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .air-tech-page .air-role-hero-card {
+    padding: 1.25rem;
+  }
+
+  .air-tech-page .air-hero-tools__label {
+    white-space: normal;
+  }
+
+  .air-tech-page .air-hero-tools__icons {
+    flex-wrap: wrap;
+    gap: 0.6rem 0.9rem;
+  }
+
+  .air-tech-page .air-hero-tools__icons img {
+    width: 28px;
+    height: 28px;
+  }
+
+  .air-tech-page .air-answer {
+    font-size: 0.98rem;
+    padding: 0.9rem 1rem;
+  }
+
+  .air-tech-page #hiring-path .btn-row .btn {
+    width: 100%;
+    min-width: 0;
+  }
+}

@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /roles/roles-template/
+Disallow: /technologies/tech-template/
+
+Sitemap: https://discover.betterengineer.com/sitemap.xml
