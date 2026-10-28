@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<!--
+  PROTOTYPE ONLY. NOT PRODUCTION NAV YET.
+  Standalone megamenu exploration for the Services dropdown.
+  - Does NOT replace the site-wide header (build-pages.js headerPrimaryChrome is untouched).
+  - HTML + CSS + JS live in this one file on purpose (design inspiration page).
+  - Open locally: npm run dev  ->  http://127.0.0.1:4323/design/megamenu-preview.html
+  - Links use local root-relative paths (same pattern as /preview/). `#` = page does not exist yet.
+  - Primary nav labels/URLs mirror build-pages.js headerPrimaryChrome (Services, AI Fluency, About, Resources, Join Us, Hire Engineers, Login).
+  - Brand tokens/fonts copied from styles/brand.css (:root) and the existing header module.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Megamenu prototype | BetterEngineer (not production)</title>
+  <link rel="icon" href="/icons/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    /* ── Brand tokens (copied from styles/brand.css :root) ─────────────────── */
+    :root {
+      --color-primary: #545bb3;
+      --color-primary-dark: #3d4293;
+      --color-primary-alt: #4c60b2;
+      --color-navy: #001062;
+      --color-text: #1c1c1c;
+      --color-muted: #5c5c66;
+      --color-surface: #fafafe;
+      --color-surface-2: #f0f1fb;
+      --color-border: #e2e4f0;
+      --color-white: #fff;
+      --lavender-1: #c9c4ec;
+      --radius-sm: 4px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --shadow-soft: 0 10px 40px rgba(28, 28, 28, 0.07);
+      --shadow-hover: 0 16px 48px rgba(84, 91, 179, 0.18);
+      --font: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+      --ease: cubic-bezier(0.4, 0, 0.2, 1);
+      --header-h: 84px;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; font-family: var(--font); color: var(--color-text); background: var(--color-white); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    img { max-width: 100%; height: auto; display: block; }
+    a { color: var(--color-primary); text-underline-offset: 3px; }
+    .skip-link { position: absolute; left: -9999px; z-index: 9999; padding: .5rem 1rem; background: var(--color-primary); color: #fff; }
+    .skip-link:focus { left: 1rem; top: 1rem; }
+
+    /* ── Header (same metrics as existing header module) ───────────────────── */
+    .site-header { position: sticky; top: 0; z-index: 100; background: #fff; border-bottom: 1px solid transparent; transition: border-color .2s var(--ease), box-shadow .2s var(--ease); }
+    .site-header.is-scrolled, .site-header.mega-open { border-color: #e2e4e0; box-shadow: 0 4px 10px rgba(0,0,0,.06); }
+    .header-inner { max-width: 1128px; margin: 0 auto; padding: 18px max(1.25rem, 20px); display: flex; align-items: center; justify-content: space-between; gap: .5rem; }
+    .logo-link { display: flex; align-items: center; line-height: 0; flex-shrink: 0; }
+    .logo-link img { width: 232px; height: 48px; max-width: min(232px, 38vw); object-fit: contain; object-position: left center; }
+    .site-nav { display: flex; flex: 1; justify-content: flex-end; align-items: center; min-width: 0; }
+    .nav-desktop { display: none; align-items: center; gap: 2px; list-style: none; margin: 0; padding: 0; flex-wrap: nowrap; }
+    .nav-desktop > li { margin: 0; }
+    .nav-desktop > li > a,
+    .nav-desktop > li > .mega-trigger {
+      display: inline-flex; align-items: center; padding: 12px 20px; border: none; border-radius: 0; background: none; cursor: pointer;
+      color: #676767; text-decoration: none; font: 400 16px/24px var(--font);
+      transition: background .15s var(--ease), color .15s var(--ease);
+    }
+    .nav-desktop > li > a:hover,
+    .nav-desktop > li > .mega-trigger:hover,
+    .nav-desktop > li.is-open > .mega-trigger { background: #f3f3f3; color: #676767; text-decoration: none; }
+    .nav-desktop > li > a:focus-visible,
+    .nav-desktop > li > .mega-trigger:focus-visible { outline: 2px solid var(--color-primary); outline-offset: -2px; }
+    .nav-chevron { display: inline-block; width: .35em; height: .35em; margin-left: 6px; margin-bottom: .2em; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg); transition: transform .2s var(--ease); }
+    .is-open > .mega-trigger .nav-chevron { transform: rotate(225deg); margin-bottom: -.1em; }
+    .nav-desktop a.nav-pill-hire { background-color: #4c60b2; color: #fff !important; font-weight: 600; border-radius: 4px; }
+    .nav-desktop a.nav-pill-hire:hover { background-color: #4d5c9f; color: #fff !important; }
+
+    .nav-toggle { display: none; box-sizing: border-box; align-items: center; justify-content: center; width: 52px; height: 55px; padding: 10px; background-color: #4c60b2; border: none; cursor: pointer; flex-shrink: 0; }
+    .nav-toggle:hover { background-color: #4d5c9f; }
+    .nav-toggle:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
+    .nav-toggle img { width: 30px; height: auto; }
+
+    @media (min-width: 1101px) { .nav-toggle { display: none !important; } .nav-desktop { display: flex; } }
+    @media (max-width: 1100px) { .nav-desktop { display: none !important; } .nav-toggle { display: inline-flex !important; } .site-nav { flex: 0; justify-content: flex-end; } }
+    @media (max-width: 1280px) and (min-width: 1101px) {
+      .header-inner { padding: 16px 18px; gap: .35rem; }
+      .logo-link img { width: 200px; height: 42px; max-width: none; }
+      .nav-desktop { gap: 0; }
+      .nav-desktop > li > a, .nav-desktop > li > .mega-trigger { font-size: 14px; line-height: 20px; padding: 10px 12px; }
+      .nav-desktop a.nav-pill-hire { padding: 10px 14px; }
+      .nav-chevron { margin-left: 4px; }
+    }
+    @media (max-width: 1200px) and (min-width: 1101px) { .nav-desktop > li.nav-item-join { display: none; } }
+
+    /* Simple dropdowns (About, Resources): same as production header module */
+    .nav-desktop .has-children { position: relative; }
+    .nav-desktop .dropdown { display: none; position: absolute; top: 100%; left: 0; min-width: 200px; margin: 0; padding: 0; list-style: none; background: #fff; box-shadow: 0 4px 10px rgba(0,0,0,.1); z-index: 999; }
+    .nav-desktop .has-children:hover .dropdown,
+    .nav-desktop .has-children:focus-within .dropdown { display: block; }
+    .nav-desktop .dropdown a { display: block; padding: 12px 16px; font-size: 15px; line-height: 22px; font-weight: 400; color: #676767; text-decoration: none; }
+    .nav-desktop .dropdown a:hover, .nav-desktop .dropdown a:focus-visible { background: #f3f3f3; color: #676767; }
+
+    /* ── Megamenu panel ────────────────────────────────────────────────────── */
+    .mega-panel {
+      position: absolute; left: 0; right: 0; top: 100%;
+      background: #fff; border-top: 1px solid var(--color-border);
+      box-shadow: 0 24px 48px rgba(0, 16, 98, .12);
+      opacity: 0; visibility: hidden; transform: translateY(-6px);
+      transition: opacity .18s var(--ease), transform .18s var(--ease), visibility 0s linear .18s;
+      z-index: 99;
+    }
+    .is-open > .mega-panel { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
+    .mega-inner {
+      max-width: 1128px; margin: 0 auto; padding: 32px max(1.25rem, 20px) 36px;
+      display: grid; grid-template-columns: 1.55fr 1fr 1fr 1fr; gap: 40px;
+    }
+    .mega-col h2 { margin: 0 0 14px; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--color-primary); }
+    .mega-list { list-style: none; margin: 0; padding: 0; }
+    .mega-list a { display: block; padding: 7px 10px; margin: 0 -10px; border-radius: 6px; color: var(--color-text); text-decoration: none; font-size: 15px; line-height: 22px; transition: background .15s var(--ease), color .15s var(--ease); }
+    .mega-list a:hover, .mega-list a:focus-visible { background: var(--color-surface-2); color: var(--color-primary-dark); outline: none; }
+    .mega-list a:focus-visible { box-shadow: 0 0 0 2px var(--color-primary); }
+    .mega-list .is-soon { color: var(--color-muted); }
+    .mega-list .soon-tag { margin-left: 6px; font-size: 10px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--color-primary); background: var(--color-surface-2); border-radius: 999px; padding: 1px 7px; vertical-align: middle; }
+    .mega-list--services a { padding: 10px 12px; margin: 0 -12px 2px; }
+    .mega-list--services strong { display: block; font-weight: 600; font-size: 15px; }
+    .mega-list--services span { display: block; font-size: 13px; line-height: 19px; color: var(--color-muted); font-weight: 400; }
+    .mega-all { display: inline-block; margin-top: 14px; font-size: 14px; font-weight: 600; color: var(--color-primary); text-decoration: none; }
+    .mega-all:hover { color: var(--color-primary-dark); text-decoration: underline; }
+    .mega-all:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 3px; border-radius: 3px; }
+
+    .mega-promo { display: block; margin-top: 18px; padding: 18px; border-radius: var(--radius-md); background: linear-gradient(135deg, var(--color-surface-2), #e6e8fa); border: 1px solid var(--color-border); text-decoration: none; color: var(--color-text); transition: box-shadow .2s var(--ease), transform .2s var(--ease); }
+    .mega-promo:hover, .mega-promo:focus-visible { box-shadow: var(--shadow-hover); transform: translateY(-1px); outline: none; }
+    .mega-promo:focus-visible { box-shadow: 0 0 0 2px var(--color-primary); }
+    .mega-promo img { width: 100%; max-height: 112px; object-fit: cover; object-position: top left; border-radius: 8px; border: 1px solid var(--color-border); margin-bottom: 14px; background: #fff; }
+    .mega-promo b { display: block; font-size: 16px; line-height: 22px; color: var(--color-navy); }
+    .mega-promo p { margin: 4px 0 12px; font-size: 13px; line-height: 19px; color: var(--color-muted); }
+    .mega-promo .mega-cta { display: inline-block; padding: 8px 14px; border-radius: 4px; background: var(--color-primary-alt); color: #fff; font-size: 14px; font-weight: 600; }
+    .mega-promo:hover .mega-cta { background: #4d5c9f; }
+
+    .mega-backdrop { position: fixed; inset: 0; background: rgba(0, 16, 98, .18); opacity: 0; visibility: hidden; transition: opacity .18s var(--ease), visibility 0s linear .18s; z-index: 90; pointer-events: none; }
+    .mega-backdrop.is-on { opacity: 1; visibility: visible; transition-delay: 0s; }
+
+    /* ── Mobile menu (accordion) ───────────────────────────────────────────── */
+    .nav-mobile { display: none; flex-direction: column; list-style: none; margin: 0; padding: 0; position: absolute; left: 0; right: 0; top: 100%; width: 100%; max-height: calc(100vh - var(--header-h)); overflow-y: auto; background: #fff; z-index: 200; box-shadow: 0 12px 32px rgba(0,0,0,.1); }
+    .nav-mobile.is-open { display: flex; }
+    @media (min-width: 1101px) { .nav-mobile.is-open { display: none; } }
+    .nav-mobile > li > a, .nav-mobile summary { display: flex; align-items: center; justify-content: space-between; width: 100%; min-height: 55px; padding: 0 20px; border-top: 1px solid #ccc; text-decoration: none; color: #676767; font-size: 16px; line-height: 24px; cursor: pointer; list-style: none; }
+    .nav-mobile summary::-webkit-details-marker { display: none; }
+    .nav-mobile summary::after { content: ""; width: .4em; height: .4em; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg); transition: transform .2s var(--ease); }
+    .nav-mobile details[open] > summary::after { transform: rotate(225deg); }
+    .nav-mobile > li:first-child > a, .nav-mobile > li:first-child > details > summary { border-top: none; }
+    .nav-mobile a.nav-mobile-hire { background: #4c60b2; color: #fff; font-weight: 600; }
+    .nav-mobile .m-group { padding: 4px 0 8px; background: #fafafa; }
+    .nav-mobile .m-group h3 { margin: 10px 20px 2px 32px; font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--color-primary); }
+    .nav-mobile .m-group ul { list-style: none; margin: 0; padding: 0; }
+    .nav-mobile .m-group a { display: flex; align-items: center; min-height: 40px; padding: 0 20px 0 32px; color: #676767; text-decoration: none; font-size: 15px; }
+    .nav-mobile .m-group a:hover { background: #f0f0f0; }
+    .nav-mobile .m-group a.m-all { color: var(--color-primary); font-weight: 600; }
+
+    /* ── Page body (placeholder content so the menu has something to overlay) ─ */
+    .demo-hero { background: linear-gradient(180deg, var(--color-surface) 0%, #fff 100%); padding: 4.5rem 0 3rem; }
+    .wrap { max-width: 1128px; margin: 0 auto; padding: 0 1.25rem; }
+    .eyebrow { font-size: .75rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--color-primary); margin: 0 0 .75rem; }
+    .demo-hero h1 { font-size: clamp(2rem, 4.5vw, 3.25rem); line-height: 1.15; font-weight: 700; letter-spacing: -.02em; margin: 0 0 1rem; }
+    .demo-hero h1 .light { font-weight: 300; color: var(--color-primary); }
+    .demo-hero p { max-width: 640px; color: var(--color-muted); margin: 0; }
+    .notes { padding: 1rem 0 5rem; }
+    .notes h2 { font-size: 1.25rem; margin: 0 0 1rem; }
+    .notes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
+    .note { padding: 1.25rem; border: 1px solid var(--color-border); border-radius: var(--radius-md); background: #fff; box-shadow: var(--shadow-soft); font-size: .92rem; }
+    .note h3 { margin: 0 0 .4rem; font-size: 1rem; color: var(--color-navy); }
+    .note p, .note ul { margin: 0; color: var(--color-muted); }
+    .note ul { padding-left: 1.1rem; }
+    code { background: var(--color-surface-2); padding: .05rem .35rem; border-radius: 4px; font-size: .86em; }
+    .proto-bar { background: var(--color-navy); color: #fff; font-size: 13px; text-align: center; padding: 6px 12px; }
+    .proto-bar a { color: var(--lavender-1); }
+
+    @media (max-width: 1100px) { .mega-panel { display: none; } .mega-backdrop { display: none; } }
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <div class="proto-bar">Prototype only, not the production nav. <a href="/preview/">Back to preview index</a></div>
+
+  <header class="site-header" id="header">
+    <div class="header-inner">
+      <a class="logo-link" href="/" aria-label="BetterEngineer home">
+        <img src="/icons/betterengineer-logo.svg" alt="BetterEngineer" width="183" height="33">
+      </a>
+      <nav class="site-nav" aria-label="Primary">
+        <ul class="nav-desktop" role="list">
+          <li class="has-mega" id="mega-services">
+            <button type="button" class="mega-trigger" aria-expanded="false" aria-controls="mega-services-panel" aria-haspopup="true">
+              Services <span class="nav-chevron" aria-hidden="true"></span>
+            </button>
+            <div class="mega-panel" id="mega-services-panel" role="region" aria-label="Services menu">
+              <div class="mega-inner">
+
+                <div class="mega-col">
+                  <h2>Our Services</h2>
+                  <ul class="mega-list mega-list--services" role="list">
+                    <li><a href="/staff-augmentation/"><strong>Staff Augmentation</strong><span>Senior nearshore engineers embedded in your team.</span></a></li>
+                    <li><a href="/ai-readiness/"><strong>AI Readiness</strong><span>Assess and prepare your stack and data for AI.</span></a></li>
+                    <li><a href="#" class="is-soon" data-placeholder="AI Discovery Sprint page does not exist yet"><strong>AI Discovery Sprint <span class="soon-tag" style="display:inline;color:var(--color-primary)">Page TBD</span></strong><span>A short, focused sprint to scope your first AI build.</span></a></li>
+                  </ul>
+                  <a class="mega-promo" href="/hiring-dashboard/">
+                    <img src="/images/platform/hiring-dashboard-frame.png" alt="" width="480" height="260" loading="lazy">
+                    <b>Hiring Platform</b>
+                    <p>Browse vetted LATAM engineers, shortlist, and hire in one place.</p>
+                    <span class="mega-cta">Explore the platform</span>
+                  </a>
+                </div>
+
+                <div class="mega-col">
+                  <h2>Roles</h2>
+                  <ul class="mega-list" role="list">
+                    <li><a href="/roles/ai-engineers/">AI Engineers</a></li>
+                    <li><a href="/roles/back-end-engineers/">Back-End Engineers</a></li>
+                    <li><a href="/roles/blockchain-engineers/">Blockchain Engineers</a></li>
+                    <li><a href="/roles/data-engineers/">Data Engineers</a></li>
+                    <li><a href="/roles/data-science-engineers/">Data Science Engineers</a></li>
+                    <li><a href="/roles/devops-engineers/">DevOps Engineers</a></li>
+                    <li><a href="/roles/front-end-engineers/">Front-End Engineers</a></li>
+                    <li><a href="/roles/full-stack-engineers/">Full-Stack Engineers</a></li>
+                    <li><a href="/roles/mobile-engineers/">Mobile Engineers</a></li>
+                    <li><a href="/roles/qa-engineers/">QA Engineers</a></li>
+                  </ul>
+                  <a class="mega-all" href="/roles/">All Roles &rarr;</a>
+                </div>
+
+                <div class="mega-col">
+                  <h2>Technologies</h2>
+                  <ul class="mega-list" role="list">
+                    <li><a href="/technologies/python-developers/">Python</a></li>
+                    <li><a href="/technologies/javascript-developers/">JavaScript</a></li>
+                    <li><a href="/technologies/typescript-developers/">TypeScript</a></li>
+                    <li><a href="/technologies/react-developers/">React</a></li>
+                    <li><a href="/technologies/nodejs-developers/">Node.js</a></li>
+                    <li><a href="/technologies/java-developers/">Java</a></li>
+                    <li><a href="/technologies/dotnet-developers/">.NET</a></li>
+                    <li><a href="/technologies/golang-developers/">Go</a></li>
+                    <li><a href="/technologies/aws-developers/">AWS</a></li>
+                    <li><a href="/technologies/kubernetes-developers/">Kubernetes</a></li>
+                  </ul>
+                  <a class="mega-all" href="/technologies/">All Technologies &rarr;</a>
+                </div>
+
+                <div class="mega-col">
+                  <h2>Industries</h2>
+                  <ul class="mega-list" role="list">
+                    <li><a href="/fintech/">FinTech</a></li>
+                    <li><a href="/healthtech/">HealthTech</a></li>
+                    <li><a href="/martech/">MarTech</a></li>
+                    <li><a href="/services/ai-systems-readiness-for-manufacturing/">Manufacturing (AI Readiness)</a></li>
+                  </ul>
+                  <a class="mega-all" href="/industries/">All Industries &rarr;</a>
+                </div>
+
+              </div>
+            </div>
+          </li>
+          <li><a href="https://discover.betterengineer.com/ai-fluent-engineers/">AI Fluency</a></li>
+          <li class="has-children">
+            <a href="/about/">About <span class="nav-chevron" aria-hidden="true"></span></a>
+            <ul class="dropdown" role="list">
+              <li><a href="/about/">Who We Are</a></li>
+              <li><a href="/latamengineer/">Why Nearshore</a></li>
+            </ul>
+          </li>
+          <li class="has-children">
+            <a href="https://blog.betterengineer.com/resource-center">Resources <span class="nav-chevron" aria-hidden="true"></span></a>
+            <ul class="dropdown" role="list">
+              <li><a href="https://blog.betterengineer.com/resource-center">Blog</a></li>
+              <li><a href="/faqs-nearshore-software-engineers-staff-augmentation-ai-talent/">FAQs</a></li>
+              <li><a href="/podcast/">Podcast</a></li>
+            </ul>
+          </li>
+          <li class="nav-item-join"><a href="/join/">Join Us</a></li>
+          <li><a class="nav-pill-hire" href="/multi-step-contact-form/">Hire Engineers</a></li>
+          <li><a href="https://app.betterengineer.com/sign-in?redirect_url=https%3A%2F%2Fapp.betterengineer.com%2F">Login</a></li>
+        </ul>
+      </nav>
+      <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="mobile-menu" id="nav-toggle" aria-label="Open menu">
+        <img src="/icons/hamburger-white.svg" alt="" width="30" height="30">
+      </button>
+    </div>
+
+    <ul class="nav-mobile" id="mobile-menu" role="list">
+      <li>
+        <details>
+          <summary>Services</summary>
+          <div class="m-group">
+            <h3>Our Services</h3>
+            <ul role="list">
+              <li><a href="/staff-augmentation/">Staff Augmentation</a></li>
+              <li><a href="/ai-readiness/">AI Readiness</a></li>
+              <li><a href="#">AI Discovery Sprint (page TBD)</a></li>
+              <li><a href="/hiring-dashboard/">Hiring Platform</a></li>
+            </ul>
+            <h3>Roles</h3>
+            <ul role="list">
+              <li><a href="/roles/ai-engineers/">AI Engineers</a></li>
+              <li><a href="/roles/back-end-engineers/">Back-End Engineers</a></li>
+              <li><a href="/roles/data-engineers/">Data Engineers</a></li>
+              <li><a href="/roles/devops-engineers/">DevOps Engineers</a></li>
+              <li><a href="/roles/front-end-engineers/">Front-End Engineers</a></li>
+              <li><a href="/roles/full-stack-engineers/">Full-Stack Engineers</a></li>
+              <li><a class="m-all" href="/roles/">All Roles &rarr;</a></li>
+            </ul>
+            <h3>Technologies</h3>
+            <ul role="list">
+              <li><a href="/technologies/python-developers/">Python</a></li>
+              <li><a href="/technologies/javascript-developers/">JavaScript</a></li>
+              <li><a href="/technologies/react-developers/">React</a></li>
+              <li><a href="/technologies/nodejs-developers/">Node.js</a></li>
+              <li><a class="m-all" href="/technologies/">All Technologies &rarr;</a></li>
+            </ul>
+            <h3>Industries</h3>
+            <ul role="list">
+              <li><a href="/fintech/">FinTech</a></li>
+              <li><a href="/healthtech/">HealthTech</a></li>
+              <li><a href="/martech/">MarTech</a></li>
+              <li><a class="m-all" href="/industries/">All Industries &rarr;</a></li>
+            </ul>
+          </div>
+        </details>
+      </li>
+      <li><a href="https://discover.betterengineer.com/ai-fluent-engineers/">AI Fluency</a></li>
+      <li>
+        <details>
+          <summary>About</summary>
+          <div class="m-group">
+            <ul role="list">
+              <li><a href="/about/">Who We Are</a></li>
+              <li><a href="/latamengineer/">Why Nearshore</a></li>
+            </ul>
+          </div>
+        </details>
+      </li>
+      <li>
+        <details>
+          <summary>Resources</summary>
+          <div class="m-group">
+            <ul role="list">
+              <li><a href="https://blog.betterengineer.com/resource-center">Blog</a></li>
+              <li><a href="/faqs-nearshore-software-engineers-staff-augmentation-ai-talent/">FAQs</a></li>
+              <li><a href="/podcast/">Podcast</a></li>
+            </ul>
+          </div>
+        </details>
+      </li>
+      <li><a href="/join/">Join Us</a></li>
+      <li><a class="nav-mobile-hire" href="/multi-step-contact-form/">Hire Engineers</a></li>
+      <li><a href="https://app.betterengineer.com/sign-in?redirect_url=https%3A%2F%2Fapp.betterengineer.com%2F">Login</a></li>
+    </ul>
+  </header>
+  <div class="mega-backdrop" id="mega-backdrop" aria-hidden="true"></div>
+
+  <main id="main">
+    <section class="demo-hero">
+      <div class="wrap">
+        <p class="eyebrow">Design exploration</p>
+        <h1>Services <span class="light">megamenu</span> prototype</h1>
+        <p>Hover or click <strong>Services</strong> in the header. Keyboard: Enter/Space or Arrow Down opens, Tab moves through links, Escape closes. Below 1101px the hamburger menu uses an accordion instead.</p>
+      </div>
+    </section>
+
+    <section class="notes">
+      <div class="wrap">
+        <h2>Prototype notes</h2>
+        <div class="notes-grid">
+          <div class="note">
+            <h3>Status</h3>
+            <p>Prototype only. The live header comes from <code>build-pages.js</code> and is unchanged.</p>
+          </div>
+          <div class="note">
+            <h3>Placeholder links</h3>
+            <ul>
+              <li>AI Discovery Sprint: no page yet (<code>#</code>)</li>
+              <li>AI Fluency and Blog: live URLs (no local page)</li>
+            </ul>
+          </div>
+          <div class="note">
+            <h3>Content choices to review</h3>
+            <ul>
+              <li>Roles: all 10 existing role pages</li>
+              <li>Technologies: 10 of 60+ featured</li>
+              <li>Industries: 3 verticals plus Manufacturing</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+  (function () {
+    var header = document.getElementById('header');
+    var item = document.getElementById('mega-services');
+    var trigger = item.querySelector('.mega-trigger');
+    var panel = document.getElementById('mega-services-panel');
+    var backdrop = document.getElementById('mega-backdrop');
+    var closeTimer = null;
+    var openTimer = null;
+
+    function isDesktop() { return window.matchMedia('(min-width: 1101px)').matches; }
+
+    function setOpen(open) {
+      clearTimeout(closeTimer); clearTimeout(openTimer);
+      item.classList.toggle('is-open', open);
+      header.classList.toggle('mega-open', open);
+      backdrop.classList.toggle('is-on', open);
+      trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+    function isOpen() { return item.classList.contains('is-open'); }
+    function scheduleClose() { clearTimeout(openTimer); closeTimer = setTimeout(function () { setOpen(false); }, 180); }
+    function scheduleOpen() { clearTimeout(closeTimer); if (!isOpen()) openTimer = setTimeout(function () { setOpen(true); }, 80); }
+
+    // Hover (mouse only, so touch taps go through the click toggle)
+    item.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse' && isDesktop()) scheduleOpen(); });
+    item.addEventListener('pointerleave', function (e) { if (e.pointerType === 'mouse') scheduleClose(); });
+
+    // Click / Enter / Space toggle
+    trigger.addEventListener('click', function () { setOpen(!isOpen()); });
+
+    // Keyboard
+    trigger.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowDown') {
+        e.preventDefault(); setOpen(true);
+        var first = panel.querySelector('a'); if (first) first.focus();
+      }
+    });
+    item.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && isOpen()) { setOpen(false); trigger.focus(); }
+    });
+    // Close when focus leaves the menu
+    item.addEventListener('focusout', function (e) {
+      if (isOpen() && e.relatedTarget && !item.contains(e.relatedTarget)) setOpen(false);
+    });
+    // Click outside
+    document.addEventListener('click', function (e) { if (isOpen() && !item.contains(e.target)) setOpen(false); });
+    window.addEventListener('resize', function () { if (!isDesktop()) setOpen(false); });
+
+    // "Page TBD" placeholder: don't jump to top
+    document.querySelectorAll('a[href="#"]').forEach(function (a) {
+      a.addEventListener('click', function (e) { e.preventDefault(); });
+    });
+
+    // Sticky header shadow
+    function onScroll() { header.classList.toggle('is-scrolled', window.scrollY > 4); }
+    window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+    // Mobile hamburger
+    var toggle = document.getElementById('nav-toggle');
+    var mobile = document.getElementById('mobile-menu');
+    toggle.addEventListener('click', function () {
+      var open = mobile.classList.toggle('is-open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    });
+  })();
+  </script>
+</body>
+</html>

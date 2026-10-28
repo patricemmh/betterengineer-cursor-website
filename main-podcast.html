@@ -1,0 +1,96 @@
+  <main id="main">
+    <section class="hero section podcast-hero" id="hero" aria-labelledby="hero-title">
+      <div class="wrap hero-grid podcast-hero__grid">
+        <div class="reveal podcast-hero__copy">
+          <h1 class="h1" id="hero-title">Off The Algorithm: Exploring the Future of Software Engineering</h1>
+          <p class="lead">Join us to discover key strategies for improving your teams, optimizing processes, and staying ahead in the digital era.</p>
+          <div class="btn-row">
+            <a class="btn btn--podcast-hero" href="https://soundcloud.com/offthealgorithm" rel="noopener noreferrer">Explore the Series</a>
+          </div>
+        </div>
+        <div class="podcast-hero__visual reveal" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <!-- MIGRATION: the source page has no heading above the episode list, so this section is labelled with aria-label rather than aria-labelledby. No visible heading was invented. -->
+    <section class="section section-podcast-episodes" id="episodes" aria-label="Episodes">
+      <div class="wrap">
+        <!-- MIGRATION BLOCKED: the live page's audio player could not be captured; five passes found only outbound SoundCloud links and no iframe. Verify in a browser whether a player is JS-injected before shipping. If one exists, it needs a real embed here. -->
+        <div class="podcast-list">
+          <!-- MIGRATION: on the source page the "EPISODE n" label sits inside the H3 alongside the title. It is rendered here as .podcast-episode__label so the heading text is the episode title alone. No words changed. -->
+          <article class="podcast-episode reveal">
+            <p class="podcast-episode__label">Episode 1</p>
+            <h2 class="podcast-episode__title"><a href="https://soundcloud.com/offthealgorithm/off-the-algorithm-podcast-series-episode-1-2-25" rel="noopener noreferrer">Better AI Engineers</a></h2>
+            <p class="podcast-episode__meta">CEO Boris Portman, CIO Marc Boudria</p>
+            <p class="podcast-episode__desc"><strong>How is AI reshaping software teams?</strong> In our first episode, CEO Boris Portman and CIO Marc Boudria discuss the essential AI-driven skills engineers need, how companies can build stronger AI-powered teams, and what the future of AI-driven development looks like.</p>
+            <a class="btn btn--primary podcast-episode__cta" href="https://soundcloud.com/offthealgorithm/off-the-algorithm-podcast-series-episode-1-2-25" rel="noopener noreferrer" aria-label="Listen Now: Better AI Engineers">Listen Now</a>
+          </article>
+          <article class="podcast-episode reveal">
+            <p class="podcast-episode__label">Episode 2</p>
+            <h2 class="podcast-episode__title"><a href="https://soundcloud.com/offthealgorithm/no-more-blackbox-measure-grow-rd-roi" rel="noopener noreferrer">No More Blackbox: R&amp;D ROI</a></h2>
+            <p class="podcast-episode__desc"><strong>Measuring ROI in research is challenging, but it doesn't have to be.</strong> This episode explores the real impact of AI on efficiency, why automation doesn't always lead to lower costs, and the shift from command-based computing to AI-driven exploration.</p>
+            <a class="btn btn--primary podcast-episode__cta" href="https://soundcloud.com/offthealgorithm/no-more-blackbox-measure-grow-rd-roi" rel="noopener noreferrer" aria-label="Listen Now: No More Blackbox: R&amp;D ROI">Listen Now</a>
+          </article>
+          <!-- MIGRATION: the next three episode URLs carry SoundCloud's copy-to-clipboard UTM string (utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing), and episode 5 also carries a share-session token (si=...). They are preserved exactly as extracted. They pollute the show's attribution, every click from this site reports as "clipboard / social_sharing" rather than as site traffic. Strip the query strings only with the analytics owner's sign-off, since doing so changes attribution. See content-followups.md -->
+          <article class="podcast-episode reveal">
+            <p class="podcast-episode__label">Episode 3</p>
+            <h2 class="podcast-episode__title"><a href="https://soundcloud.com/offthealgorithm/the-future-of-tech-talent-latin-america-rising?utm_source=clipboard&amp;utm_medium=text&amp;utm_campaign=social_sharing" rel="noopener noreferrer">The Future of Tech Talent: Latin America Rising</a></h2>
+            <p class="podcast-episode__meta">Dario Trevisani, Director of Talent Operations at BetterEngineer</p>
+            <p class="podcast-episode__desc"><strong>Latin America isn't the next big thing in tech talent, it's happening right now.</strong> In this episode, Dario Trevisani, Director of Talent Operations at BetterEngineer, shares why global companies are turning to LATAM for world-class engineers.</p>
+            <a class="btn btn--primary podcast-episode__cta" href="https://soundcloud.com/offthealgorithm/the-future-of-tech-talent-latin-america-rising?utm_source=clipboard&amp;utm_medium=text&amp;utm_campaign=social_sharing" rel="noopener noreferrer" aria-label="Listen Now: The Future of Tech Talent: Latin America Rising">Listen Now</a>
+          </article>
+          <article class="podcast-episode reveal">
+            <p class="podcast-episode__label">Episode 4</p>
+            <h2 class="podcast-episode__title"><a href="https://soundcloud.com/offthealgorithm/off-the-algorithm-when-to?utm_source=clipboard&amp;utm_medium=text&amp;utm_campaign=social_sharing" rel="noopener noreferrer">When to Build, When to Buy, and When to Walk Away</a></h2>
+            <p class="podcast-episode__meta">Christopher Esplin</p>
+            <p class="podcast-episode__desc"><strong>From finance to fractional CTO, Christopher Esplin's journey is a masterclass in reinvention.</strong> Hear how he built his first SaaS from scratch, why being a generalist accelerates success, and how to lead remote teams with trust and autonomy.</p>
+            <a class="btn btn--primary podcast-episode__cta" href="https://soundcloud.com/offthealgorithm/off-the-algorithm-when-to?utm_source=clipboard&amp;utm_medium=text&amp;utm_campaign=social_sharing" rel="noopener noreferrer" aria-label="Listen Now: When to Build, When to Buy, and When to Walk Away">Listen Now</a>
+          </article>
+          <article class="podcast-episode reveal">
+            <p class="podcast-episode__label">Episode 5</p>
+            <h2 class="podcast-episode__title"><a href="https://soundcloud.com/offthealgorithm/the-hidden-side-of-cloud-innovation-cost-waste-optimization?utm_source=clipboard&amp;utm_medium=text&amp;utm_campaign=social_sharing&amp;si=7245228fa2854064a2106b12d646b792" rel="noopener noreferrer">The Hidden Side of Cloud Innovation: Cost, Waste &amp; Optimization</a></h2>
+            <p class="podcast-episode__meta">Asaf Zamir, founder of Cloud Expat</p>
+            <p class="podcast-episode__desc"><strong>Behind every scalable system is smart strategy.</strong> In this episode, Asaf Zamir, founder of Cloud Expat, dives into how cloud cost optimization, multicloud solutions, and connecting tech with business accelerate real growth.</p>
+            <a class="btn btn--primary podcast-episode__cta" href="https://soundcloud.com/offthealgorithm/the-hidden-side-of-cloud-innovation-cost-waste-optimization?utm_source=clipboard&amp;utm_medium=text&amp;utm_campaign=social_sharing&amp;si=7245228fa2854064a2106b12d646b792" rel="noopener noreferrer" aria-label="Listen Now: The Hidden Side of Cloud Innovation: Cost, Waste &amp; Optimization">Listen Now</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- MIGRATION: live closing band is two columns (copy + HubSpot subscribe form a34417c0-8b18-4c86-be42-62bd0e5ce155). Footer CTAs are global chrome, not part of this section. -->
+    <section class="section section-tint podcast-about" id="about-the-show" aria-labelledby="about-the-show-heading">
+      <div class="wrap podcast-about__grid">
+        <div class="reveal podcast-about__copy">
+          <h2 class="h2" id="about-the-show-heading">AI, software engineering, and the future of technology - <span class="accent">without the noise.</span></h2>
+          <p class="lead">Every month we'll promote real, unfiltered discussions with top tech leaders, engineers, and innovators who are shaping the industry.</p>
+        </div>
+        <div class="split__form reveal">
+          <div class="hero-form__card hero-form__card--split podcast-about__form-card">
+            <p class="podcast-about__form-intro">Don't miss out on new episodes. Subscribe with your email and be the first to know about upcoming discussions.</p>
+            <form class="react-intake-form" data-hs-form="a34417c0-8b18-4c86-be42-62bd0e5ce155" novalidate aria-label="Subscribe to Off The Algorithm podcast updates">
+              <div class="form-grid">
+                <div class="form-field">
+                  <label for="podcast-firstname">First name *</label>
+                  <input id="podcast-firstname" name="firstname" type="text" autocomplete="given-name" placeholder="First name" required>
+                </div>
+                <div class="form-field">
+                  <label for="podcast-lastname">Last name *</label>
+                  <input id="podcast-lastname" name="lastname" type="text" autocomplete="family-name" placeholder="Last name" required>
+                </div>
+                <div class="form-field form-field--full">
+                  <label for="podcast-email">Email *</label>
+                  <input id="podcast-email" name="email" type="email" autocomplete="email" placeholder="Email" required>
+                </div>
+              </div>
+              <div aria-hidden="true" style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;pointer-events:none">
+                <label for="podcast-website">Leave this field empty</label>
+                <input type="text" name="company_website" id="podcast-website" tabindex="-1" autocomplete="off" value="">
+              </div>
+              <button class="btn btn--primary" type="submit">Subscribe</button>
+              <p class="form-status" role="status" aria-live="polite"></p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>

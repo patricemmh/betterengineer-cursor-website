@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<!--
+  Cookie consent review page (local only).
+  - Banner always shows on load (ignores saved consent) via BE_COOKIE_ALWAYS_PREVIEW.
+  - Open: npm run dev  ->  http://127.0.0.1:4323/preview/cookie-consent-preview.html
+  - On any built page: add ?cookie_preview=1 to clear consent and show the banner for QA.
+  - static-server.js sends no-cache headers for this file.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Cookie consent preview | BetterEngineer (local)</title>
+  <link rel="icon" href="/icons/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles/cookie-consent.css">
+  <script>window.BE_COOKIE_ALWAYS_PREVIEW = true;</script>
+  <script src="/scripts/cookie-consent.js"></script>
+  <script type="application/json" id="be-gtm-config">{"id":"GTM-WT77L8JF"}</script>
+  <script type="application/json" id="be-hs-config">{"portalId":"8679235"}</script>
+  <style>
+    :root {
+      --color-primary: #545bb3;
+      --color-primary-dark: #3d4293;
+      --color-navy: #001062;
+      --color-text: #1c1c1c;
+      --color-muted: #5c5c66;
+      --color-surface: #fafafe;
+      --color-surface-2: #f0f1fb;
+      --color-border: #e2e4f0;
+      --color-white: #fff;
+      --font: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+      --radius-md: 12px;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: var(--font);
+      color: var(--color-text);
+      background: var(--color-surface);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    .preview-header {
+      background: var(--color-navy);
+      color: var(--color-white);
+      padding: 1.25rem 1.5rem;
+    }
+    .preview-header h1 {
+      margin: 0 0 0.35rem;
+      font-size: 1.15rem;
+      font-weight: 650;
+    }
+    .preview-header p {
+      margin: 0;
+      font-size: 0.875rem;
+      color: #c9c4ec;
+      max-width: 42rem;
+    }
+    .preview-header a { color: #fff; text-decoration: underline; }
+    main {
+      max-width: 40rem;
+      margin: 0 auto;
+      padding: 1.5rem;
+    }
+    .card {
+      background: var(--color-white);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 1.25rem 1.35rem;
+      margin-bottom: 1rem;
+    }
+    .card h2 {
+      margin: 0 0 0.5rem;
+      font-size: 1rem;
+      color: var(--color-navy);
+    }
+    .card p, .card ul {
+      margin: 0 0 0.75rem;
+      font-size: 0.9rem;
+      color: var(--color-muted);
+    }
+    .card ul { padding-left: 1.2rem; }
+    .card li { margin-bottom: 0.35rem; }
+    .tools {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+    .tool-btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.5rem 0.85rem;
+      border-radius: 4px;
+      border: 1px solid var(--color-border);
+      background: var(--color-surface-2);
+      color: var(--color-navy);
+      font: inherit;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .tool-btn:hover { background: #e4e6f6; }
+    .tool-btn--primary {
+      background: var(--color-primary);
+      border-color: var(--color-primary);
+      color: #fff;
+    }
+    .tool-btn--primary:hover { background: var(--color-primary-dark); }
+    code {
+      font-size: 0.85em;
+      background: var(--color-surface-2);
+      padding: 0.1rem 0.35rem;
+      border-radius: 4px;
+    }
+    #consent-status {
+      font-weight: 600;
+      color: var(--color-navy);
+    }
+    .mock-page {
+      min-height: 12rem;
+      background: linear-gradient(180deg, var(--color-white) 0%, var(--color-surface-2) 100%);
+      border-radius: var(--radius-md);
+      border: 1px dashed var(--color-border);
+      padding: 2rem 1.25rem;
+      text-align: center;
+      color: var(--color-muted);
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header class="preview-header">
+    <h1>Cookie consent preview</h1>
+    <p>Local review only. The banner appears on every refresh here (saved consent is ignored). Use buttons below to simulate choices. Return to the <a href="/preview/">page index</a>.</p>
+  </header>
+
+  <main>
+    <div class="card">
+      <h2>Current choice (this tab)</h2>
+      <p id="consent-status">No choice yet in this session.</p>
+      <p>Production pages remember consent in <code>localStorage</code> key <code>be_cookie_consent_v1</code> and cookie <code>be_consent</code>.</p>
+      <div class="tools">
+        <button type="button" class="tool-btn" id="btn-open-prefs">Open manage preferences</button>
+        <button type="button" class="tool-btn" id="btn-reset">Reset preview state</button>
+        <a class="tool-btn" href="/?cookie_preview=1">Test on home (?cookie_preview=1)</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>What to check</h2>
+      <ul>
+        <li>Accept all loads analytics scripts (GTM + HubSpot) once per session on this page.</li>
+        <li>Essential only keeps analytics blocked.</li>
+        <li>Manage preferences: focus stays in the modal, Escape closes, toggles save correctly.</li>
+        <li>Keyboard: Tab through banner buttons; visible focus rings.</li>
+      </ul>
+    </div>
+
+    <div class="mock-page" aria-hidden="true">
+      Mock page content behind the banner
+    </div>
+  </main>
+
+  <script>
+    function formatConsent(c) {
+      if (!c) return 'No choice yet in this session.';
+      return c.analytics
+        ? 'Analytics allowed (necessary + analytics).'
+        : 'Essential only (necessary; analytics off).';
+    }
+    function refreshStatus() {
+      var el = document.getElementById('consent-status');
+      var c = window.BECookieConsent && window.BECookieConsent.getConsent();
+      if (el) el.textContent = formatConsent(c);
+    }
+    window.addEventListener('be:cookie-consent-updated', refreshStatus);
+    document.getElementById('btn-open-prefs').addEventListener('click', function () {
+      if (window.BECookieConsent) window.BECookieConsent.openPreferences();
+    });
+    document.getElementById('btn-reset').addEventListener('click', function () {
+      if (window.BECookieConsent) window.BECookieConsent.resetForPreview();
+      refreshStatus();
+    });
+    refreshStatus();
+  </script>
+</body>
+</html>

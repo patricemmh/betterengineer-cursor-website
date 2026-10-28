@@ -1,0 +1,2880 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-22",
+  "sourceOfTruth": {
+    "repository": "betterengineer-cursor-website",
+    "files": [
+      "data/pages.js",
+      "data/technologies.js",
+      "roles/{slug}/index.html"
+    ],
+    "note": "Marketing Intelligence should copy this file. Do not hand-edit a second page list in analytics."
+  },
+  "pageTypes": [
+    "role",
+    "technology",
+    "industry",
+    "solution",
+    "resource",
+    "company",
+    "landing-page",
+    "other"
+  ],
+  "pages": [
+    {
+      "url": "/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "BetterEngineer | Staff Augmentation & Engineering Talent",
+      "pageType": "landing-page",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/engineer-playlist/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "BetterEngineer Academy | AI Skills for Software Engineers",
+      "pageType": "resource",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/services/ai-systems-readiness-for-manufacturing/",
+      "aliases": [
+        "/ai-systems-readiness-for-manufacturing/"
+      ],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "AI Systems Readiness for Manufacturing Companies | BetterEngineer",
+      "pageType": "solution",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/services/hire-ai-ready-engineers/",
+      "aliases": [
+        "/hire-ai-ready-engineers/",
+        "/ai-fluent-engineers/"
+      ],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "Hire AI-Ready Engineers | BetterEngineer, AI Development Team from LATAM",
+      "pageType": "solution",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/staff-augmentation/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "Staff Augmentation | Nearshore Outsourcing Services & Remote Engineers",
+      "pageType": "solution",
+      "category": "Services",
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/ai-readiness/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "Accelerate Your Business with Expert AI Strategy",
+      "pageType": "solution",
+      "category": "Services",
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/hiring-dashboard/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "Remote Hiring Platform | Manage Software Engineer Recruitment",
+      "pageType": "solution",
+      "category": "Services",
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/about/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "BetterEngineer | Your Remote Software Engineering Talent Partner",
+      "pageType": "company",
+      "category": "Company",
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/latamengineer/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "Hire Nearshore Software Engineers from Latin America",
+      "pageType": "solution",
+      "category": "Company",
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/contact/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "Contact BetterEngineer | Connect with Our Team",
+      "pageType": "company",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/join/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "Why Join BetterEngineer | Senior Software Engineer Jobs",
+      "pageType": "company",
+      "category": "Careers",
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/faqs-nearshore-software-engineers-staff-augmentation-ai-talent/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "FAQs | Nearshore Software Engineers, Staff Augmentation & AI Talent",
+      "pageType": "resource",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/podcast/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "Off The Algorithm | The BetterEngineer Podcast",
+      "pageType": "resource",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/ebooks/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "Engineering & AI Ebooks for Tech Leaders | BetterEngineer",
+      "pageType": "resource",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/technical-glossary/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "Tech Glossary | Essential Terms for Software Industry Success | BetterEngineer",
+      "pageType": "resource",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/case-studies/livecgi/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "Scaling Unreal Engine Teams | 40% Cost Savings in 2 Weeks",
+      "pageType": "other",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/case-studies/wasteplace/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "WastePlace Case Study | Engineering Success with BetterEngineer",
+      "pageType": "other",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/case-studies/securelink/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "Scaling Engineering Teams | SecureLink's Success in Costa Rica | BetterEngineer",
+      "pageType": "other",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/resource-center/wpautoterms/privacy-policy/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "Privacy Policy | BetterEngineer",
+      "pageType": "other",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/terms-of-service/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "Terms of Service | BetterEngineer",
+      "pageType": "other",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/multi-step-contact-form/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "Find Top Software Engineering Talent – Find the Right Candidates",
+      "pageType": "other",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/webinar/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "Webinar",
+      "pageType": "other",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/aiwebinar/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "AI Webinar Registration",
+      "pageType": "other",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/roi/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "Increase Your R&D ROI",
+      "pageType": "other",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/youvegotllm/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "e-Books - You've got an LLM now what?",
+      "pageType": "other",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/hire-software-engineers-in-72-hours/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "BetterEngineer | Hire Remote Software Developers",
+      "pageType": "other",
+      "category": "Services",
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/careers/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "Engineer Careers | Remote Software Engineering Jobs at BetterEngineer",
+      "pageType": "other",
+      "category": "Careers",
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/careers/net-engineer/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "Engineer Careers | Remote Software Engineering Jobs at BetterEngineer",
+      "pageType": "other",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/careers/android-engineer/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "Engineer Careers | Remote Software Engineering Jobs at BetterEngineer",
+      "pageType": "other",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/careers/aws-engineer/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "Engineer Careers | Remote Software Engineering Jobs at BetterEngineer",
+      "pageType": "other",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/careers/azure-engineer/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "Engineer Careers | Remote Software Engineering Jobs at BetterEngineer",
+      "pageType": "other",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/careers/blockchain-engineer/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "Engineer Careers | Remote Software Engineering Jobs at BetterEngineer",
+      "pageType": "other",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/careers/cloudops-engineer/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "Engineer Careers | Remote Software Engineering Jobs at BetterEngineer",
+      "pageType": "other",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/careers/cordova-c-engineer/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "Engineer Careers | Remote Software Engineering Jobs at BetterEngineer",
+      "pageType": "other",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/careers/data-science-engineer/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "Engineer Careers | Remote Software Engineering Jobs at BetterEngineer",
+      "pageType": "other",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/careers/devops-engineer/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "Engineer Careers | Remote Software Engineering Jobs at BetterEngineer",
+      "pageType": "other",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/careers/drupal-engineer/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "Engineer Careers | Remote Software Engineering Jobs at BetterEngineer",
+      "pageType": "other",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/careers/e-commerce-engineer/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "Engineer Careers | Remote Software Engineering Jobs at BetterEngineer",
+      "pageType": "other",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/careers/elixir-engineer/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "Engineer Careers | Remote Software Engineering Jobs at BetterEngineer",
+      "pageType": "other",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/careers/embedded-software-engineer/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "Engineer Careers | Remote Software Engineering Jobs at BetterEngineer",
+      "pageType": "other",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/careers/front-end-engineer/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "Engineer Careers | Remote Software Engineering Jobs at BetterEngineer",
+      "pageType": "other",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/careers/full-stack-javascript-engineer/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "Engineer Careers | Remote Software Engineering Jobs at BetterEngineer",
+      "pageType": "other",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/careers/groovy-on-grails-engineer/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "Engineer Careers | Remote Software Engineering Jobs at BetterEngineer",
+      "pageType": "other",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/careers/ios-engineer/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "Engineer Careers | Remote Software Engineering Jobs at BetterEngineer",
+      "pageType": "other",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/careers/java-engineer/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "Engineer Careers | Remote Software Engineering Jobs at BetterEngineer",
+      "pageType": "other",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/careers/kubernetes-software-engineer/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "Engineer Careers | Remote Software Engineering Jobs at BetterEngineer",
+      "pageType": "other",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/careers/magneto-engineer/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "Engineer Careers | Remote Software Engineering Jobs at BetterEngineer",
+      "pageType": "other",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/careers/ms-dynamics-crm-engineer/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "Engineer Careers | Remote Software Engineering Jobs at BetterEngineer",
+      "pageType": "other",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/careers/node-js-engineer/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "Engineer Careers | Remote Software Engineering Jobs at BetterEngineer",
+      "pageType": "other",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/careers/openstack-engineer/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "Engineer Careers | Remote Software Engineering Jobs at BetterEngineer",
+      "pageType": "other",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/careers/peoplesoft-consultant/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "Engineer Careers | Remote Software Engineering Jobs at BetterEngineer",
+      "pageType": "other",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/careers/php-engineer/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "Engineer Careers | Remote Software Engineering Jobs at BetterEngineer",
+      "pageType": "other",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/careers/project-manager/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "Engineer Careers | Remote Software Engineering Jobs at BetterEngineer",
+      "pageType": "other",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/careers/python-engineer/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "Engineer Careers | Remote Software Engineering Jobs at BetterEngineer",
+      "pageType": "other",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/careers/qa-automation-engineer/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "Engineer Careers | Remote Software Engineering Jobs at BetterEngineer",
+      "pageType": "other",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/careers/react-native-engineer/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "Engineer Careers | Remote Software Engineering Jobs at BetterEngineer",
+      "pageType": "other",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/careers/ruby-on-rails-engineer/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "Engineer Careers | Remote Software Engineering Jobs at BetterEngineer",
+      "pageType": "other",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/careers/rust-c-engineer/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "Engineer Careers | Remote Software Engineering Jobs at BetterEngineer",
+      "pageType": "other",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/careers/salesforce-engineer/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "Engineer Careers | Remote Software Engineering Jobs at BetterEngineer",
+      "pageType": "other",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/careers/scala-engineer/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "Engineer Careers | Remote Software Engineering Jobs at BetterEngineer",
+      "pageType": "other",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/careers/shopify-engineer/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "Engineer Careers | Remote Software Engineering Jobs at BetterEngineer",
+      "pageType": "other",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/careers/typescript-engineer/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "Engineer Careers | Remote Software Engineering Jobs at BetterEngineer",
+      "pageType": "other",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/careers/ui-ux-engineer/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "Engineer Careers | Remote Software Engineering Jobs at BetterEngineer",
+      "pageType": "other",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/careers/unity-engineer/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "Engineer Careers | Remote Software Engineering Jobs at BetterEngineer",
+      "pageType": "other",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/careers/unreal-engineer/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "Engineer Careers | Remote Software Engineering Jobs at BetterEngineer",
+      "pageType": "other",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/careers/wordpress-engineer/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "Engineer Careers | Remote Software Engineering Jobs at BetterEngineer",
+      "pageType": "other",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/industries/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "Industries | Hire Nearshore Engineers by Vertical | BetterEngineer",
+      "pageType": "other",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/fintech/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "Hire Expert Fintech Engineers",
+      "pageType": "other",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/martech/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "Hire Expert MarTech Engineers",
+      "pageType": "other",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/healthtech/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "Hire Expert HealthTech Engineers",
+      "pageType": "other",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/roles/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "Software Engineering Roles | BetterEngineer",
+      "pageType": "role",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/technologies/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "Technologies | BetterEngineer",
+      "pageType": "technology",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/roles/ai-engineers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "AI engineers",
+      "pageType": "role",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": [
+        "/technologies/python-developers/",
+        "/technologies/openai-api-developers/",
+        "/technologies/cpp-developers/",
+        "/technologies/fastapi-developers/",
+        "/technologies/apache-spark-developers/",
+        "/technologies/tensorflow-developers/",
+        "/technologies/pytorch-developers/",
+        "/technologies/langchain-developers/",
+        "/technologies/scikit-learn-developers/"
+      ]
+    },
+    {
+      "url": "/roles/back-end-engineers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "Back-end engineers",
+      "pageType": "role",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": [
+        "/technologies/python-developers/",
+        "/technologies/laravel-developers/",
+        "/technologies/azure-developers/",
+        "/technologies/javascript-developers/",
+        "/technologies/java-developers/",
+        "/technologies/aws-developers/",
+        "/technologies/dotnet-developers/",
+        "/technologies/php-developers/",
+        "/technologies/django-developers/",
+        "/technologies/ruby-on-rails-developers/",
+        "/technologies/golang-developers/",
+        "/technologies/nodejs-developers/",
+        "/technologies/mongodb-developers/",
+        "/technologies/kotlin-developers/",
+        "/technologies/typescript-developers/",
+        "/technologies/nestjs-developers/",
+        "/technologies/graphql-developers/",
+        "/technologies/docker-developers/",
+        "/technologies/kubernetes-developers/",
+        "/technologies/spring-boot-developers/",
+        "/technologies/flask-developers/",
+        "/technologies/rust-developers/",
+        "/technologies/ruby-developers/",
+        "/technologies/openai-api-developers/",
+        "/technologies/postgresql-developers/",
+        "/technologies/csharp-developers/",
+        "/technologies/cpp-developers/",
+        "/technologies/expressjs-developers/",
+        "/technologies/fastapi-developers/",
+        "/technologies/mysql-developers/",
+        "/technologies/elasticsearch-developers/",
+        "/technologies/oracle-database-developers/",
+        "/technologies/sql-server-developers/",
+        "/technologies/apache-kafka-developers/",
+        "/technologies/redis-developers/"
+      ]
+    },
+    {
+      "url": "/roles/blockchain-engineers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "Blockchain engineers",
+      "pageType": "role",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
+      "url": "/roles/data-engineers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "Data engineers",
+      "pageType": "role",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": [
+        "/technologies/python-developers/",
+        "/technologies/aws-developers/",
+        "/technologies/mongodb-developers/",
+        "/technologies/flask-developers/",
+        "/technologies/google-cloud-developers/",
+        "/technologies/databricks-developers/",
+        "/technologies/postgresql-developers/",
+        "/technologies/snowflake-developers/",
+        "/technologies/mysql-developers/",
+        "/technologies/elasticsearch-developers/",
+        "/technologies/apache-spark-developers/",
+        "/technologies/oracle-database-developers/",
+        "/technologies/sql-server-developers/",
+        "/technologies/apache-kafka-developers/",
+        "/technologies/redis-developers/"
+      ]
+    },
+    {
+      "url": "/roles/data-science-engineers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "Data science engineers",
+      "pageType": "role",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": [
+        "/technologies/python-developers/",
+        "/technologies/openai-api-developers/",
+        "/technologies/databricks-developers/",
+        "/technologies/snowflake-developers/",
+        "/technologies/apache-spark-developers/",
+        "/technologies/tensorflow-developers/",
+        "/technologies/pytorch-developers/",
+        "/technologies/langchain-developers/",
+        "/technologies/scikit-learn-developers/"
+      ]
+    },
+    {
+      "url": "/roles/devops-engineers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "DevOps engineers",
+      "pageType": "role",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": [
+        "/technologies/azure-developers/",
+        "/technologies/java-developers/",
+        "/technologies/aws-developers/",
+        "/technologies/dotnet-developers/",
+        "/technologies/golang-developers/",
+        "/technologies/docker-developers/",
+        "/technologies/kubernetes-developers/",
+        "/technologies/rust-developers/",
+        "/technologies/google-cloud-developers/",
+        "/technologies/terraform-developers/",
+        "/technologies/jenkins-developers/",
+        "/technologies/elasticsearch-developers/",
+        "/technologies/oracle-database-developers/",
+        "/technologies/sql-server-developers/",
+        "/technologies/apache-kafka-developers/",
+        "/technologies/redis-developers/"
+      ]
+    },
+    {
+      "url": "/roles/front-end-engineers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "Front-end engineers",
+      "pageType": "role",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": [
+        "/technologies/angular-developers/",
+        "/technologies/react-native-developers/",
+        "/technologies/javascript-developers/",
+        "/technologies/react-developers/",
+        "/technologies/ionic-developers/",
+        "/technologies/typescript-developers/",
+        "/technologies/vuejs-developers/",
+        "/technologies/nextjs-developers/",
+        "/technologies/redux-developers/",
+        "/technologies/svelte-developers/",
+        "/technologies/nuxtjs-developers/"
+      ]
+    },
+    {
+      "url": "/roles/full-stack-engineers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "Full-stack engineers",
+      "pageType": "role",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": [
+        "/technologies/angular-developers/",
+        "/technologies/laravel-developers/",
+        "/technologies/javascript-developers/",
+        "/technologies/java-developers/",
+        "/technologies/dotnet-developers/",
+        "/technologies/php-developers/",
+        "/technologies/django-developers/",
+        "/technologies/ruby-on-rails-developers/",
+        "/technologies/nodejs-developers/",
+        "/technologies/react-developers/",
+        "/technologies/typescript-developers/",
+        "/technologies/nestjs-developers/",
+        "/technologies/graphql-developers/",
+        "/technologies/vuejs-developers/",
+        "/technologies/spring-boot-developers/",
+        "/technologies/ruby-developers/",
+        "/technologies/nextjs-developers/",
+        "/technologies/csharp-developers/",
+        "/technologies/expressjs-developers/",
+        "/technologies/redux-developers/",
+        "/technologies/svelte-developers/",
+        "/technologies/nuxtjs-developers/"
+      ]
+    },
+    {
+      "url": "/roles/mobile-engineers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "Mobile engineers",
+      "pageType": "role",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": [
+        "/technologies/ios-developers/",
+        "/technologies/react-native-developers/",
+        "/technologies/android-developers/",
+        "/technologies/flutter-developers/",
+        "/technologies/swift-developers/",
+        "/technologies/ionic-developers/",
+        "/technologies/kotlin-developers/"
+      ]
+    },
+    {
+      "url": "/roles/qa-engineers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "QA engineers",
+      "pageType": "role",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": [
+        "/technologies/ios-developers/"
+      ]
+    },
+    {
+      "url": "/technologies/python-developers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "Python",
+      "pageType": "technology",
+      "category": "Language",
+      "status": "live",
+      "primaryKeyword": "hire python developers",
+      "secondaryKeywords": [
+        "python developer hire",
+        "hire remote python developers",
+        "python staff augmentation"
+      ],
+      "relatedPages": [
+        "/technologies/django-developers/",
+        "/technologies/fastapi-developers/",
+        "/technologies/aws-developers/",
+        "/technologies/postgresql-developers/",
+        "/technologies/react-developers/",
+        "/technologies/pytorch-developers/",
+        "/roles/back-end-engineers/",
+        "/roles/data-engineers/",
+        "/roles/data-science-engineers/",
+        "/roles/ai-engineers/"
+      ]
+    },
+    {
+      "url": "/technologies/angular-developers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "Angular",
+      "pageType": "technology",
+      "category": "Frontend",
+      "status": "live",
+      "primaryKeyword": "hire angular developers",
+      "secondaryKeywords": [
+        "angular developer hire",
+        "hire remote angular developers",
+        "angular staff augmentation"
+      ],
+      "relatedPages": [
+        "/technologies/typescript-developers/",
+        "/technologies/javascript-developers/",
+        "/technologies/react-developers/",
+        "/technologies/nodejs-developers/",
+        "/technologies/dotnet-developers/",
+        "/technologies/graphql-developers/",
+        "/roles/front-end-engineers/",
+        "/roles/full-stack-engineers/"
+      ]
+    },
+    {
+      "url": "/technologies/laravel-developers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "Laravel",
+      "pageType": "technology",
+      "category": "Backend",
+      "status": "live",
+      "primaryKeyword": "hire laravel developers",
+      "secondaryKeywords": [
+        "laravel developer hire",
+        "hire remote laravel developers",
+        "laravel staff augmentation"
+      ],
+      "relatedPages": [
+        "/technologies/php-developers/",
+        "/technologies/mysql-developers/",
+        "/technologies/postgresql-developers/",
+        "/technologies/aws-developers/",
+        "/technologies/javascript-developers/",
+        "/technologies/redis-developers/",
+        "/roles/back-end-engineers/",
+        "/roles/full-stack-engineers/"
+      ]
+    },
+    {
+      "url": "/technologies/azure-developers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "Azure",
+      "pageType": "technology",
+      "category": "Cloud",
+      "status": "live",
+      "primaryKeyword": "hire azure developers",
+      "secondaryKeywords": [
+        "azure developer hire",
+        "hire remote azure developers",
+        "azure staff augmentation"
+      ],
+      "relatedPages": [
+        "/technologies/dotnet-developers/",
+        "/technologies/csharp-developers/",
+        "/technologies/terraform-developers/",
+        "/technologies/kubernetes-developers/",
+        "/technologies/aws-developers/",
+        "/technologies/docker-developers/",
+        "/roles/devops-engineers/",
+        "/roles/back-end-engineers/"
+      ]
+    },
+    {
+      "url": "/technologies/ios-developers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "iOS",
+      "pageType": "technology",
+      "category": "Mobile",
+      "status": "live",
+      "primaryKeyword": "hire ios developers",
+      "secondaryKeywords": [
+        "ios developer hire",
+        "hire remote ios developers",
+        "ios staff augmentation"
+      ],
+      "relatedPages": [
+        "/technologies/swift-developers/",
+        "/technologies/kotlin-developers/",
+        "/technologies/react-native-developers/",
+        "/technologies/flutter-developers/",
+        "/technologies/android-developers/",
+        "/technologies/aws-developers/",
+        "/roles/mobile-engineers/",
+        "/roles/qa-engineers/"
+      ]
+    },
+    {
+      "url": "/technologies/react-native-developers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "React Native",
+      "pageType": "technology",
+      "category": "Mobile",
+      "status": "live",
+      "primaryKeyword": "hire react native developers",
+      "secondaryKeywords": [
+        "react native developer hire",
+        "hire remote react native developers",
+        "react native staff augmentation"
+      ],
+      "relatedPages": [
+        "/technologies/react-developers/",
+        "/technologies/typescript-developers/",
+        "/technologies/javascript-developers/",
+        "/technologies/ios-developers/",
+        "/technologies/android-developers/",
+        "/technologies/flutter-developers/",
+        "/roles/mobile-engineers/",
+        "/roles/front-end-engineers/"
+      ]
+    },
+    {
+      "url": "/technologies/javascript-developers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "JavaScript",
+      "pageType": "technology",
+      "category": "Language",
+      "status": "live",
+      "primaryKeyword": "hire javascript developers",
+      "secondaryKeywords": [
+        "javascript developer hire",
+        "hire remote javascript developers",
+        "javascript staff augmentation"
+      ],
+      "relatedPages": [
+        "/technologies/typescript-developers/",
+        "/technologies/react-developers/",
+        "/technologies/nodejs-developers/",
+        "/technologies/nextjs-developers/",
+        "/technologies/expressjs-developers/",
+        "/technologies/vuejs-developers/",
+        "/roles/front-end-engineers/",
+        "/roles/full-stack-engineers/",
+        "/roles/back-end-engineers/"
+      ]
+    },
+    {
+      "url": "/technologies/java-developers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "Java",
+      "pageType": "technology",
+      "category": "Language",
+      "status": "live",
+      "primaryKeyword": "hire java developers",
+      "secondaryKeywords": [
+        "java developer hire",
+        "hire remote java developers",
+        "java staff augmentation"
+      ],
+      "relatedPages": [
+        "/technologies/spring-boot-developers/",
+        "/technologies/kotlin-developers/",
+        "/technologies/postgresql-developers/",
+        "/technologies/apache-kafka-developers/",
+        "/technologies/aws-developers/",
+        "/technologies/docker-developers/",
+        "/roles/back-end-engineers/",
+        "/roles/full-stack-engineers/",
+        "/roles/devops-engineers/"
+      ]
+    },
+    {
+      "url": "/technologies/aws-developers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "AWS",
+      "pageType": "technology",
+      "category": "Cloud",
+      "status": "live",
+      "primaryKeyword": "hire aws developers",
+      "secondaryKeywords": [
+        "aws engineer hire",
+        "hire remote aws engineers",
+        "aws staff augmentation"
+      ],
+      "relatedPages": [
+        "/technologies/terraform-developers/",
+        "/technologies/docker-developers/",
+        "/technologies/kubernetes-developers/",
+        "/technologies/jenkins-developers/",
+        "/technologies/azure-developers/",
+        "/technologies/google-cloud-developers/",
+        "/roles/devops-engineers/",
+        "/roles/back-end-engineers/",
+        "/roles/data-engineers/"
+      ]
+    },
+    {
+      "url": "/technologies/dotnet-developers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": ".NET",
+      "pageType": "technology",
+      "category": "Backend",
+      "status": "live",
+      "primaryKeyword": "hire .net developers",
+      "secondaryKeywords": [
+        ".net developer hire",
+        "hire remote .net developers",
+        ".net staff augmentation"
+      ],
+      "relatedPages": [
+        "/technologies/csharp-developers/",
+        "/technologies/azure-developers/",
+        "/technologies/sql-server-developers/",
+        "/technologies/docker-developers/",
+        "/technologies/angular-developers/",
+        "/technologies/react-developers/",
+        "/roles/back-end-engineers/",
+        "/roles/full-stack-engineers/",
+        "/roles/devops-engineers/"
+      ]
+    },
+    {
+      "url": "/technologies/php-developers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "PHP",
+      "pageType": "technology",
+      "category": "Language",
+      "status": "live",
+      "primaryKeyword": "hire php developers",
+      "secondaryKeywords": [
+        "php developer hire",
+        "hire remote php developers",
+        "php staff augmentation"
+      ],
+      "relatedPages": [
+        "/technologies/laravel-developers/",
+        "/technologies/mysql-developers/",
+        "/technologies/docker-developers/",
+        "/technologies/vuejs-developers/",
+        "/technologies/javascript-developers/",
+        "/technologies/aws-developers/",
+        "/roles/back-end-engineers/",
+        "/roles/full-stack-engineers/"
+      ]
+    },
+    {
+      "url": "/technologies/django-developers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "Django",
+      "pageType": "technology",
+      "category": "Backend",
+      "status": "live",
+      "primaryKeyword": "hire django developers",
+      "secondaryKeywords": [
+        "django developer hire",
+        "hire remote django developers",
+        "django staff augmentation"
+      ],
+      "relatedPages": [
+        "/technologies/python-developers/",
+        "/technologies/fastapi-developers/",
+        "/technologies/postgresql-developers/",
+        "/technologies/react-developers/",
+        "/technologies/aws-developers/",
+        "/technologies/docker-developers/",
+        "/roles/back-end-engineers/",
+        "/roles/full-stack-engineers/"
+      ]
+    },
+    {
+      "url": "/technologies/ruby-on-rails-developers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "Ruby on Rails",
+      "pageType": "technology",
+      "category": "Backend",
+      "status": "live",
+      "primaryKeyword": "hire ruby on rails developers",
+      "secondaryKeywords": [
+        "ruby on rails developer hire",
+        "hire remote rails developers",
+        "rails staff augmentation"
+      ],
+      "relatedPages": [
+        "/technologies/ruby-developers/",
+        "/technologies/postgresql-developers/",
+        "/technologies/react-developers/",
+        "/technologies/docker-developers/",
+        "/technologies/aws-developers/",
+        "/technologies/javascript-developers/",
+        "/roles/back-end-engineers/",
+        "/roles/full-stack-engineers/"
+      ]
+    },
+    {
+      "url": "/technologies/golang-developers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "Go",
+      "pageType": "technology",
+      "category": "Language",
+      "status": "live",
+      "primaryKeyword": "hire golang developers",
+      "secondaryKeywords": [
+        "hire go developers",
+        "hire remote golang developers",
+        "golang staff augmentation"
+      ],
+      "relatedPages": [
+        "/technologies/docker-developers/",
+        "/technologies/kubernetes-developers/",
+        "/technologies/postgresql-developers/",
+        "/technologies/apache-kafka-developers/",
+        "/technologies/aws-developers/",
+        "/technologies/redis-developers/",
+        "/roles/back-end-engineers/",
+        "/roles/devops-engineers/"
+      ]
+    },
+    {
+      "url": "/technologies/nodejs-developers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "Node.js",
+      "pageType": "technology",
+      "category": "Backend",
+      "status": "live",
+      "primaryKeyword": "hire node.js developers",
+      "secondaryKeywords": [
+        "node.js developer hire",
+        "hire remote node.js developers",
+        "node.js staff augmentation"
+      ],
+      "relatedPages": [
+        "/technologies/javascript-developers/",
+        "/technologies/typescript-developers/",
+        "/technologies/expressjs-developers/",
+        "/technologies/nestjs-developers/",
+        "/technologies/react-developers/",
+        "/technologies/postgresql-developers/",
+        "/roles/back-end-engineers/",
+        "/roles/full-stack-engineers/"
+      ]
+    },
+    {
+      "url": "/technologies/react-developers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "React",
+      "pageType": "technology",
+      "category": "Frontend",
+      "status": "live",
+      "primaryKeyword": "hire react developers",
+      "secondaryKeywords": [
+        "react developer hire",
+        "hire remote react developers",
+        "react.js staff augmentation"
+      ],
+      "relatedPages": [
+        "/technologies/javascript-developers/",
+        "/technologies/typescript-developers/",
+        "/technologies/nextjs-developers/",
+        "/technologies/redux-developers/",
+        "/technologies/nodejs-developers/",
+        "/technologies/react-native-developers/",
+        "/roles/front-end-engineers/",
+        "/roles/full-stack-engineers/"
+      ]
+    },
+    {
+      "url": "/technologies/android-developers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "Android",
+      "pageType": "technology",
+      "category": "Mobile",
+      "status": "live",
+      "primaryKeyword": "hire android developers",
+      "secondaryKeywords": [
+        "android developer hire",
+        "hire remote android developers",
+        "android app staff augmentation"
+      ],
+      "relatedPages": [
+        "/technologies/kotlin-developers/",
+        "/technologies/java-developers/",
+        "/technologies/ios-developers/",
+        "/technologies/flutter-developers/",
+        "/technologies/react-native-developers/",
+        "/technologies/graphql-developers/",
+        "/roles/mobile-engineers/"
+      ]
+    },
+    {
+      "url": "/technologies/flutter-developers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "Flutter",
+      "pageType": "technology",
+      "category": "Mobile",
+      "status": "live",
+      "primaryKeyword": "hire flutter developers",
+      "secondaryKeywords": [
+        "flutter developer hire",
+        "hire remote flutter developers",
+        "flutter app staff augmentation"
+      ],
+      "relatedPages": [
+        "/technologies/android-developers/",
+        "/technologies/ios-developers/",
+        "/technologies/react-native-developers/",
+        "/technologies/ionic-developers/",
+        "/technologies/kotlin-developers/",
+        "/roles/mobile-engineers/"
+      ]
+    },
+    {
+      "url": "/technologies/swift-developers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "Swift",
+      "pageType": "technology",
+      "category": "Language",
+      "status": "live",
+      "primaryKeyword": "hire swift developers",
+      "secondaryKeywords": [
+        "swift developer hire",
+        "hire remote swift developers",
+        "swift staff augmentation",
+        "hire ios swift developers"
+      ],
+      "relatedPages": [
+        "/technologies/ios-developers/",
+        "/technologies/kotlin-developers/",
+        "/technologies/flutter-developers/",
+        "/technologies/react-native-developers/",
+        "/technologies/android-developers/",
+        "/roles/mobile-engineers/"
+      ]
+    },
+    {
+      "url": "/technologies/ionic-developers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "Ionic",
+      "pageType": "technology",
+      "category": "Mobile",
+      "status": "live",
+      "primaryKeyword": "hire ionic developers",
+      "secondaryKeywords": [
+        "ionic developer hire",
+        "hire remote ionic developers",
+        "ionic staff augmentation",
+        "hire ionic app developers"
+      ],
+      "relatedPages": [
+        "/technologies/react-native-developers/",
+        "/technologies/flutter-developers/",
+        "/technologies/angular-developers/",
+        "/technologies/react-developers/",
+        "/technologies/typescript-developers/",
+        "/technologies/vuejs-developers/",
+        "/roles/mobile-engineers/",
+        "/roles/front-end-engineers/"
+      ]
+    },
+    {
+      "url": "/technologies/mongodb-developers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "MongoDB",
+      "pageType": "technology",
+      "category": "Data",
+      "status": "live",
+      "primaryKeyword": "hire mongodb developers",
+      "secondaryKeywords": [
+        "mongodb developer hire",
+        "hire remote mongodb developers",
+        "mongodb staff augmentation",
+        "hire mongodb engineers"
+      ],
+      "relatedPages": [
+        "/technologies/postgresql-developers/",
+        "/technologies/redis-developers/",
+        "/technologies/elasticsearch-developers/",
+        "/technologies/nodejs-developers/",
+        "/technologies/aws-developers/",
+        "/technologies/graphql-developers/",
+        "/roles/data-engineers/",
+        "/roles/back-end-engineers/"
+      ]
+    },
+    {
+      "url": "/technologies/kotlin-developers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "Kotlin",
+      "pageType": "technology",
+      "category": "Language",
+      "status": "live",
+      "primaryKeyword": "hire kotlin developers",
+      "secondaryKeywords": [
+        "kotlin developer hire",
+        "hire remote kotlin developers",
+        "kotlin staff augmentation",
+        "hire kotlin android developers"
+      ],
+      "relatedPages": [
+        "/technologies/android-developers/",
+        "/technologies/java-developers/",
+        "/technologies/spring-boot-developers/",
+        "/technologies/react-native-developers/",
+        "/technologies/flutter-developers/",
+        "/roles/mobile-engineers/",
+        "/roles/back-end-engineers/"
+      ]
+    },
+    {
+      "url": "/technologies/typescript-developers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "TypeScript",
+      "pageType": "technology",
+      "category": "Language",
+      "status": "live",
+      "primaryKeyword": "hire typescript developers",
+      "secondaryKeywords": [
+        "typescript developer hire",
+        "hire remote typescript developers",
+        "typescript staff augmentation",
+        "hire typescript engineers"
+      ],
+      "relatedPages": [
+        "/technologies/javascript-developers/",
+        "/technologies/react-developers/",
+        "/technologies/nodejs-developers/",
+        "/technologies/nextjs-developers/",
+        "/technologies/angular-developers/",
+        "/technologies/nestjs-developers/",
+        "/roles/front-end-engineers/",
+        "/roles/back-end-engineers/",
+        "/roles/full-stack-engineers/"
+      ]
+    },
+    {
+      "url": "/technologies/nestjs-developers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "NestJS",
+      "pageType": "technology",
+      "category": "Backend",
+      "status": "live",
+      "primaryKeyword": "hire nestjs developers",
+      "secondaryKeywords": [
+        "nestjs developer hire",
+        "hire remote nestjs developers",
+        "nestjs staff augmentation"
+      ],
+      "relatedPages": [
+        "/technologies/typescript-developers/",
+        "/technologies/nodejs-developers/",
+        "/technologies/expressjs-developers/",
+        "/technologies/graphql-developers/",
+        "/technologies/postgresql-developers/",
+        "/technologies/mongodb-developers/",
+        "/roles/back-end-engineers/",
+        "/roles/full-stack-engineers/"
+      ]
+    },
+    {
+      "url": "/technologies/graphql-developers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "GraphQL",
+      "pageType": "technology",
+      "category": "Backend",
+      "status": "live",
+      "primaryKeyword": "hire graphql developers",
+      "secondaryKeywords": [
+        "graphql developer hire",
+        "hire remote graphql developers",
+        "graphql api staff augmentation"
+      ],
+      "relatedPages": [
+        "/technologies/nodejs-developers/",
+        "/technologies/nestjs-developers/",
+        "/technologies/react-developers/",
+        "/technologies/typescript-developers/",
+        "/technologies/postgresql-developers/",
+        "/roles/back-end-engineers/",
+        "/roles/full-stack-engineers/"
+      ]
+    },
+    {
+      "url": "/technologies/vuejs-developers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "Vue.js",
+      "pageType": "technology",
+      "category": "Frontend",
+      "status": "live",
+      "primaryKeyword": "hire vue developers",
+      "secondaryKeywords": [
+        "vue.js developer hire",
+        "hire remote vue developers",
+        "vuejs staff augmentation"
+      ],
+      "relatedPages": [
+        "/technologies/nuxtjs-developers/",
+        "/technologies/typescript-developers/",
+        "/technologies/javascript-developers/",
+        "/technologies/nodejs-developers/",
+        "/technologies/graphql-developers/",
+        "/roles/front-end-engineers/",
+        "/roles/full-stack-engineers/"
+      ]
+    },
+    {
+      "url": "/technologies/docker-developers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "Docker",
+      "pageType": "technology",
+      "category": "Cloud",
+      "status": "live",
+      "primaryKeyword": "hire docker developers",
+      "secondaryKeywords": [
+        "docker engineer hire",
+        "hire remote devops engineers docker",
+        "docker staff augmentation"
+      ],
+      "relatedPages": [
+        "/technologies/kubernetes-developers/",
+        "/technologies/aws-developers/",
+        "/technologies/terraform-developers/",
+        "/technologies/jenkins-developers/",
+        "/technologies/google-cloud-developers/",
+        "/roles/devops-engineers/",
+        "/roles/back-end-engineers/"
+      ]
+    },
+    {
+      "url": "/technologies/kubernetes-developers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "Kubernetes",
+      "pageType": "technology",
+      "category": "Cloud",
+      "status": "live",
+      "primaryKeyword": "hire kubernetes developers",
+      "secondaryKeywords": [
+        "kubernetes engineer hire",
+        "hire remote devops engineers kubernetes",
+        "kubernetes staff augmentation"
+      ],
+      "relatedPages": [
+        "/technologies/docker-developers/",
+        "/technologies/aws-developers/",
+        "/technologies/terraform-developers/",
+        "/technologies/google-cloud-developers/",
+        "/technologies/jenkins-developers/",
+        "/roles/devops-engineers/",
+        "/roles/back-end-engineers/"
+      ]
+    },
+    {
+      "url": "/technologies/spring-boot-developers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "Spring Boot",
+      "pageType": "technology",
+      "category": "Backend",
+      "status": "live",
+      "primaryKeyword": "hire spring boot developers",
+      "secondaryKeywords": [
+        "spring boot developer hire",
+        "hire remote spring boot developers",
+        "spring boot staff augmentation"
+      ],
+      "relatedPages": [
+        "/technologies/java-developers/",
+        "/technologies/kotlin-developers/",
+        "/technologies/postgresql-developers/",
+        "/technologies/apache-kafka-developers/",
+        "/technologies/docker-developers/",
+        "/technologies/aws-developers/",
+        "/roles/back-end-engineers/",
+        "/roles/full-stack-engineers/"
+      ]
+    },
+    {
+      "url": "/technologies/flask-developers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "Flask",
+      "pageType": "technology",
+      "category": "Backend",
+      "status": "live",
+      "primaryKeyword": "hire flask developers",
+      "secondaryKeywords": [
+        "flask developer hire",
+        "hire remote flask developers",
+        "flask staff augmentation"
+      ],
+      "relatedPages": [
+        "/technologies/python-developers/",
+        "/technologies/django-developers/",
+        "/technologies/fastapi-developers/",
+        "/technologies/postgresql-developers/",
+        "/technologies/redis-developers/",
+        "/technologies/docker-developers/",
+        "/roles/back-end-engineers/",
+        "/roles/data-engineers/"
+      ]
+    },
+    {
+      "url": "/technologies/rust-developers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "Rust",
+      "pageType": "technology",
+      "category": "Language",
+      "status": "live",
+      "primaryKeyword": "hire rust developers",
+      "secondaryKeywords": [
+        "rust developer hire",
+        "hire remote rust developers",
+        "rust staff augmentation"
+      ],
+      "relatedPages": [
+        "/technologies/golang-developers/",
+        "/technologies/cpp-developers/",
+        "/technologies/docker-developers/",
+        "/technologies/kubernetes-developers/",
+        "/technologies/aws-developers/",
+        "/technologies/python-developers/",
+        "/roles/back-end-engineers/",
+        "/roles/devops-engineers/"
+      ]
+    },
+    {
+      "url": "/technologies/google-cloud-developers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "Google Cloud",
+      "pageType": "technology",
+      "category": "Cloud",
+      "status": "live",
+      "primaryKeyword": "hire google cloud developers",
+      "secondaryKeywords": [
+        "google cloud developer hire",
+        "hire remote google cloud engineers",
+        "gcp staff augmentation"
+      ],
+      "relatedPages": [
+        "/technologies/aws-developers/",
+        "/technologies/azure-developers/",
+        "/technologies/kubernetes-developers/",
+        "/technologies/docker-developers/",
+        "/technologies/terraform-developers/",
+        "/technologies/python-developers/",
+        "/roles/devops-engineers/",
+        "/roles/data-engineers/"
+      ]
+    },
+    {
+      "url": "/technologies/ruby-developers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "Ruby",
+      "pageType": "technology",
+      "category": "Language",
+      "status": "live",
+      "primaryKeyword": "hire ruby developers",
+      "secondaryKeywords": [
+        "ruby developer hire",
+        "hire remote ruby developers",
+        "ruby on rails staff augmentation"
+      ],
+      "relatedPages": [
+        "/technologies/ruby-on-rails-developers/",
+        "/technologies/postgresql-developers/",
+        "/technologies/redis-developers/",
+        "/technologies/javascript-developers/",
+        "/technologies/docker-developers/",
+        "/roles/back-end-engineers/",
+        "/roles/full-stack-engineers/"
+      ]
+    },
+    {
+      "url": "/technologies/nextjs-developers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "Next.js",
+      "pageType": "technology",
+      "category": "Frontend",
+      "status": "live",
+      "primaryKeyword": "hire next.js developers",
+      "secondaryKeywords": [
+        "hire nextjs developers",
+        "next.js developer hire",
+        "hire remote next.js developers"
+      ],
+      "relatedPages": [
+        "/technologies/react-developers/",
+        "/technologies/typescript-developers/",
+        "/technologies/nodejs-developers/",
+        "/technologies/graphql-developers/",
+        "/technologies/javascript-developers/",
+        "/roles/front-end-engineers/",
+        "/roles/full-stack-engineers/"
+      ]
+    },
+    {
+      "url": "/technologies/openai-api-developers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "OpenAI API",
+      "pageType": "technology",
+      "category": "AI/ML",
+      "status": "live",
+      "primaryKeyword": "hire openai api developers",
+      "secondaryKeywords": [
+        "hire openai api engineers",
+        "openai integration developer",
+        "hire llm integration engineers"
+      ],
+      "relatedPages": [
+        "/technologies/python-developers/",
+        "/technologies/langchain-developers/",
+        "/technologies/pytorch-developers/",
+        "/technologies/nodejs-developers/",
+        "/technologies/scikit-learn-developers/",
+        "/roles/ai-engineers/",
+        "/roles/back-end-engineers/",
+        "/roles/data-science-engineers/"
+      ]
+    },
+    {
+      "url": "/technologies/databricks-developers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "Databricks",
+      "pageType": "technology",
+      "category": "Data",
+      "status": "live",
+      "primaryKeyword": "hire databricks developers",
+      "secondaryKeywords": [
+        "hire databricks engineers",
+        "databricks developer hire",
+        "hire remote databricks engineers"
+      ],
+      "relatedPages": [
+        "/technologies/apache-spark-developers/",
+        "/technologies/python-developers/",
+        "/technologies/pytorch-developers/",
+        "/technologies/snowflake-developers/",
+        "/technologies/apache-kafka-developers/",
+        "/roles/data-engineers/",
+        "/roles/data-science-engineers/"
+      ]
+    },
+    {
+      "url": "/technologies/postgresql-developers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "PostgreSQL",
+      "pageType": "technology",
+      "category": "Data",
+      "status": "live",
+      "primaryKeyword": "hire postgresql developers",
+      "secondaryKeywords": [
+        "postgresql developer hire",
+        "hire remote postgresql developers",
+        "postgresql database engineer"
+      ],
+      "relatedPages": [
+        "/technologies/django-developers/",
+        "/technologies/fastapi-developers/",
+        "/technologies/mysql-developers/",
+        "/technologies/mongodb-developers/",
+        "/technologies/aws-developers/",
+        "/technologies/docker-developers/",
+        "/roles/data-engineers/",
+        "/roles/back-end-engineers/"
+      ]
+    },
+    {
+      "url": "/technologies/csharp-developers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "C#",
+      "pageType": "technology",
+      "category": "Language",
+      "status": "live",
+      "primaryKeyword": "hire c# developers",
+      "secondaryKeywords": [
+        "c# developer hire",
+        "hire remote c# developers",
+        ".net c# staff augmentation"
+      ],
+      "relatedPages": [
+        "/technologies/dotnet-developers/",
+        "/technologies/java-developers/",
+        "/technologies/typescript-developers/",
+        "/technologies/azure-developers/",
+        "/technologies/sql-server-developers/",
+        "/roles/back-end-engineers/",
+        "/roles/full-stack-engineers/"
+      ]
+    },
+    {
+      "url": "/technologies/cpp-developers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "C++",
+      "pageType": "technology",
+      "category": "Language",
+      "status": "live",
+      "primaryKeyword": "hire c++ developers",
+      "secondaryKeywords": [
+        "c++ developer hire",
+        "hire remote c++ developers",
+        "c++ systems engineer"
+      ],
+      "relatedPages": [
+        "/technologies/rust-developers/",
+        "/technologies/csharp-developers/",
+        "/technologies/python-developers/",
+        "/technologies/docker-developers/",
+        "/technologies/kubernetes-developers/",
+        "/roles/back-end-engineers/",
+        "/roles/ai-engineers/"
+      ]
+    },
+    {
+      "url": "/technologies/terraform-developers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "Terraform",
+      "pageType": "technology",
+      "category": "Cloud",
+      "status": "live",
+      "primaryKeyword": "hire terraform developers",
+      "secondaryKeywords": [
+        "terraform developer hire",
+        "hire remote terraform engineers",
+        "infrastructure as code engineer"
+      ],
+      "relatedPages": [
+        "/technologies/aws-developers/",
+        "/technologies/azure-developers/",
+        "/technologies/google-cloud-developers/",
+        "/technologies/kubernetes-developers/",
+        "/technologies/docker-developers/",
+        "/technologies/jenkins-developers/",
+        "/roles/devops-engineers/"
+      ]
+    },
+    {
+      "url": "/technologies/jenkins-developers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "Jenkins",
+      "pageType": "technology",
+      "category": "Cloud",
+      "status": "live",
+      "primaryKeyword": "hire jenkins developers",
+      "secondaryKeywords": [
+        "jenkins ci/cd engineer hire",
+        "hire remote jenkins developers",
+        "jenkins pipeline consultant"
+      ],
+      "relatedPages": [
+        "/technologies/docker-developers/",
+        "/technologies/kubernetes-developers/",
+        "/technologies/terraform-developers/",
+        "/technologies/aws-developers/",
+        "/technologies/azure-developers/",
+        "/roles/devops-engineers/"
+      ]
+    },
+    {
+      "url": "/technologies/expressjs-developers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "Express.js",
+      "pageType": "technology",
+      "category": "Backend",
+      "status": "live",
+      "primaryKeyword": "hire express.js developers",
+      "secondaryKeywords": [
+        "hire node.js express developers",
+        "express developer for hire",
+        "express.js staff augmentation"
+      ],
+      "relatedPages": [
+        "/technologies/nodejs-developers/",
+        "/technologies/nestjs-developers/",
+        "/technologies/mongodb-developers/",
+        "/technologies/react-developers/",
+        "/technologies/typescript-developers/",
+        "/roles/back-end-engineers/",
+        "/roles/full-stack-engineers/"
+      ]
+    },
+    {
+      "url": "/technologies/snowflake-developers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "Snowflake",
+      "pageType": "technology",
+      "category": "Data",
+      "status": "live",
+      "primaryKeyword": "hire snowflake developers",
+      "secondaryKeywords": [
+        "hire snowflake engineers",
+        "snowflake data engineer for hire",
+        "snowflake consultant staff augmentation"
+      ],
+      "relatedPages": [
+        "/technologies/databricks-developers/",
+        "/technologies/apache-spark-developers/",
+        "/technologies/postgresql-developers/",
+        "/technologies/aws-developers/",
+        "/technologies/apache-kafka-developers/",
+        "/roles/data-engineers/",
+        "/roles/data-science-engineers/"
+      ]
+    },
+    {
+      "url": "/technologies/redux-developers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "Redux",
+      "pageType": "technology",
+      "category": "Frontend",
+      "status": "live",
+      "primaryKeyword": "hire redux developers",
+      "secondaryKeywords": [
+        "redux developer hire",
+        "hire react redux developers",
+        "redux toolkit developers"
+      ],
+      "relatedPages": [
+        "/technologies/react-developers/",
+        "/technologies/typescript-developers/",
+        "/technologies/nextjs-developers/",
+        "/technologies/javascript-developers/",
+        "/technologies/graphql-developers/",
+        "/technologies/nodejs-developers/",
+        "/roles/front-end-engineers/",
+        "/roles/full-stack-engineers/"
+      ]
+    },
+    {
+      "url": "/technologies/fastapi-developers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "FastAPI",
+      "pageType": "technology",
+      "category": "Backend",
+      "status": "live",
+      "primaryKeyword": "hire fastapi developers",
+      "secondaryKeywords": [
+        "fastapi developer hire",
+        "hire remote fastapi developers",
+        "fastapi staff augmentation"
+      ],
+      "relatedPages": [
+        "/technologies/python-developers/",
+        "/technologies/django-developers/",
+        "/technologies/flask-developers/",
+        "/technologies/postgresql-developers/",
+        "/technologies/docker-developers/",
+        "/technologies/redis-developers/",
+        "/roles/back-end-engineers/",
+        "/roles/ai-engineers/"
+      ]
+    },
+    {
+      "url": "/technologies/mysql-developers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "MySQL",
+      "pageType": "technology",
+      "category": "Data",
+      "status": "live",
+      "primaryKeyword": "hire mysql developers",
+      "secondaryKeywords": [
+        "mysql developer hire",
+        "hire remote mysql developers",
+        "mysql database engineers"
+      ],
+      "relatedPages": [
+        "/technologies/postgresql-developers/",
+        "/technologies/mongodb-developers/",
+        "/technologies/php-developers/",
+        "/technologies/laravel-developers/",
+        "/technologies/aws-developers/",
+        "/technologies/redis-developers/",
+        "/roles/back-end-engineers/",
+        "/roles/data-engineers/"
+      ]
+    },
+    {
+      "url": "/technologies/elasticsearch-developers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "Elasticsearch",
+      "pageType": "technology",
+      "category": "Data",
+      "status": "live",
+      "primaryKeyword": "hire elasticsearch developers",
+      "secondaryKeywords": [
+        "elasticsearch developer hire",
+        "hire remote elasticsearch developers",
+        "elasticsearch staff augmentation"
+      ],
+      "relatedPages": [
+        "/technologies/apache-kafka-developers/",
+        "/technologies/postgresql-developers/",
+        "/technologies/mongodb-developers/",
+        "/technologies/aws-developers/",
+        "/technologies/docker-developers/",
+        "/technologies/kubernetes-developers/",
+        "/roles/back-end-engineers/",
+        "/roles/data-engineers/",
+        "/roles/devops-engineers/"
+      ]
+    },
+    {
+      "url": "/technologies/apache-spark-developers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "Apache Spark",
+      "pageType": "technology",
+      "category": "Data",
+      "status": "live",
+      "primaryKeyword": "hire apache spark developers",
+      "secondaryKeywords": [
+        "apache spark developer hire",
+        "hire remote spark developers",
+        "spark staff augmentation"
+      ],
+      "relatedPages": [
+        "/technologies/python-developers/",
+        "/technologies/databricks-developers/",
+        "/technologies/apache-kafka-developers/",
+        "/technologies/snowflake-developers/",
+        "/technologies/aws-developers/",
+        "/technologies/postgresql-developers/",
+        "/roles/data-engineers/",
+        "/roles/data-science-engineers/",
+        "/roles/ai-engineers/"
+      ]
+    },
+    {
+      "url": "/technologies/oracle-database-developers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "Oracle Database",
+      "pageType": "technology",
+      "category": "Data",
+      "status": "live",
+      "primaryKeyword": "hire oracle database developers",
+      "secondaryKeywords": [
+        "oracle developer hire",
+        "hire remote oracle database developers",
+        "oracle staff augmentation"
+      ],
+      "relatedPages": [
+        "/technologies/sql-server-developers/",
+        "/technologies/mysql-developers/",
+        "/technologies/postgresql-developers/",
+        "/technologies/dotnet-developers/",
+        "/technologies/aws-developers/",
+        "/technologies/azure-developers/",
+        "/roles/back-end-engineers/",
+        "/roles/data-engineers/",
+        "/roles/devops-engineers/"
+      ]
+    },
+    {
+      "url": "/technologies/sql-server-developers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "SQL Server",
+      "pageType": "technology",
+      "category": "Data",
+      "status": "live",
+      "primaryKeyword": "hire sql server developers",
+      "secondaryKeywords": [
+        "sql server developer hire",
+        "hire remote sql server developers",
+        "sql server staff augmentation"
+      ],
+      "relatedPages": [
+        "/technologies/oracle-database-developers/",
+        "/technologies/mysql-developers/",
+        "/technologies/postgresql-developers/",
+        "/technologies/dotnet-developers/",
+        "/technologies/azure-developers/",
+        "/technologies/aws-developers/",
+        "/roles/back-end-engineers/",
+        "/roles/data-engineers/",
+        "/roles/devops-engineers/"
+      ]
+    },
+    {
+      "url": "/technologies/apache-kafka-developers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "Apache Kafka",
+      "pageType": "technology",
+      "category": "Data",
+      "status": "live",
+      "primaryKeyword": "hire apache kafka developers",
+      "secondaryKeywords": [
+        "kafka developer hire",
+        "hire remote kafka engineers",
+        "apache kafka staff augmentation",
+        "hire kafka engineers"
+      ],
+      "relatedPages": [
+        "/technologies/apache-spark-developers/",
+        "/technologies/elasticsearch-developers/",
+        "/technologies/databricks-developers/",
+        "/technologies/aws-developers/",
+        "/technologies/java-developers/",
+        "/technologies/python-developers/",
+        "/roles/data-engineers/",
+        "/roles/back-end-engineers/",
+        "/roles/devops-engineers/"
+      ]
+    },
+    {
+      "url": "/technologies/svelte-developers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "Svelte",
+      "pageType": "technology",
+      "category": "Frontend",
+      "status": "live",
+      "primaryKeyword": "hire svelte developers",
+      "secondaryKeywords": [
+        "svelte developer hire",
+        "hire remote svelte developers",
+        "svelte staff augmentation",
+        "sveltekit developer hire"
+      ],
+      "relatedPages": [
+        "/technologies/react-developers/",
+        "/technologies/vuejs-developers/",
+        "/technologies/nuxtjs-developers/",
+        "/technologies/typescript-developers/",
+        "/technologies/javascript-developers/",
+        "/technologies/nodejs-developers/",
+        "/roles/front-end-engineers/",
+        "/roles/full-stack-engineers/"
+      ]
+    },
+    {
+      "url": "/technologies/nuxtjs-developers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "Nuxt.js",
+      "pageType": "technology",
+      "category": "Frontend",
+      "status": "live",
+      "primaryKeyword": "hire nuxt.js developers",
+      "secondaryKeywords": [
+        "nuxt developer hire",
+        "hire remote nuxt developers",
+        "nuxt staff augmentation",
+        "vue nuxt developer hire"
+      ],
+      "relatedPages": [
+        "/technologies/vuejs-developers/",
+        "/technologies/nextjs-developers/",
+        "/technologies/react-developers/",
+        "/technologies/typescript-developers/",
+        "/technologies/javascript-developers/",
+        "/technologies/nodejs-developers/",
+        "/roles/front-end-engineers/",
+        "/roles/full-stack-engineers/"
+      ]
+    },
+    {
+      "url": "/technologies/redis-developers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "Redis",
+      "pageType": "technology",
+      "category": "Data",
+      "status": "live",
+      "primaryKeyword": "hire redis developers",
+      "secondaryKeywords": [
+        "redis developer hire",
+        "hire remote redis engineers",
+        "redis staff augmentation",
+        "redis caching engineer hire"
+      ],
+      "relatedPages": [
+        "/technologies/postgresql-developers/",
+        "/technologies/mongodb-developers/",
+        "/technologies/mysql-developers/",
+        "/technologies/apache-kafka-developers/",
+        "/technologies/aws-developers/",
+        "/technologies/nodejs-developers/",
+        "/roles/back-end-engineers/",
+        "/roles/devops-engineers/",
+        "/roles/data-engineers/"
+      ]
+    },
+    {
+      "url": "/technologies/tensorflow-developers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "TensorFlow",
+      "pageType": "technology",
+      "category": "AI/ML",
+      "status": "live",
+      "primaryKeyword": "hire tensorflow developers",
+      "secondaryKeywords": [
+        "tensorflow developer hire",
+        "hire remote tensorflow engineers",
+        "hire tensorflow machine learning engineers"
+      ],
+      "relatedPages": [
+        "/technologies/pytorch-developers/",
+        "/technologies/python-developers/",
+        "/technologies/scikit-learn-developers/",
+        "/technologies/openai-api-developers/",
+        "/technologies/apache-spark-developers/",
+        "/technologies/databricks-developers/",
+        "/roles/ai-engineers/",
+        "/roles/data-science-engineers/"
+      ]
+    },
+    {
+      "url": "/technologies/pytorch-developers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "PyTorch",
+      "pageType": "technology",
+      "category": "AI/ML",
+      "status": "live",
+      "primaryKeyword": "hire pytorch developers",
+      "secondaryKeywords": [
+        "pytorch developer hire",
+        "hire remote pytorch engineers",
+        "hire pytorch machine learning engineers"
+      ],
+      "relatedPages": [
+        "/technologies/tensorflow-developers/",
+        "/technologies/python-developers/",
+        "/technologies/langchain-developers/",
+        "/technologies/openai-api-developers/",
+        "/technologies/scikit-learn-developers/",
+        "/technologies/apache-spark-developers/",
+        "/roles/ai-engineers/",
+        "/roles/data-science-engineers/"
+      ]
+    },
+    {
+      "url": "/technologies/langchain-developers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "LangChain",
+      "pageType": "technology",
+      "category": "AI/ML",
+      "status": "live",
+      "primaryKeyword": "hire langchain developers",
+      "secondaryKeywords": [
+        "langchain developer hire",
+        "hire remote langchain engineers",
+        "hire llm application developers"
+      ],
+      "relatedPages": [
+        "/technologies/openai-api-developers/",
+        "/technologies/python-developers/",
+        "/technologies/pytorch-developers/",
+        "/technologies/elasticsearch-developers/",
+        "/technologies/fastapi-developers/",
+        "/technologies/django-developers/",
+        "/roles/ai-engineers/",
+        "/roles/data-science-engineers/"
+      ]
+    },
+    {
+      "url": "/technologies/scikit-learn-developers/",
+      "aliases": [],
+      "hosts": [
+        "discover.betterengineer.com"
+      ],
+      "title": "Scikit-learn",
+      "pageType": "technology",
+      "category": "AI/ML",
+      "status": "live",
+      "primaryKeyword": "hire scikit-learn developers",
+      "secondaryKeywords": [
+        "scikit-learn developer hire",
+        "hire remote machine learning engineers",
+        "hire scikit-learn data scientists"
+      ],
+      "relatedPages": [
+        "/technologies/python-developers/",
+        "/technologies/pytorch-developers/",
+        "/technologies/tensorflow-developers/",
+        "/technologies/apache-spark-developers/",
+        "/technologies/databricks-developers/",
+        "/technologies/postgresql-developers/",
+        "/roles/ai-engineers/",
+        "/roles/data-science-engineers/"
+      ]
+    }
+  ]
+}

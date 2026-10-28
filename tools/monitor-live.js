@@ -215,6 +215,15 @@ async function main() {
   console.log('Live monitor for ' + SITE);
   console.log('Worker: ' + WORKER + '\n');
 
+  await expectStatus('discover root', SITE + '/', 200);
+  await checkPageContent(SITE + '/', {
+    label: 'discover root redirect',
+    patterns: [
+      { name: 'www redirect target', must: /www\.betterengineer\.com/ },
+      { name: 'technologies fallback link', must: /href="\/technologies\/"/ },
+    ],
+  });
+
   const urls = await fetchSitemapUrls();
   await checkSitemapPages(urls);
 

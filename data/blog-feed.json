@@ -1,0 +1,121 @@
+{
+  "fetchedAt": "2026-09-09T16:11:01.316Z",
+  "source": {
+    "latest": "https://blog.betterengineer.com/resource-center/rss.xml",
+    "ai": "https://blog.betterengineer.com/resource-center/tag/artificial-intelligence/rss.xml",
+    "join": "https://blog.betterengineer.com/resource-center/tag/for-candidates/rss.xml"
+  },
+  "feeds": {
+    "latest": [
+      {
+        "title": "3 Signals of a Great Staff Augmentation Partner",
+        "url": "https://blog.betterengineer.com/resource-center/3-signals-of-a-great-staff-augmentation-partner",
+        "date": "Wed, 19 Aug 2026 20:33:09 GMT",
+        "tags": [
+          "staff augmentation",
+          "For Businesses"
+        ],
+        "image": "https://blog.betterengineer.com/hubfs/Gemini_Generated_Image_d5bl9id5bl9id5bl.jpeg",
+        "excerpt": "Most buyers evaluating staff augmentation providers start the same way: a spreadsheet of hourly rates. It's the easiest thing to compare, and one of the..."
+      },
+      {
+        "title": "Choosing a Nearshore Staffing Partner: The 2026 Checklist",
+        "url": "https://blog.betterengineer.com/resource-center/choosing-a-nearshore-staffing-partner-the-2026-checklist",
+        "date": "Mon, 03 Aug 2026 20:36:54 GMT",
+        "tags": [
+          "staff augmentation"
+        ],
+        "image": "https://blog.betterengineer.com/hubfs/Copy%20of%20Blog%20Listing%20Thumbnails%20(80).png",
+        "excerpt": "Every nearshore staffing pitch says the same three things: \"vetted talent,\" \"fast turnaround,\" \"cost savings.\" As a company that does this work every day,..."
+      },
+      {
+        "title": "Latin America Tech Talent 2026: The Complete Guide for US Companies",
+        "url": "https://blog.betterengineer.com/resource-center/latin-america-tech-talent-2026-the-complete-guide-for-us-companies",
+        "date": "Mon, 03 Aug 2026 20:21:41 GMT",
+        "tags": [
+          "staff augmentation",
+          "Latin America"
+        ],
+        "image": "https://blog.betterengineer.com/hubfs/Copy%20of%20Blog%20Listing%20Thumbnails%20(79)-1.png",
+        "excerpt": "Latin America's engineering talent pool crossed a threshold in the last few years: it stopped being a cost-arbitrage story and became a genuine depth story...."
+      }
+    ],
+    "ai": [
+      {
+        "title": "What CTOs Get Wrong About AI and Engineering Throughput (And How LATAM Teams Fix It)",
+        "url": "https://blog.betterengineer.com/resource-center/what-ctos-get-wrong-about-ai-and-engineering-throughput-and-how-latam-teams-fix-it",
+        "date": "Wed, 22 Jul 2026 21:07:00 GMT",
+        "tags": [
+          "staff augmentation",
+          "Artificial Intelligence",
+          "For Businesses"
+        ],
+        "image": "https://blog.betterengineer.com/hubfs/Copy%20of%20Blog%20Listing%20Thumbnails%20(75).png",
+        "excerpt": "Every engineering leader has the same dashboard open right now. Copilot seats purchased. Cursor licenses issued. AI tools rolled out across the org. And the..."
+      },
+      {
+        "title": "5 AI Tools Engineering Teams Should Actually Use in 2026",
+        "url": "https://blog.betterengineer.com/resource-center/5-ai-tools-engineering-teams-should-actually-use-in-2026",
+        "date": "Tue, 30 Jun 2026 18:47:47 GMT",
+        "tags": [
+          "Artificial Intelligence",
+          "Software Development"
+        ],
+        "image": "https://blog.betterengineer.com/hubfs/Copy%20of%20Blog%20Listing%20Thumbnails%20(74)-1.png",
+        "excerpt": "Your engineering team may have more AI subscriptions than evidence that AI is improving delivery. It is a common situation. GitHub Copilot on every machine...."
+      },
+      {
+        "title": "The Jenga Tower Paradox: What AI Is Really Doing to Your Organization",
+        "url": "https://blog.betterengineer.com/resource-center/the-jenga-tower-paradox-what-ai-is-really-doing-to-your-organization",
+        "date": "Wed, 03 Jun 2026 18:37:58 GMT",
+        "tags": [
+          "Artificial Intelligence",
+          "Software Development"
+        ],
+        "image": "https://blog.betterengineer.com/hubfs/Copy%20of%20Blog%20Listing%20Thumbnails%20(68).png",
+        "excerpt": "In the middle of the current AI wave, it’s tempting to believe the hard part is tooling: Which copilot should we use? Which vendor? How fast can we roll..."
+      }
+    ],
+    "join": [
+      {
+        "title": "What Are People Actually Using AI For in Software Engineering Right Now?",
+        "url": "https://blog.betterengineer.com/resource-center/what-are-people-actually-using-ai-for-in-software-engineering-right-now",
+        "date": "Fri, 08 May 2026 22:21:39 GMT",
+        "tags": [
+          "For Employers",
+          "For Candidates",
+          "Artificial Intelligence",
+          "Software Development"
+        ],
+        "image": "https://blog.betterengineer.com/hubfs/Copy%20of%20Blog%20Listing%20Thumbnails%20(70).png",
+        "excerpt": "By Marc Boudria, Chief Innovation Officer at BetterEngineer.com There is a strange tension in software engineering right now."
+      },
+      {
+        "title": "How to Hire a Full Stack Developer (Checklist + Questions)",
+        "url": "https://blog.betterengineer.com/resource-center/how-to-hire-a-full-stack-developer-checklist-questions",
+        "date": "Mon, 04 May 2026 21:30:07 GMT",
+        "tags": [
+          "staff augmentation",
+          "For Candidates",
+          "Full Stack Engineers"
+        ],
+        "image": "https://blog.betterengineer.com/hubfs/Copy%20of%20Blog%20Listing%20Thumbnails%20(34).jpg",
+        "excerpt": "Hiring a great full-stack developer is deceptively hard."
+      },
+      {
+        "title": "5 Things You Need to Know If You're a Software Engineer in 2026",
+        "url": "https://blog.betterengineer.com/resource-center/5-things-you-need-to-know-if-youre-a-software-engineer-in-2026",
+        "date": "Thu, 30 Apr 2026 17:20:31 GMT",
+        "tags": [
+          "Career Tips",
+          "For Candidates",
+          "Artificial Intelligence",
+          "Software Development",
+          "Tech Trends"
+        ],
+        "image": "https://blog.betterengineer.com/hubfs/Copy%20of%20Blog%20Listing%20Thumbnails%20(44)-2.png",
+        "excerpt": "Your parents had to choose between stability and freedom. You don't."
+      }
+    ]
+  }
+}

@@ -1,0 +1,51 @@
+  <main id="main">
+    <section class="hero section" id="hero" aria-labelledby="hero-title">
+      <div class="wrap">
+        <div class="reveal">
+          <h1 class="h1" id="hero-title">Ebooks: Engineering Insights, Backed by Real Data</h1>
+          <p class="lead">Access research-driven guides built from thousands of developer profiles, hiring engagements, and real-world AI implementation experience.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- MIGRATION: the source page has no heading above the ebook grid, so this section is labelled with aria-label rather than aria-labelledby. No visible heading was invented. -->
+    <!-- MIGRATION: on the source page the "FREE EBOOK" / "FREE WHITEPAPER" labels sit inside the H3 alongside the title. They are rendered here as sibling .eyebrow paragraphs so the heading text is the title alone. No words changed. -->
+    <!-- MIGRATION: .resource-card__cover is omitted deliberately. The live page has no cover art for either resource. Note that styles/landing-page.css currently declares .resource-card as a two-column grid (cover + body); a no-cover rule and the .resource-grid wrapper both still need adding to the stylesheet. -->
+    <section class="section" id="ebooks" aria-label="Ebooks">
+      <div class="wrap">
+        <div class="resource-grid">
+          <div class="resource-card reveal">
+            <div class="resource-card__body">
+              <p class="eyebrow">FREE EBOOK</p>
+              <h2 class="h2">The AI-ready Engine: How to build teams that learn and ship 10x faster</h2>
+              <p>This playbook gives founders and tech leaders a concrete roadmap, from maturity model to hiring patterns to ready-to-use templates, to turn AI into a real competitive advantage.</p>
+              <!-- MIGRATION: em dash replaced, wording unchanged. See content-followups.md -->
+              <!-- MIGRATION: original file lives on host www.betterengineer.com at path /hubfs/The%20AI%E2%80%90Ready%20Engine%20-%20How%20to%20Build%20Teams%20that%20Learn%20and%20Ship%2010%C3%97%20Faster%20-%20betterengineer.pdf over https (the full URL is split here because tools/verify-migrated-pages.js fails on any hubfs URL in the output, comments included). Decoded name contains U+2010 HYPHEN and U+00D7 MULTIPLICATION SIGN. Fetch it and save it as /downloads/ebooks/ai-ready-engine.pdf. -->
+              <a class="btn btn--primary" href="/downloads/ebooks/ai-ready-engine.pdf" download aria-label="Download Now: The AI-ready Engine">Download Now</a>
+            </div>
+          </div>
+          <div class="resource-card reveal">
+            <div class="resource-card__body">
+              <p class="eyebrow">FREE WHITEPAPER</p>
+              <h2 class="h2">You've got an LLM, Now What?</h2>
+              <p>Having access to an LLM isn't a strategy. This whitepaper breaks down why most RAG and agent implementations fail, what sovereign AI actually means for your business, and how to build systems that reason, not just retrieve.</p>
+              <!-- MIGRATION: original file lives on host www.betterengineer.com at path /hubfs/Documents/Youve%20Got%20an%20LLM%2c%20Now%20What%20(2).pdf over https (URL split for the same verifier reason as above). The "(2)" duplicate-upload suffix means an earlier revision may exist in the same folder; confirm this is current, then fetch it and save it as /downloads/ebooks/youve-got-an-llm-now-what.pdf. -->
+              <a class="btn btn--primary" href="/downloads/ebooks/youve-got-an-llm-now-what.pdf" download aria-label="Download Now: You've got an LLM, Now What?">Download Now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Latest Resource Center posts are injected at build time from HubSpot RSS. See build-blog-feed.js / CF-54. -->
+    <section class="section section-tint" id="articles" aria-labelledby="articles-heading">
+      <div class="wrap">
+        <div class="reveal air-section-head" style="max-width:44rem">
+          <h2 class="h2" id="articles-heading">Latest Articles from our <span class="accent">Resource Center.</span></h2>
+        </div>
+        <div class="post-grid post-grid--blog">
+<!--BLOG_FEED:latest-->
+        </div>
+      </div>
+    </section>
+  </main>

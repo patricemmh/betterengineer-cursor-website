@@ -114,16 +114,22 @@ in `data/glossary.js` with a `note`. Needs sign-off.
 
 ---
 
-## Intentionally not started (do not treat as this week's list)
+## Built locally 2026-09-09 (still noindex, not on discover)
 
-- Phase 3 case studies
-- Phase 4 legal
-- Phase 5 multi-step contact
-- Phase 6 careers
-- Phase 8 industries
-- Roles v2 generator (schema gaps on front-end/blockchain/hub are closed without it)
-- Exhaustive tablet and desktop QA on all 11 migrated pages
+Phases 3 to 8 now have pages in this repo. Preview them at `http://localhost:4323/preview/`. They stay `noindex` and out of the discover bundle.
+
+- Phase 3: Live CGI, WastePlace, SecureLink
+- Phase 4: Privacy Policy (WordPress-era slug kept) and Terms of Service
+- Phase 5: new 4-step hire form at `/multi-step-contact-form/`
+- Phase 6: careers hub plus 39 job pages from the live HubSpot set
+- Phase 8: `/industries/` hub plus `/fintech`, `/martech`, `/healthtech` (expandable via `data/industries.js`)
+
+## Intentionally still later
+
+- Roles v2 generator
+- Exhaustive tablet and desktop QA on every migrated page
 - FW-01 ebook HTML pages, FW-03 podcast transcripts
+- Deploying the intake Worker change (`localhost:4323` origin) until you choose to publish that Worker
 
 ---
 
@@ -147,7 +153,7 @@ Friday 2026-08-07 decisions in `content-followups.md` section 10 still stand.
 - Trailing slashes: this build serves `/about/`; HubSpot serves `/about`.
 - Turnstile site key and intake Worker origins are domain scoped.
 - Hiring dashboard MP4 is 12.5 MB: `videos/pages/hiring-dashboard/better-engineer-dashboard.mp4`. Git skips it unless added explicitly.
-- Header CTA still points at `/multi-step-contact-form`, which is not in this build.
+- Header CTA points at `/multi-step-contact-form`, which is now built locally. Confirm HubSpot workflows on form `d43da6a3-79aa-45d4-99be-0d1e8162daf7` before cutover.
 
 ---
 

@@ -505,10 +505,18 @@ function getEngineerDisplayName(engineer) {
   return `${engineer.firstName} ${engineer.lastInitial}.`;
 }
 
-module.exports = {
-  ENGINEERS,
-  getEngineersForRole,
-  getEngineersForTech,
-  getEngineerPhoto,
-  getEngineerDisplayName,
+var BEEngineersApi = {
+  ENGINEERS: ENGINEERS,
+  getEngineersForRole: getEngineersForRole,
+  getEngineersForTech: getEngineersForTech,
+  getEngineerPhoto: getEngineerPhoto,
+  getEngineerDisplayName: getEngineerDisplayName,
 };
+
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = BEEngineersApi;
+}
+
+if (typeof globalThis !== "undefined") {
+  globalThis.BEEngineers = BEEngineersApi;
+}

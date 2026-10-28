@@ -327,6 +327,10 @@
     activateGuideTab(0);
   }
 
+  if (window.BEAttribution) {
+    window.BEAttribution.init();
+  }
+
   // ── Hero intake form (role + tech pages using air-page.js) ─────────────
   var roleForm = document.getElementById('react-intake-form');
   if (roleForm && window.BEIntakeForm) {

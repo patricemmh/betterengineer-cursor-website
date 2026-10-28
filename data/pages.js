@@ -52,7 +52,7 @@ var OG_IMAGE = DISCOVER + '/images/roles/shared/trust-laptop.png';
 
 /* Migrated pages stay out of the index until www is cut over to this build.
    See docs/site-migration/redirect-plan.md section 6. Set to null at cutover. */
-var PRE_CUTOVER_ROBOTS = 'noindex, follow';
+var PRE_CUTOVER_ROBOTS = null;
 
 function hireAiReadyCanonical(ctx) {
   if (ctx.siteBase === '/ai-fluent-engineers' && ctx.githubPagesCname) {
@@ -179,6 +179,7 @@ var migratedPages = [
     outputs: ['ai-readiness/index.html'],
     cssBundle: 'landing',
     script: 'page.js',
+    scripts: ['page.js', 'hs-lead-form.js'],
     migrated: true,
     navActive: 'services',
     title: 'Accelerate Your Business with Expert AI Strategy',
@@ -356,6 +357,7 @@ var phase2Pages = [
     outputs: ['podcast/index.html'],
     cssBundle: 'landing',
     script: 'page.js',
+    scripts: ['page.js', 'hs-lead-form.js'],
     migrated: true,
     /* The live title tag is the single word "Podcast" and there is no meta
        description at all. Both are written here rather than migrated, because
@@ -424,9 +426,103 @@ var phase2Pages = [
   },
 ];
 
+var phase3Pages = require('./case-studies.js').pageRecords();
+
+var phase4Pages = [
+  {
+    slug: 'privacy-policy',
+    fragment: 'main-privacy-policy.html',
+    outputs: ['resource-center/wpautoterms/privacy-policy/index.html'],
+    cssBundle: 'landing',
+    script: 'page.js',
+    migrated: true,
+    title: 'Privacy Policy | BetterEngineer',
+    description: 'Privacy Policy | BetterEngineer',
+    canonical: WWW + '/resource-center/wpautoterms/privacy-policy',
+    breadcrumb: [{ name: 'Home', url: WWW + '/' }, { name: 'Privacy Policy' }],
+    lastUpdated: '2026-08',
+  },
+  {
+    slug: 'terms-of-service',
+    fragment: 'main-terms-of-service.html',
+    outputs: ['terms-of-service/index.html'],
+    cssBundle: 'landing',
+    script: 'page.js',
+    migrated: true,
+    title: 'Terms of Service | BetterEngineer',
+    description: 'Terms of Service | BetterEngineer',
+    canonical: WWW + '/terms-of-service',
+    breadcrumb: [{ name: 'Home', url: WWW + '/' }, { name: 'Terms of Service' }],
+    lastUpdated: '2021-07',
+  },
+];
+
+var phase5Pages = [
+  {
+    slug: 'multi-step-contact-form',
+    fragment: 'main-multi-step-contact-form.html',
+    outputs: ['multi-step-contact-form/index.html'],
+    cssBundle: 'landing',
+    chrome: 'minimal',
+    script: 'page.js',
+    scripts: ['page.js', 'hire-flow.js'],
+    migrated: true,
+    robots: 'noindex, nofollow',
+    title: 'Find Top Software Engineering Talent – Find the Right Candidates',
+    description:
+      'Tell us what you need in a software engineer, and we’ll match you with the right candidates. Start your search now with our simple multi-step form.',
+    canonical: WWW + '/multi-step-contact-form',
+    breadcrumb: [{ name: 'Home', url: WWW + '/' }, { name: 'Hire Engineers' }],
+    lastUpdated: '2026-09',
+  },
+];
+
+var leftoverHubSpotPages = [
+  {
+    slug: 'youvegotllm',
+    fragment: 'main-youvegotllm.html',
+    outputs: ['youvegotllm/index.html'],
+    cssBundle: 'landing',
+    script: 'page.js',
+    migrated: true,
+    title: "e-Books - You've got an LLM now what?",
+    description:
+      'Explore expert guidance, proven frameworks, and real-world risks when implementing AI solutions.',
+    canonical: WWW + '/youvegotllm',
+    breadcrumb: [{ name: 'Home', url: WWW + '/' }, { name: "You've got an LLM" }],
+    lastUpdated: '2026-09',
+  },
+  {
+    slug: 'hire-software-engineers-in-72-hours',
+    fragment: 'main-hire-software-engineers-in-72-hours.html',
+    outputs: ['hire-software-engineers-in-72-hours/index.html'],
+    cssBundle: 'landing',
+    script: 'page.js',
+    scripts: ['page.js', 'hs-lead-form.js'],
+    migrated: true,
+    navActive: 'services',
+    title: 'BetterEngineer | Hire Remote Software Developers',
+    description:
+      'Hire top remote software engineers in your timezone. BetterEngineer connects you with vetted talent for faster delivery and proven project results.',
+    canonical: WWW + '/hire-software-engineers-in-72-hours',
+    breadcrumb: [{ name: 'Home', url: WWW + '/' }, { name: 'Hire in 72 Hours' }],
+    lastUpdated: '2026-09',
+  },
+];
+
+var phase6Pages = require('./careers.js').pageRecords();
+var phase8Pages = require('./industries.js').pageRecords();
+
 /* Migrated pages are excluded from the discover bundle until cutover. Anything in
    this list must not appear in dist/sitemap.xml or dist/llms.txt. */
-var allMigrated = migratedPages.concat(phase2Pages);
+var allMigrated = migratedPages
+  .concat(phase2Pages)
+  .concat(phase3Pages)
+  .concat(phase4Pages)
+  .concat(phase5Pages)
+  .concat(leftoverHubSpotPages)
+  .concat(phase6Pages)
+  .concat(phase8Pages);
 
 var migratedSlugs = allMigrated.map(function (p) {
   return p.slug;
@@ -442,5 +538,11 @@ module.exports = {
   migratedPages: allMigrated,
   phase1Pages: migratedPages,
   phase2Pages: phase2Pages,
+  phase3Pages: phase3Pages,
+  phase4Pages: phase4Pages,
+  phase5Pages: phase5Pages,
+  leftoverHubSpotPages: leftoverHubSpotPages,
+  phase6Pages: phase6Pages,
+  phase8Pages: phase8Pages,
   migratedSlugs: migratedSlugs,
 };

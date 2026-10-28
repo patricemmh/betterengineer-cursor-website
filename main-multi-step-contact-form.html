@@ -1,0 +1,117 @@
+<main id="main" class="hire-wizard-page">
+    <section class="hire-wizard-hero hire-wizard-hero--full" id="hero">
+      <div class="hire-wizard-shell">
+        <div class="hire-wizard-main">
+          <div id="hire-wizard">
+            <div class="hire-progress" role="progressbar" aria-valuemin="1" aria-valuemax="3" aria-valuenow="1" aria-labelledby="hire-step-label">
+              <p class="hire-wizard-step-label" id="hire-step-label">Step 1 of 3</p>
+              <span class="hire-progress__dot is-current"></span>
+              <span class="hire-progress__dot"></span>
+              <span class="hire-progress__dot"></span>
+            </div>
+
+            <form id="hire-wizard-form" class="react-intake-form hire-wizard-form" novalidate data-hs-do-not-collect="true">
+              <div class="hire-step is-active" data-step="1">
+                <p class="hire-step__intro">With just a few details, we can help narrow down some potential candidates for your development needs.</p>
+                <fieldset>
+                  <legend id="hire-engineers-label">How many people are you looking to hire?</legend>
+                  <div class="hire-step-1-actions">
+                    <div class="hire-count-row">
+                      <label class="hire-count">
+                        <input type="radio" name="engineers_choice" value="1">
+                        <span>1</span>
+                      </label>
+                      <label class="hire-count">
+                        <input type="radio" name="engineers_choice" value="2">
+                        <span>2</span>
+                      </label>
+                      <label class="hire-count">
+                        <input type="radio" name="engineers_choice" value="3">
+                        <span>3</span>
+                      </label>
+                      <label class="hire-count">
+                        <input type="radio" name="engineers_choice" value="4">
+                        <span>4+</span>
+                      </label>
+                    </div>
+                    <div class="btn-row hire-wizard-actions hire-step-1-actions__nav">
+                      <button type="button" class="btn btn--primary" data-next>Next</button>
+                    </div>
+                  </div>
+                  <input id="hire-engineers" name="engineers" type="hidden" value="">
+                </fieldset>
+              </div>
+
+              <div class="hire-step" data-step="2" hidden>
+                <fieldset>
+                  <legend id="hire-skills-label">Do you know what skills you are looking for?</legend>
+                  <div class="hire-skill-grid" role="group" aria-labelledby="hire-skills-label">
+                    <label class="hire-skill"><input type="checkbox" name="skills" value="Mobile"><span>Mobile</span></label>
+                    <label class="hire-skill"><input type="checkbox" name="skills" value="Front-End"><span>Front-End</span></label>
+                    <label class="hire-skill"><input type="checkbox" name="skills" value="Back-End"><span>Back-End</span></label>
+                    <label class="hire-skill"><input type="checkbox" name="skills" value="Full Stack"><span>Full Stack</span></label>
+                    <label class="hire-skill"><input type="checkbox" name="skills" value="DevOps"><span>DevOps</span></label>
+                    <label class="hire-skill"><input type="checkbox" name="skills" value="QA Automation"><span>QA Automation</span></label>
+                    <label class="hire-skill"><input type="checkbox" name="skills" value="Data Science"><span>Data Science</span></label>
+                    <label class="hire-skill"><input type="checkbox" name="skills" value="Big Data"><span>Big Data</span></label>
+                    <label class="hire-skill"><input type="checkbox" name="skills" value="AI"><span>AI</span></label>
+                  </div>
+                </fieldset>
+                <div class="hire-specific">
+                  <label for="specific-skills">Don't see what you're looking for? Type the specific skills you need.</label>
+                  <input id="specific-skills" name="specific_skills" type="text" placeholder="ex: Project Manager, UX Designer" autocomplete="off">
+                </div>
+                <div class="btn-row hire-wizard-actions">
+                  <button type="button" class="btn btn--outline" data-prev>Previous</button>
+                  <button type="button" class="btn btn--primary" data-next>Next</button>
+                </div>
+              </div>
+
+              <div class="hire-step hire-step--contact" data-step="3" hidden>
+                <p class="hire-step__intro">We're almost there. Now we just need your information to get in contact.</p>
+                <div class="hire-fields">
+                  <div class="form-field form-field--full">
+                    <label for="hire-name">Your Name<span class="hire-req" aria-hidden="true">*</span></label>
+                    <input id="hire-name" name="name" type="text" autocomplete="name" required>
+                  </div>
+                  <div class="form-field form-field--full">
+                    <label for="hire-company">Your Company<span class="hire-req" aria-hidden="true">*</span></label>
+                    <input id="hire-company" name="company" type="text" autocomplete="organization" required>
+                  </div>
+                  <div class="form-field form-field--full">
+                    <label for="hire-email">Your Work Email<span class="hire-req" aria-hidden="true">*</span></label>
+                    <input id="hire-email" name="email" type="email" autocomplete="email" required>
+                  </div>
+                  <div class="form-field form-field--full">
+                    <label for="hire-notes">Anything you would like us to know about your hiring needs? (optional)</label>
+                    <textarea id="hire-notes" name="hiring_needs" rows="4"></textarea>
+                  </div>
+                </div>
+                <p class="hire-privacy">BetterEngineer.com, operated by Salsa, LLC (“we”, “us”, or “our”), is committed to protecting and respecting your privacy. We will only use your personal information to provide the services you request. From time to time, we may contact you about related products, services, or updates that may be of interest. If you consent to us contacting you for this purpose, please check the box below.</p>
+                <label class="hire-consent">
+                  <input id="hire-consent" name="consent" type="checkbox" required checked>
+                  <span>I agree to receive communications from Better Engineer.<span class="hire-req" aria-hidden="true">*</span></span>
+                </label>
+                <p class="hire-unsub">You may unsubscribe from these communications at any time. For more information about how to unsubscribe, our privacy practices, and how we are committed to protecting your information, please review our <a href="https://www.betterengineer.com/resource-center/wpautoterms/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a>.</p>
+                <p class="hire-recaptcha">This form is protected by reCAPTCHA.</p>
+                <div class="btn-row hire-wizard-actions">
+                  <button type="button" class="btn btn--outline" data-prev>Previous</button>
+                  <button class="btn btn--primary react-intake-submit" type="submit">Submit</button>
+                </div>
+              </div>
+
+              <div aria-hidden="true" style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;pointer-events:none">
+                <label for="company_website">Leave this field empty</label>
+                <input type="text" name="company_website" id="company_website" tabindex="-1" autocomplete="off" value="">
+              </div>
+              <input type="hidden" name="utm_campaign" value="">
+              <input type="hidden" name="utm_content" value="">
+              <input type="hidden" name="utm_medium" value="">
+              <input type="hidden" name="utm_source" value="">
+              <p id="hire-wizard-status" class="form-status" role="status" aria-live="polite"></p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>

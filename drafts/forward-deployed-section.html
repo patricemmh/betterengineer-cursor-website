@@ -1,0 +1,84 @@
+<!--
+  Saved draft: Forward Deployed Engineers section
+  Removed from main-home.html. Paste back under #ai-fluency and
+  restore the CSS block into styles/brand.css when ready to use again.
+-->
+
+<section class="section" id="forward-deployed" aria-labelledby="forward-deployed-heading">
+  <div class="wrap fde-split">
+    <div class="fde-copy reveal">
+      <p class="eyebrow">Forward Deployed Engineers</p>
+      <h2 class="h2" id="forward-deployed-heading">They work <span class="accent">inside your company</span>, not beside it.</h2>
+      <p class="lead">BetterEngineer placements are built to embed. Your engineers join standups, share your Slack channels, pick up tickets in your tools, and own outcomes with the rest of the team.</p>
+      <a class="btn btn--primary" href="https://www.betterengineer.com/multi-step-contact-form">Find Embedded Talent</a>
+    </div>
+    <ul class="fde-points reveal">
+      <li>
+        <strong>Same hours, same rituals</strong>
+        <span>Full U.S. time-zone overlap so collaboration happens in real time, not overnight handoffs.</span>
+      </li>
+      <li>
+        <strong>Your stack and your process</strong>
+        <span>They work in your repos, ticketing system, and review cycle from week one.</span>
+      </li>
+      <li>
+        <strong>Ownership, not ticket taking</strong>
+        <span>Matched for communication and judgment so they can push work forward without constant oversight.</span>
+      </li>
+      <li>
+        <strong>Built for long stays</strong>
+        <span>Average engineer tenure is 21.3 months because we prioritize fit over fill rate.</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<style>
+/* Forward Deployed Engineers (paste into styles/brand.css) */
+#forward-deployed {
+  background: linear-gradient(180deg, #fff 0%, var(--color-surface) 100%);
+  padding-top: 2.5rem;
+}
+@media (max-width: 768px) {
+  #forward-deployed { padding-top: 1.75rem; }
+}
+.fde-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  gap: clamp(2.25rem, 5vw, 4.5rem);
+  align-items: center;
+}
+@media (max-width: 900px) {
+  .fde-split { grid-template-columns: 1fr; gap: 2rem; }
+}
+.fde-copy .lead { margin-bottom: 1.75rem; }
+.fde-points {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem 1.5rem;
+}
+@media (max-width: 600px) {
+  .fde-points { grid-template-columns: 1fr; }
+}
+.fde-points li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding-top: 1rem;
+  border-top: 2px solid rgba(84, 91, 179, 0.35);
+}
+.fde-points strong {
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: var(--color-text);
+}
+.fde-points span {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--color-muted);
+}
+</style>

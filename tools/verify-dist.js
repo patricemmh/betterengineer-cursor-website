@@ -85,10 +85,27 @@ function checkFavicon(filePath, html) {
   }
 }
 
+function usesCookieConsentGate(html) {
+  return (
+    html.includes('cookie-consent.js') &&
+    html.includes('be-gtm-config') &&
+    html.includes('be-hs-config')
+  );
+}
+
 function checkGtm(filePath, html) {
   if (shouldSkipOptionalChecks(filePath, html)) return;
   if (!html.includes(GTM_ID)) {
     fail(filePath, 'missing GTM container id ' + GTM_ID);
+  }
+  if (usesCookieConsentGate(html)) {
+    if (html.includes('googletagmanager.com/gtm.js')) {
+      fail(filePath, 'GTM must not load inline when cookie consent gates analytics');
+    }
+    if (html.includes('js.hs-scripts.com/' + HUBSPOT_PORTAL)) {
+      fail(filePath, 'HubSpot must not load inline when cookie consent gates analytics');
+    }
+    return;
   }
   if (!html.includes('googletagmanager.com/gtm.js')) {
     fail(filePath, 'missing GTM loader script');
@@ -285,6 +302,30 @@ checkSitemap();
 checkRobots();
 checkTemplateStub('dist/roles/roles-template/index.html', '/roles/');
 checkTemplateStub('dist/technologies/tech-template/index.html', '/technologies/');
+
+(function checkDiscoverRootAnd404() {
+  var indexPath = path.join(distRoot, 'index.html');
+  var notFoundPath = path.join(distRoot, '404.html');
+  if (!fs.existsSync(indexPath)) {
+    errors.push('dist/index.html: missing (discover root must redirect to www)');
+  } else {
+    var indexHtml = fs.readFileSync(indexPath, 'utf8');
+    if (!indexHtml.includes('https://www.betterengineer.com/')) {
+      errors.push('dist/index.html: must redirect to https://www.betterengineer.com/');
+    }
+    if (!indexHtml.includes('href="/technologies/"')) {
+      errors.push('dist/index.html: missing fallback link to /technologies/');
+    }
+  }
+  if (!fs.existsSync(notFoundPath)) {
+    errors.push('dist/404.html: missing (CloudFront/S3 custom error page)');
+  } else {
+    var nfHtml = fs.readFileSync(notFoundPath, 'utf8');
+    if (!nfHtml.includes('href="/technologies/"')) {
+      errors.push('dist/404.html: must link to /technologies/');
+    }
+  }
+})();
 
 if (errors.length) {
   console.error('dist verification failed (' + errors.length + ' issue(s)):');

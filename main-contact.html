@@ -1,0 +1,167 @@
+  <main id="main">
+    <section class="hero section" id="hero" aria-labelledby="hero-title">
+      <div class="wrap contact-hero">
+        <div class="contact-hero__copy reveal">
+          <h1 class="h1" id="hero-title">Are you ready to hire Better Engineers?</h1>
+          <p class="lead">Our team will reach out to talk about your companies' specific needs and we can get started introducing you to candidates right away.</p>
+          <!--
+  MIGRATION CF-56 BLOCKED: the live HubSpot form on /contact is JS-injected and its
+  field list could not be captured. This uses the established BetterEngineer intake
+  pattern (custom frontend, HubSpot backend via intake-form-shared.js, portal 8679235).
+  BEFORE SHIPPING:
+   1. Confirm the legacy form's real field list in the HubSpot Forms UI.
+   2. Confirm which HubSpot workflows and lead-routing rules are attached to the
+      legacy form GUID. An API submission does NOT inherit them. See CF-57.
+   3. Add any missing fields here and to the HubSpot property mapping.
+-->
+          <!-- MIGRATION CF-56: the form card's own heading, subtitle, message-field label, and submit button label were also not captured. No heading is invented here, so the form carries an aria-label instead; the message label and submit label are neutral placeholders pending the HubSpot Forms UI check. -->
+          <div class="hero-form__card hero-form__card--split react-intake-card">
+            <form id="react-intake-form" class="react-intake-form" novalidate aria-label="Contact BetterEngineer">
+              <div class="form-grid">
+                <div class="form-field">
+                  <label for="firstname">First name *</label>
+                  <input id="firstname" name="firstname" type="text" autocomplete="given-name" required placeholder="First name *">
+                </div>
+                <div class="form-field">
+                  <label for="lastname">Last name *</label>
+                  <input id="lastname" name="lastname" type="text" autocomplete="family-name" required placeholder="Last name *">
+                </div>
+                <div class="form-field form-field--full">
+                  <label for="email">Work email *</label>
+                  <input id="email" name="email" type="email" autocomplete="email" required placeholder="Work email *">
+                </div>
+                <div class="form-field form-field--full">
+                  <label for="message">How can we help? *</label>
+                  <textarea id="message" name="message" rows="3" required placeholder="How can we help? *"></textarea>
+                </div>
+              </div>
+              <div aria-hidden="true" style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;pointer-events:none">
+                <label for="company_website">Leave this field empty</label>
+                <input type="text" name="company_website" id="company_website" tabindex="-1" autocomplete="off" value="">
+              </div>
+              <input type="hidden" name="utm_campaign" id="utm_campaign" value="">
+              <input type="hidden" name="utm_content" id="utm_content" value="">
+              <input type="hidden" name="utm_medium" id="utm_medium" value="">
+              <input type="hidden" name="utm_source" id="utm_source" value="">
+              <p class="form-privacy-note">By submitting, you agree to be contacted about your request.</p>
+              <button class="btn btn--primary react-intake-submit" type="submit">Submit</button>
+              <p id="react-intake-status" class="form-status" role="status" aria-live="polite"></p>
+            </form>
+          </div>
+        </div>
+        <!-- MIGRATION: the live hero image ships with the alt text "Stock placeholder image with grayscale geometrical mountain landscape". That is placeholder art and placeholder alt text that reached production, so it is treated as decorative here. See extraction record note 11. Intrinsic dimensions could not be read by the extractor; confirm width and height against the imported asset. -->
+        <div class="contact-hero__image reveal">
+          <img src="/images/pages/contact/contact-hero-landscape.png" alt="" width="1200" height="800" loading="eager">
+        </div>
+      </div>
+    </section>
+
+    <section class="partners" id="clients" aria-label="Client logos">
+      <div class="wrap">
+        <p class="partners-label">Partnered with Top Brands and Startups</p>
+        <div class="logo-marquee">
+          <div class="logo-track">
+            <div class="client-block">
+              <img src="/images/roles/shared/logos/accenture-grey.png" alt="Accenture" width="280" height="80" loading="lazy">
+              <div class="client-sub"><span class="client-sub__trim-mobile">Global </span>$64B Consultancy</div>
+            </div>
+            <div class="client-block">
+              <img src="/images/roles/shared/logos/chapterspot-grey.png" alt="ChapterSpot" width="280" height="80" loading="lazy">
+              <div class="client-sub">Acquired 2024</div>
+            </div>
+            <div class="client-block">
+              <img src="/images/roles/shared/logos/securelink-grey.png" alt="SecureLink" width="280" height="80" loading="lazy">
+              <div class="client-sub">Acquired by Imprivata</div>
+            </div>
+            <div class="client-block">
+              <img src="/images/roles/shared/logos/hydrow.png" alt="Hydrow" width="280" height="80" loading="lazy">
+              <div class="client-sub"><a href="/case-studies/hydrow/">Read Case Study</a></div>
+            </div>
+            <div class="client-block">
+              <img src="/images/roles/shared/logos/wasteplace-grey.png" alt="WastePlace" width="280" height="80" loading="lazy">
+              <div class="client-sub">
+                <a href="https://www.betterengineer.com/case-studies/wasteplace">Read Case Study</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-tint" id="faq" aria-labelledby="faq-heading">
+      <div class="wrap">
+        <div class="reveal air-section-head" style="max-width:44rem">
+          <!-- MIGRATION CF-58: eyebrow label added for parity with the technology-page FAQ pattern. Not source copy. Delete this line to remove it. -->
+          <p class="eyebrow">CONTACT FAQ</p>
+          <h2 class="h2" id="faq-heading">Frequently Asked Questions</h2>
+        </div>
+        <div class="faq-list reveal" id="faq-list">
+          <div class="faq-item is-open">
+            <button type="button" aria-expanded="true"><span class="faq-question">Why should we use BetterEngineer?</span><span class="chevron" aria-hidden="true"></span></button>
+            <div class="faq-panel">
+              <p>Staff augmentation is an important part of building an agile development team. Once you meet and interview candidates that interest you (via our self-service platform), BetterEngineer handles the rest of the details in filling the contract position. We take care of the HR logistics, and payroll, and are here to facilitate your relationship with contractors for the long term.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button type="button" aria-expanded="false"><span class="faq-question">Why should we consider hiring contractors vs. full-time employees?</span><span class="chevron" aria-hidden="true"></span></button>
+            <div class="faq-panel" hidden>
+              <p>There are several reasons that contractors are a better option for meeting your company's software needs. First and foremost, there is the potential to reduce staffing costs and provide access to a larger talent pool than may be available to you locally. BetterEngineer's fully remote model offers staffing solutions to meet your budget. This can help companies make strategic pivots, and meet short-term and contingent workforce needs on demand.</p>
+            </div>
+          </div>
+          <!-- MIGRATION: extraction record note 7 flags that the three options below (Contract, Contract-to-Hire, Direct Hire) may be a list on the live page that was flattened into one paragraph by the extractor. Kept verbatim as a single paragraph. Verify in a rendered browser and re-mark as a list if so. -->
+          <div class="faq-item">
+            <button type="button" aria-expanded="false"><span class="faq-question">What does it cost to get started with BetterEngineer?</span><span class="chevron" aria-hidden="true"></span></button>
+            <div class="faq-panel" hidden>
+              <p>There is no initial cost to work with one of our account managers to figure out your staff augmentation needs. We will analyze your development goals, your budget, and your existing team to help determine the engineering talent you need. Our options include: Contract: Hire a new team member on a contract basis with terms that fit your needs. Contract-to-Hire: Hire a new team member now with the option to make it permanent in the future. Direct Hire: Pay a one-time recruiting fee and hire straight to your team from day one.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button type="button" aria-expanded="false"><span class="faq-question">Who can I expect to meet from BetterEngineer?</span><span class="chevron" aria-hidden="true"></span></button>
+            <div class="faq-panel" hidden>
+              <p>The engineers in our talent pool are accomplished, senior software engineers who can provide value to a distributed development team. We don't just look at resumes, but thoroughly assess English language ability, cultural fit, and technical skills. Their level of expertise has been demonstrated and they have the skills you are looking for.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button type="button" aria-expanded="false"><span class="faq-question">Where are your engineers located?</span><span class="chevron" aria-hidden="true"></span></button>
+            <div class="faq-panel" hidden>
+              <p>Although we work with talent throughout the world, the majority of our engineers are concentrated in Latin America, offering a nearshore solution for your outsourcing needs. Many of them share US time zones, as our largest pools of talent are in Colombia, Argentina, Brazil, and Costa Rica. Shared time zones and English fluency allow our engineers to integrate into your existing team easily.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button type="button" aria-expanded="false"><span class="faq-question">How long will it take for me to meet candidates from BetterEngineer?</span><span class="chevron" aria-hidden="true"></span></button>
+            <div class="faq-panel" hidden>
+              <p>We pride ourselves on introducing you to pre-vetted talent as soon as possible. While some specialties may take longer than others to find a perfect match, we will generally present you with senior-level engineers within four days.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button type="button" aria-expanded="false"><span class="faq-question">How do I know that BetterEngineer will protect my company's IP?</span><span class="chevron" aria-hidden="true"></span></button>
+            <div class="faq-panel" hidden>
+              <p>BetterEngineer utilizes standard forms of Confidentiality and non-competition agreements. All inventions, discoveries, developments, and innovations created by contractors (relative to the duties of the contract) are the exclusive property of the company that has contracted with BetterEngineer.</p>
+            </div>
+          </div>
+          <!-- MIGRATION: "Contact the BetterEngineer team today!" is a link element on the live page with no resolvable href. Wired to the in-page form per extraction record note 12. Verify in a rendered browser. -->
+          <div class="faq-item">
+            <button type="button" aria-expanded="false"><span class="faq-question">What will it take for me to get started with BetterEngineer?</span><span class="chevron" aria-hidden="true"></span></button>
+            <div class="faq-panel" hidden>
+              <p><a href="#react-intake-form">Contact the BetterEngineer team today!</a> Let's build better teams together.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-band" id="cta" aria-labelledby="cta-heading">
+      <div class="cta-split">
+        <div class="cta-split__text">
+          <div class="cta-split__text-inner reveal">
+            <!-- MIGRATION CF-19: "Lets" is missing its apostrophe on the live page, while the same sentence in the last FAQ answer reads "Let's". Both preserved verbatim. -->
+            <h2 class="h2" id="cta-heading">Lets build better teams together</h2>
+            <div class="btn-row">
+              <a class="btn btn--primary" href="#hero">Contact Us</a>
+              <a class="btn btn--outline" href="https://calendly.com/tim-salsamobi/30min" rel="noopener noreferrer">Schedule a Call</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>

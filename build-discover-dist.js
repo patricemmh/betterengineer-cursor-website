@@ -134,10 +134,16 @@ function writeNoindexStub(destDir, canonicalPath, label) {
 }
 
 // Stylesheets
-['brand.css', 'landing-page.css', 'role-detail.css', 'roles.css'].forEach(function (f) {
+['brand.css', 'landing-page.css', 'role-detail.css', 'roles.css', 'cookie-consent.css'].forEach(function (f) {
   fs.mkdirSync(path.join(distRoot, 'styles'), { recursive: true });
   fs.copyFileSync(path.join(root, 'styles', f), path.join(distRoot, 'styles', f));
 });
+
+fs.mkdirSync(path.join(distRoot, 'scripts'), { recursive: true });
+fs.copyFileSync(
+  path.join(root, 'scripts', 'cookie-consent.js'),
+  path.join(distRoot, 'scripts', 'cookie-consent.js'),
+);
 
 // Icons used by chrome plus tech-page ecosystem images.
 copyDir(path.join(root, 'icons'), path.join(distRoot, 'icons'));
@@ -273,10 +279,49 @@ function writeLlmsTxt() {
   fs.writeFileSync(path.join(distRoot, 'llms.txt'), lines.join('\n') + '\n', 'utf8');
 }
 
+function writeDiscover404Page() {
+  fs.writeFileSync(
+    path.join(distRoot, '404.html'),
+    '<!DOCTYPE html>\n' +
+      '<html lang="en">\n' +
+      '<head>\n' +
+      '  <meta charset="utf-8">\n' +
+      '  <meta name="viewport" content="width=device-width, initial-scale=1">\n' +
+      '  <title>Page not found | BetterEngineer</title>\n' +
+      '  <meta name="robots" content="noindex">\n' +
+      '  <link rel="icon" href="/icons/favicon.png" type="image/png">\n' +
+      '  <style>\n' +
+      '    body { margin: 0; min-height: 100vh; display: grid; place-items: center; font-family: "Plus Jakarta Sans", system-ui, sans-serif; background: #fafafe; color: #1c1c1c; }\n' +
+      '    main { text-align: center; padding: 2rem; max-width: 28rem; }\n' +
+      '    h1 { font-size: 2rem; margin: 0 0 0.5rem; }\n' +
+      '    p { color: #5c5c66; }\n' +
+      '    a { color: #545bb3; font-weight: 700; }\n' +
+      '    ul { list-style: none; padding: 0; margin: 1.25rem 0 0; }\n' +
+      '    li { margin: 0.5rem 0; }\n' +
+      '  </style>\n' +
+      '</head>\n' +
+      '<body>\n' +
+      '  <main>\n' +
+      '    <h1>Page not found</h1>\n' +
+      '    <p>That page is not on this site.</p>\n' +
+      '    <ul>\n' +
+      '      <li><a href="/technologies/">Browse technologies</a></li>\n' +
+      '      <li><a href="/roles/">Browse roles</a></li>\n' +
+      '      <li><a href="https://www.betterengineer.com/">Main BetterEngineer site</a></li>\n' +
+      '    </ul>\n' +
+      '  </main>\n' +
+      '</body>\n' +
+      '</html>\n',
+    'utf8',
+  );
+}
+
 // ── Discover root redirect ────────────────────────────────────────────────────
 // manufacturing build writes a temporary dist/index.html redirect to
 // /aimanufacturing/. Replace that so https://discover.betterengineer.com/
-// sends visitors to the main BetterEngineer site.
+// sends visitors to the main BetterEngineer site. Visible links below help
+// embedded browsers (for example Cursor Simple Browser) when external redirects
+// are blocked; deep paths such as /technologies/ are unchanged.
 (function redirectDiscoverRootToWww() {
   var wwwHome = 'https://www.betterengineer.com/';
   fs.writeFileSync(
@@ -285,6 +330,7 @@ function writeLlmsTxt() {
       '<html lang="en">\n' +
       '<head>\n' +
       '  <meta charset="utf-8">\n' +
+      '  <meta name="viewport" content="width=device-width, initial-scale=1">\n' +
       '  <meta http-equiv="refresh" content="0;url=' +
       wwwHome +
       '">\n' +
@@ -292,22 +338,47 @@ function writeLlmsTxt() {
       wwwHome +
       '">\n' +
       '  <title>Redirecting to BetterEngineer</title>\n' +
+      '  <link rel="icon" href="/icons/favicon.png" type="image/png">\n' +
       '  <script>location.replace(' +
       JSON.stringify(wwwHome) +
       ');</script>\n' +
+      '  <style>\n' +
+      '    body { margin: 0; min-height: 100vh; display: grid; place-items: center; font-family: "Plus Jakarta Sans", system-ui, sans-serif; background: #fafafe; color: #1c1c1c; }\n' +
+      '    main { text-align: center; padding: 2rem; max-width: 28rem; }\n' +
+      '    p { color: #5c5c66; }\n' +
+      '    a { color: #545bb3; font-weight: 700; }\n' +
+      '    ul { list-style: none; padding: 0; margin: 1rem 0 0; }\n' +
+      '    li { margin: 0.35rem 0; }\n' +
+      '  </style>\n' +
       '</head>\n' +
       '<body>\n' +
-      '  <p><a href="' +
+      '  <main>\n' +
+      '    <p>Redirecting to BetterEngineer…</p>\n' +
+      '    <p><a href="' +
       wwwHome +
       '">Continue to BetterEngineer</a></p>\n' +
+      '    <p>Or explore on Discover:</p>\n' +
+      '    <ul>\n' +
+      '      <li><a href="/technologies/">Technologies</a></li>\n' +
+      '      <li><a href="/roles/">Roles</a></li>\n' +
+      '      <li><a href="/ai-fluent-engineers/">AI Fluent Engineers</a></li>\n' +
+      '      <li><a href="/aimanufacturing/">AI Manufacturing</a></li>\n' +
+      '    </ul>\n' +
+      '  </main>\n' +
       '</body>\n' +
       '</html>\n',
     'utf8',
   );
 })();
 
+writeDiscover404Page();
+
 writeDiscoverSeoFiles();
 writeLlmsTxt();
+
+var cookieChrome = require('./tools/cookie-consent-chrome.js');
+var cookiePatches = cookieChrome.patchDiscoverHtmlTree(distRoot);
+console.log('Cookie consent chrome applied to ' + cookiePatches + ' HTML file(s) under ./dist/');
 
 console.log('Discover bundle ready in ./dist/');
 console.log('  https://discover.betterengineer.com/ -> https://www.betterengineer.com/');

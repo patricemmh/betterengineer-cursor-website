@@ -137,9 +137,18 @@
           setTurnstileHolderVisible(form, false);
           notifyTurnstileWaiter(true, token);
         },
+        /* Only reveal the holder when Cloudflare needs a visible challenge.
+           Showing it on error/expired made the form grow under the privacy
+           note about a second after load (layout shift). Errors still surface
+           on submit through the waiter. */
+        'before-interactive-callback': function () {
+          setTurnstileHolderVisible(form, true);
+        },
+        'after-interactive-callback': function () {
+          setTurnstileHolderVisible(form, false);
+        },
         'error-callback': function () {
           turnstileTokenCache = '';
-          setTurnstileHolderVisible(form, true);
           notifyTurnstileWaiter(
             false,
             new Error('Verification could not load. Please reload the page and try again.'),
@@ -147,7 +156,6 @@
         },
         'expired-callback': function () {
           turnstileTokenCache = '';
-          setTurnstileHolderVisible(form, true);
           notifyTurnstileWaiter(false, new Error('Verification expired. Please submit again.'));
         },
       });
@@ -378,16 +386,22 @@
         return;
       }
 
+      if (window.BEAttribution) window.BEAttribution.fillUtmFields(form);
+
       var fields = [
         { name: 'firstname', value: first },
         { name: 'lastname', value: last },
         { name: 'email', value: email },
         { name: 'message', value: message },
       ];
-      ['utm_campaign', 'utm_content', 'utm_medium', 'utm_source'].forEach(function (k) {
-        var v = (fd.get(k) || '').trim();
-        if (v) fields.push({ name: k, value: v });
-      });
+      if (window.BEAttribution) {
+        fields = fields.concat(window.BEAttribution.utmFieldsForHubSpot());
+      } else {
+        ['utm_campaign', 'utm_content', 'utm_medium', 'utm_source'].forEach(function (k) {
+          var v = (fd.get(k) || '').trim();
+          if (v) fields.push({ name: k, value: v });
+        });
+      }
 
       var context = {
         pageUri: window.location.href,
@@ -426,10 +440,18 @@
                 lastname: last,
                 email: email,
                 message: message,
-                utm_campaign: (fd.get('utm_campaign') || '').trim(),
-                utm_content: (fd.get('utm_content') || '').trim(),
-                utm_medium: (fd.get('utm_medium') || '').trim(),
-                utm_source: (fd.get('utm_source') || '').trim(),
+                utm_campaign: window.BEAttribution
+                  ? window.BEAttribution.getUtmValue('utm_campaign')
+                  : (fd.get('utm_campaign') || '').trim(),
+                utm_content: window.BEAttribution
+                  ? window.BEAttribution.getUtmValue('utm_content')
+                  : (fd.get('utm_content') || '').trim(),
+                utm_medium: window.BEAttribution
+                  ? window.BEAttribution.getUtmValue('utm_medium')
+                  : (fd.get('utm_medium') || '').trim(),
+                utm_source: window.BEAttribution
+                  ? window.BEAttribution.getUtmValue('utm_source')
+                  : (fd.get('utm_source') || '').trim(),
                 turnstileToken: token,
                 pageUri: window.location.href,
                 pageName: document.title,
@@ -477,5 +499,13 @@
     calendlyUrl: CALENDLY_URL,
     renderSuccessMessage: renderIntakeSuccessMessage,
     wireForm: wireIntakeForm,
+    useWorker: USE_WORKER,
+    workerUrl: WORKER_URL,
+    prepareTurnstile: function (form) {
+      if (!USE_WORKER || !form) return;
+      ensureTurnstileHolder(form);
+      loadTurnstileScript(form);
+    },
+    getTurnstileToken: getTurnstileToken,
   };
 })();

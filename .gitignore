@@ -18,10 +18,12 @@ betterengineer/
 
 # Local GitHub Pages bundle (see GITHUB_PAGES_DISCOVER_HOSTING.md)
 dist/
+dist-www/
 .dist-trash-*/
 astro-demo/
 tmp-pdf-ai/
 tmp_ai_ready_pdf.txt
+tmp-live-extract/
 
 # Local-only planning / ops notes (keep on machine, do not publish)
 TODO.md

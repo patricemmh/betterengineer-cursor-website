@@ -1,0 +1,585 @@
+  <main id="main">
+    <section class="hero section sa-hero" id="hero" aria-labelledby="hero-title">
+      <div class="wrap hero-grid">
+        <div class="sa-hero__copy">
+          <p class="eyebrow sa-hero__eyebrow">STAFF AUGMENTATION</p>
+          <h1 class="h1 sa-hero__title" id="hero-title"><span class="accent">Scale your team with</span> <span class="accent">Software Engineering</span> <span class="accent">Staff Augmentation.</span></h1>
+          <p class="lead sa-hero__lead">Don't let limited resources stall your growth. Get access to our pre-vetted network of passionate senior software engineers in just 72 hours.</p>
+          <div class="sa-hero__prompt">
+            <label class="sa-hero__prompt-label" for="sa-hero-prompt">Describe the engineer you need</label>
+            <textarea id="sa-hero-prompt" class="sa-hero__input"></textarea>
+            <div class="sa-hero__ghost" id="sa-hero-ghost" aria-hidden="true">&nbsp;</div>
+          </div>
+          <div class="sa-hero__actions">
+            <a class="btn sa-hero__cta" href="https://www.betterengineer.com/multi-step-contact-form">Get Started</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script>
+      (function () {
+        var examples = [
+          "I\u2019m looking for a Senior Full Stack Engineer with React experience",
+          "I need a Backend Developer with Node.js and PostgreSQL skills",
+          "Seeking a DevOps Engineer familiar with AWS and Docker",
+          "Hiring a Mobile Developer with Flutter or React Native experience"
+        ];
+        var input = document.getElementById("sa-hero-prompt");
+        var ghost = document.getElementById("sa-hero-ghost");
+        if (!input || !ghost) return;
+        var exampleIndex = 0;
+        var charIndex = 0;
+        var isDeleting = false;
+        var timer = null;
+
+        function render() {
+          ghost.innerHTML = examples[exampleIndex].substring(0, charIndex) + '<span class="sa-hero__caret">|</span>';
+        }
+        function tick() {
+          var full = examples[exampleIndex];
+          if (isDeleting) {
+            charIndex -= 1;
+            if (charIndex <= 0) {
+              isDeleting = false;
+              exampleIndex = (exampleIndex + 1) % examples.length;
+            }
+          } else {
+            charIndex += 1;
+            if (charIndex > full.length) {
+              isDeleting = true;
+              render();
+              timer = setTimeout(tick, 1000);
+              return;
+            }
+          }
+          render();
+          timer = setTimeout(tick, isDeleting ? 25 : 50);
+        }
+        function start() {
+          if (timer) clearTimeout(timer);
+          timer = setTimeout(tick, 50);
+        }
+        input.addEventListener("focus", function () {
+          if (timer) clearTimeout(timer);
+          timer = null;
+          ghost.style.display = "none";
+        });
+        input.addEventListener("blur", function () {
+          if (input.value.trim() === "") {
+            ghost.style.display = "";
+            start();
+          }
+        });
+        start();
+      })();
+    </script>
+
+    <section class="section" id="differentiators" aria-labelledby="differentiators-heading">
+      <div class="wrap">
+        <div class="reveal air-section-head diff-layout">
+          <div class="diff-layout__copy">
+            <h2 class="h2" id="differentiators-heading"><span class="accent">BetterEngineer</span> vs. Traditional Recruiting.</h2>
+            <p class="lead">Traditional hiring is a long and exhaustive process, especially when a new hire doesn't work out. <strong>We offer a better way.</strong></p>
+            <p class="lead diff-layout__bridge" style="margin-bottom:0">How we <strong>outperform</strong> traditional methods:</p>
+          </div>
+          <div class="diff-layout__visual">
+            <img src="/images/pages/staff-augmentation/hero.png" alt="Engineer wearing headphones working at a laptop" width="442" height="295">
+          </div>
+        </div>
+        <div class="air-serve-grid air-serve-grid--two">
+          <article class="air-serve-card reveal">
+            <div class="air-serve-card__icon" aria-hidden="true">
+              <img src="/images/pages/staff-augmentation/icon-search.png" alt="" width="64" height="64" loading="lazy">
+            </div>
+            <h3>Deeper Skill Assessment</h3>
+            <p>Our platform steps up beyond merely reviewing the tech expertise; we evaluate their ambitions, plans, and company culture compatibility.</p>
+          </article>
+          <article class="air-serve-card reveal">
+            <div class="air-serve-card__icon" aria-hidden="true">
+              <img src="/images/pages/staff-augmentation/icon-data.png" alt="" width="64" height="64" loading="lazy">
+            </div>
+            <h3>Cost-Effective Solutions</h3>
+            <p>We offer flexible staffing for short-term projects or permanent positions, reducing costs by 44% on average.</p>
+          </article>
+          <article class="air-serve-card reveal">
+            <div class="air-serve-card__icon" aria-hidden="true">
+              <img src="/images/pages/staff-augmentation/icon-speed.png" alt="" width="64" height="64" loading="lazy">
+            </div>
+            <h3>Faster Hiring</h3>
+            <p>Conventional recruitment may take several weeks. Our service eliminates the communication clutter and delivers qualified candidates in just 72 hours.</p>
+          </article>
+          <article class="air-serve-card reveal">
+            <div class="air-serve-card__icon" aria-hidden="true">
+              <img src="/images/pages/staff-augmentation/icon-deal.png" alt="" width="64" height="64" loading="lazy">
+            </div>
+            <h3>Long-Term Partnerships</h3>
+            <p>Our engineers are committed to long-term success, with an average tenure exceeding one year. Expect continuous support and guidance as we grow together.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="skills" aria-labelledby="skills-heading">
+      <div class="wrap">
+        <div class="reveal air-section-head">
+          <h2 class="h2" id="skills-heading">Find the <span class="accent">Right Skillset</span> for Your Projects.</h2>
+          <p class="lead" style="margin-bottom:0">We specialize in a wide range of software engineering skills, from React to DevOps, Data Science, AI, and more. Our rigorous vetting process ensures you receive highly qualified senior engineers who are a perfect match for your specific requirements.</p>
+        </div>
+        <!-- MIGRATION: logo images use alt="" because the adjacent .logo-wall__label already names each technology; announcing both would duplicate it for screen readers. -->
+        <div class="logo-wall reveal">
+          <div class="logo-wall__item">
+            <img src="/images/pages/staff-augmentation/tech/android.png" alt="" width="84" height="99" loading="lazy">
+            <span class="logo-wall__label">Android</span>
+          </div>
+          <div class="logo-wall__item">
+            <img src="/images/pages/staff-augmentation/tech/ios.png" alt="" width="84" height="84" loading="lazy">
+            <span class="logo-wall__label">iOS</span>
+          </div>
+          <div class="logo-wall__item">
+            <img src="/images/pages/staff-augmentation/tech/react-native.png" alt="" width="84" height="75" loading="lazy">
+            <span class="logo-wall__label">React Native</span>
+          </div>
+          <div class="logo-wall__item">
+            <img src="/images/pages/staff-augmentation/tech/react.png" alt="" width="84" height="76" loading="lazy">
+            <span class="logo-wall__label">React</span>
+          </div>
+          <div class="logo-wall__item">
+            <img src="/images/pages/staff-augmentation/tech/javascript.png" alt="" width="84" height="85" loading="lazy">
+            <span class="logo-wall__label">Javascript</span>
+          </div>
+          <div class="logo-wall__item">
+            <img src="/images/pages/staff-augmentation/tech/angular.png" alt="" width="84" height="92" loading="lazy">
+            <span class="logo-wall__label">Angular</span>
+          </div>
+          <div class="logo-wall__item">
+            <img src="/images/pages/staff-augmentation/tech/typescript.png" alt="" width="84" height="84" loading="lazy">
+            <span class="logo-wall__label">Typescript</span>
+          </div>
+          <div class="logo-wall__item">
+            <img src="/images/pages/staff-augmentation/tech/html5.png" alt="" width="84" height="87" loading="lazy">
+            <span class="logo-wall__label">HTML</span>
+          </div>
+          <div class="logo-wall__item">
+            <img src="/images/pages/staff-augmentation/tech/css3.png" alt="" width="84" height="84" loading="lazy">
+            <span class="logo-wall__label">CSS</span>
+          </div>
+          <div class="logo-wall__item">
+            <img src="/images/pages/staff-augmentation/tech/java.png" alt="" width="82" height="112" loading="lazy">
+            <span class="logo-wall__label">Java</span>
+          </div>
+          <div class="logo-wall__item">
+            <img src="/images/pages/staff-augmentation/tech/python.png" alt="" width="84" height="84" loading="lazy">
+            <span class="logo-wall__label">Python</span>
+          </div>
+          <div class="logo-wall__item">
+            <img src="/images/pages/staff-augmentation/tech/node-js.png" alt="" width="84" height="96" loading="lazy">
+            <span class="logo-wall__label">Node</span>
+          </div>
+          <div class="logo-wall__item">
+            <img src="/images/pages/staff-augmentation/tech/net-c-sharp.png" alt="" width="84" height="84" loading="lazy">
+            <span class="logo-wall__label">.NET C#</span>
+          </div>
+          <div class="logo-wall__item">
+            <img src="/images/pages/staff-augmentation/tech/aws.png" alt="" width="84" height="51" loading="lazy">
+            <span class="logo-wall__label">AWS</span>
+          </div>
+          <div class="logo-wall__item">
+            <img src="/images/pages/staff-augmentation/tech/gcp.png" alt="" width="84" height="68" loading="lazy">
+            <span class="logo-wall__label">GCP</span>
+          </div>
+          <div class="logo-wall__item">
+            <img src="/images/pages/staff-augmentation/tech/azure.png" alt="" width="84" height="67" loading="lazy">
+            <span class="logo-wall__label">Azure</span>
+          </div>
+          <div class="logo-wall__item">
+            <img src="/images/pages/staff-augmentation/tech/docker.png" alt="" width="84" height="59" loading="lazy">
+            <span class="logo-wall__label">Docker</span>
+          </div>
+          <div class="logo-wall__item">
+            <img src="/images/pages/staff-augmentation/tech/terraform.png" alt="" width="84" height="94" loading="lazy">
+            <span class="logo-wall__label">Terraform</span>
+          </div>
+          <div class="logo-wall__item">
+            <img src="/images/pages/staff-augmentation/tech/selenium.png" alt="" width="84" height="88" loading="lazy">
+            <span class="logo-wall__label">Selenium</span>
+          </div>
+          <div class="logo-wall__item">
+            <img src="/images/pages/staff-augmentation/tech/cypress.png" alt="" width="84" height="89" loading="lazy">
+            <span class="logo-wall__label">Cypress</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-tint" id="heavylifting" aria-labelledby="heavylifting-heading">
+      <div class="wrap split">
+        <div class="split__img reveal">
+          <img src="/images/pages/staff-augmentation/heavylifting.png" alt="A man and a woman reviewing engineering candidates together on a laptop" width="900" height="700" loading="lazy">
+        </div>
+        <div class="reveal">
+          <h2 class="h2" id="heavylifting-heading"><span class="accent">We do the heavylifting</span> for you.</h2>
+          <p class="lead">Our staff augmentation service covers the entire process, from sourcing and vetting to onboarding, payroll, and ongoing support, so you can focus on scaling your team without distractions.</p>
+          <ul class="service-check-grid">
+            <li>Sourcing</li>
+            <li>Hiring</li>
+            <li>Onboarding</li>
+            <li>Payroll</li>
+            <li>Administration</li>
+            <li>Contracts</li>
+          </ul>
+          <div class="heavylifting-cta">
+            <p>Are you struggling to <strong>find better talent</strong> with your busy schedule?</p>
+            <a class="btn btn--primary" href="https://www.betterengineer.com/contact">Let's Hire Together</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="process" aria-labelledby="process-heading">
+      <div class="wrap process-layout">
+        <div class="process-layout__copy reveal">
+          <h2 class="h2" id="process-heading"><span class="accent">Our Process:</span> What to Expect.</h2>
+          <ol class="process-list">
+            <li class="process-list__item">
+              <div class="process-list__num">
+                <img src="/images/pages/staff-augmentation/step-1.png" alt="" width="56" height="56" loading="lazy">
+              </div>
+              <div>
+                <h3>Connect and Consult</h3>
+                <p>Discuss your project needs and ideal candidate profile with our team.</p>
+              </div>
+            </li>
+            <li class="process-list__item">
+              <div class="process-list__num">
+                <img src="/images/pages/staff-augmentation/step-2.png" alt="" width="56" height="56" loading="lazy">
+              </div>
+              <div>
+                <h3>Access Top-Tier Talent</h3>
+                <p>Receive qualified candidates from our pre-vetted network within 72 hours.</p>
+              </div>
+            </li>
+            <li class="process-list__item">
+              <div class="process-list__num">
+                <img src="/images/pages/staff-augmentation/step-3.png" alt="" width="56" height="56" loading="lazy">
+              </div>
+              <div>
+                <h3>Review, Interview, and Hire</h3>
+                <p>Easily manage and review candidates through our user-friendly platform.</p>
+              </div>
+            </li>
+            <li class="process-list__item">
+              <div class="process-list__num">
+                <img src="/images/pages/staff-augmentation/step-4.png" alt="" width="56" height="56" loading="lazy">
+              </div>
+              <div>
+                <h3>Get Continuous Support</h3>
+                <p>Get continuous guidance and support to ensure smooth integration and long-term success.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+        <div class="process-layout__aside reveal">
+          <div class="split__img">
+            <img src="/images/pages/staff-augmentation/process.png" alt="Software engineer on a video call wearing a headset" width="286" height="379" loading="lazy">
+          </div>
+          <div class="btn-row">
+            <a class="btn btn--primary" href="https://calendly.com/tim-salsamobi/30min" target="_blank" rel="noopener noreferrer">Schedule Your Call</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-tint" id="platform" aria-labelledby="platform-heading">
+      <div class="wrap split">
+        <div class="split__img reveal">
+          <img src="/images/pages/staff-augmentation/hiring-dashboard.png" alt="The BetterEngineer hiring dashboard showing candidate profiles and interview scheduling" width="1200" height="760" loading="lazy">
+        </div>
+        <div class="reveal">
+          <p class="eyebrow">SERVICES / HIRING DASHBOARD</p>
+          <h2 class="h2" id="platform-heading">Smarter <span class="accent">Hiring.</span> Seamless Collaboration. All <span class="accent">in One Place.</span></h2>
+          <p class="lead">The new BetterEngineer platform is here to make your hiring experience faster, clearer, and more intuitive.</p>
+          <div class="btn-row">
+            <a class="btn btn--primary" href="https://app.betterengineer.com/sign-up/hiring-manager" rel="noopener noreferrer">Try It Free</a>
+            <a class="btn btn--outline" href="https://www.betterengineer.com/hiring-dashboard">Learn More</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="testimonials" aria-roledescription="carousel" aria-label="Client testimonials" data-carousel>
+      <div class="wrap carousel-wrap">
+        <div class="carousel-intro reveal">
+          <h2 class="h2">Real results. Real <span class="accent">people.</span></h2>
+          <p class="lead" style="margin:0 auto;max-width:32rem">Check out what our clients are saying about their hiring experience.</p>
+        </div>
+        <div class="carousel-shell reveal">
+          <button type="button" class="carousel-btn" data-carousel-prev aria-label="Previous testimonial">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"></path></svg>
+          </button>
+          <div class="carousel-slides">
+            <article class="slide is-active" id="slide-0" role="tabpanel" aria-hidden="false">
+              <div class="slide-grid">
+                <div class="slide-photo"><img src="/images/pages/staff-augmentation/testimonial-1.png" alt="" width="360" height="360" loading="lazy"></div>
+                <div class="slide-copy">
+                  <p class="quote">“The whole WastePlace development team is made up of Better Engineers. We couldn’t have gotten this far, this quickly, and within this budget without them.”</p>
+                  <div class="slide-footer">
+                    <div><div class="slide-name">Gary LaBreck</div><div class="slide-role">Co-Founder/CEO</div></div>
+                    <div class="slide-logo"><img src="/images/pages/staff-augmentation/logo-wasteplace.png" alt="WastePlace" width="140" height="40" loading="lazy"></div>
+                  </div>
+                </div>
+              </div>
+            </article>
+            <article class="slide" id="slide-1" role="tabpanel" aria-hidden="true">
+              <div class="slide-grid">
+                <div class="slide-photo"><img src="/images/pages/staff-augmentation/testimonial-2.png" alt="" width="360" height="360" loading="lazy"></div>
+                <div class="slide-copy">
+                  <p class="quote">“We’d like to send a thank you gift to the Better Engineer developers such as Javier as a token of our appreciation for their continued great work on our high profile project.”</p>
+                  <div class="slide-footer">
+                    <div><div class="slide-name">Cymberly Pierce</div><div class="slide-role">Director/Resourcing and Operations</div></div>
+                    <div class="slide-logo"><img src="/images/pages/staff-augmentation/logo-accenture.png" alt="Accenture" width="140" height="40" loading="lazy"></div>
+                  </div>
+                </div>
+              </div>
+            </article>
+            <article class="slide" id="slide-2" role="tabpanel" aria-hidden="true">
+              <div class="slide-grid">
+                <div class="slide-photo"><img src="/images/pages/staff-augmentation/testimonial-3.png" alt="" width="360" height="360" loading="lazy"></div>
+                <div class="slide-copy">
+                  <p class="quote">“When Troutwood was expanding our financial planning business, we needed the rare software engineer who could develop Django APIs and use Postgres for database modeling. BetterEngineer found a perfect fit in just a few weeks, helping us gain a valuable team member with a high level of technical expertise.”</p>
+                  <div class="slide-footer">
+                    <div><div class="slide-name">Gene Natali</div><div class="slide-role">CEO</div></div>
+                    <div class="slide-logo"><img src="/images/pages/staff-augmentation/logo-troutwood.png" alt="Troutwood" width="140" height="40" loading="lazy"></div>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+          <button type="button" class="carousel-btn" data-carousel-next aria-label="Next testimonial">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"></path></svg>
+          </button>
+        </div>
+        <div class="carousel-dots" role="tablist" aria-label="Choose testimonial">
+          <button type="button" role="tab" aria-label="Show testimonial 1" aria-selected="true" class="is-active" data-slide-index="0"></button>
+          <button type="button" role="tab" aria-label="Show testimonial 2" aria-selected="false" data-slide-index="1"></button>
+          <button type="button" role="tab" aria-label="Show testimonial 3" aria-selected="false" data-slide-index="2"></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-tint" id="faq" aria-labelledby="faq-heading">
+      <div class="wrap">
+        <div class="reveal air-section-head" style="max-width:44rem">
+          <!-- MIGRATION CF-58: eyebrow label added for parity with the technology-page FAQ pattern. Not source copy. Delete this line to remove it. -->
+          <p class="eyebrow">STAFF AUGMENTATION FAQ</p>
+          <h2 class="h2" id="faq-heading">Frequently Asked Questions</h2>
+        </div>
+        <div class="faq-list reveal" id="faq-list">
+          <div class="faq-item is-open">
+            <button type="button" aria-expanded="true"><span class="faq-question">How fast can I scale my engineering team with BetterEngineer?</span><span class="chevron" aria-hidden="true"></span></button>
+            <div class="faq-panel">
+              <p>We deliver pre-vetted engineers within <strong>72 hours</strong>, enabling you to bypass traditional delays, common even for the best nearshore outsourcing companies. With a deep talent pool spanning Colombia, Brazil, Argentina, and Costa Rica, we provide access to top Latin American engineers ready for immediate onboarding, whether you need to hire a developer or an entire remote squad.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button type="button" aria-expanded="false"><span class="faq-question">What makes BetterEngineer different from traditional recruiters or staffing firms?</span><span class="chevron" aria-hidden="true"></span></button>
+            <div class="faq-panel" hidden>
+              <p>Unlike traditional staffing agencies, we're not just transactional. We don't just fill seats. We focus on <strong>long-term value</strong> and <strong>engineers who think like owners</strong>.</p>
+              <p><strong>Here's how we're different:</strong></p>
+              <ul>
+                <li>We don't treat engineers like checkboxes; we respect their autonomy and agency</li>
+                <li>We assess beyond technical fit: problem-solving, AI-savvy, product mindset, and cultural alignment</li>
+                <li>We act as a <strong>strategic partner</strong>, not a transactional vendor</li>
+              </ul>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button type="button" aria-expanded="false"><span class="faq-question">Can I hire part-time, flexible, or project-based engineers?</span><span class="chevron" aria-hidden="true"></span></button>
+            <div class="faq-panel" hidden>
+              <p>Yes. We offer <strong>flexible staffing models</strong> that fit your timeline and goals.</p>
+              <p><strong>Options we support include:</strong></p>
+              <ul>
+                <li>Part-time or full-time engagements</li>
+                <li>Short-term project-based support</li>
+                <li>Long-term embedded team members</li>
+                <li>Rapid scale-ups for product launches or funding rounds</li>
+              </ul>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button type="button" aria-expanded="false"><span class="faq-question">How does your vetting process ensure quality and alignment?</span><span class="chevron" aria-hidden="true"></span></button>
+            <div class="faq-panel" hidden>
+              <p>Our engineers go through a <strong>multi-step evaluation</strong> designed to filter for excellence and ownership.</p>
+              <p><strong>We evaluate for:</strong></p>
+              <ul>
+                <li>Deep technical knowledge</li>
+                <li>Communication and collaboration in distributed teams</li>
+                <li>Product thinking and user empathy</li>
+                <li>AI-savvy skillsets and a willingness to learn new technologies</li>
+                <li>Long-term growth potential and alignment with your mission</li>
+              </ul>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button type="button" aria-expanded="false"><span class="faq-question">Where are your engineers located, and what's the benefit?</span><span class="chevron" aria-hidden="true"></span></button>
+            <div class="faq-panel" hidden>
+              <p>Our network is rooted in <strong>Latin America</strong>, providing top-tier senior engineers in <strong>U.S.-aligned time zones</strong>.</p>
+              <p><strong>Why this matters:</strong></p>
+              <ul>
+                <li>Real-time collaboration with your team</li>
+                <li>High English fluency</li>
+                <li>Shared cultural context and work ethic</li>
+                <li>Retention rates that outperform global averages</li>
+              </ul>
+              <p>We've built teams across Colombia, Brazil, Argentina, and Costa Rica, recognized as leading hubs for nearshore IT talent serving U.S. companies.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button type="button" aria-expanded="false"><span class="faq-question">What back-office services do you handle for me?</span><span class="chevron" aria-hidden="true"></span></button>
+            <div class="faq-panel" hidden>
+              <p>We eliminate hiring friction by managing all the logistics, so you can focus on business outcomes, not paperwork.</p>
+              <p><strong>We take care of:</strong></p>
+              <ul>
+                <li>Payroll and compliance</li>
+                <li>Contracts and onboarding</li>
+                <li>Ongoing HR support</li>
+              </ul>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button type="button" aria-expanded="false"><span class="faq-question">What is nearshore outsourcing?</span><span class="chevron" aria-hidden="true"></span></button>
+            <div class="faq-panel" hidden>
+              <p>Nearshore outsourcing is a model where you partner with professionals in countries that are geographically close to your own, like U.S. companies working with engineers in Latin America. This approach offers several major advantages over traditional outsourcing to distant locations such as Asia or Eastern Europe:</p>
+              <ul>
+                <li>Time Zone Compatibility</li>
+                <li>Cultural and Language Alignment</li>
+                <li>Travel and Overlap</li>
+                <li>Quality and Retention</li>
+                <li>Regulatory Simplicity</li>
+              </ul>
+              <p>Simply put: Nearshore outsourcing is about getting the cost and scale advantages of global hiring, without the pain of communication barriers or time zone headaches. That's why more U.S. companies, especially those needing ongoing, high-collaboration product work, are switching from traditional offshore to trusted nearshore outsourcing companies like BetterEngineer.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button type="button" aria-expanded="false"><span class="faq-question">What is staff augmentation?</span><span class="chevron" aria-hidden="true"></span></button>
+            <div class="faq-panel" hidden>
+              <p>Staff augmentation is a flexible hiring model that lets you extend your in-house engineering team with top external talent. Instead of outsourcing entire projects, you add vetted engineers who work as part of your existing team, following your tools, processes, and priorities.</p>
+              <p>At BetterEngineer, we take this one step further.</p>
+              <p>We specialize in nearshore staff augmentation, connecting U.S. companies with senior engineers across Latin America who share your time zone, language fluency, and work culture.</p>
+              <p><strong>Here's how our model works:</strong></p>
+              <ul>
+                <li>You stay in control. The engineers work directly with your team, just like internal hires.</li>
+                <li>We handle everything else. From sourcing and vetting to contracts and HR compliance, we make scaling seamless.</li>
+                <li>You get speed + quality. We match you with pre-vetted engineers in as little as 72 hours.</li>
+                <li>You gain proximity. Nearshore talent ensures real-time collaboration and smoother communication.</li>
+              </ul>
+            </div>
+          </div>
+          <!-- MIGRATION: the legacy page renders this answer with a missing space before each inline link ("call at[betterengineer.com/contact]", "on our[multi-step form]"). Normal spacing restored here; the legacy markup defect is logged in the extraction record. -->
+          <div class="faq-item">
+            <button type="button" aria-expanded="false"><span class="faq-question">How can I hire remote software engineers through BetterEngineer?</span><span class="chevron" aria-hidden="true"></span></button>
+            <div class="faq-panel" hidden>
+              <p>Hiring with us is fast and fully managed via our centralized platform:</p>
+              <ol>
+                <li>Reach out for a personalized call at <a href="https://www.betterengineer.com/contact">betterengineer.com/contact</a> or fill out your needs directly on our <a href="https://www.betterengineer.com/multi-step-contact-form">multi-step form</a>.</li>
+                <li>Share your needs (role, skills, goals)</li>
+                <li>We handpick and present top LATAM candidates, often in 72 hours</li>
+                <li>Use the platform for profile review, interview scheduling, feedback, and hiring</li>
+                <li>We handle onboarding, HR, contracts, and payroll, so you can get started right away.</li>
+              </ol>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button type="button" aria-expanded="false"><span class="faq-question">What are your best practices for managing cross-cultural remote teams?</span><span class="chevron" aria-hidden="true"></span></button>
+            <div class="faq-panel" hidden>
+              <p>Cross-cultural teams flourish with alignment and empathy. We support our U.S. clients and engineers in Colombia, Brazil, Argentina, and Costa Rica with onboarding, ongoing HR, clear performance feedback, and cultural fluency, making remote collaboration seamless.</p>
+            </div>
+          </div>
+          <!-- MIGRATION: en dash characters in "50-70%", "30-50%", and "8-12 weeks" written as plain hyphens, wording unchanged. See content-followups.md -->
+          <div class="faq-item">
+            <button type="button" aria-expanded="false"><span class="faq-question">Is it worth it to use a staffing agency?</span><span class="chevron" aria-hidden="true"></span></button>
+            <div class="faq-panel" hidden>
+              <p>Definitely! With BetterEngineer, which specializes in top talent from Latin America, your company can realize significant advantages, including quantifiable savings and reduced operational friction.</p>
+              <p>How companies benefit:</p>
+              <ul>
+                <li>Faster Hiring (Reduce Time-to-Hire by 50-70%)<br>Traditional hiring cycles can take 8-12 weeks or more. With our ready-to-go network of vetted engineers, companies typically receive candidates within 72 hours.</li>
+                <li>Cost Efficiency (Save 30-50% on Total Talent Costs)<br>Nearshore outsourcing enables substantial savings compared to U.S.-based hires. Clients see cost reductions not just in salaries, but also in recruiting, onboarding, and HR overhead.</li>
+                <li>Access to Senior Talent &amp; Specialized Skills<br>Our network provides you with high-caliber engineers (including for high-demand roles like Python developer hire), who understand your product and business context.</li>
+                <li>Reduced Risk and Turnover<br>With retention rates higher than global averages and cultural alignment from day one, you avoid the costly disruption of rehiring. Our model is built for stability and long-term fit.</li>
+                <li>Fully Managed Operations<br>We eliminate hiring headaches: everything from recruiting, contracts, and onboarding to HR support and management is handled by us.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button type="button" aria-expanded="false"><span class="faq-question">Who benefits the most from working with nearshore software development companies?</span><span class="chevron" aria-hidden="true"></span></button>
+            <div class="faq-panel" hidden>
+              <p>Nearshore software development companies are especially valuable for U.S.-based businesses seeking ongoing, real-time collaboration with remote teams. BetterEngineer helps:</p>
+              <ul>
+                <li>Startups accelerate launches and iterate fast with senior, owner-minded engineers</li>
+                <li>Scale-ups &amp; Enterprises achieve predictable, low-churn scaling and integrated compliance</li>
+                <li>Tech Agencies reliably expand bandwidth to exceed client expectations</li>
+              </ul>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button type="button" aria-expanded="false"><span class="faq-question">What industries do you serve?</span><span class="chevron" aria-hidden="true"></span></button>
+            <div class="faq-panel" hidden>
+              <p>BetterEngineer supports ambitious teams across a wide variety of industries. As a leading nearshore software development partner, we've delivered solutions for innovation-driven sectors, including:</p>
+              <ul>
+                <li>MarTech &amp; Marketing Agencies</li>
+                <li>SaaS &amp; Software Development (including AI/ML, DataTech, CyberTech, Sales Enablement, Work Management, Web3/Blockchain, and Customer Experience)</li>
+                <li>Fintech &amp; RegTech (including adjacent financial services, InsurTech, and investment platforms)</li>
+                <li>HealthTech &amp; Wellness</li>
+                <li>EdTech</li>
+                <li>Media &amp; Entertainment (including streaming, media platforms, and creative studios)</li>
+                <li>PropTech, Mobility Tech, and IoT</li>
+                <li>GreenTech &amp; Environmental Solutions</li>
+                <li>eCommerce, DTC Brands &amp; Consumer Products</li>
+                <li>Logistics/LogTech</li>
+                <li>Consulting and IT Service Providers</li>
+                <li>Non-profit Organizations</li>
+                <li>…and many more</li>
+              </ul>
+              <p>If you're looking for a reliable nearshore software development partner with proven experience across multiple industries, BetterEngineer is ready to help you reach your goals.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button type="button" aria-expanded="false"><span class="faq-question">What types of engineers can I hire through BetterEngineer?</span><span class="chevron" aria-hidden="true"></span></button>
+            <div class="faq-panel" hidden>
+              <p>BetterEngineer connects you with a diverse range of engineering talent, covering every modern technology:</p>
+              <ul>
+                <li>Full Stack Engineers: Skilled in React, Typescript, Node.js, AWS, and more. Perfect for end-to-end web application development.</li>
+                <li>Front End Engineers: Experts in building seamless user experiences with React, Angular, JavaScript, HTML, and CSS.</li>
+                <li>Back End Engineers: Mastery of Node.js, Python, Java, GO, Kotlin, Rust, and additional server-side frameworks.</li>
+                <li>Data Science Engineers: Specialized in Python, Jupyter Notebooks, TensorFlow, SQL, and machine learning for advanced analytics and AI projects.</li>
+                <li>Mobile Engineers: Experienced in iOS, Android, Swift, Kotlin, and React Native for modern mobile applications.</li>
+                <li>Data Engineers: Proficient in SQL, Hadoop, Spark, AWS, GCP, Python, and Scala for big data, ETL, and data pipeline solutions.</li>
+                <li>AI Engineers: Expertise in Python, TensorFlow, large language models (LLMs), and advanced machine learning.</li>
+                <li>DevOps Engineers: Skilled in Linux, AWS, Azure, Google Cloud, Docker, Kubernetes, and infrastructure automation.</li>
+                <li>QA Engineers: Quality assurance talent with experience in Selenium WebDriver, Cypress, Jenkins, GitLab CI, and robust testing pipelines.</li>
+              </ul>
+              <p>And that's just the beginning. Our network includes many more engineering specialties and emerging technology experts, ready to help you reach your goals.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-band" id="cta" aria-labelledby="cta-heading">
+      <div class="cta-split">
+        <div class="cta-split__text">
+          <div class="cta-split__text-inner reveal">
+            <h2 class="h2" id="cta-heading">Say goodbye to endless job boards. Find your better engineer.</h2>
+            <div class="btn-row">
+              <a class="btn btn--primary" href="https://www.betterengineer.com/contact">Contact Us</a>
+            </div>
+          </div>
+        </div>
+        <div class="cta-split__photo reveal">
+          <picture>
+            <source media="(max-width: 768px)" srcset="/images/pages/staff-augmentation/closing-cta-mobile.png">
+            <img src="/images/pages/staff-augmentation/closing-cta.png" alt="A software engineer working at his desk" width="1200" height="900" loading="lazy">
+          </picture>
+        </div>
+      </div>
+    </section>
+  </main>

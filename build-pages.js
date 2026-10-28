@@ -98,9 +98,14 @@ function normalizeHtmlPaths(html) {
 function localizeInternalLinks(html) {
   if (!localInternalLinks) return html;
   var out = html;
-  manifest.migratedSlugs.forEach(function (slug) {
-    var re = new RegExp('href="https://www\\.betterengineer\\.com/' + slug + '/?"', 'g');
-    out = out.replace(re, 'href="/' + slug + '/"');
+  (manifest.pages || []).forEach(function (page) {
+    if (!page.canonical || typeof page.canonical !== 'string') return;
+    if (page.canonical.indexOf(manifest.WWW) !== 0) return;
+    var localPath = page.canonical.slice(manifest.WWW.length);
+    if (!localPath) return;
+    if (localPath.charAt(localPath.length - 1) !== '/') localPath += '/';
+    var escaped = page.canonical.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    out = out.replace(new RegExp('href="' + escaped + '/?"', 'g'), 'href="' + localPath + '"');
   });
   return out;
 }
@@ -145,6 +150,7 @@ function readStyles() {
 }
 
 var blogFeedBuilder = require('./build-blog-feed.js');
+var migratedBlocks = require('./tools/migrated-blocks.js');
 
 function injectBlogFeed(html) {
   var cache = blogFeedBuilder.readCache();
@@ -422,7 +428,7 @@ var headerPrimaryChrome =
   '              <li><a href="https://www.betterengineer.com/podcast">Podcast</a></li>\n' +
   '            </ul>\n' +
   '          </li>\n' +
-  '          <li><a href="https://www.betterengineer.com/join">Join Us</a></li>\n' +
+  '          <li class="nav-item-join"><a href="https://www.betterengineer.com/join">Join Us</a></li>\n' +
   '          <li><a class="nav-pill-hire" href="https://www.betterengineer.com/multi-step-contact-form">Hire Engineers</a></li>\n' +
   '          <li><a href="https://app.betterengineer.com/sign-in?redirect_url=https%3A%2F%2Fapp.betterengineer.com%2F">Login</a></li>\n' +
   '        </ul>\n' +
@@ -464,6 +470,34 @@ var headerPrimaryChrome =
   '    </ul>\n' +
   '  </header>\n';
 
+var headerMinimalChrome =
+  '  <header class="site-header site-header--minimal" id="header">\n' +
+  '    <div class="header-inner header-inner--minimal">\n' +
+  '      <a class="logo-link" href="https://www.betterengineer.com/" aria-label="BetterEngineer home">\n' +
+  '        <img src="./icons/betterengineer-logo.svg" alt="BetterEngineer" width="183" height="33">\n' +
+  '      </a>\n' +
+  '      <div class="site-header-minimal-cta">\n' +
+  '        <span class="site-header-minimal-cta__label">Prefer to talk first?</span>\n' +
+  '        <a class="btn btn--primary site-header-minimal-cta__btn" href="https://calendly.com/tim-salsamobi/30min" target="_blank" rel="noopener">Book a Call</a>\n' +
+  '      </div>\n' +
+  '    </div>\n' +
+  '  </header>\n';
+
+function chromeFor(page) {
+  if (page.chrome === 'minimal') {
+    return {
+      header: localizeInternalLinks(headerMinimalChrome),
+      footer: '',
+      bodyClass: ' page-shell--hire-wizard',
+    };
+  }
+  return {
+    header: headerFor(page),
+    footer: footer,
+    bodyClass: '',
+  };
+}
+
 /* Mark the current page in the nav. Purely additive: pages with no canonical, or
    whose canonical is not in the nav, get the header unchanged. */
 function headerFor(page) {
@@ -477,8 +511,22 @@ function headerFor(page) {
 
 /* ── Shell ───────────────────────────────────────────────────────────────────── */
 
-function shell(title, description, css, header, main, scriptName, extraHead) {
+function extraScripts(page) {
+  var names = page.scripts && page.scripts.length ? page.scripts : [page.script || 'page.js'];
+  var html =
+    '  <script src="./attribution.js" defer></script>\n' +
+    '  <script src="./intake-form-shared.js" defer></script>\n';
+  names.forEach(function (name) {
+    if (!name) return;
+    html += '  <script src="./' + name + '" defer></script>\n';
+  });
+  return html;
+}
+
+function shell(title, description, css, header, main, page, extraHead, pageFooter, bodyClass) {
   if (!extraHead) extraHead = '';
+  var footerHtml = typeof pageFooter === 'string' ? pageFooter : footer;
+  if (!bodyClass) bodyClass = '';
   var html =
     '<!DOCTYPE html>\n' +
     '<html lang="en">\n' +
@@ -492,41 +540,31 @@ function shell(title, description, css, header, main, scriptName, extraHead) {
     description.replace(/"/g, '&quot;') +
     '">\n' +
     extraHead +
-    '  <!-- Google Tag Manager -->\n' +
-    '  <!-- Replace GTM-WT77L8JF in this script and in the noscript iframe right after <body> in shell() if the container changes. -->\n' +
-    '  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({\'gtm.start\':\n' +
-    '  new Date().getTime(),event:\'gtm.js\'});var f=d.getElementsByTagName(s)[0],\n' +
-    '  j=d.createElement(s),dl=l!=\'dataLayer\'?\'&l=\'+l:\'\';j.async=true;j.src=\n' +
-    '  \'https://www.googletagmanager.com/gtm.js?id=\'+i+dl;f.parentNode.insertBefore(j,f);\n' +
-    '  })(window,document,\'script\',\'dataLayer\',\'GTM-WT77L8JF\');</script>\n' +
-    '  <!-- End Google Tag Manager -->\n' +
+    '  <link rel="stylesheet" href="./styles/cookie-consent.css">\n' +
+    '  <script src="./scripts/cookie-consent.js"></script>\n' +
+    '  <!-- Analytics (GTM, HubSpot) load only after cookie consent. IDs: GTM-WT77L8JF, portal 8679235. -->\n' +
+    '  <script type="application/json" id="be-gtm-config">{"id":"GTM-WT77L8JF"}</script>\n' +
+    '  <script type="application/json" id="be-hs-config">{"portalId":"8679235"}</script>\n' +
     '  <link rel="icon" href="/icons/favicon.png" type="image/png">\n' +
     '  <link rel="preconnect" href="https://fonts.googleapis.com">\n' +
     '  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n' +
     '  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">\n' +
-    '  <script>window._hsq = window._hsq || [];</script>\n' +
-    '  <script id="hs-script-loader" async defer src="https://js.hs-scripts.com/8679235.js"></script>\n' +
     '  <style>\n' +
     css +
     '\n  </style>\n' +
     '</head>\n' +
-    '<body>\n' +
-    '  <!-- Google Tag Manager (noscript) -->\n' +
-    '  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WT77L8JF"\n' +
-    '  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>\n' +
-    '  <!-- End Google Tag Manager (noscript) -->\n' +
+    '<body class="' +
+    bodyClass.trim() +
+    '">\n' +
     '  <a class="skip-link" href="#main">Skip to content</a>\n' +
     '\n' +
     header +
     '\n' +
     main +
     '\n' +
-    footer +
+    footerHtml +
     '\n' +
-    '  <script src="./intake-form-shared.js" defer></script>\n' +
-    '  <script src="./' +
-    scriptName +
-    '" defer></script>\n' +
+    extraScripts(page) +
     '</body>\n' +
     '</html>\n';
   return applyBaseToHtml(normalizeHtmlPaths(html));
@@ -576,14 +614,17 @@ manifest.pages.forEach(function (page) {
     ),
   );
 
+  var chrome = chromeFor(page);
   var html = shell(
     page.title,
     page.description,
     cssFor(page),
-    headerFor(page),
+    chrome.header,
     mainHtml,
-    page.script,
+    page,
     buildExtraHead(page, mainHtml),
+    chrome.footer,
+    chrome.bodyClass,
   );
 
   if (EMDASH.test(html)) {
@@ -604,9 +645,14 @@ if (outputRoot) {
   copyIntoOutput('icons');
   copyIntoOutput('images');
   copyFileIntoOutput('home.js');
+  copyFileIntoOutput('attribution.js');
   copyFileIntoOutput('intake-form-shared.js');
   copyFileIntoOutput('landing-page.js');
   copyFileIntoOutput('page.js');
+  copyFileIntoOutput('hire-flow.js');
+  copyFileIntoOutput('hs-lead-form.js');
+  copyFileIntoOutput('styles/cookie-consent.css');
+  copyFileIntoOutput('scripts/cookie-consent.js');
 }
 
 if (pagesPublishRoot) {

@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Local page index (not for publish)</title>
+  <meta name="robots" content="noindex, nofollow">
+  <style>
+    :root {
+      --navy: #001062;
+      --primary: #545bb3;
+      --text: #1c1c1c;
+      --muted: #5c5c66;
+      --surface: #fafafe;
+      --surface-2: #f0f1fb;
+      --border: #e2e4f0;
+      --white: #fff;
+      --local: #3d4293;
+      --live: #2f6f4e;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, sans-serif;
+      color: var(--text);
+      background: var(--surface);
+      line-height: 1.45;
+    }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      background: var(--navy);
+      color: var(--white);
+      padding: 1rem 1.25rem 1.1rem;
+    }
+    header h1 {
+      margin: 0 0 0.25rem;
+      font-size: 1.05rem;
+      font-weight: 650;
+    }
+    header p {
+      margin: 0 0 0.85rem;
+      color: #c9c4ec;
+      font-size: 0.85rem;
+    }
+    .tools {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      align-items: center;
+    }
+    input[type="search"] {
+      flex: 1 1 16rem;
+      min-width: 12rem;
+      padding: 0.55rem 0.7rem;
+      border: 0;
+      border-radius: 8px;
+      font: inherit;
+    }
+    .jumps {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    .jumps a {
+      color: var(--white);
+      text-decoration: none;
+      background: rgba(255,255,255,0.12);
+      border-radius: 999px;
+      padding: 0.3rem 0.7rem;
+      font-size: 0.8rem;
+    }
+    main {
+      max-width: 72rem;
+      margin: 0 auto;
+      padding: 1.25rem;
+    }
+    section {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem 1.1rem 1.15rem;
+      margin-bottom: 1rem;
+    }
+    section h2 {
+      margin: 0 0 0.75rem;
+      font-size: 0.95rem;
+      color: var(--navy);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(15.5rem, 1fr));
+      gap: 0.45rem;
+    }
+    .status {
+      display: flex;
+      gap: 0.35rem;
+    }
+    .status button {
+      border: 0;
+      border-radius: 999px;
+      padding: 0.35rem 0.7rem;
+      font: inherit;
+      font-size: 0.8rem;
+      background: rgba(255,255,255,0.12);
+      color: var(--white);
+      cursor: pointer;
+    }
+    .status button.is-on {
+      background: var(--white);
+      color: var(--navy);
+    }
+    .ready-count {
+      color: #d7f0e2;
+      font-size: 0.8rem;
+    }
+    .row {
+      display: flex;
+      align-items: stretch;
+      min-width: 0;
+      border-radius: 8px;
+      background: var(--surface-2);
+    }
+    .row.is-ready { background: #e5f3eb; }
+    .row:hover { background: #e4e6f6; }
+    .row.is-ready:hover { background: #d7eddf; }
+    .row[hidden] { display: none; }
+    .ready-check {
+      display: flex;
+      align-items: center;
+      padding: 0 0.1rem 0 0.6rem;
+      cursor: pointer;
+    }
+    .ready-check input {
+      width: 1.05rem;
+      height: 1.05rem;
+      margin: 0;
+      accent-color: var(--live);
+      cursor: pointer;
+    }
+    a.page {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      flex: 1;
+      min-width: 0;
+      padding: 0.55rem 0.7rem 0.55rem 0.45rem;
+      border-radius: 8px;
+      background: transparent;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.92rem;
+    }
+    section[hidden] { display: none; }
+    .tag {
+      flex: 0 0 auto;
+      font-size: 0.68rem;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      border-radius: 999px;
+      padding: 0.12rem 0.45rem;
+      color: var(--white);
+    }
+    .tag-local { background: var(--local); }
+    .tag-live { background: var(--live); }
+    .empty {
+      display: none;
+      color: var(--muted);
+      padding: 0.5rem 0;
+    }
+    body.is-empty .empty { display: block; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Local page index</h1>
+    <p>Local only. Not published. Check Ready when a page is finished. When using <code>node static-server.js</code>, ready state saves to <code>preview/ready-state.json</code> (shared across browsers). Without that server, checks stay in this browser only via localStorage. Roles, technologies, and careers job pages start checked; migration and TODO rows start open until you mark them.</p>
+    <div class="tools">
+      <input type="search" id="filter" placeholder="Filter pages" autocomplete="off">
+      <div class="status" role="group" aria-label="Ready filter">
+        <button type="button" data-status="all" class="is-on">All</button>
+        <button type="button" data-status="ready">Ready</button>
+        <button type="button" data-status="open">Still open</button>
+      </div>
+      <span class="ready-count" id="ready-count"></span>
+      <nav class="jumps" aria-label="Sections">
+        <a href="#todos">Your TODOs</a>
+        <a href="#migrated">Migrated</a>
+        <a href="#experiments">Experiments</a>
+        <a href="#phase3">Case studies</a>
+        <a href="#phase4">Legal</a>
+        <a href="#phase5">Hire form</a>
+        <a href="#leftover">More HubSpot pages</a>
+        <a href="#careers">Careers</a>
+        <a href="#industries">Industries</a>
+        <a href="#existing">Already live</a>
+        <a href="#roles">Roles</a>
+        <a href="#technologies">Technologies</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <p class="empty">No pages match that filter.</p>
+
+    <section id="todos">
+      <h2>Your TODOs (not done in this repo)</h2>
+      <div class="grid">
+        <a class="page" href="https://www.betterengineer.com/hire-senior-python-engineers-nearshore-latam-talent"><span>HubSpot 301: Python landing</span><span class="tag tag-live">you</span></a>
+        <a class="page" href="https://www.betterengineer.com/hire-senior-full-stack-engineers-nearshore-latam-talent"><span>HubSpot 301: Full-stack landing</span><span class="tag tag-live">you</span></a>
+        <a class="page" href="https://www.betterengineer.com/hire-senior-ai-data-engineers-nearshore-latam-talent"><span>HubSpot 301: AI/data landing</span><span class="tag tag-live">you</span></a>
+        <a class="page" href="https://www.betterengineer.com/ai-readiness-manufacturing"><span>HubSpot 301: AI manufacturing</span><span class="tag tag-live">you</span></a>
+        <a class="page" href="https://discover.betterengineer.com/sitemap.xml"><span>GSC: recrawl discover sitemap</span><span class="tag tag-live">you</span></a>
+        <a class="page" href="#prelaunch-hubspot-tracking"><span>HubSpot tracking: site-wide script</span><span class="tag tag-live">you</span></a>
+        <a class="page" href="/multi-step-contact-form/"><span>UTM → HubSpot: landing &amp; form fields</span><span class="tag tag-live">you</span></a>
+        <a class="page" href="/"><span>Marina content pass: claims &amp; keywords</span><span class="tag tag-live">you</span></a>
+      </div>
+      <p style="margin:0.75rem 0 0;color:#5c5c66;font-size:0.9rem">Also still yours: one approved savings figure and delivery-speed claim, HubSpot workflow routing for the new hire form GUID <code>d43da6a3-79aa-45d4-99be-0d1e8162daf7</code>, live URL inventory verification, and the QA Engineer glossary sign-off (CF-63). Do not disable competing HubSpot pages until the 301s are live.</p>
+    </section>
+
+    <section id="migrated">
+      <h2>HubSpot migration (local, not live yet)</h2>
+      <div class="grid">
+        <a class="page" href="/staff-augmentation/"><span>Staff Augmentation</span><span class="tag tag-local">local</span></a>
+        <a class="page" href="/ai-readiness/"><span>AI Readiness</span><span class="tag tag-local">local</span></a>
+        <a class="page" href="/hiring-dashboard/"><span>Hiring Dashboard</span><span class="tag tag-local">local</span></a>
+        <a class="page" href="/about/"><span>About</span><span class="tag tag-local">local</span></a>
+        <a class="page" href="/latamengineer/"><span>LATAM Engineer</span><span class="tag tag-local">local</span></a>
+        <a class="page" href="/contact/"><span>Contact</span><span class="tag tag-local">local</span></a>
+        <a class="page" href="/join/"><span>Join Us</span><span class="tag tag-local">local</span></a>
+        <a class="page" href="/faqs-nearshore-software-engineers-staff-augmentation-ai-talent/"><span>FAQs</span><span class="tag tag-local">local</span></a>
+        <a class="page" href="/podcast/"><span>Podcast</span><span class="tag tag-local">local</span></a>
+        <a class="page" href="/ebooks/"><span>Ebooks</span><span class="tag tag-local">local</span></a>
+        <a class="page" href="/technical-glossary/"><span>Technical Glossary</span><span class="tag tag-local">local</span></a>
+      </div>
+    </section>
+
+    <section id="experiments">
+      <h2>Experiments (not publishing)</h2>
+      <div class="grid">
+        <a class="page" href="/engineer-playlist/"><span>Academy / Engineer Playlist</span><span class="tag tag-local">local</span></a>
+        <a class="page" href="/design/megamenu-preview.html"><span>Services megamenu prototype (not production nav)</span><span class="tag tag-local">local</span></a>
+        <a class="page" href="/preview/cookie-consent-preview.html"><span>Cookie banner QA (design preview; live banner ships in site chrome)</span><span class="tag tag-local">local</span></a>
+        <a class="page" href="/case-studies/securelink/"><span>SecureLink</span><span class="tag tag-local">local</span></a>
+        <a class="page" data-default-ready="true" href="/industries/"><span>Industries hub</span><span class="tag tag-local">local</span></a>
+        <a class="page" href="/hire-software-engineers-in-72-hours/"><span>Hire in 72 hours</span><span class="tag tag-local">local</span></a>
+        <a class="page" href="/find-engineers/"><span>Find an engineer (profiles at the end)</span><span class="tag tag-local">local</span></a>
+      </div>
+      <p style="margin:0.75rem 0 0;color:#5c5c66;font-size:0.9rem">Local review only. Excluded from the discover cutover bundle and www publish until you promote them out of Experiments.</p>
+    </section>
+
+    <section id="phase3">
+      <h2>Phase 3, case studies (local, not live yet)</h2>
+      <div class="grid">
+        <a class="page" href="/case-studies/livecgi/"><span>Live CGI</span><span class="tag tag-local">local</span></a>
+        <a class="page" href="/case-studies/wasteplace/"><span>WastePlace</span><span class="tag tag-local">local</span></a>
+        <a class="page" href="/case-studies/hydrow/"><span>Hydrow</span><span class="tag tag-local">local</span></a>
+      </div>
+    </section>
+
+    <section id="phase4">
+      <h2>Phase 4, legal (local, not live yet)</h2>
+      <div class="grid">
+        <a class="page" href="/resource-center/wpautoterms/privacy-policy/"><span>Privacy Policy</span><span class="tag tag-local">local</span></a>
+        <a class="page" href="/terms-of-service/"><span>Terms of Service</span><span class="tag tag-local">local</span></a>
+      </div>
+    </section>
+
+    <section id="phase5">
+      <h2>Phase 5, hire form (local, not live yet)</h2>
+      <div class="grid">
+        <a class="page" href="/multi-step-contact-form/"><span>Multi-step hire form</span><span class="tag tag-local">local</span></a>
+        <a class="page" href="/contact/"><span>Contact (existing)</span><span class="tag tag-local">local</span></a>
+      </div>
+    </section>
+
+    <section id="leftover">
+      <h2>Remaining HubSpot conversion page (local, not live yet)</h2>
+      <div class="grid">
+        <a class="page" href="/youvegotllm/"><span>You've got an LLM</span><span class="tag tag-local">local</span></a>
+      </div>
+    </section>
+
+    <section id="careers">
+      <h2>Phase 6, careers (local, not live yet)</h2>
+      <div class="grid">
+        <a class="page" data-default-ready="true" href="/careers/"><span>Careers hub</span><span class="tag tag-local">local</span></a>
+        <a class="page" data-default-ready="true" href="/careers/net-engineer/"><span>.NET Engineer</span><span class="tag tag-local">local</span></a>
+        <a class="page" data-default-ready="true" href="/careers/android-engineer/"><span>Android Engineer</span><span class="tag tag-local">local</span></a>
+        <a class="page" data-default-ready="true" href="/careers/aws-engineer/"><span>AWS Engineer</span><span class="tag tag-local">local</span></a>
+        <a class="page" data-default-ready="true" href="/careers/azure-engineer/"><span>Azure Engineer</span><span class="tag tag-local">local</span></a>
+        <a class="page" data-default-ready="true" href="/careers/blockchain-engineer/"><span>Blockchain Engineer</span><span class="tag tag-local">local</span></a>
+        <a class="page" data-default-ready="true" href="/careers/cloudops-engineer/"><span>CloudOps Engineer</span><span class="tag tag-local">local</span></a>
+        <a class="page" data-default-ready="true" href="/careers/cordova-c-engineer/"><span>Cordova / C# Engineer</span><span class="tag tag-local">local</span></a>
+        <a class="page" data-default-ready="true" href="/careers/data-science-engineer/"><span>Data Science Engineer</span><span class="tag tag-local">local</span></a>
+        <a class="page" data-default-ready="true" href="/careers/devops-engineer/"><span>DevOps Engineer</span><span class="tag tag-local">local</span></a>
+        <a class="page" data-default-ready="true" href="/careers/drupal-engineer/"><span>Drupal Engineer</span><span class="tag tag-local">local</span></a>
+        <a class="page" data-default-ready="true" href="/careers/e-commerce-engineer/"><span>E-Commerce Engineer</span><span class="tag tag-local">local</span></a>
+        <a class="page" data-default-ready="true" href="/careers/elixir-engineer/"><span>Elixir Software Engineer</span><span class="tag tag-local">local</span></a>
+        <a class="page" data-default-ready="true" href="/careers/embedded-software-engineer/"><span>Embedded Software Engineer</span><span class="tag tag-local">local</span></a>
+        <a class="page" data-default-ready="true" href="/careers/front-end-engineer/"><span>Front-end Engineer</span><span class="tag tag-local">local</span></a>
+        <a class="page" data-default-ready="true" href="/careers/full-stack-javascript-engineer/"><span>Full-stack JavaScript Engineer</span><span class="tag tag-local">local</span></a>
+        <a class="page" data-default-ready="true" href="/careers/groovy-on-grails-engineer/"><span>Groovy on Grails Engineer</span><span class="tag tag-local">local</span></a>
+        <a class="page" data-default-ready="true" href="/careers/ios-engineer/"><span>iOS Engineer</span><span class="tag tag-local">local</span></a>
+        <a class="page" data-default-ready="true" href="/careers/java-engineer/"><span>Java Engineer</span><span class="tag tag-local">local</span></a>
+        <a class="page" data-default-ready="true" href="/careers/kubernetes-software-engineer/"><span>Kubernetes Software Engineer</span><span class="tag tag-local">local</span></a>
+        <a class="page" data-default-ready="true" href="/careers/magneto-engineer/"><span>Magento Engineer</span><span class="tag tag-local">local</span></a>
+        <a class="page" data-default-ready="true" href="/careers/ms-dynamics-crm-engineer/"><span>MS Dynamics CRM Engineer</span><span class="tag tag-local">local</span></a>
+        <a class="page" data-default-ready="true" href="/careers/node-js-engineer/"><span>Node.js Engineer</span><span class="tag tag-local">local</span></a>
+        <a class="page" data-default-ready="true" href="/careers/openstack-engineer/"><span>OpenStack Engineer</span><span class="tag tag-local">local</span></a>
+        <a class="page" data-default-ready="true" href="/careers/peoplesoft-consultant/"><span>PeopleSoft Consultant</span><span class="tag tag-local">local</span></a>
+        <a class="page" data-default-ready="true" href="/careers/php-engineer/"><span>PHP Engineer</span><span class="tag tag-local">local</span></a>
+        <a class="page" data-default-ready="true" href="/careers/project-manager/"><span>Project Manager</span><span class="tag tag-local">local</span></a>
+        <a class="page" data-default-ready="true" href="/careers/python-engineer/"><span>Python Engineer</span><span class="tag tag-local">local</span></a>
+        <a class="page" data-default-ready="true" href="/careers/qa-automation-engineer/"><span>QA Automation Engineer</span><span class="tag tag-local">local</span></a>
+        <a class="page" data-default-ready="true" href="/careers/react-native-engineer/"><span>React Native Engineer</span><span class="tag tag-local">local</span></a>
+        <a class="page" data-default-ready="true" href="/careers/ruby-on-rails-engineer/"><span>Ruby on Rails Engineer</span><span class="tag tag-local">local</span></a>
+        <a class="page" data-default-ready="true" href="/careers/rust-c-engineer/"><span>Rust/C++ Software Engineer</span><span class="tag tag-local">local</span></a>
+        <a class="page" data-default-ready="true" href="/careers/salesforce-engineer/"><span>Salesforce Engineer</span><span class="tag tag-local">local</span></a>
+        <a class="page" data-default-ready="true" href="/careers/scala-engineer/"><span>Scala Engineer</span><span class="tag tag-local">local</span></a>
+        <a class="page" data-default-ready="true" href="/careers/shopify-engineer/"><span>Shopify Engineer</span><span class="tag tag-local">local</span></a>
+        <a class="page" data-default-ready="true" href="/careers/typescript-engineer/"><span>TypeScript Engineer</span><span class="tag tag-local">local</span></a>
+        <a class="page" data-default-ready="true" href="/careers/ui-ux-engineer/"><span>UI / UX Engineer</span><span class="tag tag-local">local</span></a>
+        <a class="page" data-default-ready="true" href="/careers/unity-engineer/"><span>Unity Engineer</span><span class="tag tag-local">local</span></a>
+        <a class="page" data-default-ready="true" href="/careers/unreal-engineer/"><span>Unreal Engineer</span><span class="tag tag-local">local</span></a>
+        <a class="page" data-default-ready="true" href="/careers/wordpress-engineer/"><span>WordPress Engineer</span><span class="tag tag-local">local</span></a>
+        <a class="page" data-default-ready="true" href="/join/"><span>Join Us (existing)</span><span class="tag tag-local">local</span></a>
+      </div>
+      <p style="margin:0.75rem 0 0;color:#5c5c66;font-size:0.9rem">All 39 live job pages are listed above. None of these are on discover yet.</p>
+    </section>
+
+    <section id="industries">
+      <h2>Phase 8, industry verticals (local, not live yet)</h2>
+      <div class="grid">
+        <a class="page" data-default-ready="true" href="/fintech/"><span>FinTech</span><span class="tag tag-local">local</span></a>
+        <a class="page" data-default-ready="true" href="/martech/"><span>MarTech</span><span class="tag tag-local">local</span></a>
+        <a class="page" data-default-ready="true" href="/healthtech/"><span>HealthTech</span><span class="tag tag-local">local</span></a>
+      </div>
+    </section>
+
+    <section id="existing">
+      <h2>Already in this repo</h2>
+      <div class="grid">
+        <a class="page" href="/"><span>Home</span><span class="tag tag-local">local</span></a>
+        <a class="page" href="/services/hire-ai-ready-engineers/"><span>Hire AI-Ready Engineers</span><span class="tag tag-live">discover</span></a>
+        <a class="page" href="/services/ai-systems-readiness-for-manufacturing/"><span>AI Manufacturing</span><span class="tag tag-live">discover</span></a>
+      </div>
+    </section>
+
+    <section id="roles">
+      <h2>Roles</h2>
+      <div class="grid">
+        <a class="page" data-default-ready="true" href="/roles/"><span>Roles hub</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/roles/front-end-engineers/"><span>Front-end</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/roles/back-end-engineers/"><span>Back-end</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/roles/full-stack-engineers/"><span>Full-stack</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/roles/mobile-engineers/"><span>Mobile</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/roles/devops-engineers/"><span>DevOps</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/roles/data-engineers/"><span>Data</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/roles/data-science-engineers/"><span>Data Science</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/roles/ai-engineers/"><span>AI</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/roles/qa-engineers/"><span>QA</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/roles/blockchain-engineers/"><span>Blockchain</span><span class="tag tag-live">discover</span></a>
+      </div>
+    </section>
+
+    <section id="technologies">
+      <h2>Technologies</h2>
+      <div class="grid">
+        <a class="page" data-default-ready="true" href="/technologies/"><span>Technologies hub</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/technologies/python-developers/"><span>Python</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/technologies/javascript-developers/"><span>JavaScript</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/technologies/typescript-developers/"><span>TypeScript</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/technologies/java-developers/"><span>Java</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/technologies/php-developers/"><span>PHP</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/technologies/golang-developers/"><span>Go</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/technologies/swift-developers/"><span>Swift</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/technologies/kotlin-developers/"><span>Kotlin</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/technologies/rust-developers/"><span>Rust</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/technologies/ruby-developers/"><span>Ruby</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/technologies/csharp-developers/"><span>C#</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/technologies/cpp-developers/"><span>C++</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/technologies/react-developers/"><span>React</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/technologies/angular-developers/"><span>Angular</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/technologies/vuejs-developers/"><span>Vue.js</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/technologies/nextjs-developers/"><span>Next.js</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/technologies/nuxtjs-developers/"><span>Nuxt.js</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/technologies/svelte-developers/"><span>Svelte</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/technologies/redux-developers/"><span>Redux</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/technologies/nodejs-developers/"><span>Node.js</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/technologies/expressjs-developers/"><span>Express.js</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/technologies/nestjs-developers/"><span>NestJS</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/technologies/django-developers/"><span>Django</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/technologies/flask-developers/"><span>Flask</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/technologies/fastapi-developers/"><span>FastAPI</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/technologies/laravel-developers/"><span>Laravel</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/technologies/ruby-on-rails-developers/"><span>Ruby on Rails</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/technologies/dotnet-developers/"><span>.NET</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/technologies/spring-boot-developers/"><span>Spring Boot</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/technologies/graphql-developers/"><span>GraphQL</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/technologies/ios-developers/"><span>iOS</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/technologies/android-developers/"><span>Android</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/technologies/react-native-developers/"><span>React Native</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/technologies/flutter-developers/"><span>Flutter</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/technologies/ionic-developers/"><span>Ionic</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/technologies/aws-developers/"><span>AWS</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/technologies/azure-developers/"><span>Azure</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/technologies/google-cloud-developers/"><span>Google Cloud</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/technologies/docker-developers/"><span>Docker</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/technologies/kubernetes-developers/"><span>Kubernetes</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/technologies/terraform-developers/"><span>Terraform</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/technologies/jenkins-developers/"><span>Jenkins</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/technologies/postgresql-developers/"><span>PostgreSQL</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/technologies/mysql-developers/"><span>MySQL</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/technologies/sql-server-developers/"><span>SQL Server</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/technologies/mongodb-developers/"><span>MongoDB</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/technologies/redis-developers/"><span>Redis</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/technologies/elasticsearch-developers/"><span>Elasticsearch</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/technologies/snowflake-developers/"><span>Snowflake</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/technologies/databricks-developers/"><span>Databricks</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/technologies/oracle-database-developers/"><span>Oracle Database</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/technologies/apache-spark-developers/"><span>Apache Spark</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/technologies/apache-kafka-developers/"><span>Apache Kafka</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/technologies/openai-api-developers/"><span>OpenAI API</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/technologies/tensorflow-developers/"><span>TensorFlow</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/technologies/pytorch-developers/"><span>PyTorch</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/technologies/langchain-developers/"><span>LangChain</span><span class="tag tag-live">discover</span></a>
+        <a class="page" data-default-ready="true" href="/technologies/scikit-learn-developers/"><span>Scikit-learn</span><span class="tag tag-live">discover</span></a>
+      </div>
+    </section>
+  </main>
+  <script>
+    (function () {
+      var STORAGE_KEY = "be-preview-page-ready";
+      var STORAGE_VERSION_KEY = "be-preview-page-ready-v";
+      var STORAGE_VERSION = 2;
+      var input = document.getElementById("filter");
+      var countEl = document.getElementById("ready-count");
+      var status = "all";
+      var links = Array.prototype.slice.call(document.querySelectorAll("a.page"));
+      var sections = Array.prototype.slice.call(document.querySelectorAll("section"));
+      var rows = [];
+      var applyFn;
+
+      function loadReady() {
+        try {
+          var raw = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+          if (!raw || typeof raw !== "object" || Array.isArray(raw)) return {};
+          return raw;
+        } catch (e) {
+          return {};
+        }
+      }
+
+      function saveReady(map) {
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(map));
+        } catch (e) {
+          /* private mode / quota — UI still works for this session */
+        }
+      }
+
+      function defaultReady(link) {
+        return link.getAttribute("data-default-ready") === "true";
+      }
+
+      function defaultReadyForHref(href) {
+        for (var i = 0; i < links.length; i += 1) {
+          var link = links[i];
+          if ((link.getAttribute("href") || "") !== href) continue;
+          if (defaultReady(link)) return true;
+        }
+        return false;
+      }
+
+      function checkedFromStorage(href, stored) {
+        if (Object.prototype.hasOwnProperty.call(stored, href)) return !!stored[href];
+        return defaultReadyForHref(href);
+      }
+
+      function migrateStoredReady(stored) {
+        var version = 0;
+        try {
+          version = parseInt(localStorage.getItem(STORAGE_VERSION_KEY) || "0", 10) || 0;
+        } catch (e) {
+          version = 0;
+        }
+        if (version >= STORAGE_VERSION) return stored;
+        var next = {};
+        var hrefsSeen = {};
+        links.forEach(function (link) {
+          var href = link.getAttribute("href") || "";
+          if (!href || hrefsSeen[href]) return;
+          hrefsSeen[href] = true;
+          if (Object.prototype.hasOwnProperty.call(stored, href)) next[href] = !!stored[href];
+          else next[href] = defaultReadyForHref(href);
+        });
+        try {
+          localStorage.setItem(STORAGE_VERSION_KEY, String(STORAGE_VERSION));
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+        } catch (e) {
+          /* ignore */
+        }
+        return next;
+      }
+
+      var useReadyApi = false;
+      var putReadyTimer = null;
+      var pendingReadyMap = null;
+
+      function buildReadyMap() {
+        var map = {};
+        rows.forEach(function (item) {
+          map[item.href] = item.box.checked;
+        });
+        return map;
+      }
+
+      function mergeReadyMaps(apiMap, localMap) {
+        var merged = {};
+        var hrefsSeen = {};
+        links.forEach(function (link) {
+          var href = link.getAttribute("href") || "";
+          if (!href || hrefsSeen[href]) return;
+          hrefsSeen[href] = true;
+          if (Object.prototype.hasOwnProperty.call(localMap, href)) merged[href] = !!localMap[href];
+          else if (Object.prototype.hasOwnProperty.call(apiMap, href)) merged[href] = !!apiMap[href];
+          else merged[href] = defaultReadyForHref(href);
+        });
+        return merged;
+      }
+
+      function readyMapsDiffer(a, b) {
+        for (var key in b) {
+          if (!Object.prototype.hasOwnProperty.call(b, key)) continue;
+          if (!!a[key] !== !!b[key]) return true;
+        }
+        return false;
+      }
+
+      function putReadyToApi(map) {
+        if (!useReadyApi) return;
+        pendingReadyMap = map;
+        fetch("/preview/api/ready", {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(map),
+        })
+          .then(function (res) {
+            if (!res.ok) throw new Error("HTTP " + res.status);
+            return res.json();
+          })
+          .then(function () {
+            pendingReadyMap = null;
+          })
+          .catch(function (err) {
+            console.warn("[preview] Could not save ready state to server; localStorage still has your checks.", err);
+          });
+      }
+
+      function flushReadyToApi() {
+        if (!useReadyApi || !rows.length) return;
+        if (putReadyTimer) {
+          clearTimeout(putReadyTimer);
+          putReadyTimer = null;
+        }
+        putReadyToApi(pendingReadyMap || buildReadyMap());
+      }
+
+      function snapshotReadyFromRows() {
+        var map = buildReadyMap();
+        saveReady(map);
+        if (!useReadyApi) return;
+        pendingReadyMap = map;
+        if (putReadyTimer) clearTimeout(putReadyTimer);
+        putReadyTimer = setTimeout(function () {
+          putReadyTimer = null;
+          putReadyToApi(map);
+        }, 300);
+      }
+
+      function syncRowVisual(item) {
+        item.row.classList.toggle("is-ready", item.box.checked);
+      }
+
+      function setReadyForHref(href, checked) {
+        rows.forEach(function (item) {
+          if (item.href !== href) return;
+          item.box.checked = checked;
+          syncRowVisual(item);
+        });
+      }
+
+      function boot(storedReady, apiMode, seedSnapshot, syncApiAfterBoot) {
+        useReadyApi = apiMode;
+
+        links.forEach(function (link) {
+        link.setAttribute("target", "_blank");
+        link.setAttribute("rel", "noopener noreferrer");
+        var href = link.getAttribute("href") || "";
+        var row = document.createElement("div");
+        row.className = "row";
+        var label = document.createElement("label");
+        label.className = "ready-check";
+        var box = document.createElement("input");
+        box.type = "checkbox";
+        var titleNode = link.querySelector("span");
+        var title = (titleNode ? titleNode.textContent : link.textContent).replace(/\s+/g, " ").trim();
+        box.setAttribute("aria-label", "Mark ready: " + title);
+        box.checked = checkedFromStorage(href, storedReady);
+        label.appendChild(box);
+        link.parentNode.insertBefore(row, link);
+        row.appendChild(label);
+        row.appendChild(link);
+        syncRowVisual({ row: row, box: box });
+        rows.push({ row: row, link: link, box: box, href: href });
+        box.addEventListener("change", function () {
+          setReadyForHref(href, box.checked);
+          snapshotReadyFromRows();
+          applyFn();
+        });
+        });
+
+        applyFn = function () {
+        var q = (input.value || "").trim().toLowerCase();
+        var shown = 0;
+        var readyHrefs = {};
+        var allHrefs = {};
+        rows.forEach(function (item) {
+          allHrefs[item.href] = true;
+          if (item.box.checked) readyHrefs[item.href] = true;
+          var text = item.link.textContent.toLowerCase();
+          var href = item.href.toLowerCase();
+          var textMatch = !q || text.indexOf(q) !== -1 || href.indexOf(q) !== -1;
+          var statusMatch = status === "all" || (status === "ready" ? item.box.checked : !item.box.checked);
+          var match = textMatch && statusMatch;
+          item.row.hidden = !match;
+          if (match) shown += 1;
+        });
+        sections.forEach(function (section) {
+          section.hidden = section.querySelectorAll(".row:not([hidden])").length === 0;
+        });
+        document.body.classList.toggle("is-empty", shown === 0);
+        countEl.textContent = Object.keys(readyHrefs).length + " of " + Object.keys(allHrefs).length + " ready";
+        };
+
+        Array.prototype.forEach.call(document.querySelectorAll(".status button"), function (button) {
+          button.addEventListener("click", function () {
+            status = button.getAttribute("data-status");
+            Array.prototype.forEach.call(document.querySelectorAll(".status button"), function (other) {
+              other.classList.toggle("is-on", other === button);
+            });
+            applyFn();
+          });
+        });
+
+        input.addEventListener("input", applyFn);
+        if (seedSnapshot || syncApiAfterBoot) snapshotReadyFromRows();
+        applyFn();
+      }
+
+      window.addEventListener("pagehide", flushReadyToApi);
+
+      function loadFromApi() {
+        return fetch("/preview/api/ready", {
+          headers: { Accept: "application/json" },
+          signal: AbortSignal.timeout(5000),
+        })
+          .then(function (res) {
+            if (!res.ok) throw new Error("bad status");
+            return res.json();
+          })
+          .then(function (data) {
+            if (!data || typeof data !== "object" || Array.isArray(data)) data = {};
+            var seed = Object.keys(data).length === 0;
+            return { stored: data, api: true, seed: seed };
+          });
+      }
+
+      var hadStoredReady = false;
+      try {
+        hadStoredReady = localStorage.getItem(STORAGE_KEY) !== null;
+      } catch (e) {
+        hadStoredReady = false;
+      }
+      boot(migrateStoredReady(loadReady()), false, !hadStoredReady, false);
+
+      loadFromApi()
+        .then(function (result) {
+          var localMap = buildReadyMap();
+          var merged = mergeReadyMaps(result.stored, localMap);
+          saveReady(merged);
+          rows.forEach(function (item) {
+            setReadyForHref(item.href, checkedFromStorage(item.href, merged));
+          });
+          useReadyApi = true;
+          var seed = Object.keys(result.stored).length === 0;
+          var syncApi = readyMapsDiffer(result.stored, merged);
+          if (seed || syncApi) snapshotReadyFromRows();
+          applyFn();
+        })
+        .catch(function (err) {
+          console.warn(
+            "[preview] Ready API unavailable; using localStorage only. Start with node static-server.js for file-backed state.",
+            err
+          );
+        });
+    })();
+  </script>
+</body>
+</html>

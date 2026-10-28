@@ -63,10 +63,16 @@
       justify-content: space-between;
       gap: 0.5rem;
     }
-    .logo-link { display: flex; align-items: center; line-height: 0; }
+    .logo-link {
+      display: flex;
+      align-items: center;
+      line-height: 0;
+      flex-shrink: 0;
+    }
     .logo-link img {
       width: 232px;
       height: 48px;
+      max-width: min(232px, 38vw);
       object-fit: contain;
       object-position: left center;
       display: block;
@@ -259,25 +265,42 @@
     }
     .mobile-submenu a:hover { background: #fafafa; }
 
-    @media (max-width: 1100px) and (min-width: 946px) {
-      .nav-desktop > li > a {
-        font-size: 14px;
-        line-height: 20px;
-        padding: 10px 18px;
-      }
-      .header-inner {
-        padding: 16px 18px;
-      }
-      .nav-desktop { gap: 4px; }
-    }
-    @media (min-width: 946px) {
+    /* Tablet: hamburger; full nav does not fit ~1024-1100 with logo + CTAs */
+    @media (min-width: 1101px) {
       .nav-toggle { display: none !important; }
       .nav-desktop { display: flex; }
     }
-    @media (max-width: 945px) {
+    @media (max-width: 1100px) {
       .nav-desktop { display: none !important; }
       .nav-toggle { display: inline-flex !important; }
       .site-nav { flex: 0; justify-content: flex-end; }
+    }
+    /* Compact desktop between mobile menu and full nav width */
+    @media (max-width: 1280px) and (min-width: 1101px) {
+      .header-inner {
+        padding: 16px 18px;
+        gap: 0.35rem;
+      }
+      .logo-link img {
+        width: 200px;
+        height: 42px;
+        max-width: none;
+      }
+      .nav-desktop { gap: 0; }
+      .nav-desktop > li > a {
+        font-size: 14px;
+        line-height: 20px;
+        padding: 10px 12px;
+      }
+      .nav-desktop a.nav-pill-hire {
+        padding: 10px 14px;
+        font-size: 14px;
+      }
+      .nav-chevron { margin-left: 4px; }
+    }
+    @media (max-width: 1200px) and (min-width: 1101px) {
+      /* Join Us remains in mobile menu; frees horizontal space on narrow desktop */
+      .nav-desktop > li.nav-item-join { display: none; }
     }
 
     /* Layout */
@@ -297,6 +320,7 @@
     .h2 { font-size: clamp(1.75rem, 3vw, 2.5rem); line-height: 1.2; font-weight: 600; margin: 0 0 1rem; letter-spacing: -0.02em; }
     .h2 .accent { color: var(--color-primary); font-weight: 500; }
     .lead { font-size: 1.125rem; color: var(--color-muted); max-width: 36rem; margin: 0 0 1.75rem; }
+    #differentiators .air-section-head > .lead + .lead { font-size: 1.25rem; }
     @media (min-width: 901px) {
       #hero .lead { padding-right: 4.5rem; }
     }
@@ -847,7 +871,11 @@
       gap: clamp(2rem, 5vw, 4.5rem);
       align-items: center;
     }
-    @media (max-width: 900px) { .split { grid-template-columns: 1fr; gap: 2rem; } }
+    @media (max-width: 900px) {
+      .split { grid-template-columns: 1fr; gap: 2rem; }
+      #manage-candidates .split__img { order: -1; }
+      #contractors .split__img { order: -1; }
+    }
     .split__img img {
       display: block;
       width: 100%;
@@ -1549,6 +1577,32 @@
       font-weight: 700;
     }
     .cta-band .btn--primary:hover { background: #f2f3fb; border-color: #f2f3fb; }
+    @media (max-width: 900px) {
+      .cta-split__photo { display: none; }
+      .cta-split__text {
+        width: 100%;
+        padding-right: 0;
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+      }
+      .cta-band .cta-split__text-inner:not(:has(.lead)) {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+        width: 100%;
+        max-width: none;
+      }
+      .cta-band .cta-split__text-inner:not(:has(.lead)) .h2 {
+        margin: 0;
+        min-width: 0;
+      }
+      .cta-band .cta-split__text-inner:not(:has(.lead)) .btn-row {
+        margin: 0;
+        flex: 0 0 auto;
+        justify-content: flex-start;
+      }
+    }
     /* Footer (aligned with betterengineer.com footer-v4) */
     .site-footer {
       background: var(--color-white);

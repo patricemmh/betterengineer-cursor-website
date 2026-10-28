@@ -9,20 +9,15 @@
   <meta property="og:title" content="AI Systems Readiness for Manufacturing Companies | BetterEngineer">
   <meta property="og:description" content="We help manufacturing companies audit disconnected ERP, CRM, sales, and operations systems, then build practical AI workflows and integrations that reduce manual work.">
   <meta property="og:type" content="website">
-  <!-- Google Tag Manager -->
-  <!-- Replace GTM-WT77L8JF in this script and in the noscript iframe right after <body> in shell() if the container changes. -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-WT77L8JF');</script>
-  <!-- End Google Tag Manager -->
+  <link rel="stylesheet" href="/styles/cookie-consent.css">
+  <script src="/scripts/cookie-consent.js"></script>
+  <!-- Analytics (GTM, HubSpot) load only after cookie consent. IDs: GTM-WT77L8JF, portal 8679235. -->
+  <script type="application/json" id="be-gtm-config">{"id":"GTM-WT77L8JF"}</script>
+  <script type="application/json" id="be-hs-config">{"portalId":"8679235"}</script>
   <link rel="icon" href="/icons/favicon.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
-  <script>window._hsq = window._hsq || [];</script>
-  <script id="hs-script-loader" async defer src="https://js.hs-scripts.com/8679235.js"></script>
   <style>
 :root {
       --color-primary: #545bb3;
@@ -6146,7 +6141,7 @@ main:has(.about-hero) #hero.section {
   .logo-wall__label { font-size: 0.75rem; }
 }
 
-/* Staff augmentation #skills — intro stack, then full-width logo wall */
+/* Staff augmentation #skills: intro stack, then full-width logo wall */
 #skills .wrap {
   display: flex;
   flex-direction: column;
@@ -6166,7 +6161,7 @@ main:has(.about-hero) #hero.section {
   width: 100%;
   max-width: none;
 }
-/* Staff augmentation #skills — larger tech marks than default .logo-wall */
+/* Staff augmentation #skills: larger tech marks than default .logo-wall */
 #skills .logo-wall {
   grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
   gap: 1.5rem 1.125rem;
@@ -6194,7 +6189,7 @@ main:has(.about-hero) #hero.section {
   #skills .logo-wall__label { font-size: 0.8125rem; }
 }
 
-/* Industry pages #tech — heading + body left, 5 x 2 logo grid right */
+/* Industry pages #tech: heading + body left, 5 x 2 logo grid right */
 .tech-split__grid {
   display: grid;
   grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
@@ -7203,36 +7198,68 @@ main:has(#ebooks) #ebooks .resource-grid {
 
 /* --- Hire wizard (multi-step contact) ------------------------------------- */
 body.page-shell--hire-wizard {
-  background: #f6f7fc;
+  background: var(--color-surface, #fafafe);
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
+  --hire-wizard-form-max: 60rem;
+  --hire-wizard-header-offset: 5.25rem;
+}
+
+body.page-shell--hire-wizard:has(.hire-step--contact.is-active) {
   --hire-wizard-form-max: 40rem;
-  --hire-wizard-column-gap: clamp(2.25rem, 5vw, 5rem);
-  --hire-wizard-header-offset: 4.25rem;
 }
 
 .site-header--minimal {
   position: sticky;
   top: 0;
   z-index: 40;
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(226, 228, 240, 0.9);
+  background: var(--color-surface, #fafafe);
+  backdrop-filter: none;
+  border-bottom: 0;
   box-shadow: none;
 }
 
 .site-header--minimal.is-scrolled {
-  box-shadow: 0 4px 24px rgba(28, 28, 28, 0.06);
+  box-shadow: none;
+  border-bottom: 0;
 }
 
 .header-inner--minimal {
   justify-content: space-between;
+  align-items: center;
   max-width: none;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  padding-left: max(1.25rem, env(safe-area-inset-left, 0px));
-  padding-right: max(1.25rem, env(safe-area-inset-right, 0px));
+  padding: 2rem 2.25rem 1.125rem;
+  padding-left: max(2.25rem, env(safe-area-inset-left, 0px));
+  padding-right: max(2.25rem, env(safe-area-inset-right, 0px));
+}
+
+.site-header--minimal .logo-link img {
+  width: auto;
+  height: 42px;
+  max-width: none;
+}
+
+.hire-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.hire-brand__tagline {
+  margin: 0;
+  color: var(--color-text, #1c1c1c);
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1.35;
+}
+
+.hire-brand__tagline .text-highlight {
+  color: var(--color-primary, #545bb3);
+  font-weight: 600;
 }
 
 .site-header-minimal-cta {
@@ -7244,26 +7271,22 @@ body.page-shell--hire-wizard {
   flex-shrink: 0;
 }
 
-.site-header-minimal-cta__label {
-  font-size: 0.8125rem;
-  line-height: 1.35;
-  color: var(--color-muted);
-  text-align: right;
-}
-
 .site-header-minimal-cta__btn {
-  padding: 0.625rem 1.125rem;
-  font-size: 0.9375rem;
-  min-height: 2.5rem;
+  min-height: 3rem;
+  padding: 0.55rem 1.35rem;
+  border-width: 2px;
+  border-radius: var(--radius-sm, 4px);
+  font-size: 1rem;
+  font-weight: 700;
   white-space: nowrap;
 }
 
 body.page-shell--hire-wizard > main#main.hire-wizard-page {
-  flex: 1 1 0;
+  flex: 1 1 auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  min-height: calc(100dvh - var(--hire-wizard-header-offset, 4.25rem));
+  justify-content: flex-start;
+  min-height: 0;
   overflow-x: clip;
 }
 
@@ -7271,196 +7294,48 @@ body.page-shell--hire-wizard > main#main.hire-wizard-page {
   padding-top: clamp(3.25rem, 6vw, 4.75rem);
 }
 
-body.page-shell--hire-wizard #main.hire-wizard-page .hire-wizard-hero--full.section {
-  flex: 0 0 auto;
-  display: block;
+body.page-shell--hire-wizard #main.hire-wizard-page .hire-wizard-hero--full {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  min-height: 0;
+  min-height: auto;
   margin-block: 0;
   padding-block: clamp(1rem, 2vh, 1.5rem);
   padding-inline: 0;
 }
 
+.hire-wizard-hero--full {
+  padding: 1.25rem 0 3rem;
+}
+
 .hire-wizard-shell {
-  display: grid;
-  grid-template-columns: minmax(0, var(--hire-wizard-form-max, 40rem)) minmax(16rem, 1fr);
-  column-gap: var(--hire-wizard-column-gap, clamp(2.25rem, 5vw, 5rem));
-  row-gap: clamp(1.5rem, 3vw, 2.5rem);
-  align-items: start;
-  width: min(100%, 76rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  justify-content: safe center;
+  flex: 1 1 auto;
+  width: min(100%, var(--hire-wizard-form-max, 60rem));
+  max-width: var(--hire-wizard-form-max, 60rem);
   margin-block: 0;
   margin-inline: auto;
-  padding-left: max(1.25rem, env(safe-area-inset-left, 0px));
-  padding-right: max(1.25rem, env(safe-area-inset-right, 0px));
+  padding-left: max(1.5rem, env(safe-area-inset-left, 0px));
+  padding-right: max(1.5rem, env(safe-area-inset-right, 0px));
 }
 
 body.page-shell--hire-wizard #main.hire-wizard-page .hire-wizard-hero--full .hire-wizard-shell {
+  flex: 1 1 auto;
   height: auto;
   max-height: none;
-}
-
-@media (min-width: 961px) {
-  body.page-shell--hire-wizard .hire-wizard-quote {
-    margin-inline-start: 0.75rem;
-    align-self: stretch;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  body.page-shell--hire-wizard .hire-wizard-quote__inner {
-    justify-content: center;
-  }
 }
 
 .hire-wizard-main {
   display: flex;
   flex-direction: column;
-  gap: clamp(1.25rem, 2.5vw, 1.75rem);
-  min-width: 0;
-  max-width: 100%;
-}
-
-.hire-wizard-intro__head {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 1rem 2rem;
-  margin-bottom: clamp(0.65rem, 1.5vw, 0.85rem);
-}
-
-body.page-shell--hire-wizard .hire-wizard-intro__head .h1 {
-  flex: 1 1 auto;
-  min-width: 0;
-  margin-bottom: 0;
-  font-size: clamp(1.625rem, 3.25vw, 2.25rem);
-  line-height: 1.2;
-  color: var(--color-text);
-}
-
-.hire-wizard-layout {
-  display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(20rem, 26rem);
-  gap: clamp(2rem, 4vw, 3.5rem);
-  align-items: start;
-}
-
-.hire-wizard-copy .lead {
-  margin-bottom: 1.25rem;
-}
-
-body.page-shell--hire-wizard .hire-wizard-quote {
-  position: relative;
-  align-self: start;
-  min-height: auto;
-  color: var(--color-text);
-  background: transparent;
-}
-
-.hire-wizard-quote__inner {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  gap: 1.25rem;
-  height: auto;
-  padding: clamp(0.25rem, 1.5vw, 0.75rem) 0;
-}
-
-.hire-wizard-quote__body {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-body.page-shell--hire-wizard .hire-wizard-quote__text {
-  margin: 0;
-  padding-left: 0;
-  border: none;
-  border-left: none;
-  font-size: clamp(1.1rem, 2.2vw, 1.45rem);
-  font-weight: 500;
-  line-height: 1.62;
-  letter-spacing: -0.02em;
-  color: var(--color-text);
-}
-
-body.page-shell--hire-wizard blockquote.hire-wizard-quote__text,
-body.page-shell--hire-wizard .hire-wizard-quote blockquote.hire-wizard-quote__text {
-  margin: 0;
-  padding-left: 0;
-  border: none;
-  border-left: none;
-  color: var(--color-text);
-}
-
-.hire-wizard-quote__footer {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-  margin-top: 0;
-}
-
-.hire-wizard-quote__person {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.85rem;
-}
-
-.hire-wizard-quote__meta {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  flex: 0 0 auto;
   gap: 0;
   min-width: 0;
-}
-
-.hire-wizard-quote__photo {
-  width: 4.5rem;
-  height: 4.5rem;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid rgba(0, 16, 98, 0.1);
-  box-shadow: 0 4px 14px rgba(0, 16, 98, 0.08);
-}
-
-body.page-shell--hire-wizard .hire-wizard-quote__name {
-  margin: 0;
-  font-size: 1.125rem;
-  line-height: 1.35;
-  font-weight: 700;
-  color: var(--color-text);
-}
-
-.hire-wizard-quote__role {
-  margin: 0.15rem 0 0;
-  font-size: 0.875rem;
-  color: var(--color-muted, #5c6478);
-}
-
-.hire-wizard-quote__logo {
-  width: auto;
-  max-width: 8.5rem;
-  height: auto;
-  max-height: 2.25rem;
-  margin-top: 0.25rem;
-  object-fit: contain;
-  opacity: 0.88;
-}
-
-.hire-step__group {
-  margin-bottom: 1.35rem;
-}
-
-.hire-step > .hire-step__group:first-child {
-  margin-top: 1rem;
-}
-
-.hire-step__group:last-of-type {
-  margin-bottom: 0.5rem;
-}
-
-.hire-tiles--timing {
-  margin-bottom: 0;
+  max-width: 100%;
 }
 
 #hire-wizard {
@@ -7475,41 +7350,52 @@ body.page-shell--hire-wizard .hire-wizard-quote__name {
   box-shadow: none;
 }
 
-.hire-wizard-head {
+.hire-progress {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: clamp(0.65rem, 2vw, 1.15rem);
-  margin-bottom: 1.25rem;
+  gap: 0.5rem;
+  min-height: 1.25rem;
+  width: auto;
+  height: auto;
+  margin: 0 0 1.35rem;
+  overflow: visible;
+  background: none;
+  border-radius: 0;
 }
 
 .hire-wizard-step-label {
-  margin: 0;
-  flex: 0 1 auto;
-  min-width: 0;
-  font-size: 0.8125rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  line-height: 1.25;
-  text-transform: uppercase;
-  color: var(--color-muted);
-}
-
-.hire-progress {
-  flex: 1 1 5rem;
-  min-width: 3.5rem;
-  height: 5px;
-  background: rgba(226, 228, 240, 0.85);
-  border-radius: 999px;
-  margin: 0;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
   overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
-.hire-progress__bar {
-  display: block;
-  height: 100%;
-  border-radius: inherit;
-  background: linear-gradient(90deg, var(--color-primary, #545bb3), #6b72c4);
-  transition: width 0.28s ease;
+.hire-progress__dot {
+  flex: none;
+  width: 9px;
+  height: 9px;
+  border: 1.5px solid var(--color-border, #e2e4f0);
+  border-radius: 50%;
+  background: var(--color-surface-2, #f0f1fb);
+  transition: width 0.22s var(--ease, ease), background 0.22s var(--ease, ease), border-color 0.22s var(--ease, ease);
+}
+
+.hire-progress__dot.is-done {
+  border-color: color-mix(in srgb, var(--color-primary, #545bb3) 62%, #fff);
+  background: color-mix(in srgb, var(--color-primary, #545bb3) 62%, #fff);
+}
+
+.hire-progress__dot.is-current {
+  width: 26px;
+  border-radius: 999px;
+  border-color: var(--color-primary, #545bb3);
+  background: var(--color-primary, #545bb3);
 }
 
 .hire-wizard-form {
@@ -7522,7 +7408,13 @@ body.page-shell--hire-wizard .hire-wizard-quote__name {
   display: flex;
   flex-direction: column;
   gap: 0;
-  min-height: 15.5rem;
+  min-height: 0;
+  animation: hire-wizard-in 0.28s var(--ease, ease);
+}
+
+@keyframes hire-wizard-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .hire-step[hidden] {
@@ -7538,101 +7430,202 @@ body.page-shell--hire-wizard .hire-wizard-quote__name {
 }
 
 body.page-shell--hire-wizard .hire-step legend {
-  font-size: clamp(1.05rem, 2.2vw, 1.2rem);
+  font-size: clamp(1.05rem, 2.2vw, 1.25rem);
   font-weight: 700;
   letter-spacing: -0.02em;
-  line-height: 1.35;
-  color: var(--color-text);
-  margin-bottom: 1.1rem;
+  line-height: 1.3;
+  color: var(--color-navy, #001062);
+  margin-bottom: 0.85rem;
+}
+
+body.page-shell--hire-wizard #hire-engineers-label {
+  margin: 0 0 60px;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--color-primary, #545bb3);
+}
+
+body.page-shell--hire-wizard #hire-skills-label {
+  margin: 0 0 60px;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--color-primary, #545bb3);
 }
 
 .hire-step__intro {
-  margin: 0 0 1.15rem;
-  font-size: 0.9375rem;
+  margin: 0 0 1.5rem;
+  max-width: 40rem;
+  font-size: 1.0625rem;
   line-height: 1.55;
-  color: var(--color-text);
+  color: var(--color-text, #1c1c1c);
 }
 
-.hire-tiles {
+.hire-step-1-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+}
+
+.hire-step-1-actions .hire-count-row {
+  flex: 0 1 auto;
+  width: auto;
+}
+
+.hire-step-1-actions .hire-wizard-actions {
+  margin-top: 0;
+  flex: 0 0 auto;
+}
+
+.hire-count-row {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.65rem;
-  margin: 0 0 1.35rem;
+  grid-template-columns: repeat(4, minmax(0, 5.75rem));
+  justify-content: start;
+  gap: 0.75rem;
+  width: 100%;
 }
 
-#hire-wizard .hire-tiles.hire-tiles--headcount {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-}
-
-.hire-tile,
-.hire-chip {
-  appearance: none;
-  border: 1px solid var(--color-border, #e2e4f0);
-  background: #fff;
-  border-radius: 12px;
-  font: inherit;
-  cursor: pointer;
-  text-align: left;
-  transition:
-    border-color 0.18s ease,
-    background-color 0.18s ease,
-    box-shadow 0.18s ease,
-    transform 0.12s ease;
-}
-
-body.page-shell--hire-wizard .hire-tile {
+.hire-count {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0.85rem 0.75rem;
-  font-size: 0.9rem;
-  font-weight: 650;
-  line-height: 1.3;
-  min-height: 3.35rem;
+  width: 100%;
+  max-width: 5.75rem;
+  min-width: 0;
+  min-height: 4.75rem;
+  margin: 0;
+  padding: 0.85rem 0.65rem;
+  border: 1px solid var(--color-border, #e2e4f0);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--color-text, #1c1c1c);
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
   text-align: center;
-  color: var(--color-text);
+  cursor: pointer;
+  user-select: none;
+  transition: border-color 0.18s var(--ease, ease), background 0.18s var(--ease, ease), box-shadow 0.18s var(--ease, ease);
 }
 
-.hire-tile:hover,
-.hire-chip:hover {
+.hire-count:hover {
   border-color: rgba(84, 91, 179, 0.45);
-  background: #fafbff;
 }
 
-.hire-tile:focus-visible,
-.hire-chip:focus-visible {
+.hire-count:has(input:checked),
+.hire-count.is-selected {
   border-color: var(--color-primary, #545bb3);
+  background: #eef0fb;
+  box-shadow: 0 0 0 3px rgba(84, 91, 179, 0.16);
+}
+
+.hire-count:focus-within {
+  border-color: var(--color-primary, #545bb3);
+  box-shadow: 0 0 0 3px rgba(84, 91, 179, 0.16);
   outline: none;
-  box-shadow: 0 0 0 3px rgba(84, 91, 179, 0.22);
 }
 
-.hire-tile:active,
-.hire-chip:active {
-  transform: scale(0.98);
+.hire-count input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
-.hire-tile.is-selected,
-.hire-chip.is-selected {
-  border-color: var(--color-primary, #545bb3);
-  background: linear-gradient(180deg, #f4f5fc 0%, #eceefb 100%);
-  box-shadow:
-    0 0 0 1px var(--color-primary, #545bb3),
-    0 4px 14px rgba(84, 91, 179, 0.12);
+.hire-skill-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
 }
 
-.hire-chips {
+.hire-skill {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.45rem;
-  margin: 0 0 1rem;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 3.15rem;
+  margin: 0;
+  padding: 0.7rem 0.95rem;
+  border: 1px solid var(--color-border, #e2e4f0);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--color-text, #1c1c1c);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.3;
+  cursor: pointer;
+  transition: border-color 0.18s var(--ease, ease), background 0.18s var(--ease, ease), box-shadow 0.18s var(--ease, ease);
 }
 
-body.page-shell--hire-wizard .hire-chip {
-  padding: 0.42rem 0.85rem;
-  border-radius: 999px;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--color-text);
+.hire-skill:hover {
+  border-color: rgba(84, 91, 179, 0.45);
+}
+
+.hire-skill:has(input:checked) {
+  border-color: var(--color-primary, #545bb3);
+  background: #eef0fb;
+  box-shadow: 0 0 0 3px rgba(84, 91, 179, 0.16);
+}
+
+.hire-skill input {
+  width: 1.05rem;
+  height: 1.05rem;
+  margin: 0;
+  flex: none;
+  accent-color: var(--color-primary, #545bb3);
+}
+
+.hire-specific {
+  display: grid;
+  grid-template-columns: minmax(14rem, 18rem) minmax(0, 1fr);
+  gap: 0.75rem 1.25rem;
+  align-items: center;
+  margin-top: 1.75rem;
+}
+
+.hire-specific label {
+  margin: 0;
+  color: var(--color-text, #1c1c1c);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.hire-specific input {
+  width: 100%;
+  height: 3.5rem;
+  padding: 0 1rem;
+  border: 1px solid var(--color-border, #e2e4f0);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--color-text, #1c1c1c);
+  font: inherit;
+  font-size: 1rem;
+}
+
+.hire-specific input:focus {
+  border-color: rgba(84, 91, 179, 0.55);
+  box-shadow: 0 0 0 3px rgba(84, 91, 179, 0.14);
+  outline: none;
+}
+
+.hire-specific input::placeholder {
+  color: rgba(153, 153, 153, 0.9);
+}
+
+.hire-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 1.05rem;
 }
 
 #hire-wizard .form-field {
@@ -7648,20 +7641,40 @@ body.page-shell--hire-wizard .hire-chip {
   width: auto;
   height: auto;
   padding: 0;
-  margin: 0;
+  margin: 0 0 0.4rem;
   overflow: visible;
   clip: auto;
   white-space: normal;
   border: 0;
-  font-size: 0.875rem;
-  font-weight: 600;
+  font-size: 1rem;
+  font-weight: 700;
   line-height: 1.35;
-  color: var(--color-text);
+  color: var(--color-text, #1c1c1c);
+}
+
+.hire-req {
+  color: #c62828;
+  font-weight: 700;
 }
 
 #hire-wizard .form-field input,
 #hire-wizard .form-field textarea {
-  padding: 0.75rem 0.95rem;
+  width: 100%;
+  border: 1px solid var(--color-border, #e2e4f0);
+  border-radius: 10px;
+  background: #fff;
+  font-size: 1rem;
+}
+
+#hire-wizard .form-field input {
+  height: 3.5rem;
+  padding: 0 1rem;
+}
+
+#hire-wizard .form-field textarea {
+  min-height: 6.5rem;
+  padding: 0.85rem 1rem;
+  resize: vertical;
 }
 
 #hire-wizard .form-field input:focus,
@@ -7671,25 +7684,38 @@ body.page-shell--hire-wizard .hire-chip {
   outline: none;
 }
 
-#hire-wizard .form-grid {
-  gap: 0.75rem 1rem;
-  margin-bottom: 0.35rem;
+.hire-privacy,
+.hire-unsub,
+.hire-recaptcha {
+  margin: 1.15rem 0 0;
+  max-width: 46rem;
+  color: #666;
+  font-size: 0.875rem;
+  line-height: 1.5;
 }
 
-#hire-wizard .form-privacy-note {
-  margin: 0.5rem 0 0;
-  font-size: 0.8125rem;
-  line-height: 1.45;
+.hire-unsub {
+  margin-top: 0.85rem;
+}
+
+.hire-unsub a {
+  color: var(--color-primary, #545bb3);
+}
+
+.hire-recaptcha {
+  margin-top: 1rem;
+  font-weight: 600;
 }
 
 .hire-consent {
   display: flex;
   gap: 0.65rem;
   align-items: flex-start;
-  font-size: 0.875rem;
-  font-weight: 500;
+  margin-top: 1rem;
+  font-size: 1rem;
+  font-weight: 600;
   line-height: 1.45;
-  color: var(--color-text);
+  color: var(--color-text, #1c1c1c);
   cursor: pointer;
 }
 
@@ -7701,127 +7727,230 @@ body.page-shell--hire-wizard .hire-chip {
   accent-color: var(--color-primary, #545bb3);
 }
 
-.hire-wizard-actions {
-  margin-top: auto;
-  padding-top: 1.35rem;
+/* Hire wizard step 3 (contact): tighter vertical layout */
+.hire-step--contact .hire-step__intro,
+.hire-step[data-step="3"] .hire-step__intro {
+  margin-bottom: 0.75rem;
+  font-size: 1rem;
+  line-height: 1.45;
+}
+
+.hire-step--contact .hire-fields,
+.hire-step[data-step="3"] .hire-fields {
   gap: 0.65rem;
 }
 
+@media (min-width: 640px) {
+  .hire-step--contact .hire-fields,
+  .hire-step[data-step="3"] .hire-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 1rem;
+    row-gap: 0.65rem;
+  }
+
+  .hire-step--contact .hire-fields .form-field:nth-child(n + 3),
+  .hire-step[data-step="3"] .hire-fields .form-field:nth-child(n + 3) {
+    grid-column: 1 / -1;
+  }
+}
+
+.hire-step--contact .form-field label,
+.hire-step[data-step="3"] .form-field label {
+  margin-bottom: 0.28rem;
+}
+
+.hire-step--contact .form-field textarea,
+.hire-step[data-step="3"] .form-field textarea {
+  min-height: 4.25rem;
+  padding: 0.65rem 1rem;
+}
+
+.hire-step--contact .hire-privacy,
+.hire-step--contact .hire-unsub,
+.hire-step--contact .hire-recaptcha,
+.hire-step[data-step="3"] .hire-privacy,
+.hire-step[data-step="3"] .hire-unsub,
+.hire-step[data-step="3"] .hire-recaptcha {
+  margin-top: 0.7rem;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+}
+
+.hire-step--contact .hire-unsub,
+.hire-step[data-step="3"] .hire-unsub {
+  margin-top: 0.45rem;
+}
+
+.hire-step--contact .hire-recaptcha,
+.hire-step[data-step="3"] .hire-recaptcha {
+  margin-top: 0.45rem;
+}
+
+.hire-step--contact .hire-consent,
+.hire-step[data-step="3"] .hire-consent {
+  margin-top: 0.6rem;
+  font-size: 0.9375rem;
+  line-height: 1.35;
+}
+
+.hire-step--contact .hire-wizard-actions,
+.hire-step[data-step="3"] .hire-wizard-actions {
+  margin-top: 1.15rem;
+}
+
+.hire-wizard-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1.75rem;
+  padding-top: 0;
+}
+
 .hire-wizard-actions .btn {
-  min-height: 2.75rem;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
+  width: auto;
+  min-height: 3.25rem;
+  min-width: 8.5rem;
+  padding: 0.85rem 1.4rem;
+  border-radius: var(--radius-sm, 4px);
+  font-size: 1rem;
+  font-weight: 700;
 }
 
 .hire-wizard-actions .btn--primary {
-  flex: 1 1 auto;
+  flex: 0 0 auto;
+  margin-left: auto;
   justify-content: center;
 }
 
-.hire-wizard-actions:has(.btn--outline) .btn--primary {
-  flex: 1.15 1 auto;
+.hire-wizard-actions .btn--outline {
+  min-width: 0;
+  padding: 0.4rem 0.35rem 0.4rem 0;
+  border-color: transparent;
+  background: transparent;
+  color: var(--color-muted, #5c5c66);
+  font-weight: 600;
+  box-shadow: none;
 }
 
-.hire-wizard-actions:has(.btn--outline) .btn--outline {
-  flex: 0 1 auto;
+.hire-wizard-actions .btn--outline:hover {
+  border-color: transparent;
+  background: transparent;
+  color: var(--color-primary, #545bb3);
+  box-shadow: none;
+  transform: none;
 }
 
-body.page-shell--hire-wizard .hire-step--success .hero-form__title {
-  font-size: 1.25rem;
-  margin-bottom: 0.65rem;
-  color: var(--color-text);
+.hire-confirm h1 {
+  margin: 0 0 0.75rem;
+  color: var(--color-navy, #001062);
+  font-size: clamp(1.7rem, 3vw, 2.35rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+}
+
+.hire-confirm p {
+  margin: 0 0 1.25rem;
+  max-width: 36rem;
+  color: var(--color-text, #1c1c1c);
+  font-size: 1.0625rem;
+  line-height: 1.55;
+}
+
+.hire-confirm .btn {
+  min-height: 3.25rem;
+  padding: 0.85rem 1.4rem;
+  border-radius: var(--radius-sm, 4px);
+  font-size: 1rem;
+  font-weight: 700;
 }
 
 #hire-wizard .form-status {
-  min-height: 1.4em;
+  position: static;
+  inset: auto;
+  min-height: 0;
   margin: 0.75rem 0 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  text-align: left;
   font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.4;
+  z-index: auto;
+  pointer-events: none;
 }
 
-@media (max-width: 960px) {
-  .hire-wizard-shell {
+#hire-wizard .form-status.is-error,
+#hire-wizard .form-status.is-success {
+  display: block;
+  background: transparent;
+  border: 0;
+  pointer-events: none;
+}
+
+#hire-wizard .form-status.is-error {
+  color: #b42318;
+}
+
+#hire-wizard .form-status.is-success {
+  color: #3d4293;
+}
+
+@media (max-width: 800px) {
+  .hire-skill-grid {
     grid-template-columns: 1fr;
   }
 
-  .hire-wizard-quote {
-    min-height: auto;
-    order: -1;
-  }
-
-  .hire-wizard-quote__inner {
-    padding: 0.5rem 0 0;
-    gap: 1.25rem;
-  }
-
-  .hire-wizard-quote__text {
-    font-size: 1.05rem;
+  .hire-specific {
+    grid-template-columns: 1fr;
   }
 }
 
 @media (max-width: 640px) {
-  .hire-wizard-intro__head {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0.65rem;
-  }
-
-  .site-header-minimal-cta__label {
-    display: none;
-  }
-
-  .site-header-minimal-cta__btn {
-    padding: 0.5rem 0.875rem;
-    font-size: 0.875rem;
-    min-height: 2.25rem;
+  .header-inner--minimal {
+    align-items: flex-start;
+    padding: 1.5rem 1.35rem 1rem;
   }
 }
 
-@media (max-width: 420px) {
-  .hire-wizard-head {
+@media (max-width: 560px) {
+  .hire-step-1-actions {
     flex-direction: column;
     align-items: stretch;
-    gap: 0.4rem;
+    gap: 1.25rem;
   }
 
-  .hire-progress {
-    flex: none;
+  .hire-step-1-actions .hire-count-row {
     width: 100%;
   }
-}
 
-@media (max-width: 900px) {
-  .hire-wizard-layout {
-    grid-template-columns: 1fr;
+  .hire-step-1-actions .hire-wizard-actions {
+    justify-content: flex-end;
   }
 
-  #hire-wizard {
+  .hire-count-row {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.5rem;
+  }
+
+  .hire-count {
     max-width: none;
-    margin-left: 0;
-    margin-right: 0;
-  }
-
-  .hire-step {
-    min-height: 0;
-  }
-}
-
-@media (max-width: 480px) {
-  .hire-tiles {
-    grid-template-columns: 1fr;
-  }
-
-  #hire-wizard .hire-tiles.hire-tiles--headcount {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    min-height: 4.25rem;
+    padding-inline: 0.35rem;
+    font-size: 1.25rem;
   }
 
   .hire-wizard-actions {
-    flex-direction: column-reverse;
-    align-items: stretch;
+    flex-wrap: wrap;
   }
 
-  .hire-wizard-actions .btn {
-    width: 100%;
-    justify-content: center;
+  .hire-wizard-actions .btn--primary {
+    margin-left: auto;
   }
 }
 
@@ -9568,11 +9697,7 @@ body.page-shell--hire-wizard .hire-step--success .hero-form__title {
 
   </style>
 </head>
-<body>
-  <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WT77L8JF"
-  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
+<body class="">
   <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="site-header" id="header">
@@ -9583,33 +9708,33 @@ body.page-shell--hire-wizard .hire-step--success .hero-form__title {
       <nav class="site-nav" aria-label="Primary">
         <ul class="nav-desktop" role="list">
           <li class="has-children">
-            <a href="https://www.betterengineer.com/staff-augmentation">Services <span class="nav-chevron" aria-hidden="true"></span></a>
+            <a href="/staff-augmentation/">Services <span class="nav-chevron" aria-hidden="true"></span></a>
             <ul class="dropdown" role="list">
-              <li><a href="https://www.betterengineer.com/staff-augmentation">Staff Augmentation</a></li>
-              <li><a href="https://www.betterengineer.com/ai-readiness">AI Readiness</a></li>
-              <li><a href="https://www.betterengineer.com/hiring-dashboard">Platform</a></li>
+              <li><a href="/staff-augmentation/">Staff Augmentation</a></li>
+              <li><a href="/ai-readiness/">AI Readiness</a></li>
+              <li><a href="/hiring-dashboard/">Platform</a></li>
               <li><a href="https://discover.betterengineer.com/roles/">Browse Roles</a></li>
               <li><a href="https://discover.betterengineer.com/technologies/">Browse by Technology</a></li>
             </ul>
           </li>
           <li><a href="https://discover.betterengineer.com/ai-fluent-engineers/">AI Fluency</a></li>
           <li class="has-children">
-            <a href="https://www.betterengineer.com/about">About <span class="nav-chevron" aria-hidden="true"></span></a>
+            <a href="/about/">About <span class="nav-chevron" aria-hidden="true"></span></a>
             <ul class="dropdown" role="list">
-              <li><a href="https://www.betterengineer.com/about">Who We Are</a></li>
-              <li><a href="https://www.betterengineer.com/latamengineer">Why Nearshore</a></li>
+              <li><a href="/about/">Who We Are</a></li>
+              <li><a href="/latamengineer/">Why Nearshore</a></li>
             </ul>
           </li>
           <li class="has-children">
             <a href="https://blog.betterengineer.com/resource-center">Resources <span class="nav-chevron" aria-hidden="true"></span></a>
             <ul class="dropdown" role="list">
               <li><a href="https://blog.betterengineer.com/resource-center">Blog</a></li>
-              <li><a href="https://www.betterengineer.com/faqs-nearshore-software-engineers-staff-augmentation-ai-talent">FAQs</a></li>
-              <li><a href="https://www.betterengineer.com/podcast">Podcast</a></li>
+              <li><a href="/faqs-nearshore-software-engineers-staff-augmentation-ai-talent/">FAQs</a></li>
+              <li><a href="/podcast/">Podcast</a></li>
             </ul>
           </li>
-          <li><a href="https://www.betterengineer.com/join">Join Us</a></li>
-          <li><a class="nav-pill-hire" href="https://www.betterengineer.com/multi-step-contact-form">Hire Engineers</a></li>
+          <li class="nav-item-join"><a href="/join/">Join Us</a></li>
+          <li><a class="nav-pill-hire" href="/multi-step-contact-form/">Hire Engineers</a></li>
           <li><a href="https://app.betterengineer.com/sign-in?redirect_url=https%3A%2F%2Fapp.betterengineer.com%2F">Login</a></li>
         </ul>
       </nav>
@@ -9619,33 +9744,33 @@ body.page-shell--hire-wizard .hire-step--success .hero-form__title {
     </div>
     <ul class="nav-mobile" id="mobile-menu" role="list">
       <li class="has-children">
-        <a href="https://www.betterengineer.com/staff-augmentation">Services</a>
+        <a href="/staff-augmentation/">Services</a>
         <ul class="mobile-submenu" role="list">
-          <li><a href="https://www.betterengineer.com/staff-augmentation">Staff Augmentation</a></li>
-          <li><a href="https://www.betterengineer.com/ai-readiness">AI Readiness</a></li>
-          <li><a href="https://www.betterengineer.com/hiring-dashboard">Platform</a></li>
+          <li><a href="/staff-augmentation/">Staff Augmentation</a></li>
+          <li><a href="/ai-readiness/">AI Readiness</a></li>
+          <li><a href="/hiring-dashboard/">Platform</a></li>
           <li><a href="https://discover.betterengineer.com/roles/">Browse Roles</a></li>
           <li><a href="https://discover.betterengineer.com/technologies/">Browse by Technology</a></li>
         </ul>
       </li>
       <li><a href="https://discover.betterengineer.com/ai-fluent-engineers/">AI Fluency</a></li>
       <li class="has-children">
-        <a href="https://www.betterengineer.com/about">About</a>
+        <a href="/about/">About</a>
         <ul class="mobile-submenu" role="list">
-          <li><a href="https://www.betterengineer.com/about">Who We Are</a></li>
-          <li><a href="https://www.betterengineer.com/latamengineer">Why Nearshore</a></li>
+          <li><a href="/about/">Who We Are</a></li>
+          <li><a href="/latamengineer/">Why Nearshore</a></li>
         </ul>
       </li>
       <li class="has-children">
         <a href="https://blog.betterengineer.com/resource-center">Resources</a>
         <ul class="mobile-submenu" role="list">
           <li><a href="https://blog.betterengineer.com/resource-center">Blog</a></li>
-          <li><a href="https://www.betterengineer.com/faqs-nearshore-software-engineers-staff-augmentation-ai-talent">FAQs</a></li>
-          <li><a href="https://www.betterengineer.com/podcast">Podcast</a></li>
+          <li><a href="/faqs-nearshore-software-engineers-staff-augmentation-ai-talent/">FAQs</a></li>
+          <li><a href="/podcast/">Podcast</a></li>
         </ul>
       </li>
-      <li><a href="https://www.betterengineer.com/join">Join Us</a></li>
-      <li><a class="nav-mobile-hire" href="https://www.betterengineer.com/multi-step-contact-form">Hire Engineers</a></li>
+      <li><a href="/join/">Join Us</a></li>
+      <li><a class="nav-mobile-hire" href="/multi-step-contact-form/">Hire Engineers</a></li>
       <li><a href="https://app.betterengineer.com/sign-in?redirect_url=https%3A%2F%2Fapp.betterengineer.com%2F">Login</a></li>
     </ul>
   </header>
@@ -9999,7 +10124,7 @@ body.page-shell--hire-wizard .hire-step--success .hero-form__title {
         </a>
         <p class="footer-tagline">Lets build <strong>better</strong> teams <strong>together</strong></p>
         <div class="footer-brand__btns">
-          <a class="footer-btn footer-btn--outline" href="https://www.betterengineer.com/multi-step-contact-form">Contact Us</a>
+          <a class="footer-btn footer-btn--outline" href="/multi-step-contact-form/">Contact Us</a>
           <a class="footer-btn footer-btn--solid" href="https://calendly.com/tim-salsamobi/30min" target="_blank" rel="noopener noreferrer">Schedule a Call</a>
         </div>
         <div class="footer-social">
@@ -10021,9 +10146,9 @@ body.page-shell--hire-wizard .hire-step--success .hero-form__title {
         <div class="footer-nav-group">
           <h4 class="footer-col__title">Our Services</h4>
           <ul>
-            <li><a href="https://www.betterengineer.com/staff-augmentation">Staff Augmentation</a></li>
-            <li><a href="https://www.betterengineer.com/ai-readiness">AI Readiness Assessment</a></li>
-            <li><a href="https://www.betterengineer.com/hiring-dashboard">Hiring Dashboard</a></li>
+            <li><a href="/staff-augmentation/">Staff Augmentation</a></li>
+            <li><a href="/ai-readiness/">AI Readiness Assessment</a></li>
+            <li><a href="/hiring-dashboard/">Hiring Dashboard</a></li>
             <li><a href="https://discover.betterengineer.com/roles/">Browse Roles</a></li>
             <li><a href="https://discover.betterengineer.com/technologies/">Browse by Technology</a></li>
           </ul>
@@ -10031,16 +10156,16 @@ body.page-shell--hire-wizard .hire-step--success .hero-form__title {
         <div class="footer-nav-group">
           <h4 class="footer-col__title">About Us</h4>
           <ul>
-            <li><a href="https://www.betterengineer.com/about">Who We Are</a></li>
-            <li><a href="https://www.betterengineer.com/latamengineer">Why Nearshore</a></li>
+            <li><a href="/about/">Who We Are</a></li>
+            <li><a href="/latamengineer/">Why Nearshore</a></li>
           </ul>
         </div>
         <div class="footer-nav-group">
           <h4 class="footer-col__title">Industries</h4>
           <ul>
-            <li><a href="https://www.betterengineer.com/fintech">FinTech</a></li>
-            <li><a href="https://www.betterengineer.com/martech">MarTech</a></li>
-            <li><a href="https://www.betterengineer.com/healthtech">HealthTech</a></li>
+            <li><a href="/fintech/">FinTech</a></li>
+            <li><a href="/martech/">MarTech</a></li>
+            <li><a href="/healthtech/">HealthTech</a></li>
           </ul>
         </div>
       </nav>
@@ -10048,18 +10173,18 @@ body.page-shell--hire-wizard .hire-step--success .hero-form__title {
         <div class="footer-nav-group">
           <h4 class="footer-col__title">Careers</h4>
           <ul>
-            <li><a href="https://www.betterengineer.com/careers">See All Job Opportunities</a></li>
-            <li><a href="https://www.betterengineer.com/join">Join Us</a></li>
+            <li><a href="/careers/">See All Job Opportunities</a></li>
+            <li><a href="/join/">Join Us</a></li>
             <li><a href="https://app.betterengineer.com/sign-up/candidate" rel="noopener noreferrer">Sign Up</a></li>
           </ul>
         </div>
         <div class="footer-nav-group">
           <h4 class="footer-col__title">In-Demand Jobs</h4>
           <ul>
-            <li><a href="https://www.betterengineer.com/careers/full-stack-javascript-engineer">Full-Stack Engineer</a></li>
-            <li><a href="https://www.betterengineer.com/careers/front-end-engineer">Front-end Engineer</a></li>
-            <li><a href="https://www.betterengineer.com/careers/python-engineer">Python Engineer</a></li>
-            <li><a href="https://www.betterengineer.com/careers/devops-engineer">DevOps Engineer</a></li>
+            <li><a href="/careers/full-stack-javascript-engineer/">Full-Stack Engineer</a></li>
+            <li><a href="/careers/front-end-engineer/">Front-end Engineer</a></li>
+            <li><a href="/careers/python-engineer/">Python Engineer</a></li>
+            <li><a href="/careers/devops-engineer/">DevOps Engineer</a></li>
           </ul>
         </div>
       </nav>
@@ -10068,26 +10193,27 @@ body.page-shell--hire-wizard .hire-step--success .hero-form__title {
           <h4 class="footer-col__title">Resources</h4>
           <ul>
             <li><a href="https://blog.betterengineer.com/resource-center">Blog</a></li>
-            <li><a href="https://www.betterengineer.com/faqs-nearshore-software-engineers-staff-augmentation-ai-talent">FAQs</a></li>
-            <li><a href="https://www.betterengineer.com/ebooks">Ebooks</a></li>
-            <li><a href="https://www.betterengineer.com/podcast">Podcast</a></li>
-            <li><a href="https://www.betterengineer.com/technical-glossary">Technical Glossary</a></li>
+            <li><a href="/faqs-nearshore-software-engineers-staff-augmentation-ai-talent/">FAQs</a></li>
+            <li><a href="/ebooks/">Ebooks</a></li>
+            <li><a href="/podcast/">Podcast</a></li>
+            <li><a href="/technical-glossary/">Technical Glossary</a></li>
           </ul>
         </div>
         <div class="footer-nav-group">
           <h4 class="footer-col__title">Case Studies</h4>
           <ul>
-            <li><a href="https://www.betterengineer.com/case-studies/livecgi">Live CGI</a></li>
-            <li><a href="https://www.betterengineer.com/case-studies/wasteplace">Wasteplace</a></li>
+            <li><a href="/case-studies/livecgi/">Live CGI</a></li>
+            <li><a href="/case-studies/wasteplace/">Wasteplace</a></li>
           </ul>
         </div>
       </nav>
     </div>
     <div class="wrap footer-bottom">
       <span>Copyright © 2026 BetterEngineer</span>
-      <span><a href="https://www.betterengineer.com/resource-center/wpautoterms/privacy-policy">Privacy Policy</a> · <a href="https://www.betterengineer.com/terms-of-service">Terms of Service</a></span>
+      <span><a href="/resource-center/wpautoterms/privacy-policy/">Privacy Policy</a> · <a href="/terms-of-service/">Terms of Service</a></span>
     </div>
   </footer>
+  <script src="/attribution.js" defer></script>
   <script src="/intake-form-shared.js" defer></script>
   <script src="/landing-page.js" defer></script>
 </body>
