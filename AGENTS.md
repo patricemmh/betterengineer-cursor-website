@@ -1,5 +1,9 @@
 # Agent instructions — betterengineer (GitHub Pages)
 
+## CloudFront function (live routing)
+
+`docs/site-migration/cloudfront-www-function.js` is the only copy of the viewer-request function. Distribution `E2014GBUWTTSVJ`, default behavior, function `betterengineer-router`. Edit that JS file, then paste it into CloudFront and Publish. CloudFront does not read git. Details: `docs/site-migration/cloudfront-function.md`.
+
 For **visual design, CSS structure, and component naming**, see [DESIGN.md](DESIGN.md).
 
 This site is **static only**: **HTML, CSS, and vanilla JavaScript** checked into this repo.

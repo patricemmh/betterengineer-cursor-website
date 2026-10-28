@@ -6,6 +6,8 @@ this static HTML, CSS, and vanilla JavaScript build.
 **This directory is the permanent source of truth for the migration.** Conversation
 history is not. If a decision is not written down here, it did not happen.
 
+**Live routing:** [cloudfront-function.md](cloudfront-function.md). The only function source to edit is [cloudfront-www-function.js](cloudfront-www-function.js). CloudFront does not read git; paste and Publish after every change.
+
 ## Read in this order
 
 | File | What it is |
