@@ -52,6 +52,20 @@ manifest.pages.forEach(function (page) {
   });
 });
 
+/* Thank-you is a standalone page, not a fragment, so the page manifest does not emit it.
+   Copy it as-is. Its HTML uses the same consent gate as the other pages (no inline gtm.js). */
+var thankYouOut = 'multi-step-contact-form/thank-you/index.html';
+if (!fs.existsSync(path.join(root, thankYouOut))) {
+  console.error('missing built page: ' + thankYouOut);
+  process.exitCode = 1;
+} else {
+  copyFile(thankYouOut);
+  shipped.push({
+    page: { canonical: WWW + '/multi-step-contact-form/thank-you' },
+    out: thankYouOut,
+  });
+}
+
 /* 2. Static assets. */
 ASSET_DIRS.forEach(function (d) {
   if (fs.existsSync(path.join(root, d))) {

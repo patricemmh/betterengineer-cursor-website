@@ -85,6 +85,12 @@ var urls = [
 
   /* Phase 5, multi step contact. Built. */
   { url: '/multi-step-contact-form', status: 'built', localPath: 'multi-step-contact-form/index.html', phase: 5 },
+  {
+    url: '/multi-step-contact-form/thank-you',
+    status: 'built',
+    localPath: 'multi-step-contact-form/thank-you/index.html',
+    phase: 5,
+  },
 
   { url: '/webinar', status: 'redirect', redirectTo: 'https://www.betterengineer.com/contact', phase: 7 },
   { url: '/aiwebinar', status: 'redirect', redirectTo: 'https://www.betterengineer.com/contact', phase: 7 },

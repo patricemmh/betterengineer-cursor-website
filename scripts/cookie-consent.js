@@ -105,10 +105,47 @@
     uiBuilt: false,
   };
 
+  var consentDefaultPushed = false;
+
+  function ensureGtag() {
+    global.dataLayer = global.dataLayer || [];
+    if (typeof global.gtag !== 'function') {
+      global.gtag = function () {
+        global.dataLayer.push(arguments);
+      };
+    }
+  }
+
+  function pushConsentDefaultDenied() {
+    ensureGtag();
+    if (consentDefaultPushed) return;
+    consentDefaultPushed = true;
+    global.gtag('consent', 'default', {
+      analytics_storage: 'denied',
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      wait_for_update: 500,
+    });
+  }
+
+  function pushConsentUpdate(granted) {
+    ensureGtag();
+    pushConsentDefaultDenied();
+    var stateValue = granted ? 'granted' : 'denied';
+    global.gtag('consent', 'update', {
+      analytics_storage: stateValue,
+      ad_storage: stateValue,
+      ad_user_data: stateValue,
+      ad_personalization: stateValue,
+    });
+  }
+
   function loadGtm(containerId) {
     if (!containerId) return;
+    /* Grant before the container script exists so GA4 tags that require consent can fire. */
+    pushConsentUpdate(true);
     if (doc.querySelector('script[src*="googletagmanager.com/gtm.js"]')) return;
-    global.dataLayer = global.dataLayer || [];
     global.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
     var first = doc.getElementsByTagName('script')[0];
     var gtm = doc.createElement('script');
@@ -188,8 +225,9 @@
   }
 
   function revokeAnalytics() {
-    /* Scripts already injected cannot be fully unloaded; record denial for next visit. */
+    /* Scripts already injected cannot be fully unloaded; keep storage denied and do not load GTM. */
     state.analyticsLoaded = false;
+    pushConsentUpdate(false);
   }
 
   function setConsent(choice) {
@@ -383,6 +421,8 @@
     buildUi();
     if (state.consent && state.consent.analytics) applyAnalyticsConsent();
   }
+
+  pushConsentDefaultDenied();
 
   if (doc.readyState === 'loading') {
     doc.addEventListener('DOMContentLoaded', onReady);
