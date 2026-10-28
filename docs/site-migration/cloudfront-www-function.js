@@ -1,13 +1,20 @@
-// CloudFront Function for www.betterengineer.com (viewer request, runtime cloudfront-js-2.0).
-// Paste into CloudFront > Functions, publish, then attach to the www distribution's
-// default behavior as "Viewer request". See go-live-simple.md.
+// One CloudFront Function for distribution E2014GBUWTTSVJ (discover + www + apex).
+// Viewer request, runtime cloudfront-js-2.0. It replaces the discover function on
+// the default behavior. See go-live-simple.md.
 //
-// Order: apex to www, then fixed 301s, then /roles and /technologies to discover,
-// then lowercase page paths, then serve /path and /path/ from /path/index.html
-// (200, no redirect hop).
-// Query strings (UTMs) are kept on every redirect.
+// Bucket layout (betterengineer-marketing-site):
+//   /            discover files (unchanged, deployed by the marketing-site workflow)
+//   /www/        www files (dist-www/)
+//
+// betterengineer.com          301 to www, same path and query
+// www.betterengineer.com      fixed 301s, /roles and /technologies to discover,
+//                             lowercase page paths, then serve from /www/...
+// any other host (discover)   same as before: /path and /path/ serve /path/index.html
+// Query strings (UTMs, gclid) are kept on every redirect.
 
+var WWW = 'https://www.betterengineer.com';
 var DISCOVER = 'https://discover.betterengineer.com';
+var WWW_PREFIX = '/www';
 
 var REDIRECTS = {
   '/hire-senior-python-engineers-nearshore-latam-talent': DISCOVER + '/technologies/python-developers/',
@@ -42,16 +49,34 @@ function redirect(location) {
   };
 }
 
+function hasExtension(path) {
+  return path.slice(path.lastIndexOf('/') + 1).indexOf('.') !== -1;
+}
+
+function indexFile(uri) {
+  if (uri.charAt(uri.length - 1) === '/') return uri + 'index.html';
+  if (!hasExtension(uri)) return uri + '/index.html';
+  return uri;
+}
+
 function handler(event) {
   var request = event.request;
   var uri = request.uri;
   var host = request.headers.host ? request.headers.host.value.toLowerCase() : '';
-  var qs = queryString(request.querystring);
 
   if (host === 'betterengineer.com') {
-    return redirect('https://www.betterengineer.com' + uri + qs);
+    return redirect(WWW + uri + queryString(request.querystring));
   }
 
+  if (host !== 'www.betterengineer.com') {
+    if (uri === WWW_PREFIX || uri.indexOf(WWW_PREFIX + '/') === 0) {
+      return redirect(WWW + (uri.slice(WWW_PREFIX.length) || '/') + queryString(request.querystring));
+    }
+    request.uri = indexFile(uri);
+    return request;
+  }
+
+  var qs = queryString(request.querystring);
   var key = uri.length > 1 && uri.charAt(uri.length - 1) === '/' ? uri.slice(0, -1) : uri;
   var lower = key.toLowerCase();
 
@@ -61,19 +86,14 @@ function handler(event) {
 
   if (lower === '/roles' || lower === '/technologies' ||
       lower.indexOf('/roles/') === 0 || lower.indexOf('/technologies/') === 0) {
-    var last = key.slice(key.lastIndexOf('/') + 1);
-    return redirect(DISCOVER + key + (last.indexOf('.') === -1 ? '/' : '') + qs);
+    return redirect(DISCOVER + lower + (hasExtension(lower) ? '' : '/') + qs);
   }
 
   // HubSpot matched paths case-insensitively; S3 does not. Pages are all lowercase.
-  if (key !== lower && key.slice(key.lastIndexOf('/') + 1).indexOf('.') === -1) {
-    return redirect('https://www.betterengineer.com' + lower + qs);
+  if (key !== lower && !hasExtension(key)) {
+    return redirect(WWW + lower + qs);
   }
 
-  if (uri.charAt(uri.length - 1) === '/') {
-    request.uri = uri + 'index.html';
-  } else if (uri.slice(uri.lastIndexOf('/') + 1).indexOf('.') === -1) {
-    request.uri = uri + '/index.html';
-  }
+  request.uri = WWW_PREFIX + indexFile(uri);
   return request;
 }
