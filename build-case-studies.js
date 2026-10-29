@@ -475,9 +475,7 @@ function templatePage() {
     '  <meta name="robots" content="noindex, nofollow">\n' +
     '  <title>Case study starter template | BetterEngineer (not production)</title>\n' +
     '  <link rel="icon" href="/icons/favicon.png" type="image/png">\n' +
-    '  <link rel="preconnect" href="https://fonts.googleapis.com">\n' +
-    '  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n' +
-    '  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">\n' +
+    '  <link rel="preload" href="/fonts/plus-jakarta-sans/plus-jakarta-sans-latin.woff2" as="font" type="font/woff2" crossorigin>\n' +
     '  <link rel="stylesheet" href="/styles/brand.css">\n' +
     '  <link rel="stylesheet" href="/styles/landing-page.css">\n' +
     '</head>\n' +

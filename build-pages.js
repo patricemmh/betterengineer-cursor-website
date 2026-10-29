@@ -550,9 +550,7 @@ function shell(title, description, css, header, main, page, extraHead, pageFoote
     '  <script type="application/json" id="be-gtm-config">{"id":"GTM-WT77L8JF"}</script>\n' +
     '  <script type="application/json" id="be-hs-config">{"portalId":"8679235"}</script>\n' +
     '  <link rel="icon" href="/icons/favicon.png" type="image/png">\n' +
-    '  <link rel="preconnect" href="https://fonts.googleapis.com">\n' +
-    '  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n' +
-    '  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">\n' +
+    '  <link rel="preload" href="/fonts/plus-jakarta-sans/plus-jakarta-sans-latin.woff2" as="font" type="font/woff2" crossorigin>\n' +
     '  <style>\n' +
     css +
     '\n' +
