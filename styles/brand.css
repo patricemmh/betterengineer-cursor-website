@@ -1416,16 +1416,20 @@
       gap: 0.5rem;
       margin-top: 1.5rem;
     }
+    .carousel-dots span,
     .carousel-dots button {
+      display: block;
       width: 9px;
       height: 9px;
+      padding: 0;
       border-radius: 50%;
       border: none;
       background: #d6d8e0;
-      cursor: pointer;
-      padding: 0;
       transition: background 0.2s, transform 0.2s;
     }
+    .carousel-dots button { cursor: pointer; }
+    .carousel-dots span { pointer-events: none; }
+    .carousel-dots span.is-active,
     .carousel-dots button.is-active { background: var(--color-primary); transform: scale(1.2); }
 
     /* CTA band - solid blue + official team PNG (wavy edges are in the asset) */

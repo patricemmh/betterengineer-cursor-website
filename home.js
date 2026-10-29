@@ -121,14 +121,15 @@
     var root = document.getElementById('testimonials');
     if (!root) return;
     var slides = root.querySelectorAll('.slide');
-    var dots = root.querySelectorAll('.carousel-dots button');
+    var dots = root.querySelectorAll('.carousel-dots span');
     slides.forEach(function (el, idx) {
-      el.classList.toggle('is-active', idx === slide);
-      el.setAttribute('aria-hidden', idx === slide ? 'false' : 'true');
+      var active = idx === slide;
+      el.classList.toggle('is-active', active);
+      if (active) el.removeAttribute('hidden');
+      else el.setAttribute('hidden', '');
     });
-    dots.forEach(function (btn, idx) {
-      btn.classList.toggle('is-active', idx === slide);
-      btn.setAttribute('aria-selected', idx === slide ? 'true' : 'false');
+    dots.forEach(function (dot, idx) {
+      dot.classList.toggle('is-active', idx === slide);
     });
   }
 
@@ -136,17 +137,8 @@
   if (testimonials) {
     var prevBtn = testimonials.querySelector('.carousel-btn[aria-label="Previous testimonial"]');
     var nextBtn = testimonials.querySelector('.carousel-btn[aria-label="Next testimonial"]');
-    var dots = testimonials.querySelector('.carousel-dots');
     if (prevBtn) prevBtn.addEventListener('click', function () { showSlide(slide - 1); });
     if (nextBtn) nextBtn.addEventListener('click', function () { showSlide(slide + 1); });
-    if (dots) {
-      dots.addEventListener('click', function (e) {
-        var b = e.target.closest('button');
-        if (!b || !dots.contains(b)) return;
-        var idx = parseInt(b.getAttribute('data-slide-index'), 10);
-        if (!isNaN(idx)) showSlide(idx);
-      });
-    }
     document.addEventListener('keydown', function (e) {
       if (e.key === 'ArrowLeft') showSlide(slide - 1);
       if (e.key === 'ArrowRight') showSlide(slide + 1);

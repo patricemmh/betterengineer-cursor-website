@@ -21,8 +21,7 @@
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.betterengineer.com/"},{"@type":"ListItem","position":2,"name":"Careers","item":"https://www.betterengineer.com/careers"},{"@type":"ListItem","position":3,"name":"Node.js Engineer","item":"https://www.betterengineer.com/careers/node-js-engineer"}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Engineer Careers | Remote Software Engineering Jobs at BetterEngineer","url":"https://www.betterengineer.com/careers/node-js-engineer","description":"Node.js Engineer","inLanguage":"en-US","isPartOf":{"@type":"WebSite","name":"BetterEngineer","url":"https://www.betterengineer.com/"},"primaryImageOfPage":"https://discover.betterengineer.com/images/roles/shared/trust-laptop.png","datePublished":"2026-09-01","dateModified":"2026-09-01"}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"JobPosting","title":"Node.js Engineer","description":"We are seeking a remote Node.js Engineer to join a U.S. based distributed engineering team that can deliver market-leading software solutions.","identifier":{"@type":"PropertyValue","name":"BetterEngineer","value":"node-js-engineer"},"datePosted":"2026-09-01","employmentType":"FULL_TIME","hiringOrganization":{"@type":"Organization","name":"BetterEngineer","sameAs":"https://www.betterengineer.com/","logo":"https://www.betterengineer.com/icons/betterengineer-logo.svg"},"jobLocationType":"TELECOMMUTE","applicantLocationRequirements":{"@type":"Country","name":"United States"},"url":"https://www.betterengineer.com/careers/node-js-engineer","directApply":false}</script>
-  <link rel="stylesheet" href="/styles/cookie-consent.css">
-  <script src="/scripts/cookie-consent.js"></script>
+  <script src="/scripts/cookie-consent.js" defer></script>
   <!-- Analytics (GTM, HubSpot) load only after cookie consent. IDs: GTM-WT77L8JF, portal 8679235. -->
   <script type="application/json" id="be-gtm-config">{"id":"GTM-WT77L8JF"}</script>
   <script type="application/json" id="be-hs-config">{"portalId":"8679235"}</script>
@@ -1449,16 +1448,20 @@
       gap: 0.5rem;
       margin-top: 1.5rem;
     }
+    .carousel-dots span,
     .carousel-dots button {
+      display: block;
       width: 9px;
       height: 9px;
+      padding: 0;
       border-radius: 50%;
       border: none;
       background: #d6d8e0;
-      cursor: pointer;
-      padding: 0;
       transition: background 0.2s, transform 0.2s;
     }
+    .carousel-dots button { cursor: pointer; }
+    .carousel-dots span { pointer-events: none; }
+    .carousel-dots span.is-active,
     .carousel-dots button.is-active { background: var(--color-primary); transform: scale(1.2); }
 
     /* CTA band - solid blue + official team PNG (wavy edges are in the asset) */
@@ -9707,6 +9710,262 @@ body.page-shell--hire-wizard #hire-skills-label {
 }
 
 
+/* Cookie consent UI (tokens align with styles/brand.css) */
+html.be-cookie-modal-open {
+  overflow: hidden;
+}
+.be-cookie-banner,
+.be-cookie-modal {
+  font-family: var(--font, "Plus Jakarta Sans", system-ui, -apple-system, sans-serif);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--color-text, #1c1c1c);
+}
+
+.be-cookie-banner {
+  position: fixed;
+  z-index: 10000;
+  left: max(1rem, env(safe-area-inset-left, 0px));
+  right: max(1rem, env(safe-area-inset-right, 0px));
+  bottom: max(1rem, env(safe-area-inset-bottom, 0px));
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 1.15rem 1.25rem;
+  background: var(--color-white, #fff);
+  border: 1px solid var(--color-border, #e2e4f0);
+  border-radius: var(--radius-md, 12px);
+  box-shadow: var(--shadow-soft, 0 10px 40px rgba(28, 28, 28, 0.12));
+}
+
+.be-cookie-banner[hidden],
+.be-cookie-modal[hidden] {
+  display: none !important;
+}
+
+.be-cookie-banner__title {
+  margin: 0 0 0.35rem;
+  font-size: 1.05rem;
+  font-weight: 650;
+  color: var(--color-navy, #001062);
+}
+
+.be-cookie-banner__text {
+  margin: 0 0 1rem;
+  color: var(--color-muted, #5c5c66);
+  font-size: 0.875rem;
+}
+
+.be-cookie-banner__text a {
+  color: var(--color-primary, #545bb3);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.be-cookie-banner__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.be-cookie-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.5rem;
+  padding: 0.45rem 1rem;
+  border-radius: var(--radius-sm, 4px);
+  border: 1px solid transparent;
+  font: inherit;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.be-cookie-btn:focus-visible {
+  outline: 2px solid var(--color-primary, #545bb3);
+  outline-offset: 2px;
+}
+
+.be-cookie-btn--primary {
+  background: var(--color-primary, #545bb3);
+  color: var(--color-white, #fff);
+}
+
+.be-cookie-btn--primary:hover {
+  background: var(--color-primary-dark, #3d4293);
+}
+
+.be-cookie-btn--secondary {
+  background: var(--color-surface-2, #f0f1fb);
+  color: var(--color-navy, #001062);
+  border-color: var(--color-border, #e2e4f0);
+}
+
+.be-cookie-btn--secondary:hover {
+  background: #e4e6f6;
+}
+
+.be-cookie-btn--ghost {
+  background: transparent;
+  color: var(--color-primary, #545bb3);
+  border-color: var(--color-border, #e2e4f0);
+}
+
+.be-cookie-btn--ghost:hover {
+  background: var(--color-surface, #fafafe);
+}
+
+.be-cookie-modal__backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 10001;
+  background: rgba(0, 16, 98, 0.45);
+}
+
+.be-cookie-modal__panel {
+  position: fixed;
+  z-index: 10002;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(28rem, calc(100vw - 2rem));
+  max-height: min(90vh, 32rem);
+  overflow: auto;
+  padding: 1.35rem 1.35rem 1.25rem;
+  background: var(--color-white, #fff);
+  border-radius: var(--radius-md, 12px);
+  box-shadow: var(--shadow-hover, 0 16px 48px rgba(84, 91, 179, 0.18));
+}
+
+.be-cookie-modal__title {
+  margin: 0 0 0.5rem;
+  font-size: 1.15rem;
+  font-weight: 650;
+  color: var(--color-navy, #001062);
+}
+
+.be-cookie-modal__intro {
+  margin: 0 0 1rem;
+  font-size: 0.875rem;
+  color: var(--color-muted, #5c5c66);
+}
+
+.be-cookie-pref {
+  border: 1px solid var(--color-border, #e2e4f0);
+  border-radius: var(--radius-sm, 4px);
+  padding: 0.85rem 1rem;
+  margin-bottom: 0.65rem;
+  background: var(--color-surface, #fafafe);
+}
+
+.be-cookie-pref__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.be-cookie-pref__name {
+  margin: 0;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-text, #1c1c1c);
+}
+
+.be-cookie-pref__desc {
+  margin: 0.35rem 0 0;
+  font-size: 0.8125rem;
+  color: var(--color-muted, #5c5c66);
+}
+
+.be-cookie-pref__badge {
+  flex-shrink: 0;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-muted, #5c5c66);
+  padding: 0.2rem 0.45rem;
+  background: var(--color-white, #fff);
+  border: 1px solid var(--color-border, #e2e4f0);
+  border-radius: 999px;
+}
+
+.be-cookie-toggle {
+  position: relative;
+  width: 2.75rem;
+  height: 1.5rem;
+  flex-shrink: 0;
+}
+
+.be-cookie-toggle input {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  cursor: pointer;
+}
+
+.be-cookie-toggle input:disabled {
+  cursor: not-allowed;
+}
+
+.be-cookie-toggle__track {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 999px;
+  background: #c5c8d8;
+  transition: background 0.15s ease;
+}
+
+.be-cookie-toggle input:checked + .be-cookie-toggle__track {
+  background: var(--color-primary, #545bb3);
+}
+
+.be-cookie-toggle input:focus-visible + .be-cookie-toggle__track {
+  outline: 2px solid var(--color-primary, #545bb3);
+  outline-offset: 2px;
+}
+
+.be-cookie-toggle__thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  transition: transform 0.15s ease;
+  pointer-events: none;
+}
+
+.be-cookie-toggle input:checked ~ .be-cookie-toggle__thumb {
+  transform: translateX(1.25rem);
+}
+
+.be-cookie-modal__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: flex-end;
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--color-border, #e2e4f0);
+}
+
+@media (min-width: 640px) {
+  .be-cookie-banner {
+    left: auto;
+    right: max(1.25rem, env(safe-area-inset-right, 0px));
+    margin: 0;
+  }
+}
+
   </style>
 </head>
 <body class="">
@@ -9720,33 +9979,33 @@ body.page-shell--hire-wizard #hire-skills-label {
       <nav class="site-nav" aria-label="Primary">
         <ul class="nav-desktop" role="list">
           <li class="has-children">
-            <a href="/staff-augmentation/">Services <span class="nav-chevron" aria-hidden="true"></span></a>
+            <a href="https://www.betterengineer.com/staff-augmentation">Services <span class="nav-chevron" aria-hidden="true"></span></a>
             <ul class="dropdown" role="list">
-              <li><a href="/staff-augmentation/">Staff Augmentation</a></li>
-              <li><a href="/ai-readiness/">AI Readiness</a></li>
-              <li><a href="/hiring-dashboard/">Platform</a></li>
+              <li><a href="https://www.betterengineer.com/staff-augmentation">Staff Augmentation</a></li>
+              <li><a href="https://www.betterengineer.com/ai-readiness">AI Readiness</a></li>
+              <li><a href="https://www.betterengineer.com/hiring-dashboard">Platform</a></li>
               <li><a href="https://discover.betterengineer.com/roles/">Browse Roles</a></li>
               <li><a href="https://discover.betterengineer.com/technologies/">Browse by Technology</a></li>
             </ul>
           </li>
           <li><a href="https://discover.betterengineer.com/ai-fluent-engineers/">AI Fluency</a></li>
           <li class="has-children">
-            <a href="/about/">About <span class="nav-chevron" aria-hidden="true"></span></a>
+            <a href="https://www.betterengineer.com/about">About <span class="nav-chevron" aria-hidden="true"></span></a>
             <ul class="dropdown" role="list">
-              <li><a href="/about/">Who We Are</a></li>
-              <li><a href="/latamengineer/">Why Nearshore</a></li>
+              <li><a href="https://www.betterengineer.com/about">Who We Are</a></li>
+              <li><a href="https://www.betterengineer.com/latamengineer">Why Nearshore</a></li>
             </ul>
           </li>
           <li class="has-children">
             <a href="https://blog.betterengineer.com/resource-center">Resources <span class="nav-chevron" aria-hidden="true"></span></a>
             <ul class="dropdown" role="list">
               <li><a href="https://blog.betterengineer.com/resource-center">Blog</a></li>
-              <li><a href="/faqs-nearshore-software-engineers-staff-augmentation-ai-talent/">FAQs</a></li>
-              <li><a href="/podcast/">Podcast</a></li>
+              <li><a href="https://www.betterengineer.com/faqs-nearshore-software-engineers-staff-augmentation-ai-talent">FAQs</a></li>
+              <li><a href="https://www.betterengineer.com/podcast">Podcast</a></li>
             </ul>
           </li>
-          <li class="nav-item-join"><a href="/join/">Join Us</a></li>
-          <li><a class="nav-pill-hire" href="/multi-step-contact-form/">Hire Engineers</a></li>
+          <li class="nav-item-join"><a href="https://www.betterengineer.com/join">Join Us</a></li>
+          <li><a class="nav-pill-hire" href="https://www.betterengineer.com/multi-step-contact-form">Hire Engineers</a></li>
           <li><a href="https://app.betterengineer.com/sign-in?redirect_url=https%3A%2F%2Fapp.betterengineer.com%2F">Login</a></li>
         </ul>
       </nav>
@@ -9756,33 +10015,33 @@ body.page-shell--hire-wizard #hire-skills-label {
     </div>
     <ul class="nav-mobile" id="mobile-menu" role="list">
       <li class="has-children">
-        <a href="/staff-augmentation/">Services</a>
+        <a href="https://www.betterengineer.com/staff-augmentation">Services</a>
         <ul class="mobile-submenu" role="list">
-          <li><a href="/staff-augmentation/">Staff Augmentation</a></li>
-          <li><a href="/ai-readiness/">AI Readiness</a></li>
-          <li><a href="/hiring-dashboard/">Platform</a></li>
+          <li><a href="https://www.betterengineer.com/staff-augmentation">Staff Augmentation</a></li>
+          <li><a href="https://www.betterengineer.com/ai-readiness">AI Readiness</a></li>
+          <li><a href="https://www.betterengineer.com/hiring-dashboard">Platform</a></li>
           <li><a href="https://discover.betterengineer.com/roles/">Browse Roles</a></li>
           <li><a href="https://discover.betterengineer.com/technologies/">Browse by Technology</a></li>
         </ul>
       </li>
       <li><a href="https://discover.betterengineer.com/ai-fluent-engineers/">AI Fluency</a></li>
       <li class="has-children">
-        <a href="/about/">About</a>
+        <a href="https://www.betterengineer.com/about">About</a>
         <ul class="mobile-submenu" role="list">
-          <li><a href="/about/">Who We Are</a></li>
-          <li><a href="/latamengineer/">Why Nearshore</a></li>
+          <li><a href="https://www.betterengineer.com/about">Who We Are</a></li>
+          <li><a href="https://www.betterengineer.com/latamengineer">Why Nearshore</a></li>
         </ul>
       </li>
       <li class="has-children">
         <a href="https://blog.betterengineer.com/resource-center">Resources</a>
         <ul class="mobile-submenu" role="list">
           <li><a href="https://blog.betterengineer.com/resource-center">Blog</a></li>
-          <li><a href="/faqs-nearshore-software-engineers-staff-augmentation-ai-talent/">FAQs</a></li>
-          <li><a href="/podcast/">Podcast</a></li>
+          <li><a href="https://www.betterengineer.com/faqs-nearshore-software-engineers-staff-augmentation-ai-talent">FAQs</a></li>
+          <li><a href="https://www.betterengineer.com/podcast">Podcast</a></li>
         </ul>
       </li>
-      <li><a href="/join/">Join Us</a></li>
-      <li><a class="nav-mobile-hire" href="/multi-step-contact-form/">Hire Engineers</a></li>
+      <li><a href="https://www.betterengineer.com/join">Join Us</a></li>
+      <li><a class="nav-mobile-hire" href="https://www.betterengineer.com/multi-step-contact-form">Hire Engineers</a></li>
       <li><a href="https://app.betterengineer.com/sign-in?redirect_url=https%3A%2F%2Fapp.betterengineer.com%2F">Login</a></li>
     </ul>
   </header>
@@ -9909,7 +10168,7 @@ body.page-shell--hire-wizard #hire-skills-label {
         </a>
         <p class="footer-tagline">Lets build <strong>better</strong> teams <strong>together</strong></p>
         <div class="footer-brand__btns">
-          <a class="footer-btn footer-btn--outline" href="/multi-step-contact-form/">Contact Us</a>
+          <a class="footer-btn footer-btn--outline" href="https://www.betterengineer.com/multi-step-contact-form">Contact Us</a>
           <a class="footer-btn footer-btn--solid" href="https://calendly.com/tim-salsamobi/30min" target="_blank" rel="noopener noreferrer">Schedule a Call</a>
         </div>
         <div class="footer-social">
@@ -9929,73 +10188,73 @@ body.page-shell--hire-wizard #hire-skills-label {
       </div>
       <nav class="footer-nav-col" aria-label="Services and company">
         <div class="footer-nav-group">
-          <h4 class="footer-col__title">Our Services</h4>
+          <p class="footer-col__title">Our Services</p>
           <ul>
-            <li><a href="/staff-augmentation/">Staff Augmentation</a></li>
-            <li><a href="/ai-readiness/">AI Readiness Assessment</a></li>
-            <li><a href="/hiring-dashboard/">Hiring Dashboard</a></li>
+            <li><a href="https://www.betterengineer.com/staff-augmentation">Staff Augmentation</a></li>
+            <li><a href="https://www.betterengineer.com/ai-readiness">AI Readiness Assessment</a></li>
+            <li><a href="https://www.betterengineer.com/hiring-dashboard">Hiring Dashboard</a></li>
             <li><a href="https://discover.betterengineer.com/roles/">Browse Roles</a></li>
             <li><a href="https://discover.betterengineer.com/technologies/">Browse by Technology</a></li>
           </ul>
         </div>
         <div class="footer-nav-group">
-          <h4 class="footer-col__title">About Us</h4>
+          <p class="footer-col__title">About Us</p>
           <ul>
-            <li><a href="/about/">Who We Are</a></li>
-            <li><a href="/latamengineer/">Why Nearshore</a></li>
+            <li><a href="https://www.betterengineer.com/about">Who We Are</a></li>
+            <li><a href="https://www.betterengineer.com/latamengineer">Why Nearshore</a></li>
           </ul>
         </div>
         <div class="footer-nav-group">
-          <h4 class="footer-col__title">Industries</h4>
+          <p class="footer-col__title">Industries</p>
           <ul>
-            <li><a href="/fintech/">FinTech</a></li>
-            <li><a href="/martech/">MarTech</a></li>
-            <li><a href="/healthtech/">HealthTech</a></li>
+            <li><a href="https://www.betterengineer.com/fintech">FinTech</a></li>
+            <li><a href="https://www.betterengineer.com/martech">MarTech</a></li>
+            <li><a href="https://www.betterengineer.com/healthtech">HealthTech</a></li>
           </ul>
         </div>
       </nav>
       <nav class="footer-nav-col" aria-label="Careers">
         <div class="footer-nav-group">
-          <h4 class="footer-col__title">Careers</h4>
+          <p class="footer-col__title">Careers</p>
           <ul>
-            <li><a href="/careers/">See All Job Opportunities</a></li>
-            <li><a href="/join/">Join Us</a></li>
+            <li><a href="https://www.betterengineer.com/careers">See All Job Opportunities</a></li>
+            <li><a href="https://www.betterengineer.com/join">Join Us</a></li>
             <li><a href="https://app.betterengineer.com/sign-up/candidate" rel="noopener noreferrer">Sign Up</a></li>
           </ul>
         </div>
         <div class="footer-nav-group">
-          <h4 class="footer-col__title">In-Demand Jobs</h4>
+          <p class="footer-col__title">In-Demand Jobs</p>
           <ul>
-            <li><a href="/careers/full-stack-javascript-engineer/">Full-Stack Engineer</a></li>
-            <li><a href="/careers/front-end-engineer/">Front-end Engineer</a></li>
-            <li><a href="/careers/python-engineer/">Python Engineer</a></li>
-            <li><a href="/careers/devops-engineer/">DevOps Engineer</a></li>
+            <li><a href="https://www.betterengineer.com/careers/full-stack-javascript-engineer">Full-Stack Engineer</a></li>
+            <li><a href="https://www.betterengineer.com/careers/front-end-engineer">Front-end Engineer</a></li>
+            <li><a href="https://www.betterengineer.com/careers/python-engineer">Python Engineer</a></li>
+            <li><a href="https://www.betterengineer.com/careers/devops-engineer">DevOps Engineer</a></li>
           </ul>
         </div>
       </nav>
       <nav class="footer-nav-col" aria-label="Resources">
         <div class="footer-nav-group">
-          <h4 class="footer-col__title">Resources</h4>
+          <p class="footer-col__title">Resources</p>
           <ul>
             <li><a href="https://blog.betterengineer.com/resource-center">Blog</a></li>
-            <li><a href="/faqs-nearshore-software-engineers-staff-augmentation-ai-talent/">FAQs</a></li>
-            <li><a href="/ebooks/">Ebooks</a></li>
-            <li><a href="/podcast/">Podcast</a></li>
-            <li><a href="/technical-glossary/">Technical Glossary</a></li>
+            <li><a href="https://www.betterengineer.com/faqs-nearshore-software-engineers-staff-augmentation-ai-talent">FAQs</a></li>
+            <li><a href="https://www.betterengineer.com/ebooks">Ebooks</a></li>
+            <li><a href="https://www.betterengineer.com/podcast">Podcast</a></li>
+            <li><a href="https://www.betterengineer.com/technical-glossary">Technical Glossary</a></li>
           </ul>
         </div>
         <div class="footer-nav-group">
-          <h4 class="footer-col__title">Case Studies</h4>
+          <p class="footer-col__title">Case Studies</p>
           <ul>
-            <li><a href="/case-studies/livecgi/">Live CGI</a></li>
-            <li><a href="/case-studies/wasteplace/">Wasteplace</a></li>
+            <li><a href="https://www.betterengineer.com/case-studies/livecgi">Live CGI</a></li>
+            <li><a href="https://www.betterengineer.com/case-studies/wasteplace">Wasteplace</a></li>
           </ul>
         </div>
       </nav>
     </div>
     <div class="wrap footer-bottom">
       <span>Copyright © 2026 BetterEngineer</span>
-      <span><a href="/resource-center/wpautoterms/privacy-policy/">Privacy Policy</a> · <a href="/terms-of-service/">Terms of Service</a></span>
+      <span><a href="https://www.betterengineer.com/resource-center/wpautoterms/privacy-policy">Privacy Policy</a> · <a href="https://www.betterengineer.com/terms-of-service">Terms of Service</a></span>
     </div>
   </footer>
   <script src="/attribution.js" defer></script>

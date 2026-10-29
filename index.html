@@ -5,8 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>BetterEngineer | Staff Augmentation & Engineering Talent</title>
   <meta name="description" content="Scale your team with vetted software engineers across the Americas. Staff augmentation, Slack integration, and the BetterEngineer hiring platform.">
-  <link rel="stylesheet" href="/styles/cookie-consent.css">
-  <script src="/scripts/cookie-consent.js"></script>
+  <link rel="preload" as="image" href="/images/hero/home-ai-engineer-800.webp" type="image/webp" media="(max-width: 500px)" fetchpriority="high">
+  <link rel="preload" as="image" href="/images/hero/home-ai-engineer-1120.webp" type="image/webp" media="(min-width: 501px)" fetchpriority="high">
+  <script src="/scripts/cookie-consent.js" defer></script>
   <!-- Analytics (GTM, HubSpot) load only after cookie consent. IDs: GTM-WT77L8JF, portal 8679235. -->
   <script type="application/json" id="be-gtm-config">{"id":"GTM-WT77L8JF"}</script>
   <script type="application/json" id="be-hs-config">{"portalId":"8679235"}</script>
@@ -1433,16 +1434,20 @@
       gap: 0.5rem;
       margin-top: 1.5rem;
     }
+    .carousel-dots span,
     .carousel-dots button {
+      display: block;
       width: 9px;
       height: 9px;
+      padding: 0;
       border-radius: 50%;
       border: none;
       background: #d6d8e0;
-      cursor: pointer;
-      padding: 0;
       transition: background 0.2s, transform 0.2s;
     }
+    .carousel-dots button { cursor: pointer; }
+    .carousel-dots span { pointer-events: none; }
+    .carousel-dots span.is-active,
     .carousel-dots button.is-active { background: var(--color-primary); transform: scale(1.2); }
 
     /* CTA band - solid blue + official team PNG (wavy edges are in the asset) */
@@ -1945,6 +1950,262 @@
   padding-right: max(1.25rem, env(safe-area-inset-right, 0px));
 }
 
+/* Cookie consent UI (tokens align with styles/brand.css) */
+html.be-cookie-modal-open {
+  overflow: hidden;
+}
+.be-cookie-banner,
+.be-cookie-modal {
+  font-family: var(--font, "Plus Jakarta Sans", system-ui, -apple-system, sans-serif);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--color-text, #1c1c1c);
+}
+
+.be-cookie-banner {
+  position: fixed;
+  z-index: 10000;
+  left: max(1rem, env(safe-area-inset-left, 0px));
+  right: max(1rem, env(safe-area-inset-right, 0px));
+  bottom: max(1rem, env(safe-area-inset-bottom, 0px));
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 1.15rem 1.25rem;
+  background: var(--color-white, #fff);
+  border: 1px solid var(--color-border, #e2e4f0);
+  border-radius: var(--radius-md, 12px);
+  box-shadow: var(--shadow-soft, 0 10px 40px rgba(28, 28, 28, 0.12));
+}
+
+.be-cookie-banner[hidden],
+.be-cookie-modal[hidden] {
+  display: none !important;
+}
+
+.be-cookie-banner__title {
+  margin: 0 0 0.35rem;
+  font-size: 1.05rem;
+  font-weight: 650;
+  color: var(--color-navy, #001062);
+}
+
+.be-cookie-banner__text {
+  margin: 0 0 1rem;
+  color: var(--color-muted, #5c5c66);
+  font-size: 0.875rem;
+}
+
+.be-cookie-banner__text a {
+  color: var(--color-primary, #545bb3);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.be-cookie-banner__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.be-cookie-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.5rem;
+  padding: 0.45rem 1rem;
+  border-radius: var(--radius-sm, 4px);
+  border: 1px solid transparent;
+  font: inherit;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.be-cookie-btn:focus-visible {
+  outline: 2px solid var(--color-primary, #545bb3);
+  outline-offset: 2px;
+}
+
+.be-cookie-btn--primary {
+  background: var(--color-primary, #545bb3);
+  color: var(--color-white, #fff);
+}
+
+.be-cookie-btn--primary:hover {
+  background: var(--color-primary-dark, #3d4293);
+}
+
+.be-cookie-btn--secondary {
+  background: var(--color-surface-2, #f0f1fb);
+  color: var(--color-navy, #001062);
+  border-color: var(--color-border, #e2e4f0);
+}
+
+.be-cookie-btn--secondary:hover {
+  background: #e4e6f6;
+}
+
+.be-cookie-btn--ghost {
+  background: transparent;
+  color: var(--color-primary, #545bb3);
+  border-color: var(--color-border, #e2e4f0);
+}
+
+.be-cookie-btn--ghost:hover {
+  background: var(--color-surface, #fafafe);
+}
+
+.be-cookie-modal__backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 10001;
+  background: rgba(0, 16, 98, 0.45);
+}
+
+.be-cookie-modal__panel {
+  position: fixed;
+  z-index: 10002;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(28rem, calc(100vw - 2rem));
+  max-height: min(90vh, 32rem);
+  overflow: auto;
+  padding: 1.35rem 1.35rem 1.25rem;
+  background: var(--color-white, #fff);
+  border-radius: var(--radius-md, 12px);
+  box-shadow: var(--shadow-hover, 0 16px 48px rgba(84, 91, 179, 0.18));
+}
+
+.be-cookie-modal__title {
+  margin: 0 0 0.5rem;
+  font-size: 1.15rem;
+  font-weight: 650;
+  color: var(--color-navy, #001062);
+}
+
+.be-cookie-modal__intro {
+  margin: 0 0 1rem;
+  font-size: 0.875rem;
+  color: var(--color-muted, #5c5c66);
+}
+
+.be-cookie-pref {
+  border: 1px solid var(--color-border, #e2e4f0);
+  border-radius: var(--radius-sm, 4px);
+  padding: 0.85rem 1rem;
+  margin-bottom: 0.65rem;
+  background: var(--color-surface, #fafafe);
+}
+
+.be-cookie-pref__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.be-cookie-pref__name {
+  margin: 0;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-text, #1c1c1c);
+}
+
+.be-cookie-pref__desc {
+  margin: 0.35rem 0 0;
+  font-size: 0.8125rem;
+  color: var(--color-muted, #5c5c66);
+}
+
+.be-cookie-pref__badge {
+  flex-shrink: 0;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-muted, #5c5c66);
+  padding: 0.2rem 0.45rem;
+  background: var(--color-white, #fff);
+  border: 1px solid var(--color-border, #e2e4f0);
+  border-radius: 999px;
+}
+
+.be-cookie-toggle {
+  position: relative;
+  width: 2.75rem;
+  height: 1.5rem;
+  flex-shrink: 0;
+}
+
+.be-cookie-toggle input {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  cursor: pointer;
+}
+
+.be-cookie-toggle input:disabled {
+  cursor: not-allowed;
+}
+
+.be-cookie-toggle__track {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 999px;
+  background: #c5c8d8;
+  transition: background 0.15s ease;
+}
+
+.be-cookie-toggle input:checked + .be-cookie-toggle__track {
+  background: var(--color-primary, #545bb3);
+}
+
+.be-cookie-toggle input:focus-visible + .be-cookie-toggle__track {
+  outline: 2px solid var(--color-primary, #545bb3);
+  outline-offset: 2px;
+}
+
+.be-cookie-toggle__thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  transition: transform 0.15s ease;
+  pointer-events: none;
+}
+
+.be-cookie-toggle input:checked ~ .be-cookie-toggle__thumb {
+  transform: translateX(1.25rem);
+}
+
+.be-cookie-modal__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: flex-end;
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--color-border, #e2e4f0);
+}
+
+@media (min-width: 640px) {
+  .be-cookie-banner {
+    left: auto;
+    right: max(1.25rem, env(safe-area-inset-right, 0px));
+    margin: 0;
+  }
+}
+
   </style>
 </head>
 <body class="">
@@ -1958,33 +2219,33 @@
       <nav class="site-nav" aria-label="Primary">
         <ul class="nav-desktop" role="list">
           <li class="has-children">
-            <a href="/staff-augmentation/">Services <span class="nav-chevron" aria-hidden="true"></span></a>
+            <a href="https://www.betterengineer.com/staff-augmentation">Services <span class="nav-chevron" aria-hidden="true"></span></a>
             <ul class="dropdown" role="list">
-              <li><a href="/staff-augmentation/">Staff Augmentation</a></li>
-              <li><a href="/ai-readiness/">AI Readiness</a></li>
-              <li><a href="/hiring-dashboard/">Platform</a></li>
+              <li><a href="https://www.betterengineer.com/staff-augmentation">Staff Augmentation</a></li>
+              <li><a href="https://www.betterengineer.com/ai-readiness">AI Readiness</a></li>
+              <li><a href="https://www.betterengineer.com/hiring-dashboard">Platform</a></li>
               <li><a href="https://discover.betterengineer.com/roles/">Browse Roles</a></li>
               <li><a href="https://discover.betterengineer.com/technologies/">Browse by Technology</a></li>
             </ul>
           </li>
           <li><a href="https://discover.betterengineer.com/ai-fluent-engineers/">AI Fluency</a></li>
           <li class="has-children">
-            <a href="/about/">About <span class="nav-chevron" aria-hidden="true"></span></a>
+            <a href="https://www.betterengineer.com/about">About <span class="nav-chevron" aria-hidden="true"></span></a>
             <ul class="dropdown" role="list">
-              <li><a href="/about/">Who We Are</a></li>
-              <li><a href="/latamengineer/">Why Nearshore</a></li>
+              <li><a href="https://www.betterengineer.com/about">Who We Are</a></li>
+              <li><a href="https://www.betterengineer.com/latamengineer">Why Nearshore</a></li>
             </ul>
           </li>
           <li class="has-children">
             <a href="https://blog.betterengineer.com/resource-center">Resources <span class="nav-chevron" aria-hidden="true"></span></a>
             <ul class="dropdown" role="list">
               <li><a href="https://blog.betterengineer.com/resource-center">Blog</a></li>
-              <li><a href="/faqs-nearshore-software-engineers-staff-augmentation-ai-talent/">FAQs</a></li>
-              <li><a href="/podcast/">Podcast</a></li>
+              <li><a href="https://www.betterengineer.com/faqs-nearshore-software-engineers-staff-augmentation-ai-talent">FAQs</a></li>
+              <li><a href="https://www.betterengineer.com/podcast">Podcast</a></li>
             </ul>
           </li>
-          <li class="nav-item-join"><a href="/join/">Join Us</a></li>
-          <li><a class="nav-pill-hire" href="/multi-step-contact-form/">Hire Engineers</a></li>
+          <li class="nav-item-join"><a href="https://www.betterengineer.com/join">Join Us</a></li>
+          <li><a class="nav-pill-hire" href="https://www.betterengineer.com/multi-step-contact-form">Hire Engineers</a></li>
           <li><a href="https://app.betterengineer.com/sign-in?redirect_url=https%3A%2F%2Fapp.betterengineer.com%2F">Login</a></li>
         </ul>
       </nav>
@@ -1994,33 +2255,33 @@
     </div>
     <ul class="nav-mobile" id="mobile-menu" role="list">
       <li class="has-children">
-        <a href="/staff-augmentation/">Services</a>
+        <a href="https://www.betterengineer.com/staff-augmentation">Services</a>
         <ul class="mobile-submenu" role="list">
-          <li><a href="/staff-augmentation/">Staff Augmentation</a></li>
-          <li><a href="/ai-readiness/">AI Readiness</a></li>
-          <li><a href="/hiring-dashboard/">Platform</a></li>
+          <li><a href="https://www.betterengineer.com/staff-augmentation">Staff Augmentation</a></li>
+          <li><a href="https://www.betterengineer.com/ai-readiness">AI Readiness</a></li>
+          <li><a href="https://www.betterengineer.com/hiring-dashboard">Platform</a></li>
           <li><a href="https://discover.betterengineer.com/roles/">Browse Roles</a></li>
           <li><a href="https://discover.betterengineer.com/technologies/">Browse by Technology</a></li>
         </ul>
       </li>
       <li><a href="https://discover.betterengineer.com/ai-fluent-engineers/">AI Fluency</a></li>
       <li class="has-children">
-        <a href="/about/">About</a>
+        <a href="https://www.betterengineer.com/about">About</a>
         <ul class="mobile-submenu" role="list">
-          <li><a href="/about/">Who We Are</a></li>
-          <li><a href="/latamengineer/">Why Nearshore</a></li>
+          <li><a href="https://www.betterengineer.com/about">Who We Are</a></li>
+          <li><a href="https://www.betterengineer.com/latamengineer">Why Nearshore</a></li>
         </ul>
       </li>
       <li class="has-children">
         <a href="https://blog.betterengineer.com/resource-center">Resources</a>
         <ul class="mobile-submenu" role="list">
           <li><a href="https://blog.betterengineer.com/resource-center">Blog</a></li>
-          <li><a href="/faqs-nearshore-software-engineers-staff-augmentation-ai-talent/">FAQs</a></li>
-          <li><a href="/podcast/">Podcast</a></li>
+          <li><a href="https://www.betterengineer.com/faqs-nearshore-software-engineers-staff-augmentation-ai-talent">FAQs</a></li>
+          <li><a href="https://www.betterengineer.com/podcast">Podcast</a></li>
         </ul>
       </li>
-      <li><a href="/join/">Join Us</a></li>
-      <li><a class="nav-mobile-hire" href="/multi-step-contact-form/">Hire Engineers</a></li>
+      <li><a href="https://www.betterengineer.com/join">Join Us</a></li>
+      <li><a class="nav-mobile-hire" href="https://www.betterengineer.com/multi-step-contact-form">Hire Engineers</a></li>
       <li><a href="https://app.betterengineer.com/sign-in?redirect_url=https%3A%2F%2Fapp.betterengineer.com%2F">Login</a></li>
     </ul>
   </header>
@@ -2035,12 +2296,15 @@
           </h1>
           <p class="lead">We build relationships with exceptional AI native software engineers throughout the Americas. Scale your team with senior engineers to fit your culture and time-zone, for better results.</p>
           <div class="btn-row">
-            <a class="btn btn--primary" href="/multi-step-contact-form/">Find Talent</a>
+            <a class="btn btn--primary" href="https://www.betterengineer.com/multi-step-contact-form">Find Talent</a>
             <a class="btn btn--outline" href="https://calendly.com/tim-salsamobi/30min" rel="noopener noreferrer">Book a Call</a>
           </div>
         </div>
         <div class="hero-visual hero-visual--image reveal">
-          <img class="hero-visual__img" src="/images/hero/home-ai-engineer.png" alt="Senior AI engineer profile with skills, experience, and verified expertise" width="1156" height="772" loading="eager">
+          <picture>
+            <source media="(max-width: 500px)" srcset="/images/hero/home-ai-engineer-800.webp" type="image/webp">
+            <img class="hero-visual__img" src="/images/hero/home-ai-engineer-1120.webp" alt="Senior AI engineer profile with skills, experience, and verified expertise" width="1120" height="963" fetchpriority="high">
+          </picture>
         </div>
       </div>
     </section>
@@ -2068,7 +2332,7 @@
             </div>
             <div class="client-block">
               <img src="/images/logos/wasteplace-grey.png" alt="WastePlace">
-              <div class="client-sub"><a href="/case-studies/wasteplace/">Read Case Study</a></div>
+              <div class="client-sub"><a href="https://www.betterengineer.com/case-studies/wasteplace">Read Case Study</a></div>
             </div>
           </div>
         </div>
@@ -2121,13 +2385,13 @@
     <section class="section section-tint" id="staff-augmentation">
       <div class="wrap split">
         <div class="split__img reveal">
-          <img src="/images/hero/engineers-collaborating-desk.png" alt="Two engineers collaborating at a laptop in a modern office" width="900" height="700" loading="lazy">
+          <img src="/images/hero/engineers-collaborating-desk.webp" alt="Two engineers collaborating at a laptop in a modern office" width="463" height="396" loading="lazy">
         </div>
         <div class="reveal">
           <p class="eyebrow">Services / Staff Augmentation</p>
           <h2 class="h2">Build <span class="accent">high-trust</span> engineering teams.</h2>
           <p class="lead">Our staff augmentation model is built for delivery teams that need senior talent fast, without lowering the hiring bar. We match for technical depth, communication style, and long-term team fit, with engineers who work in your time zone.</p>
-          <a class="btn btn--ghost" href="/staff-augmentation/">Learn More</a>
+          <a class="btn btn--ghost" href="https://www.betterengineer.com/staff-augmentation">Learn about staff augmentation</a>
         </div>
       </div>
     </section>
@@ -2141,7 +2405,7 @@
         <div class="ai-split__right reveal">
           <p class="eyebrow">Services / AI Readiness</p>
           <h2 class="h2"><span class="accent">Empower</span> Your Projects with our <span class="accent">AI Readiness Assessment.</span></h2>
-          <a class="btn btn--primary" href="/ai-readiness/" style="margin-top:1rem">Discover Your AI Solutions</a>
+          <a class="btn btn--primary" href="https://www.betterengineer.com/ai-readiness" style="margin-top:1rem">Discover Your AI Solutions</a>
         </div>
       </div>
     </section>
@@ -2151,7 +2415,10 @@
     <section class="section section-tint" id="platform">
       <div class="wrap split">
         <div class="split__img reveal">
-          <img src="/images/platform/hiring-dashboard-frame.png" alt="BetterEngineer hiring dashboard" loading="lazy">
+          <picture>
+            <source media="(max-width: 500px)" srcset="/images/platform/hiring-dashboard-frame-750.webp" type="image/webp">
+            <img src="/images/platform/hiring-dashboard-frame-1088.webp" alt="BetterEngineer hiring dashboard" width="1088" height="1047" loading="lazy">
+          </picture>
         </div>
         <div class="reveal">
           <p class="eyebrow">Services / Hiring Dashboard</p>
@@ -2159,7 +2426,7 @@
           <p class="lead">Use the BetterEngineer platform to review vetted profiles, collaborate with your team, and move from search to interview with less friction.</p>
           <div class="btn-row">
             <a class="btn btn--primary" href="https://app.betterengineer.com/sign-up/hiring-manager" rel="noopener noreferrer">Try It Free</a>
-            <a class="btn btn--outline" href="/hiring-dashboard/">Learn More</a>
+            <a class="btn btn--outline" href="https://www.betterengineer.com/hiring-dashboard">Learn about the hiring dashboard</a>
           </div>
         </div>
       </div>
@@ -2174,7 +2441,10 @@
           <p class="lead">We offer full Slack integration. Simply Slack us about your hiring needs and we will submit fully vetted candidates within 72 hours.</p>
         </div>
         <div class="split__img reveal">
-          <img src="/images/platform/slack-integration.png" alt="Slack integration with BetterEngineer" loading="lazy">
+          <picture>
+            <source media="(max-width: 500px)" srcset="/images/platform/slack-integration-750.webp" type="image/webp">
+            <img src="/images/platform/slack-integration-1088.webp" alt="Slack integration with BetterEngineer" width="1088" height="764" loading="lazy">
+          </picture>
         </div>
       </div>
     </section>
@@ -2208,7 +2478,7 @@
             <h2 class="h2"><span class="accent">The talent</span> you need.</h2>
             <p class="lead">Partner with talented, ambitious engineers who will push the boundaries of your technology and drive success. We specialize in a wide range of tech skills.</p>
           </div>
-          <a class="btn btn--primary" href="/multi-step-contact-form/">Start Hiring</a>
+          <a class="btn btn--primary" href="https://www.betterengineer.com/multi-step-contact-form">Start Hiring</a>
         </div>
         <div class="card-grid">
           <a class="role-card role-card--featured reveal" href="/roles/ai-engineers/">
@@ -2258,10 +2528,10 @@
           <h2 class="latam-title">Find the right <span class="latam-title__accent">engineers</span> in <span class="latam-title__accent">your local timezone.</span></h2>
           <p class="latam-lead">Work with senior software engineers across Latin America in overlapping U.S. hours. You get global reach with day-to-day collaboration that feels local.</p>
           <p class="latam-locations">USA&nbsp;&nbsp;|&nbsp;&nbsp;Argentina&nbsp;&nbsp;|&nbsp;&nbsp;Brazil&nbsp;&nbsp;|&nbsp;&nbsp;Colombia&nbsp;&nbsp;|&nbsp;&nbsp;Costa Rica</p>
-          <a class="btn btn--primary latam-cta" href="/latamengineer/">Why Hire in LATAM</a>
+          <a class="btn btn--primary latam-cta" href="https://www.betterengineer.com/latamengineer">Why Hire in LATAM</a>
         </div>
         <div class="latam-map reveal">
-          <img src="/images/backgrounds/location-map.png" loading="lazy" alt="Map of the Americas showing BetterEngineer service regions">
+          <img src="/images/backgrounds/location-map.webp" loading="lazy" alt="Map of the Americas showing BetterEngineer service regions" width="685" height="666">
         </div>
       </div>
     </section>
@@ -2277,9 +2547,9 @@
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"></path></svg>
           </button>
           <div class="carousel-slides">
-            <article class="slide is-active" id="slide-0" role="tabpanel" aria-hidden="false">
+            <div class="slide is-active" id="slide-0" role="group" aria-roledescription="slide">
               <div class="slide-grid">
-                <div class="slide-photo"><img src="/images/team/carousel-1.png" alt="" loading="lazy"></div>
+                <div class="slide-photo"><img src="/images/team/carousel-1.webp" alt="" width="400" height="400" loading="lazy"></div>
                 <div class="slide-copy">
                   <p class="quote">“The whole WastePlace development team is made up of Better Engineers. We couldn’t have gotten this far, this quickly, and within this budget without them.”</p>
                   <div class="slide-footer">
@@ -2288,10 +2558,10 @@
                   </div>
                 </div>
               </div>
-            </article>
-            <article class="slide" id="slide-1" role="tabpanel" aria-hidden="true">
+            </div>
+            <div class="slide" id="slide-1" role="group" aria-roledescription="slide" hidden>
               <div class="slide-grid">
-                <div class="slide-photo"><img src="/images/team/carousel-2.png" alt="" loading="lazy"></div>
+                <div class="slide-photo"><img src="/images/team/carousel-2.webp" alt="" width="209" height="209" loading="lazy"></div>
                 <div class="slide-copy">
                   <p class="quote">“We’d like to send a thank you gift to the Better Engineer developers such as Javier as a token of our appreciation for their continued great work on our high profile project.”</p>
                   <div class="slide-footer">
@@ -2300,10 +2570,10 @@
                   </div>
                 </div>
               </div>
-            </article>
-            <article class="slide" id="slide-2" role="tabpanel" aria-hidden="true">
+            </div>
+            <div class="slide" id="slide-2" role="group" aria-roledescription="slide" hidden>
               <div class="slide-grid">
-                <div class="slide-photo"><img src="/images/team/carousel-3.png" alt="" loading="lazy"></div>
+                <div class="slide-photo"><img src="/images/team/carousel-3.webp" alt="" width="400" height="400" loading="lazy"></div>
                 <div class="slide-copy">
                   <p class="quote">“When Troutwood was expanding our financial planning business, we needed the rare software engineer who could develop Django APIs and use Postgres for database modeling. BetterEngineer found a perfect fit in just a few weeks, helping us gain a valuable team member with a high level of technical expertise.”</p>
                   <div class="slide-footer">
@@ -2312,16 +2582,16 @@
                   </div>
                 </div>
               </div>
-            </article>
+            </div>
           </div>
           <button type="button" class="carousel-btn" aria-label="Next testimonial">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"></path></svg>
           </button>
         </div>
-        <div class="carousel-dots" role="tablist" aria-label="Choose testimonial">
-          <button type="button" role="tab" aria-label="Show testimonial 1" aria-selected="true" class="is-active" data-slide-index="0"></button>
-          <button type="button" role="tab" aria-label="Show testimonial 2" aria-selected="false" data-slide-index="1"></button>
-          <button type="button" role="tab" aria-label="Show testimonial 3" aria-selected="false" data-slide-index="2"></button>
+        <div class="carousel-dots">
+          <span class="is-active"></span>
+          <span></span>
+          <span></span>
         </div>
       </div>
     </section>
@@ -2333,14 +2603,14 @@
             <h2 class="h2">Want to <strong>build something great</strong> together?</h2>
             <p class="lead">This is not resume volume staffing. We help you build reliable engineering partnerships with people who care about your product, your customers, and your roadmap.</p>
             <div class="btn-row">
-              <a class="btn btn--primary" href="/multi-step-contact-form/">Find Better Talent Today</a>
+              <a class="btn btn--primary" href="https://www.betterengineer.com/multi-step-contact-form">Find Better Talent Today</a>
             </div>
           </div>
         </div>
         <div class="cta-split__photo reveal">
           <picture>
-            <source media="(max-width: 768px)" srcset="/images/team/betterengineer-team-group-photo-full-mobile.png">
-            <img src="/images/team/betterengineer-team-group-photo-full.png" alt="BetterEngineer team" loading="lazy" width="1200" height="900">
+            <source media="(max-width: 768px)" srcset="/images/team/betterengineer-team-group-photo-full-mobile.webp" type="image/webp">
+            <img src="/images/team/betterengineer-team-group-photo-full.webp" alt="BetterEngineer team" loading="lazy" width="723" height="448">
           </picture>
         </div>
       </div>
@@ -2354,7 +2624,7 @@
         </a>
         <p class="footer-tagline">Lets build <strong>better</strong> teams <strong>together</strong></p>
         <div class="footer-brand__btns">
-          <a class="footer-btn footer-btn--outline" href="/multi-step-contact-form/">Contact Us</a>
+          <a class="footer-btn footer-btn--outline" href="https://www.betterengineer.com/multi-step-contact-form">Contact Us</a>
           <a class="footer-btn footer-btn--solid" href="https://calendly.com/tim-salsamobi/30min" target="_blank" rel="noopener noreferrer">Schedule a Call</a>
         </div>
         <div class="footer-social">
@@ -2374,73 +2644,73 @@
       </div>
       <nav class="footer-nav-col" aria-label="Services and company">
         <div class="footer-nav-group">
-          <h4 class="footer-col__title">Our Services</h4>
+          <p class="footer-col__title">Our Services</p>
           <ul>
-            <li><a href="/staff-augmentation/">Staff Augmentation</a></li>
-            <li><a href="/ai-readiness/">AI Readiness Assessment</a></li>
-            <li><a href="/hiring-dashboard/">Hiring Dashboard</a></li>
+            <li><a href="https://www.betterengineer.com/staff-augmentation">Staff Augmentation</a></li>
+            <li><a href="https://www.betterengineer.com/ai-readiness">AI Readiness Assessment</a></li>
+            <li><a href="https://www.betterengineer.com/hiring-dashboard">Hiring Dashboard</a></li>
             <li><a href="https://discover.betterengineer.com/roles/">Browse Roles</a></li>
             <li><a href="https://discover.betterengineer.com/technologies/">Browse by Technology</a></li>
           </ul>
         </div>
         <div class="footer-nav-group">
-          <h4 class="footer-col__title">About Us</h4>
+          <p class="footer-col__title">About Us</p>
           <ul>
-            <li><a href="/about/">Who We Are</a></li>
-            <li><a href="/latamengineer/">Why Nearshore</a></li>
+            <li><a href="https://www.betterengineer.com/about">Who We Are</a></li>
+            <li><a href="https://www.betterengineer.com/latamengineer">Why Nearshore</a></li>
           </ul>
         </div>
         <div class="footer-nav-group">
-          <h4 class="footer-col__title">Industries</h4>
+          <p class="footer-col__title">Industries</p>
           <ul>
-            <li><a href="/fintech/">FinTech</a></li>
-            <li><a href="/martech/">MarTech</a></li>
-            <li><a href="/healthtech/">HealthTech</a></li>
+            <li><a href="https://www.betterengineer.com/fintech">FinTech</a></li>
+            <li><a href="https://www.betterengineer.com/martech">MarTech</a></li>
+            <li><a href="https://www.betterengineer.com/healthtech">HealthTech</a></li>
           </ul>
         </div>
       </nav>
       <nav class="footer-nav-col" aria-label="Careers">
         <div class="footer-nav-group">
-          <h4 class="footer-col__title">Careers</h4>
+          <p class="footer-col__title">Careers</p>
           <ul>
-            <li><a href="/careers/">See All Job Opportunities</a></li>
-            <li><a href="/join/">Join Us</a></li>
+            <li><a href="https://www.betterengineer.com/careers">See All Job Opportunities</a></li>
+            <li><a href="https://www.betterengineer.com/join">Join Us</a></li>
             <li><a href="https://app.betterengineer.com/sign-up/candidate" rel="noopener noreferrer">Sign Up</a></li>
           </ul>
         </div>
         <div class="footer-nav-group">
-          <h4 class="footer-col__title">In-Demand Jobs</h4>
+          <p class="footer-col__title">In-Demand Jobs</p>
           <ul>
-            <li><a href="/careers/full-stack-javascript-engineer/">Full-Stack Engineer</a></li>
-            <li><a href="/careers/front-end-engineer/">Front-end Engineer</a></li>
-            <li><a href="/careers/python-engineer/">Python Engineer</a></li>
-            <li><a href="/careers/devops-engineer/">DevOps Engineer</a></li>
+            <li><a href="https://www.betterengineer.com/careers/full-stack-javascript-engineer">Full-Stack Engineer</a></li>
+            <li><a href="https://www.betterengineer.com/careers/front-end-engineer">Front-end Engineer</a></li>
+            <li><a href="https://www.betterengineer.com/careers/python-engineer">Python Engineer</a></li>
+            <li><a href="https://www.betterengineer.com/careers/devops-engineer">DevOps Engineer</a></li>
           </ul>
         </div>
       </nav>
       <nav class="footer-nav-col" aria-label="Resources">
         <div class="footer-nav-group">
-          <h4 class="footer-col__title">Resources</h4>
+          <p class="footer-col__title">Resources</p>
           <ul>
             <li><a href="https://blog.betterengineer.com/resource-center">Blog</a></li>
-            <li><a href="/faqs-nearshore-software-engineers-staff-augmentation-ai-talent/">FAQs</a></li>
-            <li><a href="/ebooks/">Ebooks</a></li>
-            <li><a href="/podcast/">Podcast</a></li>
-            <li><a href="/technical-glossary/">Technical Glossary</a></li>
+            <li><a href="https://www.betterengineer.com/faqs-nearshore-software-engineers-staff-augmentation-ai-talent">FAQs</a></li>
+            <li><a href="https://www.betterengineer.com/ebooks">Ebooks</a></li>
+            <li><a href="https://www.betterengineer.com/podcast">Podcast</a></li>
+            <li><a href="https://www.betterengineer.com/technical-glossary">Technical Glossary</a></li>
           </ul>
         </div>
         <div class="footer-nav-group">
-          <h4 class="footer-col__title">Case Studies</h4>
+          <p class="footer-col__title">Case Studies</p>
           <ul>
-            <li><a href="/case-studies/livecgi/">Live CGI</a></li>
-            <li><a href="/case-studies/wasteplace/">Wasteplace</a></li>
+            <li><a href="https://www.betterengineer.com/case-studies/livecgi">Live CGI</a></li>
+            <li><a href="https://www.betterengineer.com/case-studies/wasteplace">Wasteplace</a></li>
           </ul>
         </div>
       </nav>
     </div>
     <div class="wrap footer-bottom">
       <span>Copyright © 2026 BetterEngineer</span>
-      <span><a href="/resource-center/wpautoterms/privacy-policy/">Privacy Policy</a> · <a href="/terms-of-service/">Terms of Service</a></span>
+      <span><a href="https://www.betterengineer.com/resource-center/wpautoterms/privacy-policy">Privacy Policy</a> · <a href="https://www.betterengineer.com/terms-of-service">Terms of Service</a></span>
     </div>
   </footer>
   <script src="/attribution.js" defer></script>

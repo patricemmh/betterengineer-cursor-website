@@ -339,6 +339,11 @@ function schemaBlocks(page, canonicalUrl, mainHtml) {
 
 function buildExtraHead(page, mainHtml) {
   var extra = '';
+  if (page.slug === 'home') {
+    extra +=
+      '  <link rel="preload" as="image" href="./images/hero/home-ai-engineer-800.webp" type="image/webp" media="(max-width: 500px)" fetchpriority="high">\n' +
+      '  <link rel="preload" as="image" href="./images/hero/home-ai-engineer-1120.webp" type="image/webp" media="(min-width: 501px)" fetchpriority="high">\n';
+  }
   var canonicalUrl = null;
 
   if (typeof page.canonical === 'function') {
@@ -540,8 +545,7 @@ function shell(title, description, css, header, main, page, extraHead, pageFoote
     description.replace(/"/g, '&quot;') +
     '">\n' +
     extraHead +
-    '  <link rel="stylesheet" href="./styles/cookie-consent.css">\n' +
-    '  <script src="./scripts/cookie-consent.js"></script>\n' +
+    '  <script src="./scripts/cookie-consent.js" defer></script>\n' +
     '  <!-- Analytics (GTM, HubSpot) load only after cookie consent. IDs: GTM-WT77L8JF, portal 8679235. -->\n' +
     '  <script type="application/json" id="be-gtm-config">{"id":"GTM-WT77L8JF"}</script>\n' +
     '  <script type="application/json" id="be-hs-config">{"portalId":"8679235"}</script>\n' +
@@ -551,6 +555,8 @@ function shell(title, description, css, header, main, page, extraHead, pageFoote
     '  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">\n' +
     '  <style>\n' +
     css +
+    '\n' +
+    cookieCss +
     '\n  </style>\n' +
     '</head>\n' +
     '<body class="' +
@@ -573,6 +579,7 @@ function shell(title, description, css, header, main, page, extraHead, pageFoote
 /* ── Build ───────────────────────────────────────────────────────────────────── */
 
 var styles = readStyles();
+var cookieCss = fs.readFileSync(path.join(styleDir, 'cookie-consent.css'), 'utf8');
 
 var homeCss =
   styles.brand +
