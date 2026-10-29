@@ -157,7 +157,7 @@ function hubHtml() {
     perks +
     '\n      </div>\n' +
     '      <div class="cr-perks__photo reveal">\n' +
-    '        <img src="/images/pages/careers/perks.png" alt="" width="720" height="900" loading="lazy">\n' +
+    '        <img src="/images/pages/careers/perks.webp" alt="" width="720" height="900" loading="lazy">\n' +
     '      </div>\n' +
     '      </div>\n' +
     '    </div>\n' +

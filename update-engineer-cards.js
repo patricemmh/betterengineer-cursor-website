@@ -35,7 +35,7 @@ function getPrimaryEngineers(roleSlug) {
 
 function buildCard(eng) {
   const name  = `${eng.firstName} ${eng.lastInitial}.`;
-  const photo = `/images/engineers/${eng.id}.png`;
+  const photo = `/images/engineers/${eng.id}.webp`;
   const tags  = eng.skills.map(s => `<span>${s}</span>`).join('');
   return [
     `<article class="air-candidate-card reveal">`,

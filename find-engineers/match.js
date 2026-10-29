@@ -58,7 +58,7 @@
       skillLabels: labels,
       skillIds: skillIds,
       primaryStack: record.primaryStack || [],
-      photo: record.photo || (record.source === "mock" ? null : "/images/engineers/" + record.id + ".png"),
+      photo: record.photo || (record.source === "mock" ? null : "/images/engineers/" + record.id + ".webp"),
       fluency: record.fluency || null,
       country: record.country || null,
       usHoursOverlap: record.usHoursOverlap === true ? true : null,

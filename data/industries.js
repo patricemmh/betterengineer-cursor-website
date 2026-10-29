@@ -219,8 +219,8 @@ var industries = [
     },
     "ctaLead": "Nearshore Talent Without the Guesswork",
     "lastUpdated": "2026-09",
-    "heroImage": "/images/pages/fintech/hero.png",
-    "solutionsImage": "/images/pages/fintech/fintech-hero.png"
+    "heroImage": "/images/pages/fintech/hero.webp",
+    "solutionsImage": "/images/pages/fintech/fintech-hero.webp"
   },
   {
     "name": "MarTech",
@@ -400,8 +400,8 @@ var industries = [
     },
     "ctaLead": "Nearshore Talent Without the Guesswork",
     "lastUpdated": "2026-09",
-    "heroImage": "/images/pages/martech/hero.png",
-    "solutionsImage": "/images/pages/martech/martech-hero.png"
+    "heroImage": "/images/pages/martech/hero.webp",
+    "solutionsImage": "/images/pages/martech/martech-hero.webp"
   },
   {
     "name": "HealthTech",
@@ -581,8 +581,8 @@ var industries = [
     },
     "ctaLead": "Nearshore Talent Without the Guesswork",
     "lastUpdated": "2026-09",
-    "heroImage": "/images/pages/healthtech/hero.png",
-    "solutionsImage": "/images/pages/healthtech/healthtech-hero.png"
+    "heroImage": "/images/pages/healthtech/hero.webp",
+    "solutionsImage": "/images/pages/healthtech/healthtech-hero.webp"
   }
 ];
 

@@ -3474,7 +3474,7 @@ main:has(.about-hero) #hero.section {
 
 .podcast-hero {
   background-color: #1a1a2e;
-  background-image: url("/images/pages/podcast/hero.png");
+  background-image: url("/images/pages/podcast/hero.webp");
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;

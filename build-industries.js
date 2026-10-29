@@ -163,7 +163,7 @@ function industryHtml(ind) {
     b.processList() +
     '\n      </div>\n' +
     '      <div class="process-layout__aside reveal">\n' +
-    '        <img src="/images/pages/staff-augmentation/process.png" alt="Software engineer on a video call wearing a headset" width="286" height="379" loading="lazy">\n' +
+    '        <img src="/images/pages/staff-augmentation/process.webp" alt="Software engineer on a video call wearing a headset" width="286" height="379" loading="lazy">\n' +
     '      </div>\n' +
     '    </div>\n' +
     '  </section>\n' +

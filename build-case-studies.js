@@ -406,7 +406,7 @@ function studyHtml(s) {
     '        ' +
     trustHeading() +
     '\n' +
-    '        <img class="cs-why__photo" src="/images/pages/case-studies/why-engineers.png" alt="Software engineers collaborating in a modern workspace" width="478" height="255" loading="lazy">\n' +
+    '        <img class="cs-why__photo" src="/images/pages/case-studies/why-engineers.webp" alt="Software engineers collaborating in a modern workspace" width="478" height="255" loading="lazy">\n' +
     '        <div class="btn-row">\n' +
     '          <a class="btn btn--primary" href="/contact/">Contact Us</a>\n' +
     '        </div>\n' +
@@ -423,7 +423,7 @@ function studyHtml(s) {
     b.processList() +
     '\n      </div>\n' +
     '      <div class="process-layout__aside reveal">\n' +
-    '        <img src="/images/pages/staff-augmentation/process.png" alt="Software engineer on a video call wearing a headset" width="286" height="379" loading="lazy">\n' +
+    '        <img src="/images/pages/staff-augmentation/process.webp" alt="Software engineer on a video call wearing a headset" width="286" height="379" loading="lazy">\n' +
     '      </div>\n' +
     '    </div>\n' +
     '  </section>\n' +

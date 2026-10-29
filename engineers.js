@@ -493,7 +493,7 @@ function getEngineersForTech(techSlug) {
  * @returns {string}
  */
 function getEngineerPhoto(engineer) {
-  return `/images/engineers/${engineer.id}.png`;
+  return `/images/engineers/${engineer.id}.webp`;
 }
 
 /**

@@ -184,7 +184,7 @@ function build() {
     '          </div>\n' +
     '        </div>\n' +
     '        <div class="hero-visual hero-visual--image reveal">\n' +
-    '          <img class="hero-visual__img" src="/images/pages/faqs/ai-readiness-strategy-1.png" alt="AI-readiness-strategy – 1" width="606" height="578" loading="eager">\n' +
+    '          <img class="hero-visual__img" src="/images/pages/faqs/ai-readiness-strategy-1.webp" alt="AI-readiness-strategy – 1" width="606" height="578" loading="eager">\n' +
     '        </div>\n' +
     '      </div>\n' +
     '    </section>\n' +

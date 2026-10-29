@@ -48,7 +48,7 @@ var ORG = {
 };
 
 /* These files are served from discover today. Pointing OG tags at www 404s. */
-var OG_IMAGE = DISCOVER + '/images/roles/shared/trust-laptop.png';
+var OG_IMAGE = DISCOVER + '/images/roles/shared/trust-laptop.webp';
 
 /* Migrated pages stay out of the index until www is cut over to this build.
    See docs/site-migration/redirect-plan.md section 6. Set to null at cutover. */

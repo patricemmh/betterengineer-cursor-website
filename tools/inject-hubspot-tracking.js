@@ -14,8 +14,15 @@ const path = require("path");
 
 const ROOT = path.join(__dirname, "..");
 const HS_SNIPPET =
-  '<script>window._hsq = window._hsq || [];</script>' +
-  '<script id="hs-script-loader" async defer src="https://js.hs-scripts.com/8679235.js"></script>';
+  '<script>window.disableHubSpotCookieBanner=true;window._hsp=window._hsp||[];' +
+  '(function(){var granted=false;try{var raw=localStorage.getItem("be_cookie_consent_v1");' +
+  'if(raw){var data=JSON.parse(raw);granted=!!(data&&data.v===1&&data.analytics);}}catch(e){}' +
+  'if(!granted){var m=document.cookie.match(/(?:^|; )be_consent=([^;]*)/);' +
+  'if(m){try{var c=JSON.parse(decodeURIComponent(m[1]));granted=!!(c&&c.v===1&&c.analytics);}catch(e2){}}}' +
+  'window._hsp.push(["setHubSpotConsent",{analytics:!!granted,advertisement:false,functionality:false}]);' +
+  'if(!granted)return;window._hsq=window._hsq||[];if(document.getElementById("hs-script-loader"))return;' +
+  'var s=document.createElement("script");s.id="hs-script-loader";s.async=true;s.defer=true;' +
+  's.src="https://js.hs-scripts.com/8679235.js";document.head.appendChild(s);})();</script>';
 const HS_MARKER = "js.hs-scripts.com/8679235";
 const GTM_END = "<!-- End Google Tag Manager -->";
 const GTM_PLACEHOLDER =

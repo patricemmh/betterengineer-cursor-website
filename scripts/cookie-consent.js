@@ -16,6 +16,10 @@
   var doc = global.document;
   if (!doc) return;
 
+  /* Official HubSpot switch: hide their banner before hs-scripts.com or a tag can render it.
+     Our banner remains the only consent UI. https://developers.hubspot.com/docs/api-reference/latest/account/settings/consent-banner/consent-banner-api */
+  global.disableHubSpotCookieBanner = true;
+
   function readQueryFlag(name) {
     try {
       return new URL(global.location.href).searchParams.get(name);
@@ -161,9 +165,26 @@
     doc.body.insertBefore(noscript, doc.body.firstChild);
   }
 
+  function pushHubSpotConsent(analyticsGranted) {
+    /* Categories match this banner: analytics is the only optional grant.
+       Advertisement and functionality are not offered, so they stay off.
+       Calling this also tells HubSpot consent is already decided. */
+    global.disableHubSpotCookieBanner = true;
+    global._hsp = global._hsp || [];
+    global._hsp.push([
+      'setHubSpotConsent',
+      {
+        analytics: !!analyticsGranted,
+        advertisement: false,
+        functionality: false,
+      },
+    ]);
+  }
+
   function loadHubSpot(portalId) {
     if (!portalId) return;
     global._hsq = global._hsq || [];
+    pushHubSpotConsent(true);
     if (doc.getElementById('hs-script-loader')) return;
     var s = doc.createElement('script');
     s.id = 'hs-script-loader';
@@ -195,6 +216,9 @@
   function applyAnalyticsConsent() {
     if (state.analyticsLoaded) return;
     state.analyticsLoaded = true;
+
+    /* Before GTM, in case a tag also loads HubSpot. */
+    pushHubSpotConsent(true);
 
     var gtmNode = doc.getElementById('be-gtm-config');
     if (gtmNode && gtmNode.textContent) {
@@ -228,6 +252,7 @@
     /* Scripts already injected cannot be fully unloaded; keep storage denied and do not load GTM. */
     state.analyticsLoaded = false;
     pushConsentUpdate(false);
+    pushHubSpotConsent(false);
   }
 
   function setConsent(choice) {
