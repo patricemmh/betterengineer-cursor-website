@@ -16,7 +16,7 @@ var WWW = 'https://www.betterengineer.com';
 var manifest = require('./data/pages.js');
 var inventory = require('./data/live-url-inventory.js');
 
-var ASSET_DIRS = ['icons', 'images', 'styles', 'scripts', 'downloads', 'videos', 'embeds'];
+var ASSET_DIRS = ['icons', 'images', 'styles', 'scripts', 'downloads', 'videos', 'embeds', 'fonts'];
 var REDIRECTED_PREFIXES = ['/roles/', '/technologies/'];
 
 /* Empty the folder rather than delete it: Dropbox locks the folder itself. */
