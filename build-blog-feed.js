@@ -5,7 +5,8 @@
  *
  * The blog stays on blog.betterengineer.com. This script only pulls title, URL,
  * tags, excerpt, and featured-image URL so migrated pages can render a static
- * preview. A failed fetch reuses data/blog-feed.json so offline builds still work.
+ * preview. Known card images are rewritten to local WebP files. A failed fetch
+ * reuses data/blog-feed.json so offline builds still work.
  *
  * Usage: node build-blog-feed.js
  */
@@ -71,6 +72,76 @@ function featuredImage(descriptionHtml) {
   if (featured) return featured[1];
   var hubfs = html.match(/src="(https?:\/\/[^"]*\/hubfs\/[^"]+)"/i);
   return hubfs ? hubfs[1] : '';
+}
+
+/* Card covers are hosted with the site. The feed may still record the HubSpot
+   file URL; render swaps these known files for the local WebP. New posts that
+   are not in this map keep their remote image until that file is copied over.
+   Display size is 2x the widest blog card (about 580px at the 620px breakpoint). */
+var LOCAL_THUMBS = {
+  'gemini_generated_image_d5bl9id5bl9id5bl.jpeg': {
+    src: '/images/pages/blog/gemini-generated-image-d5bl9id5bl9id5bl.webp',
+    width: 1160,
+    height: 600,
+  },
+  'copy of blog listing thumbnails (80).png': {
+    src: '/images/pages/blog/blog-listing-thumbnail-80.webp',
+    width: 1160,
+    height: 607,
+  },
+  'copy of blog listing thumbnails (79)-1.png': {
+    src: '/images/pages/blog/blog-listing-thumbnail-79-1.webp',
+    width: 1160,
+    height: 607,
+  },
+  'copy of blog listing thumbnails (75).png': {
+    src: '/images/pages/blog/blog-listing-thumbnail-75.webp',
+    width: 1160,
+    height: 607,
+  },
+  'copy of blog listing thumbnails (74)-1.png': {
+    src: '/images/pages/blog/blog-listing-thumbnail-74-1.webp',
+    width: 1160,
+    height: 607,
+  },
+  'copy of blog listing thumbnails (68).png': {
+    src: '/images/pages/blog/blog-listing-thumbnail-68.webp',
+    width: 1160,
+    height: 607,
+  },
+  'copy of blog listing thumbnails (70).png': {
+    src: '/images/pages/blog/blog-listing-thumbnail-70.webp',
+    width: 1160,
+    height: 607,
+  },
+  'copy of blog listing thumbnails (34).jpg': {
+    src: '/images/pages/blog/blog-listing-thumbnail-34.webp',
+    width: 1160,
+    height: 607,
+  },
+  'copy of blog listing thumbnails (44)-2.png': {
+    src: '/images/pages/blog/blog-listing-thumbnail-44-2.webp',
+    width: 1160,
+    height: 607,
+  },
+};
+
+function localThumb(url) {
+  var raw = String(url || '');
+  if (!raw) return null;
+  if (raw.charAt(0) === '/') {
+    var keys = Object.keys(LOCAL_THUMBS);
+    for (var i = 0; i < keys.length; i++) {
+      if (LOCAL_THUMBS[keys[i]].src === raw) return LOCAL_THUMBS[keys[i]];
+    }
+    return { src: raw, width: 800, height: 500 };
+  }
+  var pathOnly = raw.split('?')[0];
+  var base = pathOnly.split('/').pop();
+  try { base = decodeURIComponent(base); } catch (err) { /* keep the raw name */ }
+  var hit = LOCAL_THUMBS[base.toLowerCase()];
+  if (hit) return hit;
+  return { src: raw, width: 800, height: 500 };
 }
 
 function excerptFrom(descriptionHtml) {
@@ -153,11 +224,12 @@ function escapeHtml(value) {
 function renderPostCard(post) {
   var title = escapeHtml(post.title);
   var url = escapeHtml(post.url);
+  var image = localThumb(post.image);
   var lines = ['          <article class="post-card reveal">'];
-  if (post.image) {
+  if (image) {
     lines.push(
       '            <a class="post-card__cover" href="' + url + '" rel="noopener noreferrer">',
-      '              <img src="' + escapeHtml(post.image) + '" alt="" width="800" height="500" loading="lazy">',
+      '              <img src="' + escapeHtml(image.src) + '" alt="" width="' + image.width + '" height="' + image.height + '" loading="lazy">',
       '            </a>',
     );
   }
