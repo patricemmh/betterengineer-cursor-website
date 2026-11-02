@@ -106,25 +106,25 @@ var urls = [
   {
     url: '/hire-senior-python-engineers-nearshore-latam-talent',
     status: 'redirect',
-    redirectTo: 'https://discover.betterengineer.com/technologies/python-developers/',
+    redirectTo: 'https://www.betterengineer.com/technologies/python-developers/',
     phase: 7,
   },
   {
     url: '/hire-senior-full-stack-engineers-nearshore-latam-talent',
     status: 'redirect',
-    redirectTo: 'https://discover.betterengineer.com/roles/full-stack-engineers/',
+    redirectTo: 'https://www.betterengineer.com/roles/full-stack-engineers/',
     phase: 7,
   },
   {
     url: '/hire-senior-ai-data-engineers-nearshore-latam-talent',
     status: 'redirect',
-    redirectTo: 'https://discover.betterengineer.com/roles/ai-engineers/',
+    redirectTo: 'https://www.betterengineer.com/roles/ai-engineers/',
     phase: 7,
   },
   {
     url: '/ai-readiness-manufacturing',
     status: 'redirect',
-    redirectTo: 'https://discover.betterengineer.com/aimanufacturing/',
+    redirectTo: 'https://www.betterengineer.com/services/ai-systems-readiness-for-manufacturing/',
     phase: 7,
   },
 

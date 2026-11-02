@@ -10,9 +10,8 @@ var fs = require('fs');
 var path = require('path');
 
 var ROOT = path.join(__dirname, '..');
-var OG = 'https://discover.betterengineer.com/images/roles/shared/cta-band-mask.png';
+var OG = 'https://www.betterengineer.com/images/roles/shared/cta-band-mask.png';
 var WWW = 'https://www.betterengineer.com';
-var DISCOVER = 'https://discover.betterengineer.com';
 
 var ORG = {
   '@type': 'Organization',
@@ -71,7 +70,7 @@ function patchRolePage(slug, service) {
   var html = fs.readFileSync(file, 'utf8');
   html = insertSocial(html);
 
-  var url = DISCOVER + '/roles/' + slug + '/';
+  var url = WWW + '/roles/' + slug + '/';
   var re = /<script type="application\/ld\+json">([\s\S]*?)<\/script>/;
   var m = html.match(re);
   if (!m) throw new Error(slug + ' has no JSON-LD');
@@ -115,7 +114,7 @@ function patchRolePage(slug, service) {
         '@id': url + '#breadcrumb',
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'Home', item: WWW + '/' },
-          { '@type': 'ListItem', position: 2, name: 'Roles', item: DISCOVER + '/roles/' },
+          { '@type': 'ListItem', position: 2, name: 'Roles', item: WWW + '/roles/' },
           { '@type': 'ListItem', position: 3, name: service.crumb, item: url },
         ],
       },
@@ -137,13 +136,13 @@ function patchRolesHub() {
   var html = fs.readFileSync(file, 'utf8');
   html = insertSocial(html);
 
-  var url = DISCOVER + '/roles/';
+  var url = WWW + '/roles/';
   var itemList = ROLES.map(function (r, i) {
     return {
       '@type': 'ListItem',
       position: i + 1,
       name: r.name,
-      url: DISCOVER + '/roles/' + r.slug + '/',
+      url: WWW + '/roles/' + r.slug + '/',
     };
   });
   var blocks =
@@ -166,7 +165,7 @@ function patchRolesHub() {
       isPartOf: {
         '@type': 'WebSite',
         name: 'BetterEngineer',
-        url: DISCOVER + '/',
+        url: WWW + '/',
         publisher: { '@type': 'Organization', name: ORG.name, url: ORG.url },
       },
       mainEntity: { '@type': 'ItemList', itemListElement: itemList },

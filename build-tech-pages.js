@@ -112,15 +112,15 @@ const ORG = {
     "https://www.instagram.com/betterengineer_/"
   ]
 };
-const OG_IMAGE = "https://discover.betterengineer.com/images/roles/shared/trust-laptop.webp";
+const OG_IMAGE = "https://www.betterengineer.com/images/roles/shared/trust-laptop.webp";
 
 function head(t) {
   const title = `Hire ${t.name} Developers | BetterEngineer`;
-  const url = `https://discover.betterengineer.com/technologies/${t.slug}/`;
+  const url = `https://www.betterengineer.com/technologies/${t.slug}/`;
   const organization = { "@context": "https://schema.org", ...ORG };
   const breadcrumb = { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
     { "@type": "ListItem", position: 1, name: "Home", item: "https://www.betterengineer.com/" },
-    { "@type": "ListItem", position: 2, name: "Technologies", item: "https://discover.betterengineer.com/technologies/" },
+    { "@type": "ListItem", position: 2, name: "Technologies", item: "https://www.betterengineer.com/technologies/" },
     { "@type": "ListItem", position: 3, name: `${t.name} Developers`, item: url }
   ]};
   const faqPage = { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: t.faqs.map((f) => ({
@@ -133,7 +133,7 @@ function head(t) {
     areaServed: { "@type": "Country", name: "United States" }, url };
   const webPage = { "@context": "https://schema.org", "@type": "WebPage", name: title, url,
     inLanguage: "en-US",
-    isPartOf: { "@type": "WebSite", name: "BetterEngineer", url: "https://discover.betterengineer.com/", publisher: ORG },
+    isPartOf: { "@type": "WebSite", name: "BetterEngineer", url: "https://www.betterengineer.com/", publisher: ORG },
     primaryImageOfPage: { "@type": "ImageObject", url: OG_IMAGE },
     about: { "@type": "Thing", name: `${t.name} software development` },
     datePublished: `${t.lastUpdated}-01`,
@@ -331,7 +331,7 @@ function useCases(t) {
 }
 
 function aiTools(t) {
-  return `<section class="section section-tint" id="ai-tools" aria-labelledby="ai-tools-heading"><div class="wrap air-ai-tools-layout"><div class="air-ai-tools-text reveal"><p class="eyebrow">AI-FLUENT BY DEFAULT</p><h2 class="h2" id="ai-tools-heading">Every ${esc(t.name)} engineer we place <span class="accent">uses AI tools daily.</span></h2><p class="lead">Not as a novelty. Our engineers use the tools your team already relies on to write faster, catch issues earlier, and ship with fewer review cycles.</p><a class="btn btn--primary" href="https://discover.betterengineer.com/ai-fluent-engineers/" style="margin-top:1.5rem;display:inline-flex">See Our AI Fluency Program</a></div><div class="air-ai-tools-grid reveal"><div class="air-ai-tool-card air-ai-tool-card--claude"><img src="https://cdn.simpleicons.org/claudecode/D97757" alt="Claude Code" width="40" height="40" loading="lazy"><span>Claude Code</span></div><div class="air-ai-tool-card"><img src="https://cdn.simpleicons.org/cursor/000000" alt="Cursor IDE" width="40" height="40" loading="lazy"><span>Cursor</span></div><div class="air-ai-tool-card"><img src="/images/ai-tools/github-copilot.svg" alt="GitHub Copilot" width="40" height="40" loading="lazy"><span>Copilot</span></div><div class="air-ai-tool-card"><img src="/images/ai-tools/openai.svg" alt="ChatGPT" width="40" height="40" loading="lazy"><span>ChatGPT</span></div><div class="air-ai-tool-card"><img src="/images/ai-tools/codex.png" alt="Codex by OpenAI" width="40" height="40" loading="lazy"><span>Codex</span></div><div class="air-ai-tool-card"><img src="https://cdn.simpleicons.org/v0/000000" alt="v0 by Vercel" width="40" height="40" loading="lazy"><span>v0</span></div><div class="air-ai-tool-card"><img src="https://cdn.simpleicons.org/windsurf/1A9C8B" alt="Windsurf" width="40" height="40" loading="lazy"><span>Windsurf</span></div><div class="air-ai-tool-card"><img src="https://cdn.simpleicons.org/replit/F26207" alt="Replit" width="40" height="40" loading="lazy"><span>Replit</span></div><div class="air-ai-tool-card"><img src="/images/ai-tools/gemini.svg" alt="Google Gemini" width="40" height="40" loading="lazy"><span>Gemini</span></div></div><a class="btn btn--primary air-ai-tools-btn-mobile" href="https://discover.betterengineer.com/ai-fluent-engineers/">See Our AI Fluency Program</a></div></section>`;
+  return `<section class="section section-tint" id="ai-tools" aria-labelledby="ai-tools-heading"><div class="wrap air-ai-tools-layout"><div class="air-ai-tools-text reveal"><p class="eyebrow">AI-FLUENT BY DEFAULT</p><h2 class="h2" id="ai-tools-heading">Every ${esc(t.name)} engineer we place <span class="accent">uses AI tools daily.</span></h2><p class="lead">Not as a novelty. Our engineers use the tools your team already relies on to write faster, catch issues earlier, and ship with fewer review cycles.</p><a class="btn btn--primary" href="https://www.betterengineer.com/ai-fluent-engineers/" style="margin-top:1.5rem;display:inline-flex">See Our AI Fluency Program</a></div><div class="air-ai-tools-grid reveal"><div class="air-ai-tool-card air-ai-tool-card--claude"><img src="https://cdn.simpleicons.org/claudecode/D97757" alt="Claude Code" width="40" height="40" loading="lazy"><span>Claude Code</span></div><div class="air-ai-tool-card"><img src="https://cdn.simpleicons.org/cursor/000000" alt="Cursor IDE" width="40" height="40" loading="lazy"><span>Cursor</span></div><div class="air-ai-tool-card"><img src="/images/ai-tools/github-copilot.svg" alt="GitHub Copilot" width="40" height="40" loading="lazy"><span>Copilot</span></div><div class="air-ai-tool-card"><img src="/images/ai-tools/openai.svg" alt="ChatGPT" width="40" height="40" loading="lazy"><span>ChatGPT</span></div><div class="air-ai-tool-card"><img src="/images/ai-tools/codex.png" alt="Codex by OpenAI" width="40" height="40" loading="lazy"><span>Codex</span></div><div class="air-ai-tool-card"><img src="https://cdn.simpleicons.org/v0/000000" alt="v0 by Vercel" width="40" height="40" loading="lazy"><span>v0</span></div><div class="air-ai-tool-card"><img src="https://cdn.simpleicons.org/windsurf/1A9C8B" alt="Windsurf" width="40" height="40" loading="lazy"><span>Windsurf</span></div><div class="air-ai-tool-card"><img src="https://cdn.simpleicons.org/replit/F26207" alt="Replit" width="40" height="40" loading="lazy"><span>Replit</span></div><div class="air-ai-tool-card"><img src="/images/ai-tools/gemini.svg" alt="Google Gemini" width="40" height="40" loading="lazy"><span>Gemini</span></div></div><a class="btn btn--primary air-ai-tools-btn-mobile" href="https://www.betterengineer.com/ai-fluent-engineers/">See Our AI Fluency Program</a></div></section>`;
 }
 
 function trust(t) {
@@ -394,15 +394,15 @@ const CATEGORY_ORDER = ["Language", "Frontend", "Backend", "Mobile", "Data", "Cl
 function hubHead() {
   const title = "Hire Engineers by Technology | BetterEngineer";
   const desc = "Hire senior nearshore engineers by technology. Browse Python and every published stack, matched to your team in U.S. hours in as little as 72 hours.";
-  const url = "https://discover.betterengineer.com/technologies/";
+  const url = "https://www.betterengineer.com/technologies/";
   const organization = { "@context": "https://schema.org", ...ORG };
   const breadcrumb = { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
     { "@type": "ListItem", position: 1, name: "Home", item: "https://www.betterengineer.com/" },
     { "@type": "ListItem", position: 2, name: "Technologies", item: url }
   ]};
-  const itemList = publishedTechs.map((t, i) => ({ "@type": "ListItem", position: i + 1, name: `${t.name} Developers`, url: `https://discover.betterengineer.com/technologies/${t.slug}/` }));
+  const itemList = publishedTechs.map((t, i) => ({ "@type": "ListItem", position: i + 1, name: `${t.name} Developers`, url: `https://www.betterengineer.com/technologies/${t.slug}/` }));
   const collectionPage = { "@context": "https://schema.org", "@type": "CollectionPage", name: "Hire Engineers by Technology", url, description: desc,
-    isPartOf: { "@type": "WebSite", name: "BetterEngineer", url: "https://discover.betterengineer.com/", publisher: ORG },
+    isPartOf: { "@type": "WebSite", name: "BetterEngineer", url: "https://www.betterengineer.com/", publisher: ORG },
     mainEntity: { "@type": "ItemList", itemListElement: itemList } };
   return `<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"><title>${esc(title)}</title><meta name="description" content="${esc(desc)}"><link rel="canonical" href="${url}"><link rel="icon" href="/icons/favicon.png" type="image/png"><!-- Open Graph --><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(desc)}"><meta property="og:url" content="${url}"><meta property="og:type" content="website"><meta property="og:image" content="${OG_IMAGE}"><meta property="og:image:width" content="720"><meta property="og:image:height" content="540"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${esc(title)}"><meta name="twitter:description" content="${esc(desc)}"><meta name="twitter:image" content="${OG_IMAGE}"><link rel="preload" href="/fonts/plus-jakarta-sans/plus-jakarta-sans-latin.woff2" as="font" type="font/woff2" crossorigin>${ld(organization)}${ld(breadcrumb)}${ld(collectionPage)}<script src="/scripts/cookie-consent.js" defer></script><!-- Analytics (GTM, HubSpot) load only after cookie consent. IDs: GTM-WT77L8JF, portal 8679235. --><script type="application/json" id="be-gtm-config">{"id":"GTM-WT77L8JF"}</script><script type="application/json" id="be-hs-config">{"portalId":"8679235"}</script><style>.role-card--featured{border-color:#545bb3}.role-card__badge{display:inline-block;margin-top:8px;font-size:12px;font-weight:600;color:#545bb3;text-transform:uppercase;letter-spacing:.04em}
 </style>

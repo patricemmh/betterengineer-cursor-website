@@ -2,9 +2,11 @@
 
 /* Builds the www.betterengineer.com bundle in ./dist-www/ for S3 + CloudFront.
    Run the root build first with PRE_CUTOVER_ROBOTS = null in data/pages.js:
-     PowerShell: $env:INTERNAL_LINKS='local'; npm run build; node build-www-dist.js
-   /roles/ and /technologies/ are not shipped: CloudFront 301s them to discover.
-   Redirects live in docs/site-migration/cloudfront-www-function.js. */
+     PowerShell: $env:INTERNAL_LINKS='local'; npm run build; Remove-Item Env:INTERNAL_LINKS; node build-www-dist.js
+   /roles/, /technologies/, and /ai-fluent-engineers/ are shipped. A missing
+   required file fails the build. Authoring templates are not shipped.
+   Redirects live in docs/site-migration/cloudfront-www-function.js.
+   That function file is not pasted into CloudFront by this build. */
 
 var fs = require('fs');
 var path = require('path');
@@ -17,7 +19,7 @@ var manifest = require('./data/pages.js');
 var inventory = require('./data/live-url-inventory.js');
 
 var ASSET_DIRS = ['icons', 'images', 'styles', 'scripts', 'downloads', 'videos', 'embeds', 'fonts'];
-var REDIRECTED_PREFIXES = ['/roles/', '/technologies/'];
+var problems = [];
 
 /* Empty the folder rather than delete it: Dropbox locks the folder itself. */
 function clean(dir) {
@@ -66,6 +68,58 @@ if (!fs.existsSync(path.join(root, thankYouOut))) {
   });
 }
 
+/* Roles, technologies, and the AI fluency URL. Templates are authoring files
+   and must not ship. A missing required page fails the build. */
+function addShippedHtml(rel) {
+  var src = path.join(root, rel);
+  if (!fs.existsSync(src)) {
+    problems.push('missing required file: ' + rel);
+    return;
+  }
+  copyFile(rel);
+  var html = fs.readFileSync(src, 'utf8');
+  var canonicalMatch = html.match(/<link rel="canonical" href="([^"]+)"/);
+  var canonical = canonicalMatch ? canonicalMatch[1] : '';
+  if (canonical.indexOf('discover.betterengineer.com') !== -1) {
+    problems.push('discover canonical in ' + rel);
+  }
+  shipped.push({ page: { canonical: canonical }, out: rel });
+}
+
+addShippedHtml('roles/index.html');
+fs.readdirSync(path.join(root, 'roles')).forEach(function (name) {
+  if (name === 'roles-template' || name === 'index.html') return;
+  var dir = path.join(root, 'roles', name);
+  if (!fs.statSync(dir).isDirectory()) return;
+  addShippedHtml('roles/' + name + '/index.html');
+});
+
+addShippedHtml('technologies/index.html');
+require('./data/technologies.js').technologies.forEach(function (tech) {
+  if (tech.status !== 'published') return;
+  addShippedHtml('technologies/' + tech.slug + '/index.html');
+});
+
+var fluencySrcRel = 'services/hire-ai-ready-engineers/index.html';
+var fluencyRel = 'ai-fluent-engineers/index.html';
+var fluencySrc = path.join(root, fluencySrcRel);
+if (!fs.existsSync(fluencySrc)) {
+  problems.push('missing required file: ' + fluencySrcRel + ' (run npm run build first)');
+} else {
+  var fluencyHtml = fs.readFileSync(fluencySrc, 'utf8');
+  if (fluencyHtml.indexOf(WWW + '/ai-fluent-engineers/') === -1) {
+    problems.push('AI fluency canonical is not ' + WWW + '/ai-fluent-engineers/');
+  }
+  var fluencyDest = path.join(outDir, fluencyRel);
+  fs.mkdirSync(path.dirname(fluencyDest), { recursive: true });
+  fs.writeFileSync(fluencyDest, fluencyHtml);
+  shipped.push({ page: { canonical: WWW + '/ai-fluent-engineers/' }, out: fluencyRel });
+}
+
+['roles/roles-template/index.html', 'technologies/tech-template/index.html'].forEach(function (rel) {
+  if (fs.existsSync(path.join(outDir, rel))) problems.push('template shipped: ' + rel);
+});
+
 /* 2. Static assets. */
 ASSET_DIRS.forEach(function (d) {
   if (fs.existsSync(path.join(root, d))) {
@@ -84,6 +138,11 @@ shipped.forEach(function (s) {
 Object.keys(rootScripts).forEach(function (f) {
   if (fs.existsSync(path.join(root, f))) copyFile(f);
 });
+if (!fs.existsSync(path.join(root, 'air-page.js'))) {
+  problems.push('missing required file: air-page.js');
+} else if (!fs.existsSync(path.join(outDir, 'air-page.js'))) {
+  copyFile('air-page.js');
+}
 
 /* 4. 404, robots, sitemap. */
 fs.writeFileSync(
@@ -155,8 +214,50 @@ fs.writeFileSync(
   'utf8',
 );
 
+function writeLlmsTxt() {
+  var lines = [
+    '# BetterEngineer',
+    '',
+    '> BetterEngineer connects U.S. companies with pre-vetted senior software engineers from Latin America who embed as trusted long-term collaborators.',
+    '',
+    '## Key pages',
+    '',
+    '- [Home](' + WWW + '/): BetterEngineer staff augmentation and hiring platform overview.',
+    '- [AI Fluent Engineers](' + WWW + '/ai-fluent-engineers/): AI fluency program overview.',
+    '- [AI Systems Readiness for Manufacturing](' + WWW + '/services/ai-systems-readiness-for-manufacturing/): AI systems readiness for manufacturing teams.',
+    '- [Roles](' + WWW + '/roles/): Hire by engineering role (front-end, back-end, full-stack, mobile, DevOps, data, AI, QA, blockchain).',
+    '- [Technologies](' + WWW + '/technologies/): Hire by technology and framework.',
+  ];
+
+  function collectPages(baseDir, urlPrefix, label) {
+    if (!fs.existsSync(baseDir)) return;
+    fs.readdirSync(baseDir).forEach(function (entry) {
+      var entryPath = path.join(baseDir, entry);
+      if (!fs.statSync(entryPath).isDirectory()) return;
+      if (entry === 'roles-template' || entry === 'tech-template') return;
+      var indexPath = path.join(entryPath, 'index.html');
+      if (!fs.existsSync(indexPath)) return;
+      var html = fs.readFileSync(indexPath, 'utf8');
+      var titleMatch = html.match(/<title>([^<]*)<\/title>/);
+      var title = titleMatch ? titleMatch[1].replace(' | BetterEngineer', '') : entry;
+      lines.push('- [' + title + '](' + WWW + urlPrefix + entry + '/): ' + label + '.');
+    });
+  }
+
+  lines.push('');
+  lines.push('## Roles');
+  lines.push('');
+  collectPages(path.join(outDir, 'roles'), '/roles/', 'Hire senior nearshore engineers for this role');
+  lines.push('');
+  lines.push('## Technologies');
+  lines.push('');
+  collectPages(path.join(outDir, 'technologies'), '/technologies/', 'Hire senior nearshore engineers for this technology');
+  fs.writeFileSync(path.join(outDir, 'llms.txt'), lines.join('\n') + '\n', 'utf8');
+}
+
+writeLlmsTxt();
+
 /* 5. Checks: every inventory page is in the bundle, and local references resolve. */
-var problems = [];
 inventory.urls.forEach(function (u) {
   if (u.status === 'built' && !fs.existsSync(path.join(outDir, u.localPath))) {
     problems.push('inventory page not in bundle: ' + u.url + ' -> ' + u.localPath);
@@ -167,9 +268,6 @@ inventory.urls.forEach(function (u) {
 function resolves(ref) {
   var clean = decodeURIComponent(ref.split('#')[0].split('?')[0]);
   if (!clean || clean === '/') return true;
-  for (var i = 0; i < REDIRECTED_PREFIXES.length; i++) {
-    if ((clean + '/').indexOf(REDIRECTED_PREFIXES[i]) === 0) return true;
-  }
   if (redirectedUrls[clean.replace(/\/$/, '')]) return true;
   var abs = path.join(outDir, clean);
   if (fs.existsSync(abs) && fs.statSync(abs).isFile()) return true;
@@ -189,6 +287,27 @@ shipped.concat([{ out: '404.html' }]).forEach(function (s) {
 Object.keys(missingRefs).forEach(function (ref) {
   problems.push('broken local reference ' + ref + ' (in ' + missingRefs[ref].length + ' page(s), e.g. ' + missingRefs[ref][0] + ')');
 });
+
+['air-page.js', 'hire-software-engineers-in-72-hours/index.html', 'llms.txt'].forEach(function (rel) {
+  if (!fs.existsSync(path.join(outDir, rel))) problems.push('missing required file: ' + rel);
+});
+
+function scanDiscover(dir, rel) {
+  fs.readdirSync(dir).forEach(function (name) {
+    var abs = path.join(dir, name);
+    var child = rel ? rel + '/' + name : name;
+    if (fs.statSync(abs).isDirectory()) {
+      scanDiscover(abs, child);
+      return;
+    }
+    if (!/\.(html|xml|txt|js|css)$/.test(name)) return;
+    var text = fs.readFileSync(abs, 'utf8');
+    if (text.indexOf('discover.betterengineer.com') !== -1) {
+      problems.push('discover host still in shipped file ' + child);
+    }
+  });
+}
+scanDiscover(outDir, '');
 
 console.log('www bundle ready in ./dist-www/');
 console.log('  pages: ' + shipped.length + ', sitemap URLs: ' + locs.length + ', root scripts: ' + Object.keys(rootScripts).join(', '));

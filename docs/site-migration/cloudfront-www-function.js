@@ -1,32 +1,42 @@
 // One CloudFront Function for distribution E2014GBUWTTSVJ (discover + www + apex).
-// Viewer request, runtime cloudfront-js-2.0. It replaces the discover function on
-// the default behavior. See go-live-simple.md.
+// Viewer request, runtime cloudfront-js-2.0. NOT pasted or published yet.
+// See cloudfront-function.md.
 //
 // Bucket layout (betterengineer-marketing-site):
-//   /            discover files (unchanged, deployed by the marketing-site workflow)
-//   /www/        www files (dist-www/)
+//   /            discover files (kept; the hostname 301s to www)
+//   /www/        www files (dist-www/), including /roles/ and /technologies/
 //
 // betterengineer.com          301 to www, same path and query
-// www.betterengineer.com      fixed 301s, /roles and /technologies to discover,
-//                             lowercase page paths, then serve from /www/...
-// any other host (discover)   same as before: /path and /path/ serve /path/index.html
+// www.betterengineer.com      fixed 301s, then serve pages from /www/...
+// discover.betterengineer.com /www guard first, then 301 to the same www path
 // Query strings (UTMs, gclid) are kept on every redirect.
 
 var WWW = 'https://www.betterengineer.com';
-var DISCOVER = 'https://discover.betterengineer.com';
 var WWW_PREFIX = '/www';
 
 var REDIRECTS = {
-  '/hire-senior-python-engineers-nearshore-latam-talent': DISCOVER + '/technologies/python-developers/',
-  '/hire-senior-full-stack-engineers-nearshore-latam-talent': DISCOVER + '/roles/full-stack-engineers/',
-  '/hire-senior-ai-data-engineers-nearshore-latam-talent': DISCOVER + '/roles/ai-engineers/',
-  '/ai-readiness-manufacturing': DISCOVER + '/aimanufacturing/',
+  '/hire-senior-python-engineers-nearshore-latam-talent': WWW + '/technologies/python-developers/',
+  '/hire-senior-full-stack-engineers-nearshore-latam-talent': WWW + '/roles/full-stack-engineers/',
+  '/hire-senior-ai-data-engineers-nearshore-latam-talent': WWW + '/roles/ai-engineers/',
+  '/ai-readiness-manufacturing': WWW + '/services/ai-systems-readiness-for-manufacturing/',
   '/webinar': '/contact/',
   '/aiwebinar': '/contact/',
   '/roi': '/staff-augmentation/',
   '/hiring-dashboard-old': '/hiring-dashboard/',
   '/careers-test': '/careers/',
-  '/blog': 'https://blog.betterengineer.com/resource-center'
+  '/blog': 'https://blog.betterengineer.com/resource-center',
+  '/services/hire-ai-ready-engineers': '/ai-fluent-engineers/'
+};
+
+/* One hop from the discover host. Webinar, roi, blog, and the test slugs stay
+   on the www map so this host forwards those paths unchanged first. */
+var DISCOVER_REDIRECTS = {
+  '/hire-senior-python-engineers-nearshore-latam-talent': '/technologies/python-developers/',
+  '/hire-senior-full-stack-engineers-nearshore-latam-talent': '/roles/full-stack-engineers/',
+  '/hire-senior-ai-data-engineers-nearshore-latam-talent': '/roles/ai-engineers/',
+  '/ai-readiness-manufacturing': '/services/ai-systems-readiness-for-manufacturing/',
+  '/aimanufacturing': '/services/ai-systems-readiness-for-manufacturing/',
+  '/services/hire-ai-ready-engineers': '/ai-fluent-engineers/'
 };
 
 function queryString(qs) {
@@ -59,37 +69,44 @@ function indexFile(uri) {
   return uri;
 }
 
+function fluencyAlias(key, lower, qs) {
+  if (lower === '/ai-fluent-engineers' && key !== lower) {
+    return redirect(WWW + '/ai-fluent-engineers/' + qs);
+  }
+  return null;
+}
+
 function handler(event) {
   var request = event.request;
   var uri = request.uri;
   var host = request.headers.host ? request.headers.host.value.toLowerCase() : '';
+  var qs = queryString(request.querystring);
+  var key = uri.length > 1 && uri.charAt(uri.length - 1) === '/' ? uri.slice(0, -1) : uri;
+  var lower = key.toLowerCase();
 
   if (host === 'betterengineer.com') {
-    return redirect(WWW + uri + queryString(request.querystring));
+    return redirect(WWW + uri + qs);
   }
 
   if (host !== 'www.betterengineer.com') {
     if (uri === WWW_PREFIX || uri.indexOf(WWW_PREFIX + '/') === 0) {
-      return redirect(WWW + (uri.slice(WWW_PREFIX.length) || '/') + queryString(request.querystring));
+      return redirect(WWW + (uri.slice(WWW_PREFIX.length) || '/') + qs);
     }
-    request.uri = indexFile(uri);
-    return request;
+    var alias = fluencyAlias(key, lower, qs);
+    if (alias) return alias;
+    if (DISCOVER_REDIRECTS[lower]) {
+      return redirect(WWW + DISCOVER_REDIRECTS[lower] + qs);
+    }
+    return redirect(WWW + (hasExtension(uri) ? uri : uri.toLowerCase()) + qs);
   }
 
-  var qs = queryString(request.querystring);
-  var key = uri.length > 1 && uri.charAt(uri.length - 1) === '/' ? uri.slice(0, -1) : uri;
-  var lower = key.toLowerCase();
+  var wwwAlias = fluencyAlias(key, lower, qs);
+  if (wwwAlias) return wwwAlias;
 
   if (REDIRECTS[lower]) {
     return redirect(REDIRECTS[lower] + qs);
   }
 
-  if (lower === '/roles' || lower === '/technologies' ||
-      lower.indexOf('/roles/') === 0 || lower.indexOf('/technologies/') === 0) {
-    return redirect(DISCOVER + lower + (hasExtension(lower) ? '' : '/') + qs);
-  }
-
-  // HubSpot matched paths case-insensitively; S3 does not. Pages are all lowercase.
   if (key !== lower && !hasExtension(key)) {
     return redirect(WWW + lower + qs);
   }

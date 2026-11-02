@@ -73,14 +73,14 @@ for (const t of technologies.filter((x) => x.status === "published")) {
   const file = path.join(ROOT, "technologies", t.slug, "index.html");
   if (!fs.existsSync(file)) { fail(`${t.slug}: published but technologies/${t.slug}/index.html not generated (run build-tech-pages.js)`); continue; }
   const html = fs.readFileSync(file, "utf8");
-  const url = `https://discover.betterengineer.com/technologies/${t.slug}/`;
+  const url = `https://www.betterengineer.com/technologies/${t.slug}/`;
   const check = (cond, m) => { if (!cond) fail(`${t.slug}: ${m}`); };
 
   check(!/\[[A-Z_]+\]/.test(html), "leftover [TOKEN] in output");
   check(!/—/.test(html), "em dash character in output");
   check(html.includes(`<title>Hire ${t.name} Developers | BetterEngineer</title>`), "title must use Developers");
   check(html.includes(`<span class="light">${t.name} engineers</span>`) || (t.h1Noun && html.includes(t.h1Noun)), "H1 must use engineers");
-  check(html.includes(`rel="canonical" href="${url}"`), "canonical must be discover slug URL");
+  check(html.includes(`rel="canonical" href="${url}"`), "canonical must be the www slug URL");
   check((html.match(/<h1[ >]/g) || []).length === 1, "must have exactly one H1");
   check(html.includes("gtm.start"), "GTM head snippet missing");
   check(html.includes("ns.html?id=GTM-WT77L8JF"), "GTM noscript missing");

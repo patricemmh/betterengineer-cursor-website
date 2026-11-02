@@ -1,11 +1,11 @@
 ---
 name: create-role-page
-description: Creates a new BetterEngineer role landing page from the established template, adds it to the roles index, updates the cross-link grid on all existing pages, and deploys to discover.betterengineer.com. Use when adding a new engineer role (e.g. "Security Engineers"), when the user says "add a role page", "new role", or "create a role landing page".
+description: Creates a new BetterEngineer role landing page from the established template, adds it to the roles index, updates the cross-link grid on all existing pages, and publishes it on www.betterengineer.com. Use when adding a new engineer role (e.g. "Security Engineers"), when the user says "add a role page", "new role", or "create a role landing page".
 ---
 
 # Create a BetterEngineer Role Page
 
-Produces a complete, SEO/AEO-ready role detail page and deploys it to `discover.betterengineer.com/roles/{slug}/`.
+Produces a complete, SEO/AEO-ready role detail page at `www.betterengineer.com/roles/{slug}/`.
 
 ## Inputs — confirm before starting
 
@@ -36,7 +36,7 @@ Open `roles/{slug}/index.html` and make every substitution below. The file is a 
 **Head / meta**
 - `<title>Role Page Template | BetterEngineer</title>` → `<title>Hire {Display Name} | BetterEngineer</title>`
 - Both `og:title` and `<title>` should match
-- `og:url` and `rel="canonical"` → `https://discover.betterengineer.com/roles/{slug}/`
+- `og:url` and `rel="canonical"` → `https://www.betterengineer.com/roles/{slug}/`
 - Meta description → unique sentence (120–155 chars), include role name + "nearshore" + "72 hours"
 
 **Hero section (`#role-hero`)**
@@ -145,7 +145,7 @@ git commit -m "Add {Display Name} role page"
 git push origin main
 ```
 
-GitHub Actions deploys automatically. The full pipeline (build → gh-pages → pages rebuild) completes in ~60 seconds. Live at `https://discover.betterengineer.com/roles/{slug}/`.
+The page lives at `https://www.betterengineer.com/roles/{slug}/`. Do not mint the canonical on discover.betterengineer.com. Discover 301s that path to the same www URL.
 
 ---
 

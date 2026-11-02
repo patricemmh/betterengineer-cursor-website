@@ -22,7 +22,7 @@ var path = require('path');
 var root = __dirname;
 var terms = require('./data/glossary.js').terms;
 
-var DISCOVER = 'https://discover.betterengineer.com';
+var WWW = 'https://www.betterengineer.com';
 var EMDASH = /—/;
 
 /* Page-level copy, verbatim from the live page.
@@ -118,7 +118,7 @@ function build() {
           if (t.techSlug) {
             links.push(
               '<a href="' +
-                DISCOVER +
+                WWW +
                 '/technologies/' +
                 t.techSlug +
                 '/">Hire ' +
@@ -128,7 +128,7 @@ function build() {
           }
           if (t.roleSlug) {
             links.push(
-              '<a href="' + DISCOVER + '/roles/' + t.roleSlug + '/">Browse this role</a>',
+              '<a href="' + WWW + '/roles/' + t.roleSlug + '/">Browse this role</a>',
             );
           }
           var linkRow = links.length

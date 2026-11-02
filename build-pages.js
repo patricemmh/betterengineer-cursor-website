@@ -413,11 +413,11 @@ var headerPrimaryChrome =
   '              <li><a href="https://www.betterengineer.com/staff-augmentation">Staff Augmentation</a></li>\n' +
   '              <li><a href="https://www.betterengineer.com/ai-readiness">AI Readiness</a></li>\n' +
   '              <li><a href="https://www.betterengineer.com/hiring-dashboard">Platform</a></li>\n' +
-  '              <li><a href="https://discover.betterengineer.com/roles/">Browse Roles</a></li>\n' +
-  '              <li><a href="https://discover.betterengineer.com/technologies/">Browse by Technology</a></li>\n' +
+  '              <li><a href="https://www.betterengineer.com/roles/">Browse Roles</a></li>\n' +
+  '              <li><a href="https://www.betterengineer.com/technologies/">Browse by Technology</a></li>\n' +
   '            </ul>\n' +
   '          </li>\n' +
-  '          <li><a href="https://discover.betterengineer.com/ai-fluent-engineers/">AI Fluency</a></li>\n' +
+  '          <li><a href="https://www.betterengineer.com/ai-fluent-engineers/">AI Fluency</a></li>\n' +
   '          <li class="has-children">\n' +
   '            <a href="https://www.betterengineer.com/about">About <span class="nav-chevron" aria-hidden="true"></span></a>\n' +
   '            <ul class="dropdown" role="list">\n' +
@@ -449,11 +449,11 @@ var headerPrimaryChrome =
   '          <li><a href="https://www.betterengineer.com/staff-augmentation">Staff Augmentation</a></li>\n' +
   '          <li><a href="https://www.betterengineer.com/ai-readiness">AI Readiness</a></li>\n' +
   '          <li><a href="https://www.betterengineer.com/hiring-dashboard">Platform</a></li>\n' +
-  '          <li><a href="https://discover.betterengineer.com/roles/">Browse Roles</a></li>\n' +
-  '          <li><a href="https://discover.betterengineer.com/technologies/">Browse by Technology</a></li>\n' +
+  '          <li><a href="https://www.betterengineer.com/roles/">Browse Roles</a></li>\n' +
+  '          <li><a href="https://www.betterengineer.com/technologies/">Browse by Technology</a></li>\n' +
   '        </ul>\n' +
   '      </li>\n' +
-  '      <li><a href="https://discover.betterengineer.com/ai-fluent-engineers/">AI Fluency</a></li>\n' +
+  '      <li><a href="https://www.betterengineer.com/ai-fluent-engineers/">AI Fluency</a></li>\n' +
   '      <li class="has-children">\n' +
   '        <a href="https://www.betterengineer.com/about">About</a>\n' +
   '        <ul class="mobile-submenu" role="list">\n' +

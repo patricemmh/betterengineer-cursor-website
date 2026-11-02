@@ -47,7 +47,7 @@ if (!fs.existsSync(file)) {
 }
 const html = fs.readFileSync(file, 'utf8');
 
-const canonical = `https://discover.betterengineer.com/technologies/${slug}/`;
+const canonical = `https://www.betterengineer.com/technologies/${slug}/`;
 
 // 1. Canonical + og:url
 if (html.includes(`rel="canonical" href="${canonical}"`)) ok('canonical URL correct');
@@ -85,7 +85,7 @@ else fail('og:image missing');
 // 7. BreadcrumbList JSON-LD present and references this page
 if (html.includes('"@type":"BreadcrumbList"')) {
   ok('BreadcrumbList JSON-LD present');
-  if (!html.includes(`https://discover.betterengineer.com/technologies/${slug}/","@type"`) &&
+  if (!html.includes(`https://www.betterengineer.com/technologies/${slug}/","@type"`) &&
       !html.includes(canonical)) {
     warn('BreadcrumbList may not reference this page URL; confirm the last item item URL');
   }

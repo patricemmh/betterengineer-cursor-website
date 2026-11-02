@@ -13,8 +13,8 @@ const ROOT = path.join(__dirname, "..");
 const HIRING =
   '<li><a href="https://www.betterengineer.com/hiring-dashboard">Hiring Dashboard</a></li>';
 const ADD =
-  '<li><a href="https://discover.betterengineer.com/roles/">Browse Roles</a></li>' +
-  '<li><a href="https://discover.betterengineer.com/technologies/">Browse by Technology</a></li>';
+  '<li><a href="https://www.betterengineer.com/roles/">Browse Roles</a></li>' +
+  '<li><a href="https://www.betterengineer.com/technologies/">Browse by Technology</a></li>';
 
 function inject(html) {
   let out = html;

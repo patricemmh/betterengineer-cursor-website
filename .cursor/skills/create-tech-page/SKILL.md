@@ -6,7 +6,7 @@ description: Adds a new BetterEngineer technology hiring page by adding a record
 # Create a BetterEngineer Technology Page
 
 Produces a complete, SEO/AEO-ready technology detail page and publishes it at
-`discover.betterengineer.com/technologies/{slug}/`.
+`www.betterengineer.com/technologies/{slug}/`.
 
 ## The pipeline (read this first)
 

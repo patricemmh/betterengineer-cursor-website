@@ -127,7 +127,7 @@ pagesManifest.pages.forEach(function (page) {
 
 records.push(record({
   url: '/roles/',
-  hosts: ['discover.betterengineer.com'],
+  hosts: ['www.betterengineer.com'],
   title: 'Software Engineering Roles | BetterEngineer',
   pageType: 'role',
   category: null,
@@ -136,7 +136,7 @@ records.push(record({
 
 records.push(record({
   url: '/technologies/',
-  hosts: ['discover.betterengineer.com'],
+  hosts: ['www.betterengineer.com'],
   title: 'Technologies | BetterEngineer',
   pageType: 'technology',
   category: null,
@@ -158,7 +158,7 @@ fs.readdirSync(rolesDir).forEach(function (name) {
   });
   records.push(record({
     url: '/roles/' + name + '/',
-    hosts: ['discover.betterengineer.com'],
+    hosts: ['www.betterengineer.com'],
     title: meta.name,
     pageType: 'role',
     category: null,
@@ -178,7 +178,7 @@ technologies.forEach(function (t) {
   var live = t.status === 'published';
   records.push(record({
     url: '/technologies/' + t.slug + '/',
-    hosts: ['discover.betterengineer.com'],
+    hosts: ['www.betterengineer.com'],
     title: t.name,
     pageType: 'technology',
     category: t.category || null,

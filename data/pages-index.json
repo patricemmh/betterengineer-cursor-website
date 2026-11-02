@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-22",
+  "generatedAt": "2026-11-02",
   "sourceOfTruth": {
     "repository": "betterengineer-cursor-website",
     "files": [
@@ -279,6 +279,20 @@
       "relatedPages": []
     },
     {
+      "url": "/case-studies/hydrow/",
+      "aliases": [],
+      "hosts": [
+        "www.betterengineer.com"
+      ],
+      "title": "Hydrow Case Study | Fitness Tech, Engineered",
+      "pageType": "other",
+      "category": null,
+      "status": "live",
+      "primaryKeyword": null,
+      "secondaryKeywords": [],
+      "relatedPages": []
+    },
+    {
       "url": "/resource-center/wpautoterms/privacy-policy/",
       "aliases": [],
       "hosts": [
@@ -313,48 +327,6 @@
         "www.betterengineer.com"
       ],
       "title": "Find Top Software Engineering Talent – Find the Right Candidates",
-      "pageType": "other",
-      "category": null,
-      "status": "live",
-      "primaryKeyword": null,
-      "secondaryKeywords": [],
-      "relatedPages": []
-    },
-    {
-      "url": "/webinar/",
-      "aliases": [],
-      "hosts": [
-        "www.betterengineer.com"
-      ],
-      "title": "Webinar",
-      "pageType": "other",
-      "category": null,
-      "status": "live",
-      "primaryKeyword": null,
-      "secondaryKeywords": [],
-      "relatedPages": []
-    },
-    {
-      "url": "/aiwebinar/",
-      "aliases": [],
-      "hosts": [
-        "www.betterengineer.com"
-      ],
-      "title": "AI Webinar Registration",
-      "pageType": "other",
-      "category": null,
-      "status": "live",
-      "primaryKeyword": null,
-      "secondaryKeywords": [],
-      "relatedPages": []
-    },
-    {
-      "url": "/roi/",
-      "aliases": [],
-      "hosts": [
-        "www.betterengineer.com"
-      ],
-      "title": "Increase Your R&D ROI",
       "pageType": "other",
       "category": null,
       "status": "live",
@@ -1010,7 +982,7 @@
       "url": "/roles/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "Software Engineering Roles | BetterEngineer",
       "pageType": "role",
@@ -1024,7 +996,7 @@
       "url": "/technologies/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "Technologies | BetterEngineer",
       "pageType": "technology",
@@ -1038,7 +1010,7 @@
       "url": "/roles/ai-engineers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "AI engineers",
       "pageType": "role",
@@ -1062,7 +1034,7 @@
       "url": "/roles/back-end-engineers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "Back-end engineers",
       "pageType": "role",
@@ -1112,7 +1084,7 @@
       "url": "/roles/blockchain-engineers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "Blockchain engineers",
       "pageType": "role",
@@ -1126,7 +1098,7 @@
       "url": "/roles/data-engineers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "Data engineers",
       "pageType": "role",
@@ -1156,7 +1128,7 @@
       "url": "/roles/data-science-engineers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "Data science engineers",
       "pageType": "role",
@@ -1180,7 +1152,7 @@
       "url": "/roles/devops-engineers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "DevOps engineers",
       "pageType": "role",
@@ -1211,7 +1183,7 @@
       "url": "/roles/front-end-engineers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "Front-end engineers",
       "pageType": "role",
@@ -1237,7 +1209,7 @@
       "url": "/roles/full-stack-engineers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "Full-stack engineers",
       "pageType": "role",
@@ -1274,7 +1246,7 @@
       "url": "/roles/mobile-engineers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "Mobile engineers",
       "pageType": "role",
@@ -1296,7 +1268,7 @@
       "url": "/roles/qa-engineers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "QA engineers",
       "pageType": "role",
@@ -1312,7 +1284,7 @@
       "url": "/technologies/python-developers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "Python",
       "pageType": "technology",
@@ -1341,7 +1313,7 @@
       "url": "/technologies/angular-developers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "Angular",
       "pageType": "technology",
@@ -1368,7 +1340,7 @@
       "url": "/technologies/laravel-developers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "Laravel",
       "pageType": "technology",
@@ -1395,7 +1367,7 @@
       "url": "/technologies/azure-developers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "Azure",
       "pageType": "technology",
@@ -1422,7 +1394,7 @@
       "url": "/technologies/ios-developers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "iOS",
       "pageType": "technology",
@@ -1449,7 +1421,7 @@
       "url": "/technologies/react-native-developers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "React Native",
       "pageType": "technology",
@@ -1476,7 +1448,7 @@
       "url": "/technologies/javascript-developers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "JavaScript",
       "pageType": "technology",
@@ -1504,7 +1476,7 @@
       "url": "/technologies/java-developers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "Java",
       "pageType": "technology",
@@ -1532,7 +1504,7 @@
       "url": "/technologies/aws-developers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "AWS",
       "pageType": "technology",
@@ -1560,7 +1532,7 @@
       "url": "/technologies/dotnet-developers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": ".NET",
       "pageType": "technology",
@@ -1588,7 +1560,7 @@
       "url": "/technologies/php-developers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "PHP",
       "pageType": "technology",
@@ -1615,7 +1587,7 @@
       "url": "/technologies/django-developers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "Django",
       "pageType": "technology",
@@ -1642,7 +1614,7 @@
       "url": "/technologies/ruby-on-rails-developers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "Ruby on Rails",
       "pageType": "technology",
@@ -1669,7 +1641,7 @@
       "url": "/technologies/golang-developers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "Go",
       "pageType": "technology",
@@ -1696,7 +1668,7 @@
       "url": "/technologies/nodejs-developers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "Node.js",
       "pageType": "technology",
@@ -1723,7 +1695,7 @@
       "url": "/technologies/react-developers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "React",
       "pageType": "technology",
@@ -1750,7 +1722,7 @@
       "url": "/technologies/android-developers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "Android",
       "pageType": "technology",
@@ -1776,7 +1748,7 @@
       "url": "/technologies/flutter-developers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "Flutter",
       "pageType": "technology",
@@ -1801,7 +1773,7 @@
       "url": "/technologies/swift-developers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "Swift",
       "pageType": "technology",
@@ -1827,7 +1799,7 @@
       "url": "/technologies/ionic-developers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "Ionic",
       "pageType": "technology",
@@ -1855,7 +1827,7 @@
       "url": "/technologies/mongodb-developers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "MongoDB",
       "pageType": "technology",
@@ -1883,7 +1855,7 @@
       "url": "/technologies/kotlin-developers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "Kotlin",
       "pageType": "technology",
@@ -1910,7 +1882,7 @@
       "url": "/technologies/typescript-developers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "TypeScript",
       "pageType": "technology",
@@ -1939,7 +1911,7 @@
       "url": "/technologies/nestjs-developers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "NestJS",
       "pageType": "technology",
@@ -1966,7 +1938,7 @@
       "url": "/technologies/graphql-developers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "GraphQL",
       "pageType": "technology",
@@ -1992,7 +1964,7 @@
       "url": "/technologies/vuejs-developers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "Vue.js",
       "pageType": "technology",
@@ -2018,7 +1990,7 @@
       "url": "/technologies/docker-developers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "Docker",
       "pageType": "technology",
@@ -2044,7 +2016,7 @@
       "url": "/technologies/kubernetes-developers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "Kubernetes",
       "pageType": "technology",
@@ -2070,7 +2042,7 @@
       "url": "/technologies/spring-boot-developers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "Spring Boot",
       "pageType": "technology",
@@ -2097,7 +2069,7 @@
       "url": "/technologies/flask-developers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "Flask",
       "pageType": "technology",
@@ -2124,7 +2096,7 @@
       "url": "/technologies/rust-developers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "Rust",
       "pageType": "technology",
@@ -2151,7 +2123,7 @@
       "url": "/technologies/google-cloud-developers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "Google Cloud",
       "pageType": "technology",
@@ -2178,7 +2150,7 @@
       "url": "/technologies/ruby-developers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "Ruby",
       "pageType": "technology",
@@ -2204,7 +2176,7 @@
       "url": "/technologies/nextjs-developers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "Next.js",
       "pageType": "technology",
@@ -2230,7 +2202,7 @@
       "url": "/technologies/openai-api-developers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "OpenAI API",
       "pageType": "technology",
@@ -2257,7 +2229,7 @@
       "url": "/technologies/databricks-developers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "Databricks",
       "pageType": "technology",
@@ -2283,7 +2255,7 @@
       "url": "/technologies/postgresql-developers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "PostgreSQL",
       "pageType": "technology",
@@ -2310,7 +2282,7 @@
       "url": "/technologies/csharp-developers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "C#",
       "pageType": "technology",
@@ -2336,7 +2308,7 @@
       "url": "/technologies/cpp-developers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "C++",
       "pageType": "technology",
@@ -2362,7 +2334,7 @@
       "url": "/technologies/terraform-developers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "Terraform",
       "pageType": "technology",
@@ -2388,7 +2360,7 @@
       "url": "/technologies/jenkins-developers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "Jenkins",
       "pageType": "technology",
@@ -2413,7 +2385,7 @@
       "url": "/technologies/expressjs-developers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "Express.js",
       "pageType": "technology",
@@ -2439,7 +2411,7 @@
       "url": "/technologies/snowflake-developers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "Snowflake",
       "pageType": "technology",
@@ -2465,7 +2437,7 @@
       "url": "/technologies/redux-developers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "Redux",
       "pageType": "technology",
@@ -2492,7 +2464,7 @@
       "url": "/technologies/fastapi-developers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "FastAPI",
       "pageType": "technology",
@@ -2519,7 +2491,7 @@
       "url": "/technologies/mysql-developers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "MySQL",
       "pageType": "technology",
@@ -2546,7 +2518,7 @@
       "url": "/technologies/elasticsearch-developers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "Elasticsearch",
       "pageType": "technology",
@@ -2574,7 +2546,7 @@
       "url": "/technologies/apache-spark-developers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "Apache Spark",
       "pageType": "technology",
@@ -2602,7 +2574,7 @@
       "url": "/technologies/oracle-database-developers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "Oracle Database",
       "pageType": "technology",
@@ -2630,7 +2602,7 @@
       "url": "/technologies/sql-server-developers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "SQL Server",
       "pageType": "technology",
@@ -2658,7 +2630,7 @@
       "url": "/technologies/apache-kafka-developers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "Apache Kafka",
       "pageType": "technology",
@@ -2687,7 +2659,7 @@
       "url": "/technologies/svelte-developers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "Svelte",
       "pageType": "technology",
@@ -2715,7 +2687,7 @@
       "url": "/technologies/nuxtjs-developers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "Nuxt.js",
       "pageType": "technology",
@@ -2743,7 +2715,7 @@
       "url": "/technologies/redis-developers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "Redis",
       "pageType": "technology",
@@ -2772,7 +2744,7 @@
       "url": "/technologies/tensorflow-developers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "TensorFlow",
       "pageType": "technology",
@@ -2799,7 +2771,7 @@
       "url": "/technologies/pytorch-developers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "PyTorch",
       "pageType": "technology",
@@ -2826,7 +2798,7 @@
       "url": "/technologies/langchain-developers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "LangChain",
       "pageType": "technology",
@@ -2853,7 +2825,7 @@
       "url": "/technologies/scikit-learn-developers/",
       "aliases": [],
       "hosts": [
-        "discover.betterengineer.com"
+        "www.betterengineer.com"
       ],
       "title": "Scikit-learn",
       "pageType": "technology",

@@ -31,7 +31,6 @@
  */
 
 var WWW = 'https://www.betterengineer.com';
-var DISCOVER = 'https://discover.betterengineer.com';
 
 /* Shared Organization node. Kept identical to build-tech-pages.js ORG so both
    generators emit the same entity. */
@@ -47,18 +46,21 @@ var ORG = {
   ],
 };
 
-/* These files are served from discover today. Pointing OG tags at www 404s. */
-var OG_IMAGE = DISCOVER + '/images/roles/shared/trust-laptop.webp';
+/* This file 200s on www and 404s on discover. */
+var OG_IMAGE = WWW + '/images/roles/shared/trust-laptop.webp';
 
 /* Migrated pages stay out of the index until www is cut over to this build.
    See docs/site-migration/redirect-plan.md section 6. Set to null at cutover. */
 var PRE_CUTOVER_ROBOTS = null;
 
 function hireAiReadyCanonical(ctx) {
+  /* Discover's own build still sets GITHUB_PAGES_CNAME, so that bundle keeps a
+     discover canonical until a discover deploy is intentional. The www build
+     uses /ai-fluent-engineers/ as the one AI fluency URL. */
   if (ctx.siteBase === '/ai-fluent-engineers' && ctx.githubPagesCname) {
     return 'https://' + ctx.githubPagesCname + '/ai-fluent-engineers/';
   }
-  return WWW + '/services/hire-ai-ready-engineers/';
+  return WWW + '/ai-fluent-engineers/';
 }
 
 var aiManufacturingDescription =
