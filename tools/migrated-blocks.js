@@ -374,7 +374,7 @@ function techIntakeCard(opts) {
     '<div class="hero-form__card react-hero-side-card air-role-hero-card">\n' +
     '  <p class="eyebrow">Get matched fast</p>\n' +
     '  <h2 class="hero-form__title">' +
-    esc(opts.title || 'Book a 20-minute intro and tell us about your project.') +
+    esc(opts.title || 'Book a 30-minute intro and tell us about your project.') +
     '</h2>\n  ' +
     form +
     '\n  <p class="air-role-process">Intro Call &gt; Requirements &gt; Profiles in slack / inbox</p>\n' +

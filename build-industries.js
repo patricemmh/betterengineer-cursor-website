@@ -91,7 +91,7 @@ function industryHtml(ind) {
     : '      <div class="ind-hero__form reveal">\n' +
       b.techIntakeCard({
         name: ind.name,
-        title: 'Book a 20-minute intro and tell us about your ' + ind.name + ' project.',
+        title: 'Book a 30-minute intro and tell us about your ' + ind.name + ' project.',
         placeholder: ind.formPlaceholder,
       }) +
       '\n      </div>\n';
