@@ -2,7 +2,8 @@
   "name": "betterengineer-cursor-website",
   "private": true,
   "scripts": {
-    "build": "node build-pages.js",
+    "build": "node build-pages.js && node build-marketing-pages.js",
+    "build:marketing": "node build-marketing-pages.js",
     "build:lp-dist": "node build-lp-dist.js",
     "build:cf": "node build-pages.js --cloudflare",
     "build:tech": "node build-tech-pages.js",
