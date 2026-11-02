@@ -72,7 +72,9 @@ var hireAiReadyDescription =
 /* ── Existing pages ──────────────────────────────────────────────────────────
    These three predate the migration. Their head output must stay byte identical,
    so they carry only the fields they already had. Do not add og:image, twitter,
-   robots, or schema to them without checking the diff. */
+   robots, or schema to them without checking the diff. Approved exception
+   2026-11-02: home gets an Organization and WebSite graph, and the two service
+   pages get og:url plus a serviceSchema graph (see build-pages.js). */
 
 var existingPages = [
   {
@@ -116,6 +118,7 @@ var existingPages = [
     title: 'AI Systems Readiness for Manufacturing Companies | BetterEngineer',
     description: aiManufacturingDescription,
     canonical: WWW + '/services/ai-systems-readiness-for-manufacturing/',
+    serviceSchema: { crumb: 'AI Systems Readiness for Manufacturing' },
     og: {
       title: 'AI Systems Readiness for Manufacturing Companies | BetterEngineer',
       description: aiManufacturingDescription,
@@ -134,6 +137,7 @@ var existingPages = [
     title: 'Hire AI-Ready Engineers | BetterEngineer, AI Development Team from LATAM',
     description: hireAiReadyDescription,
     canonical: hireAiReadyCanonical,
+    serviceSchema: { crumb: 'AI Fluency' },
     og: {
       title: 'Hire AI-Ready Engineers | BetterEngineer',
       description: hireAiReadyDescription,

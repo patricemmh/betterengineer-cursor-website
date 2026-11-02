@@ -229,6 +229,16 @@ function writeLlmsTxt() {
     '- [Technologies](' + WWW + '/technologies/): Hire by technology and framework.',
   ];
 
+  ['staff-augmentation', 'latamengineer', 'faqs', 'about', 'contact'].forEach(function (slug) {
+    var page = manifest.pages.filter(function (p) { return p.slug === slug; })[0];
+    if (!page) {
+      problems.push('llms.txt page missing from manifest: ' + slug);
+      return;
+    }
+    var label = page.breadcrumb[page.breadcrumb.length - 1].name;
+    lines.push('- [' + label + '](' + page.canonical + '): ' + page.description);
+  });
+
   function collectPages(baseDir, urlPrefix, label) {
     if (!fs.existsSync(baseDir)) return;
     fs.readdirSync(baseDir).forEach(function (entry) {

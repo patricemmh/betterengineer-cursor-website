@@ -335,6 +335,71 @@ function schemaBlocks(page, canonicalUrl, mainHtml) {
   return out;
 }
 
+/* Single @graph blocks for the homepage and the two pre-migration service pages.
+   The Organization @id matches the role pages so the entity is shared sitewide. */
+var ORG_ID = manifest.WWW + '/#organization';
+var WEBSITE_ID = manifest.WWW + '/#website';
+
+function orgNode() {
+  return Object.assign({ '@type': 'Organization', '@id': ORG_ID }, manifest.ORG);
+}
+
+function homeGraph(page) {
+  return ld({
+    '@context': 'https://schema.org',
+    '@graph': [
+      orgNode(),
+      {
+        '@type': 'WebSite',
+        '@id': WEBSITE_ID,
+        url: manifest.WWW + '/',
+        name: 'BetterEngineer',
+        description: page.description,
+        publisher: { '@id': ORG_ID },
+        inLanguage: 'en',
+      },
+    ],
+  });
+}
+
+function serviceGraph(page, canonicalUrl, mainHtml) {
+  var h1Match = mainHtml.match(/<h1[^>]*>([\s\S]*?)<\/h1>/);
+  if (!h1Match) throw new Error('serviceSchema page has no <h1>: ' + page.slug);
+  var h1 = htmlToText(h1Match[1]).replace(/\s+/g, ' ');
+  return ld({
+    '@context': 'https://schema.org',
+    '@graph': [
+      orgNode(),
+      {
+        '@type': 'WebPage',
+        '@id': canonicalUrl + '#webpage',
+        url: canonicalUrl,
+        name: page.title,
+        description: page.description,
+        inLanguage: 'en',
+        isPartOf: { '@id': WEBSITE_ID },
+        breadcrumb: { '@id': canonicalUrl + '#breadcrumb' },
+      },
+      {
+        '@type': 'BreadcrumbList',
+        '@id': canonicalUrl + '#breadcrumb',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: manifest.WWW + '/' },
+          { '@type': 'ListItem', position: 2, name: page.serviceSchema.crumb, item: canonicalUrl },
+        ],
+      },
+      {
+        '@type': 'Service',
+        '@id': canonicalUrl + '#service',
+        name: h1,
+        description: page.description,
+        url: canonicalUrl,
+        provider: { '@id': ORG_ID },
+      },
+    ],
+  });
+}
+
 /* ── Head ────────────────────────────────────────────────────────────────────── */
 
 function buildExtraHead(page, mainHtml) {
@@ -375,6 +440,9 @@ function buildExtraHead(page, mainHtml) {
     extra += '  <meta property="og:title" content="' + attr(ogTitle) + '">\n';
     extra += '  <meta property="og:description" content="' + attr(ogDescription) + '">\n';
     extra += '  <meta property="og:type" content="' + ogType + '">\n';
+    if (page.serviceSchema && canonicalUrl) {
+      extra += '  <meta property="og:url" content="' + canonicalUrl + '">\n';
+    }
 
     if (page.migrated) {
       var ogImage = og.image || manifest.OG_IMAGE;
@@ -393,6 +461,12 @@ function buildExtraHead(page, mainHtml) {
 
   if (page.migrated) {
     extra += schemaBlocks(page, canonicalUrl, mainHtml);
+  }
+  if (page.slug === 'home') {
+    extra += homeGraph(page);
+  }
+  if (page.serviceSchema && canonicalUrl) {
+    extra += serviceGraph(page, canonicalUrl, mainHtml);
   }
 
   return extra;
