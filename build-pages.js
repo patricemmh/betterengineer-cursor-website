@@ -340,6 +340,10 @@ function schemaBlocks(page, canonicalUrl, mainHtml) {
 function buildExtraHead(page, mainHtml) {
   var extra = '';
   if (page.slug === 'home') {
+    /* Emit these here, not via page.canonical. A homepage canonical on the page
+       record would make INTERNAL_LINKS=local rewrite absolute nav links to "/". */
+    extra += '  <link rel="canonical" href="' + manifest.WWW + '/">\n';
+    extra += '  <meta property="og:url" content="' + manifest.WWW + '/">\n';
     extra +=
       '  <link rel="preload" as="image" href="./images/hero/home-ai-engineer-800.webp" type="image/webp" media="(max-width: 500px)" fetchpriority="high">\n' +
       '  <link rel="preload" as="image" href="./images/hero/home-ai-engineer-1120.webp" type="image/webp" media="(min-width: 501px)" fetchpriority="high">\n';
