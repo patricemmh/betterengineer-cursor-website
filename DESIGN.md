@@ -114,7 +114,7 @@ from here on.
 | `<h1>` | **Sentence case** | `Hire senior OpenAI API engineers in your time zone.` |
 | `<h2>`, `<h3>` | **Sentence case** | `What does a senior OpenAI API developer do?`, `Our simple hiring path` |
 | `.eyebrow` | **ALL CAPS** | `OPENAI API DEVELOPER FAQ` |
-| Buttons and CTAs | **Title Case** | `Book Your 20-Minute Intro` |
+| Buttons and CTAs | **Title Case** | `Book Your 30-Minute Intro` |
 | Meta description | Sentence case | |
 
 The short version: **the title tag is Title Case, everything a visitor reads on the

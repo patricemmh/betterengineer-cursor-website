@@ -1,0 +1,596 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Copy review, 2026-11-02 | BetterEngineer</title>
+<style>
+  :root {
+    --ink: #1d1f2b;
+    --muted: #5b6075;
+    --line: #e3e5ef;
+    --bg: #f7f8fc;
+    --card: #ffffff;
+    --brand: #4b3fd1;
+    --before-bg: #fdf1f1;
+    --before-line: #e7b4b4;
+    --before-ink: #7a2e2e;
+    --after-bg: #eef8f1;
+    --after-line: #a9d8b8;
+    --after-ink: #1f5c34;
+    --note-bg: #fff8e6;
+    --note-line: #f0d68a;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+  }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
+  header.top {
+    background: linear-gradient(135deg, #2b2370, #4b3fd1);
+    color: #fff;
+    padding: 48px 0 40px;
+  }
+  header.top h1 { margin: 0 0 8px; font-size: 2rem; line-height: 1.2; }
+  header.top p { margin: 0; max-width: 720px; opacity: .92; }
+  .pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+  .pill {
+    display: inline-block; padding: 4px 12px; border-radius: 999px;
+    background: rgba(255,255,255,.16); color: #fff; font-size: .85rem; text-decoration: none;
+  }
+  .pill:hover { background: rgba(255,255,255,.28); }
+  nav.toc {
+    position: sticky; top: 0; z-index: 5;
+    background: rgba(247,248,252,.95); backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav.toc .wrap { display: flex; gap: 20px; flex-wrap: wrap; padding-top: 12px; padding-bottom: 12px; font-size: .92rem; }
+  nav.toc a { color: var(--brand); text-decoration: none; font-weight: 600; }
+  main { padding: 32px 0 80px; }
+  section.commit { margin: 0 0 48px; }
+  .commit-head {
+    display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;
+    border-bottom: 2px solid var(--ink); padding-bottom: 8px; margin-bottom: 8px;
+  }
+  .commit-head h2 { margin: 0; font-size: 1.5rem; }
+  .letter {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 34px; height: 34px; border-radius: 8px; background: var(--brand); color: #fff;
+    font-weight: 700;
+  }
+  code.hash { background: #ecebfb; color: #3a2fb0; padding: 2px 8px; border-radius: 6px; font-size: .85rem; }
+  .commit-sub { color: var(--muted); margin: 0 0 20px; }
+  .page {
+    background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+    padding: 20px 22px; margin: 0 0 18px; box-shadow: 0 1px 2px rgba(20,20,60,.04);
+  }
+  .page-head { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: baseline; }
+  .page h3 { margin: 0; font-size: 1.15rem; }
+  .src { color: var(--muted); font-size: .85rem; margin: 2px 0 12px; }
+  .links { display: flex; gap: 8px; flex-wrap: wrap; }
+  .links a {
+    font-size: .85rem; text-decoration: none; padding: 4px 10px; border-radius: 6px;
+    border: 1px solid var(--line); color: var(--ink); background: #fafbff; white-space: nowrap;
+  }
+  .links a.review { border-color: #c9c4f5; color: var(--brand); font-weight: 600; }
+  .links a:hover { background: #f0efff; }
+  .change { margin: 14px 0 0; }
+  .change h4 { margin: 0 0 6px; font-size: .95rem; color: var(--muted); font-weight: 600; }
+  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  @media (max-width: 760px) { .pair { grid-template-columns: 1fr; } }
+  .before, .after { border-radius: 8px; padding: 10px 12px 12px; font-size: .95rem; }
+  .before { background: var(--before-bg); border: 1px solid var(--before-line); color: var(--before-ink); }
+  .after { background: var(--after-bg); border: 1px solid var(--after-line); color: var(--after-ink); }
+  .before::before, .after::before {
+    display: block; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; font-weight: 700; margin-bottom: 4px; opacity: .8;
+  }
+  .before::before { content: "Before"; }
+  .after::before { content: "After"; }
+  .note {
+    background: var(--note-bg); border: 1px solid var(--note-line); border-radius: 8px;
+    padding: 10px 14px; margin: 14px 0 0; font-size: .92rem;
+  }
+  table.counts { width: 100%; border-collapse: collapse; background: var(--card); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; font-size: .92rem; }
+  table.counts th, table.counts td { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  table.counts th { background: #f1f2f9; }
+  ul.plain { margin: 8px 0 0; padding-left: 20px; }
+  ul.plain li { margin: 4px 0; }
+  footer.end { color: var(--muted); font-size: .85rem; border-top: 1px solid var(--line); padding-top: 16px; }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <h1>Copy review, November 2, 2026</h1>
+    <p>Everything on this page is on the review branch <strong>copy-review-2026-11-02</strong> only. Nothing is pushed or deployed. Each change sits in its own commit, so any one of them can ship or be dropped on its own. Open a page on the review server next to the same page on the live site to compare.</p>
+    <div class="pill-row">
+      <a class="pill" href="#commit-a">A. LinkedIn</a>
+      <a class="pill" href="#commit-b">B. 44% and 72 hours</a>
+      <a class="pill" href="#commit-c">C. Plainer openings</a>
+      <a class="pill" href="#commit-d">D. Copy brief</a>
+      <a class="pill" href="#left-out">Left out</a>
+    </div>
+  </div>
+</header>
+
+<nav class="toc" aria-label="Sections">
+  <div class="wrap">
+    <a href="#commit-a">A. LinkedIn</a>
+    <a href="#commit-b">B. Claims</a>
+    <a href="#commit-c">C. Openings</a>
+    <a href="#commit-d">D. Brief</a>
+    <a href="#left-out">Not applied</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <!-- ============ A ============ -->
+  <section class="commit" id="commit-a">
+    <div class="commit-head">
+      <span class="letter">A</span>
+      <h2>Point the company LinkedIn at the BetterEngineer page</h2>
+      <code class="hash">fb10145</code>
+    </div>
+    <p class="commit-sub">One URL swap, everywhere it appears: footer icon on every page, Organization sameAs in structured data, role pages, technology generator, and templates. 149 files, one line each.</p>
+
+    <div class="page">
+      <div class="page-head">
+        <h3>Every page (footer and structured data)</h3>
+        <div class="links">
+          <a class="review" href="http://localhost:4324/" target="_blank" rel="noopener">Review: home</a>
+          <a href="https://www.betterengineer.com/" target="_blank" rel="noopener">Live: home</a>
+        </div>
+      </div>
+      <p class="src">Sources: footer-full.html, data/pages.js (ORG sameAs), build-tech-pages.js, roles/*/index.html, roles/roles-template, technologies/tech-template, tools/patch-role-indexability.js</p>
+      <div class="change">
+        <h4>LinkedIn link</h4>
+        <div class="pair">
+          <div class="before">https://www.linkedin.com/company/salsamobi</div>
+          <div class="after">https://www.linkedin.com/company/betterengineer</div>
+        </div>
+      </div>
+      <div class="note">The Facebook link (facebook.com/BetterEngineerbySalsaMobi) and the Calendly link (calendly.com/tim-salsamobi/30min) still carry the SalsaMobi name. They were not part of this decision, so they are unchanged.</div>
+    </div>
+  </section>
+
+  <!-- ============ B ============ -->
+  <section class="commit" id="commit-b">
+    <div class="commit-head">
+      <span class="letter">B</span>
+      <h2>Use 44% savings and 72 hours consistently</h2>
+      <code class="hash">03b3ba3</code>
+    </div>
+    <p class="commit-sub">Only wrong or retired numbers changed. 44% means fully loaded cost versus a U.S. hire. Experiments pages were not touched.</p>
+
+    <div class="page">
+      <div class="page-head">
+        <h3>Homepage stats</h3>
+        <div class="links">
+          <a class="review" href="http://localhost:4324/#stats" target="_blank" rel="noopener">Review</a>
+          <a href="https://www.betterengineer.com/#stats" target="_blank" rel="noopener">Live</a>
+        </div>
+      </div>
+      <p class="src">main-home.html, "Clients love us" stat labels. The numbers 72, 44%, and 21 stay.</p>
+      <div class="change"><h4>72 label</h4><div class="pair">
+        <div class="before">Avg hours to vet BetterEngineer profiles</div>
+        <div class="after">Average hours to present vetted candidates</div>
+      </div></div>
+      <div class="change"><h4>44% label</h4><div class="pair">
+        <div class="before">Avg 1st year cost saving vs US equivalent</div>
+        <div class="after">Average first-year hiring cost savings vs. U.S. hires</div>
+      </div></div>
+      <div class="change"><h4>21 label</h4><div class="pair">
+        <div class="before">Months of average engineer duration</div>
+        <div class="after">Months average engineer tenure</div>
+      </div></div>
+    </div>
+
+    <div class="page">
+      <div class="page-head">
+        <h3>FAQs</h3>
+        <div class="links">
+          <a class="review" href="http://localhost:4324/faqs-nearshore-software-engineers-staff-augmentation-ai-talent/" target="_blank" rel="noopener">Review</a>
+          <a href="https://www.betterengineer.com/faqs-nearshore-software-engineers-staff-augmentation-ai-talent" target="_blank" rel="noopener">Live</a>
+        </div>
+      </div>
+      <p class="src">main-faqs.html. The FAQPage structured data is built from these answers, so it now carries the same numbers.</p>
+      <div class="change"><h4>"Is it worth it to use a staffing agency?", first bullet</h4><div class="pair">
+        <div class="before">Faster Hiring (Reduce Time-to-Hire by 50-70%)<br>Traditional hiring cycles can take 8-12 weeks or more. With our ready-to-go network of vetted engineers, companies typically receive candidates within 72 hours.</div>
+        <div class="after">Faster Hiring<br>You see vetted candidates within 72 hours. On average, clients hire in 38 days.</div>
+      </div></div>
+      <div class="change"><h4>Same answer, second bullet</h4><div class="pair">
+        <div class="before">Cost Efficiency (Save 30-50% on Total Talent Costs)<br>Nearshore outsourcing enables substantial savings compared to U.S.-based hires. Clients see cost reductions not just in salaries, but also in recruiting, onboarding, and HR overhead.</div>
+        <div class="after">Cost Efficiency (44% Average Savings)<br>Clients save 44% on average compared with the fully loaded first-year cost of a U.S. hire. That figure counts salary, benefits, recruiting, and HR.</div>
+      </div></div>
+      <div class="change"><h4>"How do Latin American developer salaries compare to those in the U.S.?"</h4><div class="pair">
+        <div class="before">On average, Latin American developers earn <strong>50-70% less</strong> than U.S.-based engineers in equivalent roles. This cost difference is one of the main reasons U.S. companies hire nearshore technical talent.</div>
+        <div class="after">Salaries vary by country, seniority, and stack. BetterEngineer clients save <strong>44%</strong> on average on first-year hiring costs compared with hiring the same role in the U.S. This cost difference is one of the main reasons U.S. companies hire nearshore technical talent.</div>
+      </div></div>
+      <div class="note">38 days is an approved proof point in COPY_BRIEF.md, so it replaces the unsourced "8 to 12 weeks". The second bullet uses the fully loaded definition you confirmed (salary, benefits, recruiting, HR) instead of the draft's "recruiting, onboarding, and HR work we take on".</div>
+    </div>
+
+    <div class="page">
+      <div class="page-head">
+        <h3>Staff Augmentation</h3>
+        <div class="links">
+          <a class="review" href="http://localhost:4324/staff-augmentation/#faq" target="_blank" rel="noopener">Review</a>
+          <a href="https://www.betterengineer.com/staff-augmentation" target="_blank" rel="noopener">Live</a>
+        </div>
+      </div>
+      <p class="src">main-staff-augmentation.html, FAQ "Is it worth it to use a staffing agency?". Same two bullets as the FAQs page.</p>
+      <div class="change"><h4>First bullet</h4><div class="pair">
+        <div class="before">Faster Hiring (Reduce Time-to-Hire by 50-70%)<br>Traditional hiring cycles can take 8-12 weeks or more. With our ready-to-go network of vetted engineers, companies typically receive candidates within 72 hours.</div>
+        <div class="after">Faster Hiring<br>You see vetted candidates within 72 hours. On average, clients hire in 38 days.</div>
+      </div></div>
+      <div class="change"><h4>Second bullet</h4><div class="pair">
+        <div class="before">Cost Efficiency (Save 30-50% on Total Talent Costs)<br>Nearshore outsourcing enables substantial savings compared to U.S.-based hires. Clients see cost reductions not just in salaries, but also in recruiting, onboarding, and HR overhead.</div>
+        <div class="after">Cost Efficiency (44% Average Savings)<br>Clients save 44% on average compared with the fully loaded first-year cost of a U.S. hire. That figure counts salary, benefits, recruiting, and HR.</div>
+      </div></div>
+    </div>
+
+    <div class="page">
+      <div class="page-head">
+        <h3>LATAM Engineer</h3>
+        <div class="links">
+          <a class="review" href="http://localhost:4324/latamengineer/" target="_blank" rel="noopener">Review</a>
+          <a href="https://www.betterengineer.com/latamengineer" target="_blank" rel="noopener">Live</a>
+        </div>
+      </div>
+      <p class="src">main-latamengineer.html</p>
+      <div class="change"><h4>Cost section heading (h3)</h4><div class="pair">
+        <div class="before">Save up to 50% without sacrificing the quality.</div>
+        <div class="after">Save 44% on first-year hiring costs, with senior engineers only.</div>
+      </div></div>
+      <div class="change"><h4>FAQ benefits list</h4><div class="pair">
+        <div class="before">Cost savings (30-50% vs. U.S. averages)</div>
+        <div class="after">Cost savings (44% on average in first-year hiring costs vs. U.S. hires)</div>
+      </div></div>
+      <div class="change"><h4>Hero form title and button</h4><div class="pair">
+        <div class="before">Book a 20-minute intro and tell us about your hiring needs.<br>Button: Book Your 20-Minute Intro</div>
+        <div class="after">Book a 30-minute intro and tell us about your hiring needs.<br>Button: Book Your 30-Minute Intro</div>
+      </div></div>
+    </div>
+
+    <div class="page">
+      <div class="page-head">
+        <h3>Contact</h3>
+        <div class="links">
+          <a class="review" href="http://localhost:4324/contact/" target="_blank" rel="noopener">Review</a>
+          <a href="https://www.betterengineer.com/contact" target="_blank" rel="noopener">Live</a>
+        </div>
+      </div>
+      <p class="src">main-contact.html, FAQ "How long will it take for me to meet candidates from BetterEngineer?"</p>
+      <div class="change"><h4>Answer</h4><div class="pair">
+        <div class="before">We pride ourselves on introducing you to pre-vetted talent as soon as possible. While some specialties may take longer than others to find a perfect match, we will generally present you with senior-level engineers within four days.</div>
+        <div class="after">We pride ourselves on introducing you to pre-vetted talent as soon as possible. We will generally present senior-level engineers within 72 hours. Some specialties take longer to match.</div>
+      </div></div>
+    </div>
+
+    <div class="page">
+      <div class="page-head">
+        <h3>AI Readiness</h3>
+        <div class="links">
+          <a class="review" href="http://localhost:4324/ai-readiness/" target="_blank" rel="noopener">Review</a>
+          <a href="https://www.betterengineer.com/ai-readiness" target="_blank" rel="noopener">Live</a>
+        </div>
+      </div>
+      <p class="src">main-ai-readiness.html, hero form</p>
+      <div class="change"><h4>Hero form title and button</h4><div class="pair">
+        <div class="before">Book a 20-minute intro and tell us about your AI goals.<br>Button: Book Your 20-Minute Intro</div>
+        <div class="after">Book a 30-minute intro and tell us about your AI goals.<br>Button: Book Your 30-Minute Intro</div>
+      </div></div>
+    </div>
+
+    <div class="page">
+      <div class="page-head">
+        <h3>AI fluency page</h3>
+        <div class="links">
+          <a class="review" href="http://localhost:4324/services/hire-ai-ready-engineers/#numbers" target="_blank" rel="noopener">Review</a>
+          <a href="https://www.betterengineer.com/ai-fluent-engineers/#numbers" target="_blank" rel="noopener">Live</a>
+        </div>
+      </div>
+      <p class="src">main-hire-ai-ready-engineers.html (ships as /ai-fluent-engineers/). The $107K figure is dropped everywhere.</p>
+      <div class="change"><h4>Comparison table, BetterEngineer column, cost row</h4><div class="pair">
+        <div class="before">44% avg savings, about $107K per hire per year</div>
+        <div class="after">44% avg savings vs. a fully loaded U.S. hire</div>
+      </div></div>
+      <div class="change"><h4>"The numbers behind our relationships", fourth card</h4><div class="pair">
+        <div class="before"><strong>$107K</strong><br>Average first-year savings per hire vs. U.S.-based equivalent. Hire smarter, not just faster.</div>
+        <div class="after"><strong>44%</strong><br>Average first-year savings vs. the fully loaded cost of a U.S. hire. Hire smarter, not just faster.</div>
+      </div></div>
+    </div>
+
+    <div class="page">
+      <div class="page-head">
+        <h3>Role pages (8 with the short card)</h3>
+        <div class="links">
+          <a class="review" href="http://localhost:4324/roles/ai-engineers/" target="_blank" rel="noopener">Review: AI engineers</a>
+          <a href="https://www.betterengineer.com/roles/ai-engineers/" target="_blank" rel="noopener">Live: AI engineers</a>
+        </div>
+      </div>
+      <p class="src">roles/ai-engineers, back-end-engineers, data-engineers, data-science-engineers, devops-engineers, full-stack-engineers, mobile-engineers, qa-engineers</p>
+      <div class="change"><h4>"Real Cost Advantage" card</h4><div class="pair">
+        <div class="before">On average, save 42% in first-year hiring costs compared to U.S. hires while keeping a senior-only talent bar.</div>
+        <div class="after">On average, save 44% in first-year hiring costs compared to U.S. hires while keeping a senior-only talent bar.</div>
+      </div></div>
+      <div class="change"><h4>Hero form title and button (all 10 role pages)</h4><div class="pair">
+        <div class="before">Book a 20-minute intro and tell us what you need ...<br>Button: Book Your 20-Minute Intro</div>
+        <div class="after">Book a 30-minute intro and tell us what you need ...<br>Button: Book Your 30-Minute Intro</div>
+      </div></div>
+      <div class="links" style="margin-top:12px">
+        <a class="review" href="http://localhost:4324/roles/back-end-engineers/" target="_blank" rel="noopener">Back end</a>
+        <a class="review" href="http://localhost:4324/roles/data-engineers/" target="_blank" rel="noopener">Data</a>
+        <a class="review" href="http://localhost:4324/roles/data-science-engineers/" target="_blank" rel="noopener">Data science</a>
+        <a class="review" href="http://localhost:4324/roles/devops-engineers/" target="_blank" rel="noopener">DevOps</a>
+        <a class="review" href="http://localhost:4324/roles/full-stack-engineers/" target="_blank" rel="noopener">Full stack</a>
+        <a class="review" href="http://localhost:4324/roles/mobile-engineers/" target="_blank" rel="noopener">Mobile</a>
+        <a class="review" href="http://localhost:4324/roles/qa-engineers/" target="_blank" rel="noopener">QA</a>
+      </div>
+    </div>
+
+    <div class="page">
+      <div class="page-head">
+        <h3>Role pages: front-end and blockchain</h3>
+        <div class="links">
+          <a class="review" href="http://localhost:4324/roles/front-end-engineers/" target="_blank" rel="noopener">Review: front-end</a>
+          <a href="https://www.betterengineer.com/roles/front-end-engineers/" target="_blank" rel="noopener">Live: front-end</a>
+          <a class="review" href="http://localhost:4324/roles/blockchain-engineers/" target="_blank" rel="noopener">Review: blockchain</a>
+          <a href="https://www.betterengineer.com/roles/blockchain-engineers/" target="_blank" rel="noopener">Live: blockchain</a>
+        </div>
+      </div>
+      <p class="src">roles/front-end-engineers and roles/blockchain-engineers. The same text is fixed in roles/roles-template and technologies/tech-template, which do not ship but seed new pages.</p>
+      <div class="change"><h4>"Real Cost Advantage Without Compromise" card</h4><div class="pair">
+        <div class="before">On average, save $107,000 per engineer in the first year, 42% less than U.S. hiring. You get world-class senior talent, not trade-offs or short-cuts.</div>
+        <div class="after">On average, save 44% on first-year hiring costs compared to U.S. hiring. You get senior talent, not trade-offs or short-cuts.</div>
+      </div></div>
+    </div>
+
+    <div class="page">
+      <div class="page-head">
+        <h3>Technology pages (58) and FinTech</h3>
+        <div class="links">
+          <a class="review" href="http://localhost:4324/technologies/python-developers/" target="_blank" rel="noopener">Review: Python</a>
+          <a href="https://www.betterengineer.com/technologies/python-developers/" target="_blank" rel="noopener">Live: Python</a>
+          <a class="review" href="http://localhost:4324/fintech/" target="_blank" rel="noopener">Review: FinTech</a>
+          <a href="https://www.betterengineer.com/fintech" target="_blank" rel="noopener">Live: FinTech</a>
+        </div>
+      </div>
+      <p class="src">build-tech-pages.js and technologies/tech-template (all 58 pages regenerated); build-industries.js and fragments/industries/fintech.html; tools/migrated-blocks.js default form title</p>
+      <div class="change"><h4>Hero form title and button</h4><div class="pair">
+        <div class="before">Book a 20-minute intro and tell us about your Python project.<br>Button: Book Your 20-Minute Intro</div>
+        <div class="after">Book a 30-minute intro and tell us about your Python project.<br>Button: Book Your 30-Minute Intro</div>
+      </div></div>
+      <div class="note">Nothing else on the technology pages changed. They already said 44% and 72 hours.</div>
+    </div>
+  </section>
+
+  <!-- ============ C ============ -->
+  <section class="commit" id="commit-c">
+    <div class="commit-head">
+      <span class="letter">C</span>
+      <h2>Plainer openings for engineering leaders</h2>
+      <code class="hash">2740636</code>
+    </div>
+    <p class="commit-sub">Written for a VP Engineering or CTO at an established company. Same sections, same number of headings, same CTA labels. The H1 "Better AI Native Engineers. Better Results." and the Troutwood testimonial are unchanged.</p>
+
+    <div class="page">
+      <div class="page-head">
+        <h3>Homepage hero</h3>
+        <div class="links">
+          <a class="review" href="http://localhost:4324/" target="_blank" rel="noopener">Review</a>
+          <a href="https://www.betterengineer.com/" target="_blank" rel="noopener">Live</a>
+        </div>
+      </div>
+      <p class="src">main-home.html, #hero lead paragraph</p>
+      <div class="change"><h4>Lead</h4><div class="pair">
+        <div class="before">We build relationships with exceptional AI native software engineers throughout the Americas. Scale your team with senior engineers to fit your culture and time-zone, for better results.</div>
+        <div class="after">We place senior, AI-fluent engineers from Latin America on U.S. software teams. You see vetted profiles in 72 hours, and every engineer works your hours. Clients save 44% on first-year hiring costs, on average.</div>
+      </div></div>
+    </div>
+
+    <div class="page">
+      <div class="page-head">
+        <h3>Homepage AI readiness</h3>
+        <div class="links">
+          <a class="review" href="http://localhost:4324/#ai-readiness" target="_blank" rel="noopener">Review</a>
+          <a href="https://www.betterengineer.com/#ai-readiness" target="_blank" rel="noopener">Live</a>
+        </div>
+      </div>
+      <p class="src">main-home.html, #ai-readiness. Left H2 and the "Discover Your AI Solutions" button are unchanged.</p>
+      <div class="change"><h4>Lead</h4><div class="pair">
+        <div class="before">Get on-demand access to AI experts who will analyze your current capabilities, identify opportunities, and create a tailored roadmap for your success.</div>
+        <div class="after">In 4 to 6 weeks, we interview your stakeholders, review your workflows, and rank where AI will pay off first. You get an executive readout and a roadmap your team can act on.</div>
+      </div></div>
+      <div class="change"><h4>Right H2</h4><div class="pair">
+        <div class="before">Empower Your Projects with our AI Readiness Assessment.</div>
+        <div class="after">Know where AI fits before you staff for it.</div>
+      </div></div>
+    </div>
+
+    <div class="page">
+      <div class="page-head">
+        <h3>Homepage Slack</h3>
+        <div class="links">
+          <a class="review" href="http://localhost:4324/#slack" target="_blank" rel="noopener">Review</a>
+          <a href="https://www.betterengineer.com/#slack" target="_blank" rel="noopener">Live</a>
+        </div>
+      </div>
+      <p class="src">main-home.html, #slack</p>
+      <div class="change"><h4>Lead</h4><div class="pair">
+        <div class="before">We offer full Slack integration. Simply Slack us about your hiring needs and we will submit fully vetted candidates within 72 hours.</div>
+        <div class="after">Message us in Slack with the role you need. We send fully vetted candidates within 72 hours.</div>
+      </div></div>
+    </div>
+
+    <div class="page">
+      <div class="page-head">
+        <h3>Homepage "The talent you need"</h3>
+        <div class="links">
+          <a class="review" href="http://localhost:4324/#skills" target="_blank" rel="noopener">Review</a>
+          <a href="https://www.betterengineer.com/#skills" target="_blank" rel="noopener">Live</a>
+        </div>
+      </div>
+      <p class="src">main-home.html, #skills. Card titles, links, and the Featured badge are unchanged.</p>
+      <div class="change"><h4>Lead</h4><div class="pair">
+        <div class="before">Partner with talented, ambitious engineers who will push the boundaries of your technology and drive success. We specialize in a wide range of tech skills.</div>
+        <div class="after">Hire senior engineers by role. Every candidate passes technical, communication, and AI fluency checks before you see a profile.</div>
+      </div></div>
+      <div class="change"><h4>AI engineers card</h4><div class="pair">
+        <div class="before">LLMs, RAG, vector databases, and production AI workflows beyond demo-stage prototypes.</div>
+        <div class="after">Move LLM and RAG features from demo to production inside your existing stack.</div>
+      </div></div>
+      <div class="change"><h4>Full stack engineers card</h4><div class="pair">
+        <div class="before">Senior engineers for end-to-end product work across React, Node.js, TypeScript, APIs, and cloud deployment.</div>
+        <div class="after">Own features end to end, from the React front end to the Node.js API and the deploy.</div>
+      </div></div>
+      <div class="change"><h4>Front-end engineers card</h4><div class="pair">
+        <div class="before">Hire vetted senior front-end engineers for React, TypeScript, and design systems with U.S. hours overlap.</div>
+        <div class="after">Build React and TypeScript screens that follow your design system and pass review.</div>
+      </div></div>
+      <div class="change"><h4>Back end engineers card</h4><div class="pair">
+        <div class="before">APIs, microservices, databases, and scalable cloud systems from vetted nearshore senior engineers.</div>
+        <div class="after">Design APIs, services, and databases that hold up as your traffic grows.</div>
+      </div></div>
+      <div class="change"><h4>Mobile engineers card</h4><div class="pair">
+        <div class="before">iOS, Android, React Native, and Flutter talent for apps that ship reliably through store review.</div>
+        <div class="after">Ship iOS and Android apps in native code, React Native, or Flutter, and get them through store review.</div>
+      </div></div>
+      <div class="change"><h4>Data engineers card</h4><div class="pair">
+        <div class="before">Pipelines, warehouses, Airflow, dbt, and Spark expertise for dependable data infrastructure.</div>
+        <div class="after">Build data pipelines your reports can trust, with tools like Airflow, dbt, and Spark.</div>
+      </div></div>
+      <div class="change"><h4>Data science engineers card</h4><div class="pair">
+        <div class="before">Machine learning, experimentation, and predictive analytics that connect to real product decisions.</div>
+        <div class="after">Run experiments and build models that answer real product questions.</div>
+      </div></div>
+      <div class="change"><h4>DevOps engineers card</h4><div class="pair">
+        <div class="before">CI/CD, Kubernetes, AWS, monitoring, and automation for safer, faster releases.</div>
+        <div class="after">Set up CI/CD, Kubernetes, and monitoring so your team can release often and roll back safely.</div>
+      </div></div>
+      <div class="change"><h4>QA engineers card</h4><div class="pair">
+        <div class="before">Manual QA, Cypress, Playwright, and API testing to raise release confidence.</div>
+        <div class="after">Write Cypress, Playwright, and API tests, and run manual checks before each release.</div>
+      </div></div>
+      <div class="note">Tradeoff: the old cards carried more stack keywords (vector databases, microservices, warehouses, AWS). The role pages they link to still carry those terms.</div>
+    </div>
+
+    <div class="page">
+      <div class="page-head">
+        <h3>Homepage LATAM</h3>
+        <div class="links">
+          <a class="review" href="http://localhost:4324/#latam" target="_blank" rel="noopener">Review</a>
+          <a href="https://www.betterengineer.com/#latam" target="_blank" rel="noopener">Live</a>
+        </div>
+      </div>
+      <p class="src">main-home.html, #latam. Heading, location line, and button unchanged.</p>
+      <div class="change"><h4>Lead</h4><div class="pair">
+        <div class="before">Work with senior software engineers across Latin America in overlapping U.S. hours. You get global reach with day-to-day collaboration that feels local.</div>
+        <div class="after">Our engineers live in Argentina, Brazil, Colombia, and Costa Rica and work U.S. business hours. They join your standups, code reviews, and Slack threads in real time.</div>
+      </div></div>
+    </div>
+
+    <div class="page">
+      <div class="page-head">
+        <h3>LATAM Engineer opening</h3>
+        <div class="links">
+          <a class="review" href="http://localhost:4324/latamengineer/" target="_blank" rel="noopener">Review</a>
+          <a href="https://www.betterengineer.com/latamengineer" target="_blank" rel="noopener">Live</a>
+        </div>
+      </div>
+      <p class="src">main-latamengineer.html, hero lead. H1 unchanged.</p>
+      <div class="change"><h4>Lead</h4><div class="pair">
+        <div class="before">Discover how nearshoring to Latin America can transform your business with senior software engineers - streamlined, vetted, and cost-effective.</div>
+        <div class="after">BetterEngineer connects U.S. engineering teams with senior software engineers in Argentina, Brazil, Colombia, and Costa Rica. They work U.S. business hours, and you see vetted profiles within 72 hours. Clients save 44% on first-year hiring costs compared with a U.S. hire, on average.</div>
+      </div></div>
+    </div>
+
+    <div class="page">
+      <div class="page-head">
+        <h3>Staff Augmentation opening</h3>
+        <div class="links">
+          <a class="review" href="http://localhost:4324/staff-augmentation/" target="_blank" rel="noopener">Review</a>
+          <a href="https://www.betterengineer.com/staff-augmentation" target="_blank" rel="noopener">Live</a>
+        </div>
+      </div>
+      <p class="src">main-staff-augmentation.html, hero lead. H1 unchanged.</p>
+      <div class="change"><h4>Lead</h4><div class="pair">
+        <div class="before">Don't let limited resources stall your growth. Get access to our pre-vetted network of passionate senior software engineers in just 72 hours.</div>
+        <div class="after">BetterEngineer adds senior Latin American software engineers to U.S. engineering teams, for one project or a long-term role. You see vetted profiles in 72 hours, and every engineer works U.S. hours. Clients save 44% on first-year hiring costs, on average.</div>
+      </div></div>
+      <div class="note">The draft's optional fourth sentence ("We handle contracts, payroll, and HR, so your team interviews and manages the work.") was not added. Say the word if you want it.</div>
+    </div>
+  </section>
+
+  <!-- ============ D ============ -->
+  <section class="commit" id="commit-d">
+    <div class="commit-head">
+      <span class="letter">D</span>
+      <h2>Update the copy brief to 44% and 72 hours</h2>
+      <code class="hash">this commit</code>
+    </div>
+    <p class="commit-sub">Docs only. Nothing here ships. This page is part of this commit.</p>
+
+    <div class="page">
+      <h3>COPY_BRIEF.md</h3>
+      <div class="change"><h4>Approved proof point</h4><div class="pair">
+        <div class="before">42.8% average first-year hiring cost savings.</div>
+        <div class="after">44% average first-year hiring cost savings. This is fully loaded cost versus a U.S. hire (salary, benefits, recruiting, HR).<br>Also added: the intro call is 30 minutes.</div>
+      </div></div>
+      <div class="change"><h4>New "Retired claims (do not use)" list</h4><div class="pair">
+        <div class="before">(none)</div>
+        <div class="after">42.8% or 42%; 30 to 50% and up to 50%; 50 to 70% faster time-to-hire and 50 to 70% lower salaries; $107,000 or $107K per hire; within four days; 20-minute intro.</div>
+      </div></div>
+      <div class="change"><h4>Website primary ICP</h4><div class="pair">
+        <div class="before">(not stated; three ICPs listed equally)</div>
+        <div class="after">Established companies (ICP 2), read by a VP Engineering or CTO. Current clients are mostly startups and founders found through the CEO's event networking, but the website targets established companies.</div>
+      </div></div>
+      <div class="note">72 hours was already the approved speed proof point, so that line did not change.</div>
+    </div>
+
+    <div class="page">
+      <h3>docs/site-migration/content-followups.md</h3>
+      <ul class="plain">
+        <li><strong>CF-03</strong> (Staff Augmentation cost claims): decided 2026-11-02, one savings claim site wide, 44% vs. the fully loaded cost of a U.S. hire.</li>
+        <li><strong>CF-04</strong> (LATAM savings claim): decided 2026-11-02, both LATAM claims become 44%.</li>
+        <li><strong>CF-67</strong> (FAQ claims vs. other pages): decided 2026-11-02, 72 hours everywhere and 44% savings, including the salary answer.</li>
+        <li><strong>CF-35</strong> (SalsaMobi links): note added that LinkedIn now points at the BetterEngineer page on this branch.</li>
+      </ul>
+    </div>
+
+    <div class="page">
+      <h3>Small doc fixes so future drafts do not bring old numbers back</h3>
+      <ul class="plain">
+        <li>.cursor/skills/create-tech-page/SKILL.md: "42.8% average savings" becomes "44% average savings".</li>
+        <li>DESIGN.md: CTA example "Book Your 20-Minute Intro" becomes "Book Your 30-Minute Intro".</li>
+        <li>docs/copy-review/2026-11-02-ai-readiness-copy.md: added to the branch with a status line pointing here.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ Left out ============ -->
+  <section class="commit" id="left-out">
+    <div class="commit-head"><h2>Not applied, and why</h2></div>
+    <table class="counts">
+      <tr><th>Item</th><th>Why</th></tr>
+      <tr><td>Homepage AI readiness button "Discover Your AI Solutions" to "See How the Assessment Works"</td><td>CTA labels were to stay unchanged.</td></tr>
+      <tr><td>Staff Augmentation optional fourth sentence about contracts, payroll, and HR</td><td>Marked optional in the draft.</td></tr>
+      <tr><td>Experiments pages: /hire-software-engineers-in-72-hours/, /case-studies/securelink/ ("Up to 3x cost savings"), /engineer-playlist/, /industries/, /find-engineers/</td><td>Held back. Their copy is unchanged. They do pick up the new LinkedIn URL from the shared footer (commit A).</td></tr>
+      <tr><td>LiveCGI "40% cost savings"</td><td>One client's result, kept as is.</td></tr>
+      <tr><td>"In as little as 72 hours" vs. "often in 72 hours" wording</td><td>The number is right; phrasing was not standardized.</td></tr>
+      <tr><td>Facebook and Calendly handles with "salsamobi"</td><td>Not part of the LinkedIn decision.</td></tr>
+      <tr><td>"Partnered with Top Brands and Startups" and other CTA labels</td><td>Out of scope for this pass.</td></tr>
+    </table>
+  </section>
+
+  <footer class="end">
+    Review server: http://localhost:4324/ (serves the review worktree). Live site: https://www.betterengineer.com/. Branch copy-review-2026-11-02, based on go-live-www-2026-10-28 at ab62888. Not pushed.
+  </footer>
+</main>
+</body>
+</html>

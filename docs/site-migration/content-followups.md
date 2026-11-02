@@ -6,11 +6,11 @@ content decision before anyone edits them.
 
 Each item records: what it is, where it is, and what the decision is.
 
-Last updated: 2026-09-08
+Last updated: 2026-11-02
 
 Section 10 is the decision log. Items marked **Done** there are applied in the
-fragments. Remaining blockers are approved numbers (CF-03, CF-04, CF-67), contact
-form capture (CF-56, CF-57), and glossary QA Engineer sign-off (CF-63).
+fragments. Approved numbers (CF-03, CF-04, CF-67) were decided 2026-11-02. Remaining
+blockers are contact form capture (CF-56, CF-57) and glossary QA Engineer sign-off (CF-63).
 
 ---
 
@@ -20,8 +20,8 @@ form capture (CF-56, CF-57), and glossary QA Engineer sign-off (CF-63).
 | --- | --- | --- | --- |
 | CF-01 | LATAM Engineer | The section "Similar Time Zones & Real-Time Collaboration" appears **twice, back to back**, with identical heading, paragraph, and CTA. | **Done.** Duplicate deleted from `main-latamengineer.html`. |
 | CF-02 | Join Us | The trait "AI-Enabled Mindset" appears **twice** with identical copy. | **Done 2026-09-08.** Duplicate sixth card removed from `main-join.html`. |
-| CF-03 | Staff Augmentation | **Contradictory cost claims on the same page.** A differentiator card says "reducing costs by 42.8% on average". FAQ 11 says "Save 30-50% on Total Talent Costs". | Pick one number, or explain the difference. |
-| CF-04 | LATAM Engineer | **Inconsistent savings claim**: "Save up to 50%" in one place, "30-50%" in another. | Same decision as CF-03. Should be one approved number site wide. |
+| CF-03 | Staff Augmentation | **Contradictory cost claims on the same page.** A differentiator card says "reducing costs by 42.8% on average". FAQ 11 says "Save 30-50% on Total Talent Costs". | **Decided 2026-11-02.** One savings claim site wide: 44% average first-year savings vs. the fully loaded cost of a U.S. hire. |
+| CF-04 | LATAM Engineer | **Inconsistent savings claim**: "Save up to 50%" in one place, "30-50%" in another. | **Decided 2026-11-02.** Same as CF-03: both LATAM claims become 44%. |
 | CF-05 | About | The hero paragraph contains **em dash characters**: "We take the hardest part of software development—finding top talent—and make it easy." | The repo forbids the em dash character and the build fails on it. Needs an approved rewrite, not a silent substitution. |
 | CF-06 | Hiring Dashboard | **Em dashes in at least 5 places** in body copy. | Same as CF-05. |
 | CF-07 | Join Us | **Em dashes in 5 places.** | Same as CF-05. |
@@ -142,7 +142,7 @@ Title tags and eyebrows would not change.
 | CF-64 | Glossary | `Selenium WebDriver` and `WebDriver (Selenium WebDriver)` are **byte-identical duplicate entries**. `Vanilla JavaScript` is out of alphabetical order on the live page (the generator now sorts it correctly). | Delete one of the duplicates, or differentiate them. |
 | CF-65 | Glossary | Five definitions contained em dash characters, replaced with commas or colons per the standing rule. Wording unchanged. Each is marked with a `note` field in `data/glossary.js`. | Approve the substitutions. |
 | CF-66 | FAQs | A production signup link on the live page carries a **leaked HubSpot preview parameter** (`?hs_preview=ZKiKAtZX-196806927364`). | **Done 2026-09-08.** Stripped. Target is `https://app.betterengineer.com/sign-up/hiring-manager`. |
-| CF-67 | FAQs | The page's own claims contradict other pages: "72 hours" here vs "within four days" on `/contact`, and four different savings figures across the site (42%, 30-50%, 50-70%, up to 50%). | Same decision as CF-03 and CF-04. There should be one approved number. |
+| CF-67 | FAQs | The page's own claims contradict other pages: "72 hours" here vs "within four days" on `/contact`, and four different savings figures across the site (42%, 30-50%, 50-70%, up to 50%). | **Decided 2026-11-02.** Speed is 72 hours everywhere (Contact drops "within four days") and savings is 44%, including the FAQ salary answer. |
 
 ---
 
@@ -162,9 +162,9 @@ Title tags and eyebrows would not change.
 | CF-54 | Fetch the blog RSS at build time | **Wired.** `build-blog-feed.js` writes `data/blog-feed.json`; pages use `<!--BLOG_FEED:...-->` tokens |
 | CF-62 | Keep both ebooks ungated with crawlable PDF links | **Decided.** See FW-01 and FW-02 below |
 | CF-61 | Podcast stays as outbound SoundCloud links, no embedded player | **Decided.** See FW-03 below |
-| CF-35 | SalsaMobi Calendly and LinkedIn stay; account-level change | **Logged as a business task** |
+| CF-35 | SalsaMobi Calendly and LinkedIn stay; account-level change | **Logged as a business task.** 2026-11-02: LinkedIn now points at `linkedin.com/company/betterengineer` on branch `copy-review-2026-11-02`. Calendly and Facebook handles unchanged |
 | CF-36 | Two contact entry points; decide during Phase 5 | **Deferred to Phase 5** |
-| CF-03, CF-04, CF-67 | Standardize the cost and speed claims | **Blocked on the approved numbers** |
+| CF-03, CF-04, CF-67 | Standardize the cost and speed claims | **Decided 2026-11-02.** 44% (fully loaded cost vs. a U.S. hire) and 72 hours. Applied on branch `copy-review-2026-11-02`, pending Patrice's review |
 
 ## 11. Future work recorded, not implemented
 

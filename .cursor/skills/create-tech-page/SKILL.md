@@ -88,7 +88,7 @@ Notes on specific fields:
   attaches the evaluation checklist to whichever section is last.
 - Approved BetterEngineer proof points only (from `COPY_BRIEF.md`): 25,000+ vetted
   engineers, 72 hours to first profiles, 38 days average time to hire, 3 of 4
-  candidates interviewed, 21.3 months average tenure, 42.8% average savings, 98%
+  candidates interviewed, 21.3 months average tenure, 44% average savings, 98%
   long-term engagement rate. Never invent company numbers.
 
 ## Step 2, repopulate the engineer roster if needed

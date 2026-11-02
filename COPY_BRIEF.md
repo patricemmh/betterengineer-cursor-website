@@ -42,12 +42,26 @@ Use these when relevant and accurate for the page context:
 - 38 days average time to hire.
 - 3 out of 4 presented candidates are interviewed.
 - 21.3 months average engineer tenure.
-- 42.8% average first-year hiring cost savings.
+- 44% average first-year hiring cost savings. This is fully loaded cost versus a U.S. hire (salary, benefits, recruiting, HR). Say what it is compared against only where it fits naturally, for example "44% lower fully loaded cost than a U.S. hire".
 - 98% of placements lead to long-term engagements.
+- The intro call is 30 minutes (matches Calendly).
+
+### Retired claims (do not use)
+
+Decided 2026-11-02. Use 44% and 72 hours instead.
+
+- 42.8% or 42% savings.
+- "30 to 50%" or "up to 50%" savings.
+- "50 to 70%" faster time-to-hire, and "50 to 70% lower salaries".
+- $107,000 (or $107K) saved per hire. It has no source.
+- "Within four days" to present candidates.
+- "20-minute intro". The call is 30 minutes.
 
 ## ICP Segments
 
 Always choose the primary ICP before drafting a section.
+
+**Website primary ICP: established companies (ICP 2), read by a VP Engineering or CTO.** Current clients are mostly startups and founders found through the CEO's event networking. The website targets established companies, so default to ICP 2 unless a page is built for another segment.
 
 ### ICP 1: Startups (5 to 50 employees)
 
@@ -100,4 +114,5 @@ Always choose the primary ICP before drafting a section.
 ## Source Notes
 
 - Updated using Founder Press Kit, Deck 2026, and New Positioning Statement + ICPs (Staff Aug).
+- 2026-11-02: Patrice approved 44% (fully loaded cost vs. a U.S. hire) and 72 hours as the only savings and speed claims, retired the claims listed above, and set established companies as the website primary ICP.
 - If strategy changes, update this file first, then revise page copy.
