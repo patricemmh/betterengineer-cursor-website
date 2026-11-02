@@ -107,7 +107,7 @@ const ORG = {
   url: "https://www.betterengineer.com/",
   logo: "https://www.betterengineer.com/icons/betterengineer-logo.svg",
   sameAs: [
-    "https://www.linkedin.com/company/salsamobi",
+    "https://www.linkedin.com/company/betterengineer",
     "https://www.facebook.com/BetterEngineerbySalsaMobi",
     "https://www.instagram.com/betterengineer_/"
   ]
