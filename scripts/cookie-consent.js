@@ -181,6 +181,36 @@
     ]);
   }
 
+  var HUBSPOT_POPUP_SELECTOR =
+    '#hs-web-interactives-top-anchor,#hs-web-interactives-bottom-anchor,' +
+    '#hs-web-interactive-top-anchor,#hs-web-interactive-bottom-anchor,' +
+    '#hs-interactives-modal-overlay,.hs-web-interactive-container';
+
+  function suppressHubSpotPopups() {
+    if (doc.getElementById('be-no-hs-popups')) return;
+    var style = doc.createElement('style');
+    style.id = 'be-no-hs-popups';
+    style.textContent = HUBSPOT_POPUP_SELECTOR + '{display:none!important}';
+    (doc.head || doc.documentElement).appendChild(style);
+
+    function sweep() {
+      var nodes = doc.querySelectorAll(HUBSPOT_POPUP_SELECTOR);
+      for (var i = 0; i < nodes.length; i++) {
+        if (nodes[i].parentNode) nodes[i].parentNode.removeChild(nodes[i]);
+      }
+    }
+
+    sweep();
+    if (!global.MutationObserver || !doc.documentElement) return;
+    var observer = new global.MutationObserver(sweep);
+    observer.observe(doc.documentElement, { childList: true, subtree: true });
+  }
+
+  /* HubSpot's tracking script also injects the newsletter pop-up after consent,
+     including the one set to appear about halfway down the page.
+     Contact forms stay. Only those overlay nodes are removed. */
+  suppressHubSpotPopups();
+
   function loadHubSpot(portalId) {
     if (!portalId) return;
     global._hsq = global._hsq || [];
