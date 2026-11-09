@@ -184,6 +184,31 @@ fs.writeFileSync(
   'utf8',
 );
 
+/* Short /aimanufacturing address. noindex so Google does not treat the stub as a page.
+   The CloudFront 301 is the real redirect once that function is published. */
+var mfgRedirectDir = path.join(outDir, 'aimanufacturing');
+fs.mkdirSync(mfgRedirectDir, { recursive: true });
+fs.writeFileSync(
+  path.join(mfgRedirectDir, 'index.html'),
+  '<!DOCTYPE html>\n' +
+    '<html lang="en">\n' +
+    '<head>\n' +
+    '  <meta charset="utf-8">\n' +
+    '  <meta name="robots" content="noindex">\n' +
+    '  <meta http-equiv="refresh" content="0;url=' + WWW + '/services/ai-systems-readiness-for-manufacturing/">\n' +
+    '  <link rel="canonical" href="' + WWW + '/services/ai-systems-readiness-for-manufacturing/">\n' +
+    '  <title>Redirecting</title>\n' +
+    '  <script>\n' +
+    '    location.replace("' + WWW + '/services/ai-systems-readiness-for-manufacturing/" + location.search + location.hash);\n' +
+    '  </script>\n' +
+    '</head>\n' +
+    '<body>\n' +
+    '  <p><a href="' + WWW + '/services/ai-systems-readiness-for-manufacturing/">Continue</a></p>\n' +
+    '</body>\n' +
+    '</html>\n',
+  'utf8',
+);
+
 var redirectedUrls = {};
 inventory.urls.forEach(function (u) {
   if (u.status === 'redirect') redirectedUrls[u.url.replace(/\/$/, '')] = true;

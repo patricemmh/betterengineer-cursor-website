@@ -19,6 +19,7 @@ var REDIRECTS = {
   '/hire-senior-full-stack-engineers-nearshore-latam-talent': WWW + '/roles/full-stack-engineers/',
   '/hire-senior-ai-data-engineers-nearshore-latam-talent': WWW + '/roles/ai-engineers/',
   '/ai-readiness-manufacturing': WWW + '/services/ai-systems-readiness-for-manufacturing/',
+  '/aimanufacturing': WWW + '/services/ai-systems-readiness-for-manufacturing/',
   '/webinar': '/contact/',
   '/aiwebinar': '/contact/',
   '/roi': '/staff-augmentation/',
