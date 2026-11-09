@@ -1,1103 +1,128 @@
 /**
- * Careers hub and job listings. Generated from live HubSpot pages.
- * Edit this file (or re-run tools/compile-migration-data.js) then
- * `node build-careers.js`.
+ * Careers hub and the roles BetterEngineer places.
+ * These are not live job openings. US companies ask for a skill, and
+ * BetterEngineer introduces vetted engineers from the network.
+ * Edit this file, then run `node build-careers.js`.
  */
 'use strict';
 
 var WWW = 'https://www.betterengineer.com';
 
 var data = {
-  "hub": {
-    "title": "Engineer Careers | Remote Software Engineering Jobs at BetterEngineer",
-    "description": "Find remote software engineer jobs and advance your career. Explore open positions, join top global teams, and build your future with BetterEngineer.",
-    "h1": "Join our network of better engineers, where talent has no borders.",
-    "lead": "At BetterEngineer, we match dedicated senior engineers with impactful projects at top US companies. Join a community where your potential is seen, your growth is supported, and your work truly matters.",
-    "openingsHeading": "Our current openings",
-    "openingsLead": "Learn about our current available roles. Don't see an opening? We're always looking for top engineers.",
-    "selectHeading": "Select a job to learn more",
-    "perks": [
+  hub: {
+    title: 'Software engineer jobs in Latin America | BetterEngineer',
+    description:
+      'Roles BetterEngineer places with US product teams: senior engineers in Latin America, on a full-time contract, working US business hours.',
+    h1: 'Roles we place with US product teams',
+    lead:
+      'These pages are not open jobs. US companies ask us for a skill, and we introduce vetted senior engineers from our network. Active client openings are posted on LinkedIn.',
+    openingsHeading: 'Roles we place',
+    openingsLead:
+      'Each role is a full-time contract with a US product team. You work US business hours from Latin America.',
+    selectHeading: 'Other roles we place',
+    perks: [
       {
-        "title": "Develop great products.",
-        "body": "We work on innovative projects that you'll be proud to show off."
+        title: 'Work in the client codebase.',
+        body: 'You join a US product team and ship in their repo, their standups, and their code reviews.',
       },
       {
-        "title": "Be a thought leader.",
-        "body": "We value product-mindedness and open communication."
+        title: 'Full-time contract, paid monthly.',
+        body: 'The monthly amount stays the same. You are paid in US dollars. Candidates never pay anything.',
       },
       {
-        "title": "Work from anywhere.",
-        "body": "We are 100% remote, meaning you can work from wherever you're most productive."
-      }
-    ]
-  },
-  "shared": {
-    "chips": [
-      "Work remotely",
-      "Full-time",
-      "Apply from anywhere"
+        title: 'Latin America, US business hours.',
+        body: 'Engineers live in Mexico, Costa Rica, Colombia, Peru, Brazil, Chile, Argentina, and Uruguay.',
+      },
     ],
-    "roleMeta": [
-      { "id": "remote", "label": "Work remotely" },
-      { "id": "employment", "label": "Full-time" },
-      { "id": "location", "label": "Apply from anywhere" }
-    ],
-    "applyLabel": "Apply as a Better Engineer",
-    "applyHref": "https://app.betterengineer.com/sign-up/candidate",
-    "englishNote": "Candidates must have excellent English communication skills and previous experience with North American software companies.",
-    "additionalNote": "Candidates in Western time zones preferred.",
-    "about": "We connect senior software engineers from across the Americas with our portfolio of high-growth and newsworthy technology companies in the United States. Our BetterEngineer platform introduces better talent to great teams and helps to create a tech world without borders.",
-    "communityHeading": "Become part of the Better Engineer Community",
-    "communityLead": "We value relationships and help you improve",
-    "jobTitle": "Engineer Careers | Remote Software Engineering Jobs at BetterEngineer"
   },
-  "jobs": [
-    {
-      "slug": "net-engineer",
-      "name": ".NET Engineer",
-      "description": ".NET Engineer",
-      "intro": "We are seeking a remote .NET Engineer to join a U.S. based distributed engineering team that can deliver market-leading software solutions.",
-      "duties": [
-        "Adhere to agile development best practice",
-        "Demonstrate a passion for learning and building cutting-edge applications",
-        "Implement unit tests using test driven development (TDD)",
-        "Implement and refactor using relevant design patterns",
-        "Mentor other engineers",
-        "Proactively learn and implement new best practices",
-        "Manage expectations by communicating regularly",
-        "Code review pull requests in a CI / CD environment",
-        "Review requirements and provide input",
-        "Collaborate with the engineering team to suggest, design and launch new features",
-        "Maintain code integrity and organization"
-      ],
-      "requirements": [
-        "C# and the .NET framework",
-        "Building and deploying large scale secure RESTful APIs",
-        "JavaScript frameworks such as React/Redux, Angular, Express, jQuery etc.",
-        "5+ years experience as a software engineer",
-        "Strong administrative/organizational skills (ability to effectively prioritize, manage time, and meet deadlines on multiple projects)"
-      ]
-    },
-    {
-      "slug": "android-engineer",
-      "name": "Android Engineer",
-      "description": "Android Engineer",
-      "intro": "We are seeking a remote Android Engineer to join a U.S. based distributed engineering team that can deliver market-leading software solutions.",
-      "duties": [
-        "Adhere to agile development best practice",
-        "Demonstrate a passion for learning and building cutting-edge applications",
-        "Implement unit tests using test driven development (TDD)",
-        "Implement and refactor using relevant design patterns",
-        "Mentor other engineers",
-        "Proactively learn and implement new best practices",
-        "Manage expectations by communicating regularly",
-        "Code review pull requests in a CI / CD environment",
-        "Review requirements and provide input",
-        "Collaborate with the engineering team to suggest, design and launch new features",
-        "Maintain code integrity and organization"
-      ],
-      "requirements": [
-        "Java and/or Kotlin",
-        "Building Android applications from scratch and libraries that can be shared across applications",
-        "Delivering apps to the Google Play Store",
-        "Android frameworks, tools, and techniques",
-        "5+ years experience as a software engineer",
-        "Strong administrative/organizational skills (ability to effectively prioritize, manage time, and meet deadlines on multiple projects)",
-        "Proficiency in spoken and written English is required"
-      ]
-    },
-    {
-      "slug": "aws-engineer",
-      "name": "AWS Engineer",
-      "description": "AWS Engineer",
-      "intro": "We are seeking a remote AWS Engineer to join a U.S. based distributed engineering team that can deliver market-leading software solutions.",
-      "duties": [
-        "Adhere to agile development best practice",
-        "Demonstrate a passion for learning and building cutting-edge applications",
-        "Implement unit tests using test driven development (TDD)",
-        "Implement and refactor using relevant design patterns",
-        "Mentor other engineers",
-        "Proactively learn and implement new best practices",
-        "Manage expectations by communicating regularly",
-        "Code review pull requests in a CI / CD environment",
-        "Review requirements and provide input",
-        "Collaborate with the engineering team to suggest, design and launch new features",
-        "Maintain code integrity and organization"
-      ],
-      "requirements": [
-        "Professional experience managing production environments in Amazon (AWS)",
-        "Configuration management (such as Ansible, Puppet, Chef, etc.)",
-        "Some programming and/or scripting language experience",
-        "Strong knowledge of Linux systems administration",
-        "5+ years experience as a software engineer",
-        "Strong administrative/organizational skills (ability to effectively prioritize, manage time, and meet deadlines on multiple projects)"
-      ]
-    },
-    {
-      "slug": "azure-engineer",
-      "name": "Azure Engineer",
-      "description": "Azure Engineer",
-      "intro": "We are seeking a remote Azure Engineer to join a U.S. based distributed engineering team that can deliver market-leading software solutions.",
-      "duties": [
-        "Adhere to agile development best practice",
-        "Demonstrate a passion for learning and building cutting-edge applications",
-        "Implement unit tests using test driven development (TDD)",
-        "Implement and refactor using relevant design patterns",
-        "Mentor other engineers",
-        "Proactively learn and implement new best practices",
-        "Manage expectations by communicating regularly",
-        "Code review pull requests in a CI / CD environment",
-        "Review requirements and provide input",
-        "Collaborate with the engineering team to suggest, design and launch new features",
-        "Maintain code integrity and organization"
-      ],
-      "requirements": [
-        "Professional experience managing production environments in Microsoft Azure",
-        "Configuration management (such as Ansible, Puppet, Chef, etc.)",
-        "Some programming and/or scripting language experience",
-        "5+ years professional experience",
-        "Strong administrative/organizational skills (ability to effectively prioritize, manage time, and meet deadlines on multiple projects)"
-      ]
-    },
-    {
-      "slug": "blockchain-engineer",
-      "name": "Blockchain Engineer",
-      "description": "Blockchain Engineer",
-      "intro": "We are seeking a remote Blockchain Engineer to join a U.S. based distributed engineering team that can deliver market-leading software solutions.",
-      "duties": [
-        "Adhere to agile development best practice",
-        "Demonstrate a passion for learning and building cutting-edge applications",
-        "Implement unit tests using test driven development (TDD)",
-        "Implement and refactor using relevant design patterns",
-        "Mentor other engineers",
-        "Proactively learn and implement new best practices",
-        "Manage expectations by communicating regularly",
-        "Code review pull requests in a CI / CD environment",
-        "Review requirements and provide input",
-        "Collaborate with the engineering team to suggest, design and launch new features",
-        "Maintain code integrity and organization"
-      ],
-      "requirements": [
-        "Proficiency in one or more of the following languages: C++, Java, Python, JavaScript",
-        "Familiarity with basic cryptography",
-        "5+ years experience as a software engineer",
-        "Strong administrative/organizational skills (ability to effectively prioritize, manage time, and meet deadlines on multiple projects)"
-      ]
-    },
-    {
-      "slug": "cloudops-engineer",
-      "name": "CloudOps Engineer",
-      "description": "CloudOps Engineer",
-      "intro": "We are seeking a remote CloudOps Engineer to join a U.S. based distributed engineering team that can deliver market-leading software solutions.",
-      "duties": [
-        "Adhere to agile development best practice",
-        "Demonstrate a passion for learning and building cutting-edge applications",
-        "Implement unit tests using test driven development (TDD)",
-        "Implement and refactor using relevant design patterns",
-        "Mentor other engineers",
-        "Proactively learn and implement new best practices",
-        "Manage expectations by communicating regularly",
-        "Code review pull requests in a CI / CD environment",
-        "Review requirements and provide input",
-        "Collaborate with the engineering team to suggest, design and launch new features",
-        "Maintain code integrity and organization"
-      ],
-      "requirements": [
-        "Professional experience in a cloud-based DevOps role using Amazon (AWS), Microsoft Azure, or Google Cloud (GCP)",
-        "Configuration management (such as Ansible, Puppet, Chef, etc.)",
-        "Some programming and/or scripting language experience",
-        "Strong knowledge of Linux systems administration",
-        "Strong administrative/organizational skills (ability to effectively prioritize, manage time, and meet deadlines on multiple projects)"
-      ]
-    },
-    {
-      "slug": "cordova-c-engineer",
-      "name": "Cordova / C# Engineer",
-      "description": "Cordova / C# Engineer",
-      "intro": "We are seeking a remote Cordova / C# Engineer to join a U.S. based distributed engineering team that can deliver market-leading software solutions.",
-      "duties": [
-        "Adhere to agile development best practice",
-        "Demonstrate a passion for learning and building cutting-edge applications",
-        "Implement unit tests using test driven development (TDD)",
-        "Implement and refactor using relevant design patterns",
-        "Mentor other engineers",
-        "Proactively learn and implement new best practices",
-        "Manage expectations by communicating regularly",
-        "Code review pull requests in a CI / CD environment",
-        "Review requirements and provide input",
-        "Collaborate with the engineering team to suggest, design and launch new features",
-        "Maintain code integrity and organization"
-      ],
-      "requirements": [
-        "At least 3+ years of experience in mobile app development",
-        "Strong knowledge of Cordova, Ionic and Phonegap",
-        "Experience in Xamarin, JavaScript, jQuery, HTML5, and CSS3",
-        "Solid understanding of databases (such as SQLite, MySQL, IndexDB Firebase, PostgreSQL, etc)",
-        "Good grasp on Apache Cordova plugin framework",
-        "In-depth knowledge of existing code base and building or publishing APKs"
-      ]
-    },
-    {
-      "slug": "data-science-engineer",
-      "name": "Data Science Engineer",
-      "description": "Data Science Engineer",
-      "intro": "We are seeking a remote Data Science Engineer to join a U.S. based distributed engineering team that can deliver market-leading software solutions.",
-      "duties": [
-        "Adhere to agile development best practice",
-        "Demonstrate a passion for learning and building cutting-edge applications",
-        "Implement unit tests using test driven development (TDD)",
-        "Implement and refactor using relevant design patterns",
-        "Mentor other engineers",
-        "Proactively learn and implement new best practices",
-        "Manage expectations by communicating regularly",
-        "Code review pull requests in a CI / CD environment",
-        "Review requirements and provide input",
-        "Collaborate with the engineering team to suggest, design and launch new features",
-        "Maintain code integrity and organization"
-      ],
-      "requirements": [
-        "Experience manipulating data sets and building statistical models, has a bachelor's in Statistics, Mathematics, Computer Science or another quantitative field",
-        "Strong problem-solving skills with an emphasis on consumer behavior trends",
-        "Experience using statistical computer languages (R, Python, etc.) to manipulate data and draw insights from large data sets",
-        "Knowledge of advanced statistical techniques and concepts (regression, properties of distributions, statistical tests, and proper usage, etc.) and experience with applications",
-        "Excellent written and verbal communication skills for coordinating across teams",
-        "Knowledge and experience in statistical and data mining techniques: Generalized Linear Models (GLM) and Regression"
-      ]
-    },
-    {
-      "slug": "devops-engineer",
-      "name": "DevOps Engineer",
-      "description": "DevOps Engineer",
-      "intro": "We are seeking a remote DevOps Engineer to join a U.S. based distributed engineering team that can deliver market-leading software solutions.",
-      "duties": [
-        "Adhere to agile development best practice",
-        "Demonstrate a passion for learning and building cutting-edge applications",
-        "Implement unit tests using test driven development (TDD)",
-        "Implement and refactor using relevant design patterns",
-        "Mentor other engineers",
-        "Proactively learn and implement new best practices",
-        "Manage expectations by communicating regularly",
-        "Code review pull requests in a CI / CD environment",
-        "Review requirements and provide input",
-        "Collaborate with the engineering team to suggest, design and launch new features",
-        "Maintain code integrity and organization"
-      ],
-      "requirements": [
-        "Professional experience in a cloud-based DevOps role using Amazon (AWS), Microsoft Azure, or Google Cloud (GCP)",
-        "Configuration management (such as Ansible, Puppet, Chef, etc.)",
-        "Some programming and/or scripting language experience",
-        "Strong knowledge of Linux systems administration",
-        "Strong administrative/organizational skills (ability to effectively prioritize, manage time, and meet deadlines on multiple projects)",
-        "Proficiency in spoken and written English is required",
-        "5+ years in a dev-ops environment"
-      ]
-    },
-    {
-      "slug": "drupal-engineer",
-      "name": "Drupal Engineer",
-      "description": "Drupal Engineer",
-      "intro": "We are seeking a remote Drupal Engineer to join a U.S. based distributed engineering team that can deliver market-leading software solutions.",
-      "duties": [
-        "Adhere to agile development best practice",
-        "Demonstrate a passion for learning and building cutting-edge applications",
-        "Implement unit tests using test driven development (TDD)",
-        "Implement and refactor using relevant design patterns",
-        "Mentor other engineers",
-        "Proactively learn and implement new best practices",
-        "Manage expectations by communicating regularly",
-        "Code review pull requests in a CI / CD environment",
-        "Review requirements and provide input",
-        "Collaborate with the engineering team to suggest, design and launch new features",
-        "Maintain code integrity and organization"
-      ],
-      "requirements": [
-        "Experience developing web solutions in Drupal and PHP implementations in a LAMP environment",
-        "Ability to architect enterprise Drupal solutions including data, display, and information architecture",
-        "Advanced site-building experience including deep familiarity with Drupal modules such as CTools, Views, and Panels",
-        "Experience creating custom Drupal modules",
-        "Experience building responsive websites using Drupal CMS, HTML/HTML5, CSS/CSS3, and JavaScript/jQuery",
-        "Knowledge of PHP, PHP files and theme functions, and knowledge of the Drupal theme layer",
-        "Experience building user interfaces for websites and/or web applications"
-      ]
-    },
-    {
-      "slug": "e-commerce-engineer",
-      "name": "E-Commerce Engineer",
-      "description": "E-Commerce Engineer",
-      "intro": "We are seeking a remote E-Commerce Engineer to join a U.S. based distributed engineering team that can deliver market-leading software solutions.",
-      "duties": [
-        "Adhere to agile development best practice",
-        "Demonstrate a passion for learning and building cutting-edge applications",
-        "Implement unit tests using test driven development (TDD)",
-        "Implement and refactor using relevant design patterns",
-        "Mentor other engineers",
-        "Proactively learn and implement new best practices",
-        "Manage expectations by communicating regularly",
-        "Code review pull requests in a CI / CD environment",
-        "Review requirements and provide input",
-        "Collaborate with the engineering team to suggest, design and launch new features",
-        "Maintain code integrity and organization"
-      ],
-      "requirements": [
-        "Experience creating e-commerce sites.",
-        "Stellar communication skills - including the ability to effectively communicate complex technical issues to a non-technical audience and engage in productive dialog involving multiple viewpoints or conflicting perspectives.",
-        "The ability to independently scope, design and implement flexible technical solutions while anticipating technical uncertainties.",
-        "The ability to thrive in a fast-paced environment with multiple deadlines and shifting priorities."
-      ]
-    },
-    {
-      "slug": "elixir-engineer",
-      "name": "Elixir Software Engineer",
-      "description": "Elixir Software Engineer",
-      "intro": "We are seeking a remote Elixir Software Engineer to join a U.S. based distributed engineering team that can deliver market-leading software solutions.",
-      "duties": [
-        "Adhere to agile development best practice",
-        "Demonstrate a passion for learning and building cutting-edge applications",
-        "Implement unit tests using test driven development (TDD)",
-        "Implement and refactor using relevant design patterns",
-        "Mentor other engineers",
-        "Proactively learn and implement new best practices",
-        "Manage expectations by communicating regularly",
-        "Code review pull requests in a CI / CD environment",
-        "Review requirements and provide input",
-        "Collaborate with the engineering team to suggest, design and launch new features",
-        "Maintain code integrity and organization"
-      ],
-      "requirements": [
-        "5+ years of software development experience",
-        "2+ year working with Elixir / Phoenix in production"
-      ]
-    },
-    {
-      "slug": "embedded-software-engineer",
-      "name": "Embedded Software Engineer",
-      "description": "Embedded Software Engineer",
-      "intro": "We are seeking a remote Embedded Software Engineer to join a U.S. based distributed engineering team that can deliver market-leading software solutions.",
-      "duties": [
-        "Adhere to agile development best practice",
-        "Demonstrate a passion for learning and building cutting-edge applications",
-        "Implement unit tests using test driven development (TDD)",
-        "Implement and refactor using relevant design patterns",
-        "Mentor other engineers",
-        "Proactively learn and implement new best practices",
-        "Manage expectations by communicating regularly",
-        "Code review pull requests in a CI / CD environment",
-        "Review requirements and provide input",
-        "Collaborate with the engineering team to suggest, design and launch new features",
-        "Maintain code integrity and organization"
-      ],
-      "requirements": [
-        "2 - 5 years of industry experience with a demonstrated ability in problem-solving, effectively diagnosing technical issues and proposing solutions",
-        "Fluent in C/C++ and Python with the ability to rapidly design, test, and verify systems",
-        "Experience with build systems (make), source control (Git), and bug tracking systems",
-        "Clear written and spoken communication, ability to create functional and design specifications"
-      ]
-    },
-    {
-      "slug": "front-end-engineer",
-      "name": "Front-end Engineer",
-      "description": "Front-end Engineer",
-      "intro": "We are seeking a remote Front-end Engineer to join a U.S. based distributed engineering team that can deliver market-leading software solutions.",
-      "duties": [
-        "Adhere to agile development best practice",
-        "Demonstrate a passion for learning and building cutting-edge applications",
-        "Implement unit tests using test driven development (TDD)",
-        "Implement and refactor using relevant design patterns",
-        "Mentor other engineers",
-        "Proactively learn and implement new best practices",
-        "Manage expectations by communicating regularly",
-        "Code review pull requests in a CI / CD environment",
-        "Review requirements and provide input",
-        "Collaborate with the engineering team to suggest, design and launch new features",
-        "Maintain code integrity and organization"
-      ],
-      "requirements": [
-        "Building organized, accessible, and performant apps using JavaScript, CSS, and HTML",
-        "JavaScript frameworks such as React/Redux, Angular, Express, jQuery etc.",
-        "Managing robust testing & workflow automations (Gulp, NPM, Rollup, Mocha)",
-        "Good design and UX sensibilities",
-        "5+ years experience as a software engineer",
-        "Strong administrative/organizational skills (ability to effectively prioritize, manage time, and meet deadlines on multiple projects)."
-      ]
-    },
-    {
-      "slug": "full-stack-javascript-engineer",
-      "name": "Full-stack JavaScript Engineer",
-      "description": "Full-stack JavaScript Engineer",
-      "intro": "We are seeking a remote Full-stack JavaScript Engineer to join a U.S. based distributed engineering team that can deliver market-leading software solutions.",
-      "duties": [
-        "Adhere to agile development best practice",
-        "Demonstrate a passion for learning and building cutting-edge applications",
-        "Implement unit tests using test driven development (TDD)",
-        "Implement and refactor using relevant design patterns",
-        "Mentor other engineers",
-        "Proactively learn and implement new best practices",
-        "Manage expectations by communicating regularly",
-        "Code review pull requests in a CI / CD environment",
-        "Review requirements and provide input",
-        "Collaborate with the engineering team to suggest, design and launch new features",
-        "Maintain code integrity and organization"
-      ],
-      "requirements": [
-        "Experience with JavaScript and/or TypeScript",
-        "REST API design",
-        "Relational and/or NoSQL databases (PostgreSQL, MySQL, Microsoft SQL Server, MongoDB, DynamoDB, etc.)",
-        "5+ years experience as a software engineer",
-        "Strong administrative/organizational skills (ability to effectively prioritize, manage time, and meet deadlines on multiple projects)"
-      ]
-    },
-    {
-      "slug": "groovy-on-grails-engineer",
-      "name": "Groovy on Grails Engineer",
-      "description": "Groovy on Grails Engineer",
-      "intro": "We are seeking a remote Groovy on Grails Engineer to join a U.S. based distributed engineering team that can deliver market-leading software solutions.",
-      "duties": [
-        "Adhere to agile development best practice",
-        "Demonstrate a passion for learning and building cutting-edge applications",
-        "Implement unit tests using test driven development (TDD)",
-        "Implement and refactor using relevant design patterns",
-        "Mentor other engineers",
-        "Proactively learn and implement new best practices",
-        "Manage expectations by communicating regularly",
-        "Code review pull requests in a CI / CD environment",
-        "Review requirements and provide input",
-        "Collaborate with the engineering team to suggest, design and launch new features",
-        "Maintain code integrity and organization"
-      ],
-      "requirements": [
-        "5+ Years Java/JEE development experience in an enterprise",
-        "3+ Experience in Grails Web Framework and Groovy Language",
-        "Experience integrating Grails code with front-end JavaScript frameworks",
-        "Must have experience working with XML and JSON using Grails, JMS and Web, services, XML, Apache Tomcat, SQL and Unix and GIT",
-        "Experience with RESTful Web Services",
-        "Understanding of proper application design techniques and methodologies",
-        "Proficient understanding of SDLC processes desired - Agile"
-      ]
-    },
-    {
-      "slug": "ios-engineer",
-      "name": "iOS Engineer",
-      "description": "iOS Engineer",
-      "intro": "We are seeking a remote iOS Engineer to join a U.S. based distributed engineering team that can deliver market-leading software solutions.",
-      "duties": [
-        "Adhere to agile development best practice",
-        "Demonstrate a passion for learning and building cutting-edge applications",
-        "Implement unit tests using test driven development (TDD)",
-        "Implement and refactor using relevant design patterns",
-        "Mentor other engineers",
-        "Proactively learn and implement new best practices",
-        "Manage expectations by communicating regularly",
-        "Code review pull requests in a CI / CD environment",
-        "Review requirements and provide input",
-        "Collaborate with the engineering team to suggest, design and launch new features",
-        "Maintain code integrity and organization"
-      ],
-      "requirements": [
-        "Swift and Cocoa Touch with an understanding of Objective-C",
-        "Building iOS applications from scratch and libraries that can be shared across applications",
-        "Delivering iOS applications to the Apple app store",
-        "iOS frameworks, tools, and techniques",
-        "5+ years experience as a software engineer",
-        "Strong administrative/organizational skills (ability to effectively prioritize, manage time, and meet deadlines on multiple projects)."
-      ]
-    },
-    {
-      "slug": "java-engineer",
-      "name": "Java Engineer",
-      "description": "Java Engineer",
-      "intro": "We are seeking a remote Java Engineer to join a U.S. based distributed engineering team that can deliver market-leading software solutions.",
-      "duties": [
-        "Adhere to agile development best practice",
-        "Demonstrate a passion for learning and building cutting-edge applications",
-        "Implement unit tests using test driven development (TDD)",
-        "Implement and refactor using relevant design patterns",
-        "Mentor other engineers",
-        "Proactively learn and implement new best practices",
-        "Manage expectations by communicating regularly",
-        "Code review pull requests in a CI / CD environment",
-        "Review requirements and provide input",
-        "Collaborate with the engineering team to suggest, design and launch new features",
-        "Maintain code integrity and organization"
-      ],
-      "requirements": [
-        "Professional projects built with Java",
-        "Building and consuming REST APIs",
-        "5+ years experience as a software engineer",
-        "Strong administrative/organizational skills (ability to effectively prioritize, manage time, and meet deadlines on multiple projects)"
-      ]
-    },
-    {
-      "slug": "kubernetes-software-engineer",
-      "name": "Kubernetes Software Engineer",
-      "description": "Kubernetes Software Engineer",
-      "intro": "We are seeking a remote Kubernetes Software Engineer to join a U.S. based distributed engineering team that can deliver market-leading software solutions.",
-      "duties": [
-        "Adhere to agile development best practice",
-        "Demonstrate a passion for learning and building cutting-edge applications",
-        "Implement unit tests using test driven development (TDD)",
-        "Implement and refactor using relevant design patterns",
-        "Mentor other engineers",
-        "Proactively learn and implement new best practices",
-        "Manage expectations by communicating regularly",
-        "Code review pull requests in a CI / CD environment",
-        "Review requirements and provide input",
-        "Collaborate with the engineering team to suggest, design and launch new features",
-        "Maintain code integrity and organization"
-      ],
-      "requirements": [
-        "Kubernetes and containers",
-        "Auto-scaling, Infrastructure as Code (IaC), automated monitoring and reporting",
-        "Deploying to cloud infrastructure - Amazon (AWS), Microsoft Azure, or Google Cloud (GCP)",
-        "Configuration Management using one or more of Terraform, Chef, Puppet, Ansible, SaltStack, CloudFormation, etc.",
-        "Software development using multiple languages",
-        "5+ years experience as a software engineer",
-        "Strong administrative/organizational skills (ability to effectively prioritize, manage time, and meet deadlines on multiple projects)."
-      ]
-    },
-    {
-      "slug": "magneto-engineer",
-      "name": "Magento Engineer",
-      "description": "Magento Engineer",
-      "intro": "We are seeking a remote Magento Engineer to join a U.S. based distributed engineering team that can deliver market-leading software solutions.",
-      "duties": [
-        "Adhere to agile development best practice",
-        "Demonstrate a passion for learning and building cutting-edge applications",
-        "Implement unit tests using test driven development (TDD)",
-        "Implement and refactor using relevant design patterns",
-        "Mentor other engineers",
-        "Proactively learn and implement new best practices",
-        "Manage expectations by communicating regularly",
-        "Code review pull requests in a CI / CD environment",
-        "Review requirements and provide input",
-        "Collaborate with the engineering team to suggest, design and launch new features",
-        "Maintain code integrity and organization"
-      ],
-      "requirements": [
-        "5+ years of experience as a Systems Engineer",
-        "3+ years of experience in e-commerce",
-        "Strong object-oriented programming knowledge",
-        "Very good PHP knowledge",
-        "JavaScript is a must for front-end development",
-        "Extensive LESS & CSS knowledge",
-        "Creating websites and user interfaces while incorporating back-end databases and web services",
-        "Oversee and manage enhancements to the website and related systems, including integrations, maintenance, and support necessary to enhance the website’s user experience"
-      ]
-    },
-    {
-      "slug": "ms-dynamics-crm-engineer",
-      "name": "MS Dynamics CRM Engineer",
-      "description": "MS Dynamics CRM Engineer",
-      "intro": "We are seeking a remote MS Dynamics CRM Engineer to join a U.S. based distributed engineering team that can deliver market-leading software solutions.",
-      "duties": [
-        "Adhere to agile development best practice",
-        "Demonstrate a passion for learning and building cutting-edge applications",
-        "Implement unit tests using test driven development (TDD)",
-        "Implement and refactor using relevant design patterns",
-        "Mentor other engineers",
-        "Proactively learn and implement new best practices",
-        "Manage expectations by communicating regularly",
-        "Code review pull requests in a CI / CD environment",
-        "Review requirements and provide input",
-        "Collaborate with the engineering team to suggest, design and launch new features",
-        "Maintain code integrity and organization"
-      ],
-      "requirements": [
-        "Leads development of functional enhancement’s cloud applications",
-        "Assists and provides input to the manager in planning, estimation, and scheduling application development.",
-        "4+ years of Dynamics AX experience",
-        "2+ Years D365",
-        "Thorough programming skills: X++, C#, .NET, and SQL",
-        "Results-oriented/self-directed with strong organizational skills",
-        "Experience in building and deploying Dynamics 365 packages."
-      ]
-    },
-    {
-      "slug": "node-js-engineer",
-      "name": "Node.js Engineer",
-      "description": "Node.js Engineer",
-      "intro": "We are seeking a remote Node.js Engineer to join a U.S. based distributed engineering team that can deliver market-leading software solutions.",
-      "duties": [
-        "Adhere to agile development best practice",
-        "Demonstrate a passion for learning and building cutting-edge applications",
-        "Implement unit tests using test driven development (TDD)",
-        "Implement and refactor using relevant design patterns",
-        "Mentor other engineers",
-        "Proactively learn and implement new best practices",
-        "Manage expectations by communicating regularly",
-        "Code review pull requests in a CI / CD environment",
-        "Review requirements and provide input",
-        "Collaborate with the engineering team to suggest, design and launch new features",
-        "Maintain code integrity and organization"
-      ],
-      "requirements": [
-        "Experience working with NodeJS",
-        "Comfortable working with microservices architectures",
-        "Experience working with GraphQL and/or Apollo",
-        "Penchant for learning new technologies balanced with strong pragmatic thinking.",
-        "Proficient with version control and effective collaborative development workflows.",
-        "Able to quickly fix bugs and solve problems in large, complex apps.",
-        "Familiarity with build tooling such as Jenkins",
-        "Experience with a cloud provider (AWS/Azure/Google) considered an asset"
-      ]
-    },
-    {
-      "slug": "openstack-engineer",
-      "name": "OpenStack Engineer",
-      "description": "OpenStack Engineer",
-      "intro": "We are seeking a remote OpenStack Engineer to join a U.S. based distributed engineering team that can deliver market-leading software solutions.",
-      "duties": [
-        "Adhere to agile development best practice",
-        "Demonstrate a passion for learning and building cutting-edge applications",
-        "Implement unit tests using test driven development (TDD)",
-        "Implement and refactor using relevant design patterns",
-        "Mentor other engineers",
-        "Proactively learn and implement new best practices",
-        "Manage expectations by communicating regularly",
-        "Code review pull requests in a CI / CD environment",
-        "Review requirements and provide input",
-        "Collaborate with the engineering team to suggest, design and launch new features",
-        "Maintain code integrity and organization"
-      ],
-      "requirements": [
-        "Experience in the programming and configuration of OpenStack",
-        "Experience in optimization and debugging of complex OpenStack environments",
-        "Knowledge of OpenStack components such as Heat, Horizon, Nova, Neutron and Keystone",
-        "Knowledge of Kubernetes",
-        "Experience with Linux",
-        "Experience with GitLab CI or equivalent (e.g. Github Actions, CircleCI, Travis CI)"
-      ]
-    },
-    {
-      "slug": "peoplesoft-consultant",
-      "name": "PeopleSoft Consultant",
-      "description": "PeopleSoft Consultant",
-      "intro": "We are seeking a remote PeopleSoft Consultant to join a U.S. based distributed engineering team that can deliver market-leading software solutions.",
-      "duties": [
-        "Adhere to agile development best practice",
-        "Demonstrate a passion for learning and building cutting-edge applications",
-        "Implement unit tests using test driven development (TDD)",
-        "Implement and refactor using relevant design patterns",
-        "Mentor other engineers",
-        "Proactively learn and implement new best practices",
-        "Manage expectations by communicating regularly",
-        "Code review pull requests in a CI / CD environment",
-        "Review requirements and provide input",
-        "Collaborate with the engineering team to suggest, design and launch new features",
-        "Maintain code integrity and organization"
-      ],
-      "requirements": [
-        "At least 5 years of prior work experience working with Concur and PeopleSoft modules",
-        "Strong knowledge in business areas such as Accounts Payable, Budgeting, eProcurement, Travel & Expense",
-        "Experience with documentation of functional and technical requirements and specs for system integration",
-        "Experience with documentation of user guides and production support documents"
-      ]
-    },
-    {
-      "slug": "php-engineer",
-      "name": "PHP Engineer",
-      "description": "PHP Engineer",
-      "intro": "We are seeking a remote PHP Engineer to join a U.S. based distributed engineering team that can deliver market-leading software solutions.",
-      "duties": [
-        "Adhere to agile development best practice",
-        "Demonstrate a passion for learning and building cutting-edge applications",
-        "Implement unit tests using test driven development (TDD)",
-        "Implement and refactor using relevant design patterns",
-        "Mentor other engineers",
-        "Proactively learn and implement new best practices",
-        "Manage expectations by communicating regularly",
-        "Code review pull requests in a CI / CD environment",
-        "Review requirements and provide input",
-        "Collaborate with the engineering team to suggest, design and launch new features",
-        "Maintain code integrity and organization"
-      ],
-      "requirements": [
-        "Professional projects built with PHP",
-        "Building and consuming REST APIs",
-        "5+ years experience as a software engineer",
-        "Strong administrative/organizational skills (ability to effectively prioritize, manage time, and meet deadlines on multiple projects)"
-      ]
-    },
-    {
-      "slug": "project-manager",
-      "name": "Project Manager",
-      "description": "Project Manager",
-      "intro": "We are seeking a remote Project Manager to join a U.S. based distributed engineering team that can deliver market-leading software solutions.",
-      "duties": [
-        "Adhere to agile development best practice",
-        "Demonstrate a passion for learning and building cutting-edge applications",
-        "Implement unit tests using test driven development (TDD)",
-        "Implement and refactor using relevant design patterns",
-        "Mentor other engineers",
-        "Proactively learn and implement new best practices",
-        "Manage expectations by communicating regularly",
-        "Code review pull requests in a CI / CD environment",
-        "Review requirements and provide input",
-        "Collaborate with the engineering team to suggest, design and launch new features",
-        "Maintain code integrity and organization"
-      ],
-      "requirements": [
-        "Demonstrated leadership capabilities",
-        "6+ years of experience in technology with 2+ years in technical project management and 2+ years required business analysis experience",
-        "Technical Project Management of software-related projects",
-        "Proficiency with Project Management tools; spreadsheets or others"
-      ]
-    },
-    {
-      "slug": "python-engineer",
-      "name": "Python Engineer",
-      "description": "Python Engineer",
-      "intro": "We are seeking a remote Python Engineer to join a U.S. based distributed engineering team that can deliver market-leading software solutions.",
-      "duties": [
-        "Adhere to agile development best practice",
-        "Demonstrate a passion for learning and building cutting-edge applications",
-        "Implement unit tests using test driven development (TDD)",
-        "Implement and refactor using relevant design patterns",
-        "Mentor other engineers",
-        "Proactively learn and implement new best practices",
-        "Manage expectations by communicating regularly",
-        "Code review pull requests in a CI / CD environment",
-        "Review requirements and provide input",
-        "Collaborate with the engineering team to suggest, design and launch new features",
-        "Maintain code integrity and organization"
-      ],
-      "requirements": [
-        "Professional projects built with Python",
-        "5+ years experience as a software engineer",
-        "Strong administrative/organizational skills (ability to effectively prioritize, manage time, and meet deadlines on multiple projects)"
-      ]
-    },
-    {
-      "slug": "qa-automation-engineer",
-      "name": "QA Automation Engineer",
-      "description": "QA Automation Engineer",
-      "intro": "We are seeking a remote QA Automation Engineer to join a U.S. based distributed engineering team that can deliver market-leading software solutions.",
-      "duties": [
-        "Adhere to agile development best practice",
-        "Demonstrate a passion for learning and building cutting-edge applications",
-        "Implement unit tests using test driven development (TDD)",
-        "Implement and refactor using relevant design patterns",
-        "Mentor other engineers",
-        "Proactively learn and implement new best practices",
-        "Manage expectations by communicating regularly",
-        "Code review pull requests in a CI / CD environment",
-        "Review requirements and provide input",
-        "Collaborate with the engineering team to suggest, design and launch new features",
-        "Maintain code integrity and organization"
-      ],
-      "requirements": [
-        "Experience applying test automation best practices for Web and REST API including test design patterns, parallelization, and reporting",
-        "Expertise in programming and scripting languages in Java, Python, or JavaScript",
-        "Experience setting up CI/CD pipelines such as Jenkins or Git"
-      ]
-    },
-    {
-      "slug": "react-native-engineer",
-      "name": "React Native Engineer",
-      "description": "React Native Engineer",
-      "intro": "We are seeking a remote React Native Engineer to join a U.S. based distributed engineering team that can deliver market-leading software solutions.",
-      "duties": [
-        "Adhere to agile development best practice",
-        "Demonstrate a passion for learning and building cutting-edge applications",
-        "Implement unit tests using test driven development (TDD)",
-        "Implement and refactor using relevant design patterns",
-        "Mentor other engineers",
-        "Proactively learn and implement new best practices",
-        "Manage expectations by communicating regularly",
-        "Code review pull requests in a CI / CD environment",
-        "Review requirements and provide input",
-        "Collaborate with the engineering team to suggest, design and launch new features",
-        "Maintain code integrity and organization"
-      ],
-      "requirements": [
-        "React Native",
-        "Professional mobile app development at scale (iOS and/or Android)",
-        "JavaScript language and its nuances",
-        "REST APIs",
-        "5+ years experience as a software engineer",
-        "Strong administrative/organizational skills (ability to effectively prioritize, manage time, and meet deadlines on multiple projects)."
-      ]
-    },
-    {
-      "slug": "ruby-on-rails-engineer",
-      "name": "Ruby on Rails Engineer",
-      "description": "Ruby on Rails Engineer",
-      "intro": "We are seeking a remote Ruby on Rails Engineer to join a U.S. based distributed engineering team that can deliver market-leading software solutions.",
-      "duties": [
-        "Adhere to agile development best practice",
-        "Demonstrate a passion for learning and building cutting-edge applications",
-        "Implement unit tests using test driven development (TDD)",
-        "Implement and refactor using relevant design patterns",
-        "Mentor other engineers",
-        "Proactively learn and implement new best practices",
-        "Manage expectations by communicating regularly",
-        "Code review pull requests in a CI / CD environment",
-        "Review requirements and provide input",
-        "Collaborate with the engineering team to suggest, design and launch new features",
-        "Maintain code integrity and organization"
-      ],
-      "requirements": [
-        "Professional projects built with Ruby on Rails",
-        "5+ years experience as a software engineer",
-        "Strong administrative/organizational skills (ability to effectively prioritize, manage time, and meet deadlines on multiple projects)"
-      ]
-    },
-    {
-      "slug": "rust-c-engineer",
-      "name": "Rust/C++ Software Engineer",
-      "description": "Rust/C++ Software Engineer",
-      "intro": "We are seeking a remote Rust/C++ Software Engineer to join a U.S. based distributed engineering team that can deliver market-leading software solutions.",
-      "duties": [
-        "Adhere to agile development best practice",
-        "Demonstrate a passion for learning and building cutting-edge applications",
-        "Implement unit tests using test driven development (TDD)",
-        "Implement and refactor using relevant design patterns",
-        "Mentor other engineers",
-        "Proactively learn and implement new best practices",
-        "Manage expectations by communicating regularly",
-        "Code review pull requests in a CI / CD environment",
-        "Review requirements and provide input",
-        "Collaborate with the engineering team to suggest, design and launch new features",
-        "Maintain code integrity and organization"
-      ],
-      "requirements": [
-        "5+ years of experience as a software engineer",
-        "Strong proficiency in RUST/C++, with fair knowledge of the language specification",
-        "Solid background in distributed system and network development",
-        "Strong collaboration and listening skills, able to solicit honest feedback early and often",
-        "Understanding fundamental design principles behind a scalable application",
-        "Work well with teams and help those around you improve",
-        "Committed to writing reliable, scalable, testable and maintainable code",
-        "Work comfortably with people in different time zones",
-        "Self-driven determination to complete tasks"
-      ]
-    },
-    {
-      "slug": "salesforce-engineer",
-      "name": "Salesforce Engineer",
-      "description": "Salesforce Engineer",
-      "intro": "We are seeking a remote Salesforce Engineer to join a U.S. based distributed engineering team that can deliver market-leading software solutions.",
-      "duties": [
-        "Adhere to agile development best practice",
-        "Demonstrate a passion for learning and building cutting-edge applications",
-        "Implement unit tests using test driven development (TDD)",
-        "Implement and refactor using relevant design patterns",
-        "Mentor other engineers",
-        "Proactively learn and implement new best practices",
-        "Manage expectations by communicating regularly",
-        "Code review pull requests in a CI / CD environment",
-        "Review requirements and provide input",
-        "Collaborate with the engineering team to suggest, design and launch new features",
-        "Maintain code integrity and organization"
-      ],
-      "requirements": [
-        "Salesforce project deployments including release and environment management",
-        "Apex, Visualforce, and Developer Console",
-        "Salesforce.com APIs and security model",
-        "5+ years experience as a software engineer",
-        "Strong administrative/organizational skills (ability to effectively prioritize, manage time, and meet deadlines on multiple projects)."
-      ]
-    },
-    {
-      "slug": "scala-engineer",
-      "name": "Scala Engineer",
-      "description": "Scala Engineer",
-      "intro": "We are seeking a remote Scala Engineer to join a U.S. based distributed engineering team that can deliver market-leading software solutions.",
-      "duties": [
-        "Adhere to agile development best practice",
-        "Demonstrate a passion for learning and building cutting-edge applications",
-        "Implement unit tests using test driven development (TDD)",
-        "Implement and refactor using relevant design patterns",
-        "Mentor other engineers",
-        "Proactively learn and implement new best practices",
-        "Manage expectations by communicating regularly",
-        "Code review pull requests in a CI / CD environment",
-        "Review requirements and provide input",
-        "Collaborate with the engineering team to suggest, design and launch new features",
-        "Maintain code integrity and organization"
-      ],
-      "requirements": [
-        "Professional projects built with Scala",
-        "5+ years experience as a software engineer",
-        "Strong administrative/organizational skills (ability to effectively prioritize, manage time, and meet deadlines on multiple projects)"
-      ]
-    },
-    {
-      "slug": "shopify-engineer",
-      "name": "Shopify Engineer",
-      "description": "Shopify Engineer",
-      "intro": "We are seeking a remote Shopify Engineer to join a U.S. based distributed engineering team that can deliver market-leading software solutions.",
-      "duties": [
-        "Adhere to agile development best practice",
-        "Demonstrate a passion for learning and building cutting-edge applications",
-        "Implement unit tests using test driven development (TDD)",
-        "Implement and refactor using relevant design patterns",
-        "Mentor other engineers",
-        "Proactively learn and implement new best practices",
-        "Manage expectations by communicating regularly",
-        "Code review pull requests in a CI / CD environment",
-        "Review requirements and provide input",
-        "Collaborate with the engineering team to suggest, design and launch new features",
-        "Maintain code integrity and organization"
-      ],
-      "requirements": [
-        "General experience building, launching and maintaining stores, as well as general knowledge of the admin system",
-        "Demonstrable expertise with HTML5, CSS3, and JavaScript, with an in-depth understanding of DOM",
-        "Experience with working with a made theme and/or Storefront API",
-        "Experience with Shopify's theming system and Liquid templating",
-        "Experience with implementing/debugging 3rd party Shopify apps as well as creating custom solutions if necessary",
-        "Thorough understanding and experience with vanilla JavaScript, jQuery, ES2015/ES6, and modern JavaScript frameworks",
-        "Experience with Shopify's object/properties, AJAX API, and Meta fields"
-      ]
-    },
-    {
-      "slug": "typescript-engineer",
-      "name": "TypeScript Engineer",
-      "description": "TypeScript Engineer",
-      "intro": "We are seeking a remote TypeScript Engineer to join a U.S. based distributed engineering team that can deliver market-leading software solutions.",
-      "duties": [
-        "Adhere to agile development best practice",
-        "Demonstrate a passion for learning and building cutting-edge applications",
-        "Implement unit tests using test driven development (TDD)",
-        "Implement and refactor using relevant design patterns",
-        "Mentor other engineers",
-        "Proactively learn and implement new best practices",
-        "Manage expectations by communicating regularly",
-        "Code review pull requests in a CI / CD environment",
-        "Review requirements and provide input",
-        "Collaborate with the engineering team to suggest, design and launch new features",
-        "Maintain code integrity and organization"
-      ],
-      "requirements": [
-        "2+ years of React development",
-        "Experience developing and consuming GraphQL APIs with Apollo, or similar libraries",
-        "Experience writing quality unit tests for developed applications",
-        "Working knowledge of git and GitHub PR process",
-        "Strong preference for candidates that have worked previously with reusable component libraries",
-        "Strong preference for candidates that have worked in Agile/Scrum environments"
-      ]
-    },
-    {
-      "slug": "ui-ux-engineer",
-      "name": "UI / UX Engineer",
-      "description": "UI / UX Engineer",
-      "intro": "We are seeking a remote UI / UX Engineer to join a U.S. based distributed engineering team that can deliver market-leading software solutions.",
-      "duties": [
-        "Adhere to agile development best practice",
-        "Demonstrate a passion for learning and building cutting-edge applications",
-        "Implement unit tests using test driven development (TDD)",
-        "Implement and refactor using relevant design patterns",
-        "Mentor other engineers",
-        "Proactively learn and implement new best practices",
-        "Manage expectations by communicating regularly",
-        "Code review pull requests in a CI / CD environment",
-        "Review requirements and provide input",
-        "Collaborate with the engineering team to suggest, design and launch new features",
-        "Maintain code integrity and organization"
-      ],
-      "requirements": [
-        "5+ years experience as a UI / UX designer",
-        "Strong administrative/organizational skills (ability to effectively prioritize, manage time, and meet deadlines on multiple projects)",
-        "Professional experience building original web sites and applications focused on user experience",
-        "Proficiency in spoken and written English is required"
-      ]
-    },
-    {
-      "slug": "unity-engineer",
-      "name": "Unity Engineer",
-      "description": "Unity Engineer",
-      "intro": "We are seeking a remote Unity Engineer to join a U.S. based distributed engineering team that can deliver market-leading software solutions.",
-      "duties": [
-        "Adhere to agile development best practice",
-        "Demonstrate a passion for learning and building cutting-edge applications",
-        "Implement unit tests using test driven development (TDD)",
-        "Implement and refactor using relevant design patterns",
-        "Mentor other engineers",
-        "Proactively learn and implement new best practices",
-        "Manage expectations by communicating regularly",
-        "Code review pull requests in a CI / CD environment",
-        "Review requirements and provide input",
-        "Collaborate with the engineering team to suggest, design and launch new features",
-        "Maintain code integrity and organization"
-      ],
-      "requirements": [
-        "Advanced working knowledge of Unity and Unity SDKs",
-        "C# software development",
-        "Interactive real-time 3D graphics development",
-        "5+ years experience as a software engineer",
-        "Strong administrative/organizational skills (ability to effectively prioritize, manage time, and meet deadlines on multiple projects)."
-      ]
-    },
-    {
-      "slug": "unreal-engineer",
-      "name": "Unreal Engineer",
-      "description": "Unreal Engineer",
-      "intro": "We are seeking a remote Unreal Engineer to join a U.S. based distributed engineering team that can deliver market-leading software solutions.",
-      "duties": [
-        "Adhere to agile development best practice",
-        "Demonstrate a passion for learning and building cutting-edge applications",
-        "Implement unit tests using test driven development (TDD)",
-        "Implement and refactor using relevant design patterns",
-        "Mentor other engineers",
-        "Proactively learn and implement new best practices",
-        "Manage expectations by communicating regularly",
-        "Code review pull requests in a CI / CD environment",
-        "Review requirements and provide input",
-        "Collaborate with the engineering team to suggest, design and launch new features",
-        "Maintain code integrity and organization"
-      ],
-      "requirements": [
-        "Proven Unreal Engine C++ experience",
-        "Understanding of versioning and repository best practices",
-        "Blueprints scripting experience",
-        "Hunger to learn new things"
-      ]
-    },
-    {
-      "slug": "wordpress-engineer",
-      "name": "WordPress Engineer",
-      "description": "WordPress Engineer",
-      "intro": "We are seeking a remote WordPress Engineer to join a U.S. based distributed engineering team that can deliver market-leading software solutions.",
-      "duties": [
-        "Adhere to agile development best practice",
-        "Demonstrate a passion for learning and building cutting-edge applications",
-        "Implement unit tests using test driven development (TDD)",
-        "Implement and refactor using relevant design patterns",
-        "Mentor other engineers",
-        "Proactively learn and implement new best practices",
-        "Manage expectations by communicating regularly",
-        "Code review pull requests in a CI / CD environment",
-        "Review requirements and provide input",
-        "Collaborate with the engineering team to suggest, design and launch new features",
-        "Maintain code integrity and organization"
-      ],
-      "requirements": [
-        "Stellar communication skills - including the ability to effectively communicate complex technical issues to a non-technical audience and engage in productive dialog involving multiple viewpoints or conflicting perspectives.",
-        "The ability to independently scope, design and implement flexible technical solutions while anticipating technical uncertainties.",
-        "The ability to thrive in a fast-paced environment with multiple deadlines and shifting priorities."
-      ]
-    }
-  ]
+  shared: {
+    roleMeta: [
+      { id: 'remote', label: 'Remote, US business hours' },
+      { id: 'employment', label: 'Full-time contract' },
+      { id: 'location', label: 'Latin America' },
+    ],
+    applyLabel: 'Join the network',
+    applyHref: 'https://app.betterengineer.com/sign-up/candidate',
+    linkedInHref: 'https://www.linkedin.com/company/betterengineer/jobs/',
+    englishNote:
+      'You need advanced or fluent English. You will be in standups, code reviews, and Slack with a US team.',
+    aiNote:
+      'Every engineer is assessed on the four-level AI fluency scale before a client meets them.',
+    aiHref: '/ai-fluent-engineers/',
+    poolNote:
+      'This is not a single opening. When a US company asks for this skill, we introduce engineers from the network.',
+    about:
+      'BetterEngineer keeps a network of senior engineers in Latin America and introduces them to US product teams. Placements are almost always a full-time contract, paid the same amount every month in US dollars.',
+    communityHeading: 'How joining works',
+    communityLead: 'Create a profile. We vet your work, your English, and your AI fluency.',
+    updatedLabel: 'Updated November 9, 2026',
+    joinHref: '/join/',
+  },
+  retired: [
+    { slug: 'cordova-c-engineer', to: '/careers/react-native-engineer/' },
+    { slug: 'groovy-on-grails-engineer', to: '/careers/java-engineer/' },
+    { slug: 'openstack-engineer', to: '/careers/devops-engineer/' },
+    { slug: 'peoplesoft-consultant', to: '/careers/' },
+    { slug: 'drupal-engineer', to: '/careers/wordpress-engineer/' },
+    { slug: 'ms-dynamics-crm-engineer', to: '/careers/' },
+    { slug: 'cloudops-engineer', to: '/careers/devops-engineer/' },
+    { slug: 'e-commerce-engineer', to: '/careers/shopify-engineer/' },
+    { slug: 'project-manager', to: '/careers/' },
+    { slug: 'elixir-engineer', to: '/careers/' },
+    { slug: 'scala-engineer', to: '/careers/' },
+    { slug: 'embedded-software-engineer', to: '/careers/' },
+    { slug: 'magneto-engineer', to: '/careers/magento-engineer/' },
+  ],
+  jobs: [
+    job('net-engineer', '.NET engineer', 'C#, ASP.NET Core, and SQL Server or PostgreSQL on a US product team.', ['C# and ASP.NET Core in production', 'SQL Server or PostgreSQL', 'APIs that other teams call', '5 or more years as a software engineer'], 'You use AI tools to draft tests and a first pass of a C# change, then you review the diff before it ships.', '/technologies/dotnet-developers/', 'Hiring .NET engineers'),
+    job('android-engineer', 'Android engineer', 'Native Android apps, from the repo to the Play Store, for a US product team.', ['Kotlin, with Java where the existing app still uses it', 'Apps shipped to the Google Play Store', 'Screens that follow the product design system', '5 or more years as a software engineer'], 'You use AI tools to draft tests or a Kotlin migration step, then you review the result before it ships.', '/technologies/android-developers/', 'Hiring Android engineers'),
+    job('aws-engineer', 'AWS engineer', 'Production systems on AWS for a US product team: accounts, networking, and the path to deploy.', ['Production workloads on AWS', 'Infrastructure as code, such as Terraform or CloudFormation', 'CI that can deploy and roll back', '5 or more years in engineering or operations'], 'You use AI tools to draft a Terraform change or a runbook, then you review it before it is applied.', '/technologies/aws-developers/', 'Hiring AWS engineers'),
+    job('azure-engineer', 'Azure engineer', 'Production systems on Microsoft Azure for a US product team.', ['Production workloads on Azure', 'Infrastructure as code', 'Identity, networking, and a safe deploy path', '5 or more years in engineering or operations'], 'You use AI tools to draft a template or a runbook, then you review it before it is applied.', '/technologies/azure-developers/', 'Hiring Azure engineers'),
+    job('blockchain-engineer', 'Blockchain engineer', 'Smart contracts and the services around them, for a US product team.', ['Solidity or a comparable contract language', 'How transactions, keys, and upgrades fail in production', 'APIs that let a product read and write chain state', '5 or more years as a software engineer'], 'You use AI tools to draft tests around a contract, then you review every line before it is deployed.', '/roles/blockchain-engineers/', 'Hiring blockchain engineers'),
+    job('data-science-engineer', 'Data science engineer', 'Models and experiments that answer a product question for a US team.', ['Python for analysis and modeling', 'Experiments with a clear metric and a decision at the end', 'Data a report can trust, not a one-off notebook', '5 or more years in data science or engineering'], 'You use AI tools to draft a query or a notebook step, then you check the result against the source data.', '/roles/data-science-engineers/', 'Hiring data science engineers'),
+    job('devops-engineer', 'DevOps engineer', 'CI, Kubernetes, and monitoring so a US team can release and roll back.', ['CI/CD that the team actually uses', 'Kubernetes in production', 'Monitoring and a rollback path', '5 or more years in engineering or operations'], 'You use AI tools to draft a pipeline step or a dashboard query, then you review it before it runs in production.', '/roles/devops-engineers/', 'Hiring DevOps engineers'),
+    job('front-end-engineer', 'Front-end engineer', 'Screens in React, Vue, or Angular that follow a US team design system.', ['HTML, CSS, and accessible components', 'React, Vue, or Angular in production', 'TypeScript on the current codebase', '5 or more years as a software engineer'], 'You use AI tools to draft a component or a test, then you review the markup and the behavior before it ships.', '/roles/front-end-engineers/', 'Hiring front-end engineers'),
+    job('full-stack-javascript-engineer', 'Full-stack JavaScript engineer', 'A feature from the React screen through the Node.js API to deploy, on a US team.', ['React on the front end and Node.js on the API', 'A database the feature actually uses', 'A deploy you can roll back', '5 or more years as a software engineer'], 'You use AI tools to draft one layer of a feature, then you review the whole path before it ships.', '/roles/full-stack-engineers/', 'Hiring full-stack engineers'),
+    job('ios-engineer', 'iOS engineer', 'Native iOS apps, from the repo through App Store review, for a US product team.', ['Swift and the current Apple UI stack', 'Apps shipped through App Store review', 'Networking, storage, and crash reports in production', '5 or more years as a software engineer'], 'You use AI tools to draft a Swift test or a first pass of a screen, then you review it before it goes to TestFlight.', '/technologies/ios-developers/', 'Hiring iOS engineers'),
+    job('java-engineer', 'Java engineer', 'Services and APIs in Java, usually with Spring Boot, for a US product team.', ['Java and Spring Boot in production', 'APIs and the database behind them', 'Tests that run in CI', '5 or more years as a software engineer'], 'You use AI tools to draft a test or a service method, then you review the diff before it ships.', '/technologies/java-developers/', 'Hiring Java engineers'),
+    job('kubernetes-software-engineer', 'Kubernetes engineer', 'Clusters, deploys, and the path to roll back, for a US product team.', ['Kubernetes in production', 'Helm, Kustomize, or plain manifests the team can read', 'CI that deploys to the cluster', '5 or more years in engineering or operations'], 'You use AI tools to draft a manifest or a probe, then you review it before it is applied.', '/technologies/kubernetes-developers/', 'Hiring Kubernetes engineers'),
+    job('node-js-engineer', 'Node.js engineer', 'APIs and services in Node.js for a US product team.', ['Node.js services in production', 'REST or GraphQL that other teams call', 'PostgreSQL, MySQL, or a document store', '5 or more years as a software engineer'], 'You use AI tools to draft a handler or a test, then you review the behavior before it ships.', '/technologies/nodejs-developers/', 'Hiring Node.js engineers'),
+    job('php-engineer', 'PHP engineer', 'PHP applications, often Laravel, for a US product team.', ['PHP and Laravel, or the framework the team already runs', 'MySQL or PostgreSQL', 'A deploy path the team uses', '5 or more years as a software engineer'], 'You use AI tools to draft a controller or a test, then you review it before it ships.', '/technologies/php-developers/', 'Hiring PHP engineers'),
+    job('python-engineer', 'Python engineer', 'Services, data jobs, or internal tools in Python for a US product team.', ['Python in production, not only notebooks', 'APIs, workers, or data jobs the team relies on', 'Tests that run in CI', '5 or more years as a software engineer'], 'You use AI tools to draft a test or a first pass of a script, then you review the result before it ships.', '/technologies/python-developers/', 'Hiring Python engineers'),
+    job('qa-automation-engineer', 'QA automation engineer', 'Cypress, Playwright, and API checks before a US team releases.', ['Cypress or Playwright on a real product', 'API tests, not only UI clicks', 'A way to run the suite in CI', '5 or more years in QA or engineering'], 'You use AI tools to draft a test case, then you run it and throw out the ones that do not catch a real failure.', '/roles/qa-engineers/', 'Hiring QA engineers'),
+    job('react-native-engineer', 'React Native engineer', 'iOS and Android apps in React Native, through store review, for a US team.', ['React Native in production', 'TypeScript', 'A release through the App Store and Play Store', '5 or more years as a software engineer'], 'You use AI tools to draft a component or a test, then you review it on a device before it ships.', '/technologies/react-native-developers/', 'Hiring React Native engineers'),
+    job('ruby-on-rails-engineer', 'Ruby on Rails engineer', 'Rails applications, from the model to the deploy, for a US product team.', ['Ruby on Rails in production', 'PostgreSQL or MySQL', 'Tests with RSpec or the suite the team already runs', '5 or more years as a software engineer'], 'You use AI tools to draft a model test or a migration, then you review it before it runs.', '/technologies/ruby-on-rails-developers/', 'Hiring Ruby on Rails engineers'),
+    job('rust-c-engineer', 'Rust and C++ engineer', 'Performance-sensitive services in Rust or C++ for a US product team.', ['Rust or C++ in production', 'Memory, latency, and what fails under load', 'Tests and a review bar the team trusts', '5 or more years as a software engineer'], 'You use AI tools to draft a test or a small function, then you review ownership and error paths before it ships.', '/technologies/rust-developers/', 'Hiring Rust engineers'),
+    job('salesforce-engineer', 'Salesforce engineer', 'Salesforce configuration and code for a US team that runs its work in the platform.', ['Apex, Lightning, or both, in a live org', 'Integrations with the rest of the product', 'A sandbox path, not edits straight in production', '5 or more years in engineering or Salesforce delivery'], 'You use AI tools to draft an Apex test or a field plan, then you review it in a sandbox before it is promoted.', '/contact/', 'Hiring Salesforce engineers'),
+    job('shopify-engineer', 'Shopify engineer', 'Shopify themes, apps, and checkout changes for a US commerce team.', ['Shopify themes or apps in production', 'Liquid, JavaScript, or a Shopify app backend', 'A change you can preview before it hits the live store', '5 or more years as a software engineer'], 'You use AI tools to draft a section or a test order path, then you review it in a preview theme before it goes live.', '/contact/', 'Hiring Shopify engineers'),
+    job('typescript-engineer', 'TypeScript engineer', 'Typed JavaScript across a US team stack, from the UI to the API.', ['TypeScript in a production codebase', 'Types that match the runtime, not only the happy path', 'React, Node.js, or both', '5 or more years as a software engineer'], 'You use AI tools to draft a typed function, then you check the types against real inputs before it ships.', '/technologies/typescript-developers/', 'Hiring TypeScript engineers'),
+    job('ui-ux-engineer', 'UI engineer', 'Interface design and the front-end code that implements it, for a US product team.', ['Design systems and the components that implement them', 'HTML, CSS, and accessible interaction', 'Figma, or the tool the team already uses, plus the code', '5 or more years in UI engineering or product design'], 'You use AI tools to draft a variant or a copy pass, then you check it against the design system before it ships.', '/contact/', 'Hiring UI engineers'),
+    job('unity-engineer', 'Unity engineer', 'Unity games or interactive apps for a US team, through a build players can run.', ['Unity and C# in a shipped or live project', 'Scenes, input, and a build pipeline', 'Performance on the target device', '5 or more years as a software engineer'], 'You use AI tools to draft a script or a test scene, then you play the result before it is merged.', '/contact/', 'Hiring Unity engineers'),
+    job('unreal-engineer', 'Unreal engineer', 'Unreal projects, in C++ or Blueprints, for a US team.', ['Unreal Engine on a real project', 'C++ or Blueprints, matching the codebase', 'A build the team can run', '5 or more years as a software engineer'], 'You use AI tools to draft a Blueprint note or a C++ stub, then you run it in editor before it is merged.', '/contact/', 'Hiring Unreal engineers'),
+    job('wordpress-engineer', 'WordPress engineer', 'WordPress themes and plugins for a US team, with PHP they can review.', ['WordPress themes or plugins in production', 'PHP, and the hooks the site already uses', 'A staging site, not edits only on production', '5 or more years as a software engineer'], 'You use AI tools to draft a template or a plugin function, then you review it on staging before it goes live.', '/technologies/php-developers/', 'Hiring WordPress engineers'),
+    job('magento-engineer', 'Magento engineer', 'Adobe Commerce or Magento stores for a US commerce team.', ['Magento or Adobe Commerce in production', 'PHP modules and the theme the store already uses', 'Checkout, catalog, or integration work you can roll back', '5 or more years as a software engineer'], 'You use AI tools to draft a module sketch, then you review it on a staging store before it goes live.', '/contact/', 'Hiring Magento engineers'),
+    job('ai-engineer', 'AI engineer', 'LLM features inside an existing product, from a demo to something the team can run.', ['A shipped feature that calls a model, not only a notebook', 'Prompts, tools, and a way to tell when the output is wrong', 'The product stack the feature has to live in', '5 or more years as a software engineer'], 'You are assessed at the top of the four-level scale: you design the model workflow and you can explain a bad output.', '/roles/ai-engineers/', 'Hiring AI engineers'),
+    job('data-engineer', 'Data engineer', 'Pipelines a US team can trust, with tools such as Airflow, dbt, or Spark.', ['A pipeline that feeds a report or a product feature', 'SQL and a warehouse the team already uses', 'Tests or checks that fail when the data is wrong', '5 or more years in data or software engineering'], 'You use AI tools to draft a model or a SQL check, then you compare the output to the source before it is scheduled.', '/roles/data-engineers/', 'Hiring data engineers'),
+    job('react-engineer', 'React engineer', 'React and TypeScript screens for a US product team, inside their design system.', ['React in production', 'TypeScript', 'Component state, data loading, and a reviewable pull request', '5 or more years as a software engineer'], 'You use AI tools to draft a component or a test, then you review rendering and accessibility before it ships.', '/technologies/react-developers/', 'Hiring React engineers'),
+    job('go-engineer', 'Go engineer', 'Services in Go for a US product team: APIs, workers, and a deploy they can roll back.', ['Go services in production', 'HTTP or RPC APIs', 'PostgreSQL, Redis, or the store the service uses', '5 or more years as a software engineer'], 'You use AI tools to draft a handler or a test, then you review error handling before it ships.', '/technologies/golang-developers/', 'Hiring Go engineers'),
+    job('flutter-engineer', 'Flutter engineer', 'iOS and Android apps in Flutter, through store review, for a US team.', ['Flutter and Dart in a shipped app', 'A release through the App Store and Play Store', 'State, networking, and the builds the team runs', '5 or more years as a software engineer'], 'You use AI tools to draft a widget or a test, then you run it on a device before it ships.', '/technologies/flutter-developers/', 'Hiring Flutter engineers'),
+  ],
 };
 
-function jobPosting(job, canonical) {
+function job(slug, name, intro, requirements, aiClause, hireHref, hireLabel) {
+  var short = name.replace(' engineer', '').replace('Engineer', '').trim();
   return {
-    '@context': 'https://schema.org',
-    '@type': 'JobPosting',
-    title: job.name,
-    description: job.intro,
-    identifier: { '@type': 'PropertyValue', name: 'BetterEngineer', value: job.slug },
-    datePosted: '2026-09-01',
-    employmentType: 'FULL_TIME',
-    hiringOrganization: {
-      '@type': 'Organization',
-      name: 'BetterEngineer',
-      sameAs: WWW + '/',
-      logo: WWW + '/icons/betterengineer-logo.svg',
-    },
-    jobLocationType: 'TELECOMMUTE',
-    applicantLocationRequirements: { '@type': 'Country', name: 'United States' },
-    url: canonical,
-    directApply: false,
+    slug: slug,
+    name: name.charAt(0).toUpperCase() + name.slice(1),
+    title: name.charAt(0).toUpperCase() + name.slice(1) + ' jobs in Latin America | BetterEngineer',
+    description:
+      short +
+      ' engineers in Latin America join US product teams through BetterEngineer. Full-time contract, US business hours, advanced English.',
+    intro: intro,
+    requirements: requirements,
+    aiClause: aiClause,
+    hireHref: hireHref,
+    hireLabel: hireLabel,
   };
 }
 
@@ -1115,40 +140,38 @@ function pageRecords() {
     description: data.hub.description,
     canonical: WWW + '/careers',
     breadcrumb: [{ name: 'Home', url: WWW + '/' }, { name: 'Careers' }],
-    lastUpdated: '2026-09',
+    lastUpdated: '2026-11-09',
     extraSchema: function (ctx) {
       return [{
         '@context': 'https://schema.org',
         '@type': 'CollectionPage',
         name: data.hub.title,
         url: ctx.canonical,
-        hasPart: data.jobs.map(function (job) {
-          return { '@type': 'WebPage', name: job.name, url: WWW + '/careers/' + job.slug };
+        hasPart: data.jobs.map(function (item) {
+          return { '@type': 'WebPage', name: item.name, url: WWW + '/careers/' + item.slug };
         }),
       }];
     },
   };
-  var jobPages = data.jobs.map(function (job) {
+  var jobPages = data.jobs.map(function (item) {
     return {
-      slug: 'careers-' + job.slug,
-      fragment: 'fragments/careers/' + job.slug + '.html',
-      outputs: ['careers/' + job.slug + '/index.html'],
+      slug: 'careers-' + item.slug,
+      fragment: 'fragments/careers/' + item.slug + '.html',
+      outputs: ['careers/' + item.slug + '/index.html'],
       cssBundle: 'landing',
       script: 'page.js',
       migrated: true,
       excludeFromDiscover: true,
-      title: data.shared.jobTitle,
-      description: job.description,
-      canonical: WWW + '/careers/' + job.slug,
+      navActive: 'join',
+      title: item.title,
+      description: item.description,
+      canonical: WWW + '/careers/' + item.slug,
       breadcrumb: [
         { name: 'Home', url: WWW + '/' },
         { name: 'Careers', url: WWW + '/careers' },
-        { name: job.name },
+        { name: item.name },
       ],
-      lastUpdated: '2026-09',
-      extraSchema: function (ctx) {
-        return [jobPosting(job, ctx.canonical)];
-      },
+      lastUpdated: '2026-11-09',
     };
   });
   return [hub].concat(jobPages);
@@ -1159,5 +182,6 @@ module.exports = {
   hub: data.hub,
   shared: data.shared,
   jobs: data.jobs,
+  retired: data.retired,
   pageRecords: pageRecords,
 };

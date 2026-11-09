@@ -113,10 +113,16 @@ function hubHtml() {
     '    <div class="wrap cr-hero__grid">\n' +
     '      <div class="reveal">\n' +
     '        <p class="eyebrow">For engineers / Job opportunities</p>\n' +
-    '        <h1 class="h1" id="hero-title"><span class="light">Join our network of better</span> engineers, where talent has no borders.</h1>\n' +
+    '                <h1 class="h1" id="hero-title">' +
+    b.esc(data.hub.h1) +
+    '</h1>\n' +
     '        <p class="lead">' +
     b.esc(data.hub.lead) +
-    '</p>\n' +
+    ' <a href="' +
+    b.esc(data.shared.joinHref) +
+    '">How joining works</a>. <a href="' +
+    b.esc(data.shared.linkedInHref) +
+    '">Current openings on LinkedIn</a>.</p>\n' +
     '        <div class="btn-row">\n' +
     '          <a class="btn btn--primary" href="' +
     b.esc(data.shared.applyHref) +
@@ -133,7 +139,7 @@ function hubHtml() {
     '  <section class="section cr-openings" id="openings" aria-labelledby="openings-heading">\n' +
     '    <div class="wrap">\n' +
     '      <div class="air-section-head">\n' +
-    '        <p class="eyebrow">Open roles</p>\n' +
+    '        <p class="eyebrow">For engineers</p>\n' +
     '        <h2 class="h2" id="openings-heading">' +
     b.esc(data.hub.openingsHeading) +
     '</h2>\n' +
@@ -141,7 +147,8 @@ function hubHtml() {
     b.esc(data.hub.openingsLead) +
     ' <a href="' +
     b.esc(data.shared.applyHref) +
-    '">Send us your resume</a></p>\n' +
+    '">Join the network</a>.</p>\n' +
+    '        <p class="lead">Updated November 9, 2026.</p>\n' +
     '      </div>\n' +
     jobList(data.jobs) +
     '\n    </div>\n' +
@@ -198,27 +205,42 @@ function jobHtml(job) {
     '        </div>\n' +
     '      </div>\n' +
     '      <div class="cr-job-hero__photo reveal">\n' +
-    '        <img src="/images/pages/careers/work-from-home.jpg" alt="" width="720" height="480" loading="eager">\n' +
+    '        <img src="/images/pages/careers/work-from-home.jpg" alt="Engineer working on a laptop at home" width="720" height="480" loading="eager">\n' +
     '      </div>\n' +
     '    </div>\n' +
     '  </section>\n' +
     '  <section class="section cr-jd" id="description" aria-labelledby="jd-heading">\n' +
     '    <div class="wrap cr-jd__grid">\n' +
     '      <div class="reveal">\n' +
-    '        <h2 class="h2" id="jd-heading">Job Description</h2>\n' +
+    '        <p>' +
+    b.esc(data.shared.poolNote) +
+    ' <a href="' +
+    b.esc(data.shared.linkedInHref) +
+    '">Active client openings are on LinkedIn</a>.</p>\n' +
+    '        <p class="lead">Updated November 9, 2026.</p>\n' +
+    '        <h2 class="h2" id="jd-heading">What this work is</h2>\n' +
     '        <p>' +
     b.esc(job.intro) +
     '</p>\n' +
-    b.ul(job.duties, 'cs-list cs-list--dark') +
-    '\n        <h2 class="h2" id="req-heading">Job Requirements</h2>\n' +
+    '        <h2 class="h2" id="req-heading">What we look for</h2>\n' +
     b.ul(job.requirements, 'cs-list cs-list--dark') +
-    '\n        <p class="cr-jd__emphasis">' +
+    '\n        <p>' +
+    b.esc(job.aiClause) +
+    ' ' +
+    b.esc(data.shared.aiNote) +
+    ' <a href="' +
+    b.esc(data.shared.aiHref) +
+    '">See the four levels</a>.</p>\n' +
+    '        <p class="cr-jd__emphasis">' +
     b.esc(data.shared.englishNote) +
-    '</p>\n' +
-    '        <h2 class="h2" id="additional-heading">Additional Information</h2>\n' +
-    '        <p>' +
-    b.esc(data.shared.additionalNote) +
-    '</p>\n' +
+    ' The placement is a full-time contract, paid the same amount every month in US dollars. Candidates never pay anything. <a href="' +
+    b.esc(data.shared.joinHref) +
+    '">How joining works</a>.</p>\n' +
+    '        <p><a href="' +
+    b.esc(job.hireHref) +
+    '">' +
+    b.esc(job.hireLabel) +
+    '</a>.</p>\n' +
     '      </div>\n' +
     '      <aside class="cr-about reveal">\n' +
     '        <p>' +

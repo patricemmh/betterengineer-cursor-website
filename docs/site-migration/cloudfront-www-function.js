@@ -1,5 +1,7 @@
 // One CloudFront Function for distribution E2014GBUWTTSVJ (discover + www + apex).
-// Viewer request, runtime cloudfront-js-2.0. NOT pasted or published yet.
+// Viewer request, runtime cloudfront-js-2.0.
+// Paste into CloudFront and Publish after editing. CloudFront does not read git.
+// Career redirects added 2026-11-09 are not live until the next paste. HTML stubs cover them until then.
 // See cloudfront-function.md.
 //
 // Bucket layout (betterengineer-marketing-site):
@@ -20,6 +22,19 @@ var REDIRECTS = {
   '/hire-senior-ai-data-engineers-nearshore-latam-talent': WWW + '/roles/ai-engineers/',
   '/ai-readiness-manufacturing': WWW + '/services/ai-systems-readiness-for-manufacturing/',
   '/aimanufacturing': WWW + '/services/ai-systems-readiness-for-manufacturing/',
+  '/careers/cordova-c-engineer': '/careers/react-native-engineer/',
+  '/careers/groovy-on-grails-engineer': '/careers/java-engineer/',
+  '/careers/openstack-engineer': '/careers/devops-engineer/',
+  '/careers/peoplesoft-consultant': '/careers/',
+  '/careers/drupal-engineer': '/careers/wordpress-engineer/',
+  '/careers/ms-dynamics-crm-engineer': '/careers/',
+  '/careers/cloudops-engineer': '/careers/devops-engineer/',
+  '/careers/e-commerce-engineer': '/careers/shopify-engineer/',
+  '/careers/project-manager': '/careers/',
+  '/careers/elixir-engineer': '/careers/',
+  '/careers/scala-engineer': '/careers/',
+  '/careers/embedded-software-engineer': '/careers/',
+  '/careers/magneto-engineer': '/careers/magento-engineer/',
   '/webinar': '/contact/',
   '/aiwebinar': '/contact/',
   '/roi': '/staff-augmentation/',

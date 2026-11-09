@@ -314,9 +314,9 @@ var migratedPages = [
     script: 'page.js',
     migrated: true,
     navActive: 'join',
-    title: 'Why Join BetterEngineer | Senior Software Engineer Jobs',
+    title: 'Join BetterEngineer | Senior software jobs in Latin America',
     description:
-      'Grow your career with BetterEngineer. Connect with top US companies, work on impactful projects, and enjoy remote opportunities while earning in USD.',
+      'Senior engineers in Latin America join US product teams on a full-time contract. Paid monthly in US dollars. Candidates never pay.',
     canonical: WWW + '/join',
     breadcrumb: [
       { name: 'Home', url: WWW + '/' },

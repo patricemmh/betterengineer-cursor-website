@@ -86,6 +86,9 @@ var cases = [
   [W, '/blog', 'utm_source=x', '301 https://blog.betterengineer.com/resource-center?utm_source=x'],
   [W, '/hiring-dashboard-old', '', '301 /hiring-dashboard/'],
   [W, '/careers-test/', 'x=1', '301 /careers/?x=1'],
+  [W, '/careers/magneto-engineer/', 'utm_source=x', '301 /careers/magento-engineer/?utm_source=x'],
+  [W, '/careers/scala-engineer', '', '301 /careers/'],
+  [W, '/careers/Cordova-C-Engineer/', 'gclid=abc', '301 /careers/react-native-engineer/?gclid=abc'],
   // Unknown page: rewritten, S3 has no such key, distribution error response serves /404.html with status 404.
   [W, '/nope', '', '/www/nope/index.html']
 ];

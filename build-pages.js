@@ -318,8 +318,9 @@ function schemaBlocks(page, canonicalUrl, mainHtml) {
     primaryImageOfPage: (page.og && page.og.image) || manifest.OG_IMAGE,
   };
   if (page.lastUpdated) {
-    webPage.datePublished = page.lastUpdated + '-01';
-    webPage.dateModified = page.lastUpdated + '-01';
+    var schemaDate = /^\d{4}-\d{2}-\d{2}$/.test(page.lastUpdated) ? page.lastUpdated : page.lastUpdated + '-01';
+    webPage.datePublished = schemaDate;
+    webPage.dateModified = schemaDate;
   }
   out += ld(webPage);
 

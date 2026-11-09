@@ -254,7 +254,7 @@ function writeLlmsTxt() {
     '- [Technologies](' + WWW + '/technologies/): Hire by technology and framework.',
   ];
 
-  ['staff-augmentation', 'latamengineer', 'faqs', 'about', 'contact'].forEach(function (slug) {
+  ['staff-augmentation', 'latamengineer', 'faqs', 'about', 'contact', 'join'].forEach(function (slug) {
     var page = manifest.pages.filter(function (p) { return p.slug === slug; })[0];
     if (!page) {
       problems.push('llms.txt page missing from manifest: ' + slug);
