@@ -112,7 +112,7 @@ function hubHtml() {
     '  <section class="cr-hero" id="hero" aria-labelledby="hero-title">\n' +
     '    <div class="wrap cr-hero__grid">\n' +
     '      <div class="reveal">\n' +
-    '        <p class="eyebrow">For engineers / Job opportunities</p>\n' +
+    '        <p class="eyebrow">For engineers</p>\n' +
     '                <h1 class="h1" id="hero-title">' +
     b.esc(data.hub.h1) +
     '</h1>\n' +
@@ -193,6 +193,9 @@ function jobHtml(job) {
     '        <h1 class="h1" id="hero-title">' +
     b.esc(job.name) +
     '</h1>\n' +
+    '        <p class="lead">' +
+    b.esc(job.intro) +
+    '</p>\n' +
     '        <ul class="cr-meta" aria-label="Role details">\n' +
     roleMetaListHtml() +
     '\n        </ul>\n' +
@@ -217,23 +220,30 @@ function jobHtml(job) {
     ' <a href="' +
     b.esc(data.shared.linkedInHref) +
     '">Active client openings are on LinkedIn</a>.</p>\n' +
-    '        <p class="lead">Updated November 9, 2026.</p>\n' +
     '        <h2 class="h2" id="jd-heading">What this work is</h2>\n' +
     '        <p>' +
-    b.esc(job.intro) +
+    b.esc(job.work) +
     '</p>\n' +
-    '        <h2 class="h2" id="req-heading">What we look for</h2>\n' +
+    '        <h2 class="h2" id="stack-heading">The stack</h2>\n' +
+    b.ul(job.stack, 'cs-list cs-list--dark') +
+    '\n        <h2 class="h2" id="req-heading">What we look for</h2>\n' +
     b.ul(job.requirements, 'cs-list cs-list--dark') +
-    '\n        <p>' +
+    '\n        <h2 class="h2" id="check-heading">How we check</h2>\n' +
+    '        <p>' +
+    b.esc(data.shared.checkNote) +
+    ' ' +
+    b.esc(data.shared.englishNote) +
+    ' ' +
     b.esc(job.aiClause) +
     ' ' +
     b.esc(data.shared.aiNote) +
     ' <a href="' +
     b.esc(data.shared.aiHref) +
     '">See the four levels</a>.</p>\n' +
+    '        <h2 class="h2" id="placement-heading">How a placement runs</h2>\n' +
     '        <p class="cr-jd__emphasis">' +
-    b.esc(data.shared.englishNote) +
-    ' The placement is a full-time contract, paid the same amount every month in US dollars. Candidates never pay anything. <a href="' +
+    b.esc(data.shared.placement) +
+    ' <a href="' +
     b.esc(data.shared.joinHref) +
     '">How joining works</a>.</p>\n' +
     '        <p><a href="' +
@@ -241,6 +251,9 @@ function jobHtml(job) {
     '">' +
     b.esc(job.hireLabel) +
     '</a>.</p>\n' +
+    '        <p>' +
+    b.esc(data.shared.updatedLabel) +
+    '.</p>\n' +
     '      </div>\n' +
     '      <aside class="cr-about reveal">\n' +
     '        <p>' +
@@ -260,7 +273,7 @@ function jobHtml(job) {
     b.esc(data.hub.selectHeading) +
     '</h2>\n' +
     jobList(otherJobs) +
-    '\n      <p class="cr-all"><a href="/careers/">See all job opportunities</a></p>\n' +
+    '\n      <p class="cr-all"><a href="/careers/">See all roles we place</a></p>\n' +
     '    </div>\n' +
     '  </section>\n' +
     '</main>\n'
