@@ -1780,6 +1780,14 @@
     .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s var(--ease), transform 0.6s var(--ease); }
     .reveal.is-visible { opacity: 1; transform: none; }
 
+    /* The first screen is the largest paint. Show it immediately. Sections below still fade in. */
+    #hero .reveal,
+    .hero .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+
     @media (prefers-reduced-motion: reduce) {
       .reveal { opacity: 1; transform: none; transition: none; }
     }
