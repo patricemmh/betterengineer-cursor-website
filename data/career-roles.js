@@ -6,7 +6,7 @@ function displayName(name) {
   return name.charAt(0).toUpperCase() + name.slice(1);
 }
 
-function job(slug, name, intro, work, stack, requirements, aiClause, hireHref, hireLabel) {
+function job(slug, name, intro, work, stack, requirements, aiClause, hireHref, hireLabel, duties) {
   var display = displayName(name);
   var short = display.replace(/ engineer$/, '');
   return {
@@ -23,6 +23,7 @@ function job(slug, name, intro, work, stack, requirements, aiClause, hireHref, h
     aiClause: aiClause,
     hireHref: hireHref,
     hireLabel: hireLabel,
+    duties: duties || null,
   };
 }
 
@@ -36,7 +37,16 @@ module.exports = [
     ['C# and ASP.NET Core in production', 'SQL Server or PostgreSQL', 'APIs that other teams call', '5 or more years as a software engineer'],
     'You use AI tools to draft tests and a first pass of a C# change, then you review the diff before it ships.',
     '/technologies/dotnet-developers/',
-    'Hiring .NET engineers'
+    'Hiring .NET engineers',
+    [
+      'Add and change APIs in an existing C# codebase',
+      'Update the database the service already uses',
+      'Cover the change with the test project in the repo',
+      'Review pull requests before they ship',
+      'Use AI tools to draft a test or a first pass of a C# change, then review the diff before it ships',
+      'Talk through the API with the teams that call it',
+      'Ship through their deploy, and be able to roll it back',
+    ]
   ),
   job(
     'android-engineer',
@@ -47,7 +57,16 @@ module.exports = [
     ['Kotlin, with Java where the existing app still uses it', 'Apps shipped to the Google Play Store', 'Screens that follow the product design system', '5 or more years as a software engineer'],
     'You use AI tools to draft tests or a Kotlin migration step, then you review the result before it ships.',
     '/technologies/android-developers/',
-    'Hiring Android engineers'
+    'Hiring Android engineers',
+    [
+      'Add and change screens in the existing Android app',
+      'Fix bugs in flows people already use',
+      'Follow the design system the app already has',
+      'Use Kotlin for new work, and keep Java where the app still uses it',
+      'Use AI tools to draft a test or a Kotlin migration step, then review the result before it ships',
+      'Run the change on a device before it ships',
+      'Ship a build through Play Console',
+    ]
   ),
   job(
     'aws-engineer',
@@ -58,7 +77,15 @@ module.exports = [
     ['Production workloads on AWS', 'Infrastructure as code, such as Terraform or CloudFormation', 'CI that can deploy and roll back', '5 or more years in engineering or operations'],
     'You use AI tools to draft a Terraform change or a runbook, then you review it before it is applied.',
     '/technologies/aws-developers/',
-    'Hiring AWS engineers'
+    'Hiring AWS engineers',
+    [
+      'Change accounts, networking, and the path to deploy',
+      'Write the change in Terraform or CloudFormation',
+      'Review it before it is applied',
+      'Use AI tools to draft a Terraform change or a runbook, then review it before it is applied',
+      'Keep a rollback path the team can use',
+      'Read the logs the team already uses when something fails',
+    ]
   ),
   job(
     'azure-engineer',
@@ -69,7 +96,15 @@ module.exports = [
     ['Production workloads on Azure', 'Infrastructure as code', 'Identity, networking, and a safe deploy path', '5 or more years in engineering or operations'],
     'You use AI tools to draft a template or a runbook, then you review it before it is applied.',
     '/technologies/azure-developers/',
-    'Hiring Azure engineers'
+    'Hiring Azure engineers',
+    [
+      'Change identity, networking, and the path to deploy',
+      'Write the change in Bicep, ARM, or Terraform',
+      'Review it before it is applied',
+      'Use AI tools to draft a template or a runbook, then review it before it is applied',
+      'Keep a rollback path the team can use',
+      'Use the logs and alerts the team already has',
+    ]
   ),
   job(
     'blockchain-engineer',
@@ -80,7 +115,15 @@ module.exports = [
     ['Solidity or a comparable contract language', 'How transactions, keys, and upgrades fail in production', 'APIs that let a product read and write chain state', '5 or more years as a software engineer'],
     'You use AI tools to draft tests around a contract, then you review every line before it is deployed.',
     '/roles/blockchain-engineers/',
-    'Hiring blockchain engineers'
+    'Hiring blockchain engineers',
+    [
+      'Change a contract the product already uses',
+      'Write a test that shows how the contract fails',
+      'Keep the API that reads and writes chain state working',
+      'Use AI tools to draft tests around a contract, then review every line before it is deployed',
+      'Do not deploy a contract you have not reviewed line by line',
+      'Talk through keys and upgrades with the team before a change goes out',
+    ]
   ),
   job(
     'data-science-engineer',
@@ -91,7 +134,15 @@ module.exports = [
     ['Python for analysis and modeling', 'Experiments with a clear metric and a decision at the end', 'Data a report can trust, not a one-off notebook', '5 or more years in data science or engineering'],
     'You use AI tools to draft a query or a notebook step, then you check the result against the source data.',
     '/roles/data-science-engineers/',
-    'Hiring data science engineers'
+    'Hiring data science engineers',
+    [
+      'Answer a product question with a metric and a decision',
+      'Write the analysis so someone else can rerun it',
+      'Check the result against the source data',
+      'Use AI tools to draft a query or a notebook step, then check the result against the source data',
+      'Hand off a model or a finding the product can use',
+      'A notebook that nobody else can rerun is not the deliverable',
+    ]
   ),
   job(
     'devops-engineer',
@@ -102,7 +153,15 @@ module.exports = [
     ['CI/CD that the team actually uses', 'Kubernetes in production', 'Monitoring and a rollback path', '5 or more years in engineering or operations'],
     'You use AI tools to draft a pipeline step or a dashboard query, then you review it before it runs in production.',
     '/roles/devops-engineers/',
-    'Hiring DevOps engineers'
+    'Hiring DevOps engineers',
+    [
+      'Keep CI, the cluster, and monitoring working',
+      'Change pipelines and manifests in review',
+      'Keep a rollback the team has used',
+      'Use AI tools to draft a pipeline step or a dashboard query, then review it before it runs in production',
+      'Do not edit production by hand as the first step',
+      'Read the logs the on-call person already uses',
+    ]
   ),
   job(
     'front-end-engineer',
@@ -113,7 +172,15 @@ module.exports = [
     ['HTML, CSS, and accessible components', 'React, Vue, or Angular in production', 'TypeScript on the current codebase', '5 or more years as a software engineer'],
     'You use AI tools to draft a component or a test, then you review the markup and the behavior before it ships.',
     '/roles/front-end-engineers/',
-    'Hiring front-end engineers'
+    'Hiring front-end engineers',
+    [
+      'Build screens in the React, Vue, or Angular app the team already has',
+      'Follow their design system',
+      'Make the page work with a keyboard and a screen reader',
+      'Cover the change with the tests the repo already runs',
+      'Use AI tools to draft a component or a test, then review the markup and the behavior before it ships',
+      'Review the pull request before it ships',
+    ]
   ),
   job(
     'full-stack-javascript-engineer',
@@ -124,7 +191,15 @@ module.exports = [
     ['React on the front end and Node.js on the API', 'A database the feature actually uses', 'A deploy you can roll back', '5 or more years as a software engineer'],
     'You use AI tools to draft one layer of a feature, then you review the whole path before it ships.',
     '/roles/full-stack-engineers/',
-    'Hiring full-stack engineers'
+    'Hiring full-stack engineers',
+    [
+      'Take a feature from the React screen through the Node.js API and the database',
+      'Cover the whole path, not only one layer',
+      'Include the failure in the middle, not only the happy path',
+      'Use AI tools to draft one layer of a feature, then review the whole path before it ships',
+      'Ship through their deploy, and be able to roll it back',
+      'Talk through the feature in standup before a large change',
+    ]
   ),
   job(
     'ios-engineer',
@@ -135,7 +210,15 @@ module.exports = [
     ['Swift and the current Apple UI stack', 'Apps shipped through App Store review', 'Networking, storage, and crash reports in production', '5 or more years as a software engineer'],
     'You use AI tools to draft a Swift test or a first pass of a screen, then you review it before it goes to TestFlight.',
     '/technologies/ios-developers/',
-    'Hiring iOS engineers'
+    'Hiring iOS engineers',
+    [
+      'Add and change screens in the native iOS app',
+      'Use UIKit or SwiftUI, matching the app',
+      'Fix crashes the team can see in production',
+      'Use AI tools to draft a Swift test or a first pass of a screen, then review it before it goes to TestFlight',
+      'Run the change on a device before it ships',
+      'Ship through TestFlight and App Store review',
+    ]
   ),
   job(
     'java-engineer',
@@ -146,7 +229,15 @@ module.exports = [
     ['Java and Spring Boot in production', 'APIs and the database behind them', 'Tests that run in CI', '5 or more years as a software engineer'],
     'You use AI tools to draft a test or a service method, then you review the diff before it ships.',
     '/technologies/java-developers/',
-    'Hiring Java engineers'
+    'Hiring Java engineers',
+    [
+      'Add and change APIs in the Java services the team already runs',
+      'Update the database behind the API',
+      'Cover the change with a test that runs in CI',
+      'Use AI tools to draft a test or a service method, then review the diff before it ships',
+      'Review pull requests in their CI',
+      'Ship through their deploy, and be able to roll it back',
+    ]
   ),
   job(
     'kubernetes-software-engineer',
@@ -157,7 +248,15 @@ module.exports = [
     ['Kubernetes in production', 'Helm, Kustomize, or plain manifests the team can read', 'CI that deploys to the cluster', '5 or more years in engineering or operations'],
     'You use AI tools to draft a manifest or a probe, then you review it before it is applied.',
     '/technologies/kubernetes-developers/',
-    'Hiring Kubernetes engineers'
+    'Hiring Kubernetes engineers',
+    [
+      'Change manifests, probes, and the CI job that applies them',
+      'Review a change before it is applied to the cluster',
+      'Use Helm, Kustomize, or plain YAML, matching the repo',
+      'Use AI tools to draft a manifest or a probe, then review it before it is applied',
+      'Keep a rollback',
+      'Read the logs the team already uses when a deploy fails',
+    ]
   ),
   job(
     'node-js-engineer',
@@ -168,7 +267,15 @@ module.exports = [
     ['Node.js services in production', 'REST or GraphQL that other teams call', 'PostgreSQL, MySQL, or a document store', '5 or more years as a software engineer'],
     'You use AI tools to draft a handler or a test, then you review the behavior before it ships.',
     '/technologies/nodejs-developers/',
-    'Hiring Node.js engineers'
+    'Hiring Node.js engineers',
+    [
+      'Build and keep Node.js APIs and workers other teams call',
+      'Include the error path, not only the happy path',
+      'Cover the change with a test',
+      'Use AI tools to draft a handler or a test, then review the behavior before it ships',
+      'Review pull requests in their CI',
+      'Ship through their deploy, and be able to roll it back',
+    ]
   ),
   job(
     'php-engineer',
@@ -179,7 +286,15 @@ module.exports = [
     ['PHP and Laravel, or the framework the team already runs', 'MySQL or PostgreSQL', 'A deploy path the team uses', '5 or more years as a software engineer'],
     'You use AI tools to draft a controller or a test, then you review it before it ships.',
     '/technologies/php-developers/',
-    'Hiring PHP engineers'
+    'Hiring PHP engineers',
+    [
+      'Add and change features in the PHP app the team already runs',
+      'Follow Laravel, or the framework the repo already uses',
+      'Update the database the feature touches',
+      'Use AI tools to draft a controller or a test, then review it before it ships',
+      'Cover the change with the test suite',
+      'Ship through their deploy',
+    ]
   ),
   job(
     'python-engineer',
@@ -190,7 +305,15 @@ module.exports = [
     ['Python in production, not only notebooks', 'APIs, workers, or data jobs the team relies on', 'Tests that run in CI', '5 or more years as a software engineer'],
     'You use AI tools to draft a test or a first pass of a script, then you review the result before it ships.',
     '/technologies/python-developers/',
-    'Hiring Python engineers'
+    'Hiring Python engineers',
+    [
+      'Write an API, a worker, or a data job the team runs in production',
+      'Cover the change with pytest in their CI',
+      'A notebook that only you can rerun does not count',
+      'Use AI tools to draft a test or a first pass of a script, then review the result before it ships',
+      'Review the pull request before it ships',
+      'Ship through their deploy, and be able to roll it back',
+    ]
   ),
   job(
     'qa-automation-engineer',
@@ -201,7 +324,15 @@ module.exports = [
     ['Cypress or Playwright on a real product', 'API tests, not only UI clicks', 'A way to run the suite in CI', '5 or more years in QA or engineering'],
     'You use AI tools to draft a test case, then you run it and throw out the ones that do not catch a real failure.',
     '/roles/qa-engineers/',
-    'Hiring QA engineers'
+    'Hiring QA engineers',
+    [
+      'Write Cypress or Playwright checks for the product',
+      'Add API checks, not only UI clicks',
+      'Wire the suite into the CI the team already runs',
+      'Throw out a test that never fails, or fails at random',
+      'Use AI tools to draft a test case, then run it and keep only the ones that catch a real failure',
+      'Tell the team which failure is a product bug and which is a flake',
+    ]
   ),
   job(
     'react-native-engineer',
@@ -212,7 +343,15 @@ module.exports = [
     ['React Native in production', 'TypeScript', 'A release through the App Store and Play Store', '5 or more years as a software engineer'],
     'You use AI tools to draft a component or a test, then you review it on a device before it ships.',
     '/technologies/react-native-developers/',
-    'Hiring React Native engineers'
+    'Hiring React Native engineers',
+    [
+      'Add and change screens in the React Native app',
+      'Run the change on a device, not only a simulator',
+      'Work with a native module when the screen already depends on one',
+      'Use AI tools to draft a component or a test, then review it on a device before it ships',
+      'Ship through the App Store and Play Store',
+      'Talk through the release with the team before it goes out',
+    ]
   ),
   job(
     'ruby-on-rails-engineer',
@@ -223,7 +362,16 @@ module.exports = [
     ['Ruby on Rails in production', 'PostgreSQL or MySQL', 'Tests with RSpec or the suite the team already runs', '5 or more years as a software engineer'],
     'You use AI tools to draft a model test or a migration, then you review it before it runs.',
     '/technologies/ruby-on-rails-developers/',
-    'Hiring Ruby on Rails engineers'
+    'Hiring Ruby on Rails engineers',
+    [
+      'Add and change features in an existing Rails app',
+      'Write the migration with the model or controller change',
+      'Cover the change with RSpec, or with the suite the repo already runs',
+      'Review pull requests in their CI',
+      'Use AI tools to draft a test or a migration, then review the result before it runs',
+      'Talk through scope in standup and Slack before a large change',
+      'Ship through their deploy, and be able to roll it back',
+    ]
   ),
   job(
     'rust-c-engineer',
@@ -234,7 +382,15 @@ module.exports = [
     ['Rust or C++ in production', 'Memory, latency, and what fails under load', 'Tests and a review bar the team trusts', '5 or more years as a software engineer'],
     'You use AI tools to draft a test or a small function, then you review ownership and error paths before it ships.',
     '/technologies/rust-developers/',
-    'Hiring Rust engineers'
+    'Hiring Rust engineers',
+    [
+      'Change performance-sensitive Rust or C++ the team already runs',
+      'Say what the change does to memory, latency, and failure under load',
+      'Cover it with the tests the repo trusts',
+      'Use AI tools to draft a test or a small function, then review ownership and error paths before it ships',
+      'Do not merge a function you have not reviewed',
+      'Profile the change when the work is about speed',
+    ]
   ),
   job(
     'salesforce-engineer',
@@ -245,7 +401,15 @@ module.exports = [
     ['Apex, Lightning, or both, in a live org', 'Integrations with the rest of the product', 'A sandbox path, not edits straight in production', '5 or more years in engineering or Salesforce delivery'],
     'You use AI tools to draft an Apex test or a field plan, then you review it in a sandbox before it is promoted.',
     '/contact/',
-    'Hiring Salesforce engineers'
+    'Hiring Salesforce engineers',
+    [
+      'Change Apex, Lightning, or both in the org the team uses',
+      'Keep integrations with the rest of the product working',
+      'Try the change in a sandbox before it is promoted',
+      'Use AI tools to draft an Apex test or a field plan, then review it in a sandbox before it is promoted',
+      'Do not edit production as the first step',
+      'Talk through the object model with the team before a large change',
+    ]
   ),
   job(
     'shopify-engineer',
@@ -256,7 +420,15 @@ module.exports = [
     ['Shopify themes or apps in production', 'Liquid, JavaScript, or a Shopify app backend', 'A change you can preview before it hits the live store', '5 or more years as a software engineer'],
     'You use AI tools to draft a section or a test order path, then you review it in a preview theme before it goes live.',
     '/contact/',
-    'Hiring Shopify engineers'
+    'Hiring Shopify engineers',
+    [
+      'Change a theme, an app, or checkout on the store the team sells on',
+      'Preview the change before it hits the live store',
+      'Run a test order when the change touches checkout',
+      'Use AI tools to draft a section or a test order path, then review it in a preview theme before it goes live',
+      'Review the Liquid or the app code before it ships',
+      'Be able to roll the change back',
+    ]
   ),
   job(
     'typescript-engineer',
@@ -267,7 +439,15 @@ module.exports = [
     ['TypeScript in a production codebase', 'Types that match the runtime, not only the happy path', 'React, Node.js, or both', '5 or more years as a software engineer'],
     'You use AI tools to draft a typed function, then you check the types against real inputs before it ships.',
     '/technologies/typescript-developers/',
-    'Hiring TypeScript engineers'
+    'Hiring TypeScript engineers',
+    [
+      'Work in the TypeScript codebase, on the UI, the API, or both',
+      'Make the types match real input, including the failure case',
+      'Cover the change with the test runner in the repo',
+      'Use AI tools to draft a typed function, then check the types against real inputs before it ships',
+      'Review the pull request before it ships',
+      'A type that only covers the happy path is not done',
+    ]
   ),
   job(
     'ui-ux-engineer',
@@ -278,7 +458,15 @@ module.exports = [
     ['Design systems and the components that implement them', 'HTML, CSS, and accessible interaction', 'Figma, or the tool the team already uses, plus the code', '5 or more years in UI engineering or product design'],
     'You use AI tools to draft a variant or a copy pass, then you check it against the design system before it ships.',
     '/contact/',
-    'Hiring UI engineers'
+    'Hiring UI engineers',
+    [
+      'Design a flow in the team design system and build the HTML and CSS for it',
+      'Check it with a keyboard and a screen reader',
+      'Match the component library the product already uses',
+      'Use AI tools to draft a variant or a copy pass, then check it against the design system before it ships',
+      'Review the change with the team before it ships',
+      'A screen that only looks right is not finished',
+    ]
   ),
   job(
     'unity-engineer',
@@ -289,7 +477,15 @@ module.exports = [
     ['Unity and C# in a shipped or live project', 'Scenes, input, and a build pipeline', 'Performance on the target device', '5 or more years as a software engineer'],
     'You use AI tools to draft a script or a test scene, then you play the result before it is merged.',
     '/contact/',
-    'Hiring Unity engineers'
+    'Hiring Unity engineers',
+    [
+      'Change a scene, input, or a C# script in the Unity project',
+      'Make a build that plays on the target device',
+      'Play the build before it is merged',
+      'Use AI tools to draft a script or a test scene, then play the result before it is merged',
+      'Watch performance on the target device',
+      'Hand the team a build they can run',
+    ]
   ),
   job(
     'unreal-engineer',
@@ -300,7 +496,15 @@ module.exports = [
     ['Unreal Engine on a real project', 'C++ or Blueprints, matching the codebase', 'A build the team can run', '5 or more years as a software engineer'],
     'You use AI tools to draft a Blueprint note or a C++ stub, then you run it in editor before it is merged.',
     '/contact/',
-    'Hiring Unreal engineers'
+    'Hiring Unreal engineers',
+    [
+      'Change the project in C++ or Blueprints, matching the codebase',
+      'Run the change in the editor before it is merged',
+      'Follow the gameplay framework the project uses',
+      'Use AI tools to draft a Blueprint note or a C++ stub, then run it in the editor before it is merged',
+      'Hand the team a build they can run',
+      'Talk through a large change with the team before it is merged',
+    ]
   ),
   job(
     'wordpress-engineer',
@@ -311,7 +515,15 @@ module.exports = [
     ['WordPress themes or plugins in production', 'PHP, and the hooks the site already uses', 'A staging site, not edits only on production', '5 or more years as a software engineer'],
     'You use AI tools to draft a template or a plugin function, then you review it on staging before it goes live.',
     '/technologies/php-developers/',
-    'Hiring WordPress engineers'
+    'Hiring WordPress engineers',
+    [
+      'Change themes and plugins on the WordPress site',
+      'Put PHP through review',
+      'Follow the hooks the site already uses',
+      'Use AI tools to draft a template or a plugin function, then review it on staging before it goes live',
+      'Try the change on a staging site before production',
+      'Do not edit production as the first step',
+    ]
   ),
   job(
     'magento-engineer',
@@ -322,7 +534,15 @@ module.exports = [
     ['Magento or Adobe Commerce in production', 'PHP modules and the theme the store already uses', 'Checkout, catalog, or integration work you can roll back', '5 or more years as a software engineer'],
     'You use AI tools to draft a module sketch, then you review it on a staging store before it goes live.',
     '/contact/',
-    'Hiring Magento engineers'
+    'Hiring Magento engineers',
+    [
+      'Change catalog, checkout, a module, or an integration',
+      'Follow the theme the store already uses',
+      'Try the change on a staging store',
+      'Use AI tools to draft a module sketch, then review it on a staging store before it goes live',
+      'Be able to roll the change back',
+      'Do not edit the live store as the first step',
+    ]
   ),
   job(
     'ai-engineer',
@@ -333,7 +553,15 @@ module.exports = [
     ['A shipped feature that calls a model, not only a notebook', 'Prompts, tools, and a way to tell when the output is wrong', 'The product stack the feature has to live in', '5 or more years as a software engineer'],
     'You are assessed at the top of the four-level scale: you design the model workflow and you can explain a bad output.',
     '/roles/ai-engineers/',
-    'Hiring AI engineers'
+    'Hiring AI engineers',
+    [
+      'Put a model feature inside a product the team already ships',
+      'Write the prompt or the tool call, and the product code around it',
+      'Show how you know when the output is wrong',
+      'Design the model workflow, and explain a bad output. You are assessed at the top of the four-level AI fluency scale',
+      'Log bad outputs so the team can see them',
+      'A demo notebook is not the feature',
+    ]
   ),
   job(
     'data-engineer',
@@ -344,7 +572,15 @@ module.exports = [
     ['A pipeline that feeds a report or a product feature', 'SQL and a warehouse the team already uses', 'Tests or checks that fail when the data is wrong', '5 or more years in data or software engineering'],
     'You use AI tools to draft a model or a SQL check, then you compare the output to the source before it is scheduled.',
     '/roles/data-engineers/',
-    'Hiring data engineers'
+    'Hiring data engineers',
+    [
+      'Build a pipeline that feeds a report or a product feature',
+      'Make it fail a check when the data is wrong',
+      'Schedule it so the team does not run it by hand',
+      'Use AI tools to draft a model or a SQL check, then compare the output to the source before it is scheduled',
+      'Match Airflow, dbt, or Spark to the stack the team already uses',
+      'Talk through a bad number with the team before the pipeline stays on',
+    ]
   ),
   job(
     'react-engineer',
@@ -355,7 +591,15 @@ module.exports = [
     ['React in production', 'TypeScript', 'Component state, data loading, and a reviewable pull request', '5 or more years as a software engineer'],
     'You use AI tools to draft a component or a test, then you review rendering and accessibility before it ships.',
     '/technologies/react-developers/',
-    'Hiring React engineers'
+    'Hiring React engineers',
+    [
+      'Build React and TypeScript screens inside the team design system',
+      'Load the data the screen needs, and handle the failure',
+      'Leave a pull request someone else can review',
+      'Use AI tools to draft a component or a test, then review rendering and accessibility before it ships',
+      'Check the screen with a keyboard and a screen reader',
+      'This role is React. Vue and Angular sit with the front-end role',
+    ]
   ),
   job(
     'go-engineer',
@@ -366,7 +610,15 @@ module.exports = [
     ['Go services in production', 'HTTP or RPC APIs', 'PostgreSQL, Redis, or the store the service uses', '5 or more years as a software engineer'],
     'You use AI tools to draft a handler or a test, then you review error handling before it ships.',
     '/technologies/golang-developers/',
-    'Hiring Go engineers'
+    'Hiring Go engineers',
+    [
+      'Write a Go API or worker the team can roll back',
+      'Include error handling in the change',
+      'Cover it with a test',
+      'Use AI tools to draft a handler or a test, then review error handling before it ships',
+      'Review the pull request before it ships',
+      'Ship through their deploy, and be able to roll it back',
+    ]
   ),
   job(
     'flutter-engineer',
@@ -377,6 +629,14 @@ module.exports = [
     ['Flutter and Dart in a shipped app', 'A release through the App Store and Play Store', 'State, networking, and the builds the team runs', '5 or more years as a software engineer'],
     'You use AI tools to draft a widget or a test, then you run it on a device before it ships.',
     '/technologies/flutter-developers/',
-    'Hiring Flutter engineers'
+    'Hiring Flutter engineers',
+    [
+      'Add and change screens in the Flutter app',
+      'Run the build on a device',
+      'Keep state and networking matching the app',
+      'Use AI tools to draft a widget or a test, then run it on a device before it ships',
+      'Ship iOS and Android through store review',
+      'Talk through the release with the team before it goes out',
+    ]
   ),
 ];

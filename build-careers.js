@@ -179,6 +179,16 @@ function hubHtml() {
   );
 }
 
+function dutiesBlock(job) {
+  if (!job.duties || !job.duties.length) return '';
+  return (
+    '        <h2 class="h2" id="duties-heading">What you do on the team</h2>\n' +
+    '        <p>On a placement, this is the work the US team expects.</p>\n' +
+    b.ul(job.duties, 'cs-list cs-list--dark') +
+    '\n'
+  );
+}
+
 function jobHtml(job) {
   var otherJobs = data.jobs.filter(function (j) {
     return j.slug !== job.slug;
@@ -224,6 +234,7 @@ function jobHtml(job) {
     '        <p>' +
     b.esc(job.work) +
     '</p>\n' +
+    dutiesBlock(job) +
     '        <h2 class="h2" id="stack-heading">The stack</h2>\n' +
     b.ul(job.stack, 'cs-list cs-list--dark') +
     '\n        <h2 class="h2" id="req-heading">What we look for</h2>\n' +
