@@ -400,7 +400,7 @@ var phase2Pages = [
     cssBundle: 'landing',
     script: 'page.js',
     migrated: true,
-    title: 'Tech Glossary | Essential Terms for Software Industry Success | BetterEngineer',
+    title: 'Technical Glossary | BetterEngineer',
     description:
       'Discover the BetterEngineer Tech Glossary, a curated list of essential terms in software engineering and AI built to help you scale your engineering org with confidence.',
     canonical: WWW + '/technical-glossary',

@@ -247,7 +247,6 @@ function renderPostCard(post) {
   lines.push(
     '            <h3 class="post-card__title"><a href="' + url + '" rel="noopener noreferrer">' + title + '</a></h3>',
     '            <p class="post-card__excerpt">' + escapeHtml(post.excerpt) + '</p>',
-    '            <a class="post-card__more" href="' + url + '" rel="noopener noreferrer" aria-label="Read more: ' + title + '">Read more</a>',
     '          </article>',
   );
   return lines.join('\n');
