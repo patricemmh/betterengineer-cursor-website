@@ -312,6 +312,16 @@
       .nav-desktop { display: none !important; }
       .nav-toggle { display: inline-flex !important; }
       .site-nav { flex: 0; justify-content: flex-end; }
+      .nav-mobile.is-open {
+        max-height: calc(100dvh - var(--header-h));
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        -webkit-overflow-scrolling: touch;
+      }
+      html:has(.nav-mobile.is-open),
+      html:has(.nav-mobile.is-open) body {
+        overflow: hidden;
+      }
     }
     /* Compact desktop between mobile menu and full nav width */
     @media (max-width: 1280px) and (min-width: 1101px) {
